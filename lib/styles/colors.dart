@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-const defaultColor = Color.fromARGB(255, 31, 81, 255);
+const defaultColor = Color.fromRGBO(93, 63, 211, 1);

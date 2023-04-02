@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+
+import '../modules/auth/auth_screen.dart';
+import '../network/local/cache_helper.dart';
 // import '/layout/cubit/cubit.dart';
 // import '/network/local/cache_helper.dart';
 
 //=========== For Switching Between The State Of The Snack Bar ===========
 enum SnackBarStates { success, error, warning }
 
-// The User's Token
-String? token;
+// The User's Id
+String? uId;
 
 //================== For Building A Snack Bar ==================
 void buildSnackBar({
@@ -69,13 +72,13 @@ navigateTo(context, Widget screen) {
 }
 
 //================== For Signing The Current User Out ==================
-// void signOut(context) {
-//   CacheHelper.removeData(key: 'token').then((value) {
-//     if (value) {
-//       navigateAndFinish(context, screen: const AuthScreen());
-//     }
-//   });
-// }
+void signOut(context) {
+  CacheHelper.removeData(key: 'uId').then((value) {
+    if (value) {
+      navigateAndFinish(context, screen: const AuthScreen());
+    }
+  });
+}
 
 //================== For Print A Complete String ==================
 void printFullText(String text) {

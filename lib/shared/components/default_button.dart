@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/styles/colors.dart';
 
 class DefaultButton extends StatelessWidget {
   final String buttonText;
@@ -32,8 +33,7 @@ class DefaultButton extends StatelessWidget {
             vertical: screenHeight * height,
           ),
         ),
-        backgroundColor:
-            MaterialStateProperty.all(Theme.of(context).primaryColor),
+        backgroundColor: MaterialStateProperty.all(defaultColor),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(screenWidth * buttonRaduis),

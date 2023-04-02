@@ -16,6 +16,7 @@ dependencies:
   flutter_bloc: ^8.1.2
   conditional_builder_null_safety: ^0.0.6
   shared_preferences: ^2.0.20
+  cloud_firestore: ^4.5.0
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +25,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: Janna
+      fonts:
+        - asset: assets/fonts/Janna LT Regular.ttf
+
+    - family: IconBroken
+      fonts:
+        - asset: assets/fonts/icons.ttf

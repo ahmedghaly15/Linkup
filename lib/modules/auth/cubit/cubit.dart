@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/models/user_model.dart';
 // import '/models/sign_in_model.dart';
 import '/modules/auth/cubit/states.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 // import '/network/end_points.dart';
 // import '/network/remote/dio_helper.dart';
 
@@ -31,7 +33,7 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
         .then((value) {
       print(value.user!.email);
       print(value.user!.uid);
-      emit(SignInSuccessState());
+      emit(SignInSuccessState(value.user!.uid));
     }).catchError((error) {
       emit(SignInErrorState(error.toString()));
     });
@@ -52,11 +54,44 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
       password: password,
     )
         .then((value) {
-      print(value.user);
-      print(value.user!.uid);
-      emit(SignUpSuccessState());
+      // print(value.user);
+      // print(value.user!.uid);
+      firestoreCreateUSer(
+        name: username,
+        email: email,
+        phone: phone,
+        uId: value.user!.uid,
+      );
+      // emit(SignUpSuccessState());
     }).catchError((error) {
+      print(error.toString());
       emit(SignUpErrorState(error.toString()));
+    });
+  }
+
+  void firestoreCreateUSer({
+    required String name,
+    required String email,
+    required String phone,
+    required String uId,
+  }) {
+    UserModel userModel = UserModel(
+      name: name,
+      email: email,
+      phone: phone,
+      uId: uId,
+      isEmailVerified: false,
+    );
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .set(userModel.toJson())
+        .then((value) {
+      emit(CreateUserSuccessState());
+      emit(SignUpSuccessState(uId));
+    }).catchError((error) {
+      print(error.toString());
+      CreateUserErrorState(error.toString());
     });
   }
 }

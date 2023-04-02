@@ -1,6 +1,8 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/layout/social_layout.dart';
+import 'package:social_app/network/local/cache_helper.dart';
 import 'package:social_app/shared/constants.dart';
 
 // import '/layout/shop_layout.dart';
@@ -93,6 +95,22 @@ class _AuthScreenState extends State<AuthScreen>
               context: context,
             );
           }
+
+          if (state is SignInSuccessState) {
+            CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
+              navigateAndFinish(context, screen: const SocialAppLayout());
+            });
+          }
+
+          if (state is SignUpSuccessState) {
+            CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
+              navigateAndFinish(context, screen: const SocialAppLayout());
+            });
+          }
+
+          if (state is CreateUserSuccessState) {
+            navigateAndFinish(context, screen: const SocialAppLayout());
+          }
           // if (state is SignInSuccessState) {
           // if (state.signInModel.status!) {
           //======= In Case User Sign In Successfully =======
@@ -153,6 +171,7 @@ class _AuthScreenState extends State<AuthScreen>
                 // For Closing The Keyboard When The Screen Is Tapped
                 onTap: () => FocusScope.of(context).unfocus(),
                 child: Scaffold(
+                  appBar: AppBar(),
                   body: Center(
                     child: SingleChildScrollView(
                       child: Padding(
@@ -175,6 +194,8 @@ class _AuthScreenState extends State<AuthScreen>
                                     color: defaultColor,
                                   ),
                             ),
+                            // For Adding Some Space
+                            SizedBox(height: screenHeight * 0.01),
                             Text(
                               authMode == AuthMode.signIn
                                   ? "Sign in now to communicate with friends"
@@ -183,12 +204,12 @@ class _AuthScreenState extends State<AuthScreen>
                                   .textTheme
                                   .titleLarge!
                                   .copyWith(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     color: Colors.black54,
                                   ),
                             ),
                             //======== For Adding Some Space ========
-                            SizedBox(height: screenHeight * 0.025),
+                            SizedBox(height: screenHeight * 0.03),
                             //======================= Auth Form =======================
                             Form(
                               key: formKey,
