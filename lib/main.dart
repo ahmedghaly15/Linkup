@@ -10,6 +10,7 @@ import 'package:social_app/shared/constants.dart';
 
 import 'firebase_options.dart';
 import 'network/local/cache_helper.dart';
+import 'styles/colors.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,24 +34,30 @@ Future<void> main() async {
     startingScreen = const AuthScreen();
   }
 
-  runApp(MainApp(startingScreen));
+  runApp(
+    MainApp(
+      startingScreen,
+      uId,
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
   final Widget? startingScreen;
-  const MainApp(this.startingScreen, {super.key});
+  final String? uId;
+  const MainApp(this.startingScreen, this.uId, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SocialAppCubit()..getUserData(),
+      create: (context) => SocialAppCubit()..getUserData(uId),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Janna',
           appBarTheme: const AppBarTheme(
             iconTheme: IconThemeData(
-              color: Colors.black,
+              color: defaultColor,
               size: 25,
             ),
             titleTextStyle: TextStyle(

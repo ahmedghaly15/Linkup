@@ -5,12 +5,10 @@ import 'package:social_app/layout/cubit/states.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/modules/chats/chats_screen.dart';
 import 'package:social_app/modules/feeds/feeds_screen.dart';
-import 'package:social_app/modules/settings/settings_screen.dart';
+import 'package:social_app/modules/profile/profile_screen.dart';
 import 'package:social_app/modules/users/users_screen.dart';
-import 'package:social_app/shared/constants.dart';
+import 'package:social_app/network/local/cache_helper.dart';
 import 'package:social_app/styles/iconbroken.dart';
-
-import '../../styles/colors.dart';
 
 class SocialAppCubit extends Cubit<SocialAppStates> {
   SocialAppCubit() : super(SocialAppInitialState());
@@ -25,7 +23,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     const FeedsScreen(),
     const ChatsScreen(),
     const UsersScreen(),
-    const SettingsScreen(),
+    const ProfileScreen(),
   ];
 
   //============ Bottom Nav Bar Content ============
@@ -33,32 +31,32 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     BottomNavigationBarItem(
       icon: Icon(IconBroken.home),
       label: "Home",
-      backgroundColor: defaultColor,
+      // backgroundColor: defaultColor,
     ),
     BottomNavigationBarItem(
       icon: Icon(IconBroken.chat),
       label: "Chats",
-      backgroundColor: defaultColor,
+      // backgroundColor: defaultColor,
     ),
     BottomNavigationBarItem(
       icon: Icon(IconBroken.location),
       label: "Users",
-      backgroundColor: defaultColor,
+      // backgroundColor: defaultColor,
     ),
     BottomNavigationBarItem(
-      icon: Icon(IconBroken.setting),
-      label: "Settings",
-      backgroundColor: defaultColor,
+      icon: Icon(IconBroken.profile),
+      label: "Profile",
+      // backgroundColor: defaultColor,
     ),
   ];
 
   //============ App Bar Titles Of Bottom Nav Bar Screens ============
-  List<String> titles = [
-    'News Feed',
-    'Chats',
-    'Users',
-    'Settings',
-  ];
+  // List<String> titles = [
+  //   'News Feed',
+  //   'Chats',
+  //   'Users',
+  //   'Profile',
+  // ];
 
   //============ For Moving Between Bottom Nav Bar Screens ============
   void changeBottomNavIndex(int index) {
@@ -69,8 +67,10 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   UserModel? model;
 
-  void getUserData() {
+  void getUserData(String? uId) {
     emit(GetUserLoadingState());
+
+    uId = CacheHelper.getStringData(key: 'uId');
 
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
       // print(value.data());

@@ -81,6 +81,11 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
       phone: phone,
       uId: uId,
       isEmailVerified: false,
+      image:
+          'https://media.istockphoto.com/id/1131164548/vector/avatar-5.jpg?s=612x612&w=0&k=20&c=CK49ShLJwDxE4kiroCR42kimTuuhvuo2FH5y_6aSgEo=',
+      bio: 'Write your bio...',
+      cover:
+          'https://img.freepik.com/premium-photo/woman-praying-free-bird-enjoying-nature-sunset-background-hope-concept_34200-192.jpg?size=626&ext=jpg&ga=GA1.2.825316313.1674289475&semt=ais',
     );
     FirebaseFirestore.instance
         .collection('users')

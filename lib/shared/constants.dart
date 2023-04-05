@@ -66,8 +66,13 @@ void navigateAndFinish(context, {required Widget screen}) {
   );
 }
 
+//================== For Navigating Back ==================
+void navigateBack(context) {
+  Navigator.pop(context);
+}
+
 //================== For Navigating To A Screen ==================
-navigateTo(context, Widget screen) {
+void navigateTo(context, Widget screen) {
   Navigator.of(context).push(MaterialPageRoute(builder: (context) => screen));
 }
 
