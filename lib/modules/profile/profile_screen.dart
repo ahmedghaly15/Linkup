@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/states.dart';
+import 'package:social_app/modules/edit_profile/edit_profile_screen.dart';
 import 'package:social_app/shared/components/default_button.dart';
+import 'package:social_app/shared/constants.dart';
 
 import '../../models/user_model.dart';
 
@@ -161,7 +163,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               DefaultButton(
                 buttonText: "Edit Profile",
-                onPressed: () {},
+                onPressed: () => navigateTo(context, const EditProfileScreen()),
                 screenHeight: screenHeight,
                 screenWidth: screenWidth,
                 height: 0.015,

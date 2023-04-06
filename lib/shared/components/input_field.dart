@@ -3,6 +3,7 @@ import '/styles/colors.dart';
 
 class InputField extends StatelessWidget {
   final String hint;
+  final TextStyle? hintStyle;
   final bool? obsecure;
   final Widget? icon;
   final Widget? prefixIcon;
@@ -15,6 +16,10 @@ class InputField extends StatelessWidget {
   const InputField({
     Key? key,
     required this.hint,
+    this.hintStyle = const TextStyle(
+      fontSize: 18,
+      color: Colors.grey,
+    ),
     required this.controller,
     required this.textCapitalization,
     required this.validating,
@@ -32,10 +37,7 @@ class InputField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: const TextStyle(
-          fontSize: 18,
-          color: Colors.grey,
-        ),
+        hintStyle: hintStyle,
         prefixIcon: prefixIcon,
         prefixIconColor: defaultColor,
         suffixIcon: icon,

@@ -421,20 +421,11 @@ class _AuthScreenState extends State<AuthScreen>
                                             .textTheme
                                             .labelLarge,
                                       ),
-                                      TextButton(
+                                      defaultTextButton(
                                         onPressed: switchAuthMode,
-                                        child: Text(
-                                          authMode == AuthMode.signIn
-                                              ? "Sign Up"
-                                              : "Sign In",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium!
-                                              .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                color: defaultColor,
-                                              ),
-                                        ),
+                                        title: authMode == AuthMode.signIn
+                                            ? "Sign Up"
+                                            : "Sign In",
                                       ),
                                     ],
                                   ),

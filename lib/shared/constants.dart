@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/styles/iconbroken.dart';
 
 import '../modules/auth/auth_screen.dart';
 import '../network/local/cache_helper.dart';
+import '../styles/colors.dart';
 // import '/layout/cubit/cubit.dart';
 // import '/network/local/cache_helper.dart';
 
@@ -90,3 +92,36 @@ void printFullText(String text) {
   final pattern = RegExp('.{1,800}');
   pattern.allMatches(text).forEach((match) => print(match.group(0)));
 }
+
+//================== For Building An AppBar ==================
+AppBar appBarBuilder({
+  required BuildContext context,
+  String? title,
+  List<Widget>? actions,
+}) =>
+    AppBar(
+      title: Text(title ?? ""),
+      leading: IconButton(
+        onPressed: () => navigateBack(context),
+        icon: const Icon(
+          IconBroken.arrowLeft_2,
+          color: Colors.black,
+        ),
+      ),
+      actions: actions,
+    );
+
+//================== For Building A Default TextButton ==================
+Widget defaultTextButton({
+  required void Function()? onPressed,
+  required String title,
+  TextStyle? textStyle = const TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.bold,
+    color: defaultColor,
+  ),
+}) =>
+    TextButton(
+      onPressed: onPressed,
+      child: Text(title, style: textStyle),
+    );

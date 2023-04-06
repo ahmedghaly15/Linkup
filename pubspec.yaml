@@ -10,13 +10,17 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_auth: ^4.4.0
-  firebase_core: ^2.9.0
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2
   conditional_builder_null_safety: ^0.0.6
   shared_preferences: ^2.0.20
+  image_picker: ^0.8.7+1
+
+  # Firebase
+  firebase_auth: ^4.4.0
+  firebase_core: ^2.9.0
   cloud_firestore: ^4.5.0
+  firebase_storage: ^11.1.0
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +29,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/camera.png
+    - assets/images/add_image.png
 
   fonts:
     - family: Janna
