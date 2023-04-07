@@ -11,6 +11,8 @@ import 'package:social_app/shared/constants.dart';
 import 'package:social_app/styles/colors.dart';
 import 'package:social_app/styles/iconbroken.dart';
 
+import '../../shared/components/default_button.dart';
+
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
 
@@ -27,36 +29,37 @@ class EditProfileScreen extends StatelessWidget {
         nameController.text = userModel.name!;
         bioController.text = userModel.bio!;
         phoneController.text = userModel.phone!;
-        File? profileImage = SocialAppCubit.getObject(context).profileImage;
-        File? coverImage = SocialAppCubit.getObject(context).coverImage;
-        return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            appBar: appBarBuilder(
-              context: context,
-              title: "Edit Profile",
-              actions: <Widget>[
-                defaultTextButton(
-                  onPressed: () {
-                    SocialAppCubit.getObject(context).updateUser(
-                      name: nameController.text,
-                      phone: phoneController.text,
-                      bio: bioController.text,
-                    );
-                  },
-                  title: "UPDATE",
-                ),
-                const SizedBox(width: 5),
-              ],
-            ),
-            body: Padding(
+        SocialAppCubit cubit = SocialAppCubit.getObject(context);
+        File? profileImage = cubit.profileImage;
+        File? coverImage = cubit.coverImage;
+        return Scaffold(
+          appBar: appBarBuilder(
+            context: context,
+            title: "Edit Profile",
+            actions: <Widget>[
+              defaultTextButton(
+                onPressed: () {
+                  cubit.updateUser(
+                    name: nameController.text,
+                    phone: phoneController.text,
+                    bio: bioController.text,
+                  );
+                },
+                title: "UPDATE",
+              ),
+              const SizedBox(width: 5),
+            ],
+          ),
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
-                  if (state is UserUpdateLoadingState)
-                    const LinearProgressIndicator(color: defaultColor),
-                  if (state is UserUpdateLoadingState)
-                    const SizedBox(height: 10),
+                  // if (state is UserUpdateLoadingState)
+                  //   const LinearProgressIndicator(color: defaultColor),
+                  // if (state is UserUpdateLoadingState)
+                  //   const SizedBox(height: 10),
                   SizedBox(
                     height: 220,
                     child: Stack(
@@ -91,15 +94,14 @@ class EditProfileScreen extends StatelessWidget {
                                   backgroundColor: Colors.white,
                                   child: IconButton(
                                     onPressed: () => buildBottomSheet(
+                                      type: "Cover",
                                       context: context,
                                       onPressedCamera: () =>
-                                          SocialAppCubit.getObject(context)
-                                              .getCoverImage(
+                                          cubit.getCoverImage(
                                         source: ImageSource.camera,
                                       ),
                                       onPressedGallery: () =>
-                                          SocialAppCubit.getObject(context)
-                                              .getCoverImage(
+                                          cubit.getCoverImage(
                                         source: ImageSource.gallery,
                                       ),
                                     ),
@@ -130,15 +132,12 @@ class EditProfileScreen extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () => buildBottomSheet(
+                                type: "Profile",
                                 context: context,
-                                onPressedCamera: () =>
-                                    SocialAppCubit.getObject(context)
-                                        .getProfileImage(
+                                onPressedCamera: () => cubit.getProfileImage(
                                   source: ImageSource.camera,
                                 ),
-                                onPressedGallery: () =>
-                                    SocialAppCubit.getObject(context)
-                                        .getProfileImage(
+                                onPressedGallery: () => cubit.getProfileImage(
                                   source: ImageSource.gallery,
                                 ),
                               ),
@@ -157,6 +156,76 @@ class EditProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 15),
+                  if (cubit.profileImage != null || cubit.coverImage != null)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        if (cubit.profileImage != null)
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                DefaultButton(
+                                  buttonText: "Upload Profile Image",
+                                  onPressed: () => cubit.uploadProfileImage(
+                                    context: context,
+                                    name: nameController.text,
+                                    phone: phoneController.text,
+                                    bio: bioController.text,
+                                  ),
+                                  width: 15,
+                                  height: 10,
+                                  textStyle: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                if (state is UserUpdateLoadingState)
+                                  const SizedBox(height: 5),
+                                if (state is UserUpdateLoadingState)
+                                  const SizedBox(
+                                    width: 150,
+                                    child: LinearProgressIndicator(
+                                      color: defaultColor,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        const SizedBox(width: 5),
+                        if (cubit.coverImage != null)
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                DefaultButton(
+                                  buttonText: "Upload Cover Image",
+                                  onPressed: () => cubit.uploadCoverImage(
+                                    context: context,
+                                    name: nameController.text,
+                                    phone: phoneController.text,
+                                    bio: bioController.text,
+                                  ),
+                                  width: 15,
+                                  height: 10,
+                                  textStyle: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                if (state is UserUpdateLoadingState)
+                                  const SizedBox(height: 5),
+                                if (state is UserUpdateLoadingState)
+                                  const SizedBox(
+                                    width: 150,
+                                    child: LinearProgressIndicator(
+                                      color: defaultColor,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
                   // const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -234,75 +303,5 @@ class EditProfileScreen extends StatelessWidget {
         );
       },
     );
-  }
-
-  void buildBottomSheet({
-    required BuildContext context,
-    required void Function()? onPressedGallery,
-    required void Function()? onPressedCamera,
-  }) {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: BottomSheet(
-              enableDrag: true,
-              onClosing: () => navigateBack(context),
-              builder: (context) {
-                return ListView(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 5,
-                  ),
-                  children: <Widget>[
-                    const Text(
-                      "Pick Profile Picture",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                        letterSpacing: 0.5,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        ElevatedButton(
-                          onPressed: onPressedGallery,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: const CircleBorder(),
-                            fixedSize: const Size(180, 130),
-                          ),
-                          child: Image.asset(
-                            'assets/images/add_image.png',
-                            width: 180,
-                            height: 100,
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: onPressedCamera,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: const CircleBorder(),
-                            fixedSize: const Size(180, 130),
-                          ),
-                          child: Image.asset(
-                            'assets/images/camera.png',
-                            width: 180,
-                            height: 100,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              },
-            ),
-          );
-        });
   }
 }

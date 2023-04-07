@@ -62,7 +62,7 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
         phone: phone,
         uId: value.user!.uid,
       );
-      // emit(SignUpSuccessState());
+      // emit(SignUpSuccessState(value.user!.uid));
     }).catchError((error) {
       print(error.toString());
       emit(SignUpErrorState(error.toString()));

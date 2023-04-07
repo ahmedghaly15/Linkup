@@ -96,11 +96,13 @@ void printFullText(String text) {
 //================== For Building An AppBar ==================
 AppBar appBarBuilder({
   required BuildContext context,
+  bool centerTitle = true,
   String? title,
   List<Widget>? actions,
 }) =>
     AppBar(
       title: Text(title ?? ""),
+      centerTitle: centerTitle,
       leading: IconButton(
         onPressed: () => navigateBack(context),
         icon: const Icon(
@@ -125,3 +127,74 @@ Widget defaultTextButton({
       onPressed: onPressed,
       child: Text(title, style: textStyle),
     );
+
+void buildBottomSheet({
+  required BuildContext context,
+  required void Function()? onPressedGallery,
+  required void Function()? onPressedCamera,
+  required String type,
+}) {
+  showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: BottomSheet(
+            enableDrag: true,
+            onClosing: () => navigateBack(context),
+            builder: (context) {
+              return ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
+                children: <Widget>[
+                  Text(
+                    "Pick $type Picture",
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      letterSpacing: 0.5,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      ElevatedButton(
+                        onPressed: onPressedGallery,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: const CircleBorder(),
+                          fixedSize: const Size(180, 130),
+                        ),
+                        child: Image.asset(
+                          'assets/images/add_image.png',
+                          width: 180,
+                          height: 100,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: onPressedCamera,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: const CircleBorder(),
+                          fixedSize: const Size(180, 130),
+                        ),
+                        child: Image.asset(
+                          'assets/images/camera.png',
+                          width: 180,
+                          height: 100,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      });
+}

@@ -395,11 +395,6 @@ class _AuthScreenState extends State<AuthScreen>
                                             : "Sign Up",
                                         onPressed: () =>
                                             signInOrSignUp(context),
-                                        screenHeight: screenHeight,
-                                        screenWidth: screenWidth,
-                                        height: 0.015,
-                                        width: 0.33,
-                                        buttonRaduis: 0.05,
                                       ),
                                       fallback: (context) => const Center(
                                         child: CircularProgressIndicator(

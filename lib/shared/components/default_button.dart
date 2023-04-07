@@ -4,11 +4,8 @@ import 'package:social_app/styles/colors.dart';
 class DefaultButton extends StatelessWidget {
   final String buttonText;
 
-  final double screenWidth;
-  final double screenHeight;
   final double height;
   final double width;
-  final double buttonRaduis;
   final void Function()? onPressed;
   final TextStyle? textStyle;
 
@@ -16,11 +13,8 @@ class DefaultButton extends StatelessWidget {
     super.key,
     required this.buttonText,
     required this.onPressed,
-    required this.screenHeight,
-    required this.screenWidth,
-    required this.height,
-    required this.width,
-    required this.buttonRaduis,
+    this.height = 15,
+    this.width = 130,
     this.textStyle = const TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.bold,
@@ -35,14 +29,14 @@ class DefaultButton extends StatelessWidget {
       style: ButtonStyle(
         padding: MaterialStateProperty.all(
           EdgeInsets.symmetric(
-            horizontal: screenWidth * width,
-            vertical: screenHeight * height,
+            horizontal: width,
+            vertical: height,
           ),
         ),
         backgroundColor: MaterialStateProperty.all(defaultColor),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(screenWidth * buttonRaduis),
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
         textStyle: MaterialStateProperty.all(textStyle),
