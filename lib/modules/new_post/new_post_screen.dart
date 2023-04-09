@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/states.dart';
 import 'package:social_app/models/user_model.dart';
@@ -19,7 +20,6 @@ class NewPostScreen extends StatelessWidget {
         SocialAppCubit cubit = SocialAppCubit.getObject(context);
         UserModel model = cubit.model!;
         TextEditingController textController = TextEditingController();
-        var now = DateTime.now();
         return Scaffold(
           appBar: appBarBuilder(
             context: context,
@@ -31,12 +31,14 @@ class NewPostScreen extends StatelessWidget {
                   FocusScope.of(context).unfocus();
                   if (cubit.postImage == null) {
                     cubit.createPost(
-                      dateTime: now.toString(),
+                      date: getDate(),
+                      time: DateFormat.jm().format(DateTime.now()),
                       text: textController.text,
                     );
                   } else {
                     cubit.uploadPostImage(
-                      dateTime: now.toString(),
+                      date: getDate(),
+                      time: DateFormat.jm().format(DateTime.now()),
                       text: textController.text,
                     );
                   }
@@ -100,7 +102,7 @@ class NewPostScreen extends StatelessWidget {
                     alignment: AlignmentDirectional.topEnd,
                     children: <Widget>[
                       Container(
-                        height: 180,
+                        height: 200,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),

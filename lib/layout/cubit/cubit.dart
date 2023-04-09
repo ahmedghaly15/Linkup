@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/layout/cubit/states.dart';
+import 'package:social_app/models/like_model.dart';
 import 'package:social_app/models/post_model.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/modules/chats/chats_screen.dart';
@@ -15,6 +16,8 @@ import 'package:social_app/network/local/cache_helper.dart';
 import 'package:social_app/shared/constants.dart';
 import 'package:social_app/styles/iconbroken.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
+import '../../models/comment_model.dart';
 
 class SocialAppCubit extends Cubit<SocialAppStates> {
   SocialAppCubit() : super(SocialAppInitialState());
@@ -102,19 +105,6 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     }
   }
 
-  File? coverImage;
-
-  Future<void> getCoverImage({required ImageSource source}) async {
-    final XFile? pickedImage = await picker.pickImage(source: source);
-    if (pickedImage != null) {
-      coverImage = File(pickedImage.path);
-      emit(CoverImagePickedSuccessState());
-    } else {
-      print("No image has been selected");
-      emit(CoverImagePickedErrorState());
-    }
-  }
-
   void uploadProfileImage({
     required String name,
     required String phone,
@@ -128,6 +118,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
         .putFile(profileImage!)
         .then((value) {
       value.ref.getDownloadURL().then((value) {
+        emit(UploadProfileImageSuccessState());
         updateUser(
           name: name,
           phone: phone,
@@ -139,13 +130,25 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
           state: SnackBarStates.success,
           context: context,
         );
-        emit(UploadProfileImageSuccessState());
       }).catchError((error) {
         emit(UploadProfileImageErrorState());
       });
     }).catchError((error) {
       emit(UploadProfileImageErrorState());
     });
+  }
+
+  File? coverImage;
+
+  Future<void> getCoverImage({required ImageSource source}) async {
+    final XFile? pickedImage = await picker.pickImage(source: source);
+    if (pickedImage != null) {
+      coverImage = File(pickedImage.path);
+      emit(CoverImagePickedSuccessState());
+    } else {
+      print("No image has been selected");
+      emit(CoverImagePickedErrorState());
+    }
   }
 
   void uploadCoverImage({
@@ -221,9 +224,64 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
         .doc(userModel.uId)
         .update(userModel.toJson())
         .then((value) {
-      getUserData(userModel.uId);
+      getUserData(uId);
     }).catchError((error) {
       emit(UserUpdateErrorState());
+    });
+  }
+
+  void createPost({
+    required String date,
+    required String time,
+    required String text,
+    String? postImage,
+  }) {
+    emit(CreatePostLoadingState());
+
+    PostModel postModel = PostModel(
+      name: model!.name,
+      image: model!.image,
+      uId: model!.uId,
+      date: date,
+      time: time,
+      text: text,
+      postImage: postImage ?? "",
+      likes: 0,
+      comments: 0,
+    );
+
+    FirebaseFirestore.instance
+        .collection('posts')
+        .add(postModel.toJson())
+        .then((value) {
+      emit(CreatePostSuccessState());
+      text = '';
+      postImage = null;
+    }).catchError((error) {
+      print(error.toString());
+      emit(CreatePostErrorState(error.toString()));
+    });
+  }
+
+  void deletePost({
+    required String postId,
+    required BuildContext context,
+  }) {
+    emit(DeletePostLoadingState());
+    FirebaseFirestore.instance
+        .collection('posts')
+        .doc(postId)
+        .delete()
+        .then((value) {
+      emit(DeletePostSuccessState());
+      buildSnackBar(
+        message: "Post Deleted Successfully",
+        state: SnackBarStates.success,
+        context: context,
+      );
+    }).catchError((error) {
+      print(error.toString());
+      emit(DeletePostErrorState(error.toString()));
     });
   }
 
@@ -240,42 +298,9 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     }
   }
 
-  void removePostImage() {
-    postImage = null;
-    emit(PostImageRemovedState());
-  }
-
-  void createPost({
-    required String dateTime,
-    required String text,
-    String? postImage,
-  }) {
-    emit(CreatePostLoadingState());
-
-    PostModel postModel = PostModel(
-      name: model!.name,
-      image: model!.image,
-      uId: model!.uId,
-      dateTime: dateTime,
-      text: text,
-      postImage: postImage ?? "",
-    );
-
-    FirebaseFirestore.instance
-        .collection('posts')
-        .add(postModel.toJson())
-        .then((value) {
-      emit(CreatePostSuccessState());
-      text = '';
-      postImage = null;
-    }).catchError((error) {
-      print(error.toString());
-      emit(CreatePostErrorState(error.toString()));
-    });
-  }
-
   void uploadPostImage({
-    required String dateTime,
+    required String date,
+    required String time,
     required String text,
   }) {
     emit(CreatePostLoadingState());
@@ -286,7 +311,8 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
         .then((value) {
       value.ref.getDownloadURL().then((value) {
         createPost(
-          dateTime: dateTime,
+          date: date,
+          time: time,
           text: text,
           postImage: value,
         );
@@ -303,40 +329,201 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
+  void removePostImage() {
+    postImage = null;
+    emit(PostImageRemovedState());
+  }
+
   List<PostModel> posts = [];
   List<String> postsIds = [];
   List<int> likes = [];
 
   void getPosts() {
-    emit(GetPostsLoadingState());
-    FirebaseFirestore.instance.collection('posts').get().then((value) {
-      for (var doc in value.docs) {
-        doc.reference.collection('likes').get().then((value) {
-          likes.add(value.docs.length);
-          postsIds.add(doc.id);
-          posts.add(PostModel.fromJson(doc.data()));
-        }).catchError((error) {
-          emit(GetPostsErrorState(error.toString()));
+    // emit(GetPostsLoadingState());
+    FirebaseFirestore.instance
+        .collection('posts')
+        .orderBy(
+          'time',
+          descending: false,
+        )
+        .snapshots()
+        .listen((event) async {
+      for (var element in event.docs) {
+        posts.add(PostModel.fromJson(element.data()));
+        var likes = await element.reference.collection('likes').get();
+        var comments = await element.reference.collection('comments').get();
+        await FirebaseFirestore.instance
+            .collection('posts')
+            .doc(element.id)
+            .update({
+          'likes': likes.docs.length,
+          'comments': comments.docs.length,
+          'postId': element.id,
         });
       }
       emit(GetPostsSuccessState());
-    }).catchError((error) {
-      emit(GetPostsErrorState(error.toString()));
     });
+
+    // FirebaseFirestore.instance.collection('posts').get().then((value) {
+    //   for (var doc in value.docs) {
+    //     doc.reference.collection('likes').get().then((value) {
+    //       likes.add(value.docs.length);
+    //       postsIds.add(doc.id);
+    //       posts.add(PostModel.fromJson(doc.data()));
+    //     }).catchError((error) {
+    //       emit(GetPostsErrorState(error.toString()));
+    //     });
+    //   }
+    //   emit(GetPostsSuccessState());
+    // }).catchError((error) {
+    //   emit(GetPostsErrorState(error.toString()));
+    // });
   }
 
-  void likePost(String postId) {
+  void likePost({required String postId}) {
+    LikesModel likesModel = LikesModel(
+      uId: model!.uId,
+      name: model!.name,
+      dateTime: DateTime.now().toString(),
+    );
+
     FirebaseFirestore.instance
         .collection('posts')
         .doc(postId)
         .collection('likes')
         .doc(model!.uId)
-        .set({
-      'like': true,
-    }).then((value) {
+        .set(likesModel.toJson())
+        .then((value) {
+      getPosts();
       emit(LikePostSuccessState());
     }).catchError((error) {
       emit(LikePostErrorState(error.toString()));
+    });
+  }
+
+  Future<bool> likedByMe({
+    required String postId,
+  }) async {
+    bool isLikedByMe = false;
+    FirebaseFirestore.instance
+        .collection('posts')
+        .doc(postId)
+        .get()
+        .then((post) async {
+      var likes = await post.reference.collection('likes').get();
+      for (var element in likes.docs) {
+        if (element.id == model!.uId) {
+          isLikedByMe = true;
+        }
+      }
+      if (isLikedByMe == false) {
+        likePost(postId: postId);
+      }
+      print(isLikedByMe);
+      emit(LikePostSuccessState());
+    });
+    return isLikedByMe;
+  }
+
+  List<CommentModel> comments = [];
+  // CommentModel? realCommentModel;
+
+  void typeNewComment({
+    String? commentText,
+    required String postId,
+    required String time,
+    required String date,
+    Map<String, dynamic>? commentImage,
+  }) {
+    emit(CommentCreatedLoadingState());
+
+    CommentModel commentModel = CommentModel(
+      name: model!.name,
+      image: model!.image,
+      uId: model!.uId,
+      commentImage: commentImage ?? {},
+      commentText: commentText ?? '',
+      time: time,
+      date: date,
+    );
+
+    FirebaseFirestore.instance
+        .collection('posts')
+        .doc(postId)
+        .collection('comments')
+        .add(commentModel.toJson())
+        .then((value) {
+      getPosts();
+      emit(CommentCreatedSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(CommentCreatedErrorState(error.toString()));
+    });
+  }
+
+  File? commentImage;
+
+  Future<void> getCommentImage({required ImageSource source}) async {
+    final XFile? pickedImage = await picker.pickImage(source: source);
+    if (pickedImage != null) {
+      commentImage = File(pickedImage.path);
+      emit(CommentImagePickedSuccessState());
+    } else {
+      print("No image selected");
+      emit(CommentImagePickedErrorState());
+    }
+  }
+
+  void uploadCommentImage({
+    String? commentText,
+    required String postId,
+    required String time,
+    required String date,
+  }) {
+    emit(UploadCommentImageLoadingState());
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('comments/${Uri.file(commentImage!.path).pathSegments.last}')
+        .putFile(commentImage!)
+        .then((value) {
+      value.ref.getDownloadURL().then((value) {
+        typeNewComment(
+          commentImage: {'width': 150, 'image': value, 'height': 200},
+          postId: postId,
+          time: time,
+          date: date,
+          commentText: commentText,
+        );
+        emit(UploadCommentImageSuccessState());
+      }).catchError((error) {
+        emit(UploadCommentImageErrorState());
+      });
+    }).catchError((error) {
+      emit(UploadCommentImageErrorState());
+    });
+  }
+
+  void removeCommentImage() {
+    commentImage = null;
+    emit(CommentImageRemovedSuccessState());
+  }
+
+  void getComments({required String postId}) {
+    FirebaseFirestore.instance
+        .collection('posts')
+        .doc(postId)
+        .collection('comments')
+        .orderBy(
+          'time',
+          descending: false,
+        )
+        .snapshots()
+        .listen((event) {
+      comments.clear();
+      for (var element in event.docs) {
+        comments.add(CommentModel.fromJson(element.data()));
+        emit(GetCommentsSuccessState());
+      }
     });
   }
 }

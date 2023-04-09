@@ -1,18 +1,26 @@
 class PostModel {
   String? name;
   String? uId;
+  String? postId;
   String? image;
-  String? dateTime;
+  String? time;
+  String? date;
   String? text;
   String? postImage;
+  int? likes;
+  int? comments;
 
   PostModel({
     this.name,
     this.uId,
     this.image,
-    this.dateTime,
+    this.date,
+    this.time,
     this.postImage,
     this.text,
+    this.comments,
+    this.likes,
+    this.postId,
   });
 
   PostModel.fromJson(Map<String, dynamic> json) {
@@ -20,9 +28,13 @@ class PostModel {
 
     uId = json['uId'];
     image = json['image'];
-    dateTime = json['dateTime'];
+    date = json['date'];
+    time = json['time'];
     postImage = json['postImage'];
     text = json['text'];
+    comments = json['comments'];
+    likes = json['likes'];
+    postId = json['postId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,8 +43,12 @@ class PostModel {
       'uId': uId,
       'text': text,
       'image': image,
-      'dateTime': dateTime,
+      'date': date,
+      'time': time,
       'postImage': postImage,
+      'comments': comments,
+      'likes': likes,
+      'postId': postId,
     };
   }
 }

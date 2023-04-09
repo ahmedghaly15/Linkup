@@ -55,6 +55,15 @@ class CreatePostErrorState extends SocialAppStates {
   CreatePostErrorState(this.error);
 }
 
+class DeletePostLoadingState extends SocialAppStates {}
+
+class DeletePostSuccessState extends SocialAppStates {}
+
+class DeletePostErrorState extends SocialAppStates {
+  final String error;
+  DeletePostErrorState(this.error);
+}
+
 class PostImagePickedSuccessState extends SocialAppStates {}
 
 class PostImagePickedErrorState extends SocialAppStates {}
@@ -67,3 +76,26 @@ class LikePostErrorState extends SocialAppStates {
   final String error;
   LikePostErrorState(this.error);
 }
+
+class CommentCreatedLoadingState extends SocialAppStates {}
+
+class CommentCreatedSuccessState extends SocialAppStates {}
+
+class CommentCreatedErrorState extends SocialAppStates {
+  final String error;
+  CommentCreatedErrorState(this.error);
+}
+
+class CommentImagePickedSuccessState extends SocialAppStates {}
+
+class CommentImagePickedErrorState extends SocialAppStates {}
+
+class UploadCommentImageLoadingState extends SocialAppStates {}
+
+class UploadCommentImageSuccessState extends SocialAppStates {}
+
+class UploadCommentImageErrorState extends SocialAppStates {}
+
+class GetCommentsSuccessState extends SocialAppStates {}
+
+class CommentImageRemovedSuccessState extends SocialAppStates {}

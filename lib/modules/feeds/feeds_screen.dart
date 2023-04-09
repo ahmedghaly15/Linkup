@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/states.dart';
 import 'package:social_app/models/post_model.dart';
+import 'package:social_app/modules/comments/comments_screen.dart';
+import 'package:social_app/shared/constants.dart';
 import 'package:social_app/styles/colors.dart';
 import 'package:social_app/styles/iconbroken.dart';
 
@@ -129,7 +131,7 @@ class FeedsScreen extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          model.dateTime!,
+                          "${model.date} at ${model.time}",
                           style:
                               Theme.of(context).textTheme.bodySmall!.copyWith(
                                     height: 1.5,
@@ -216,7 +218,7 @@ class FeedsScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsetsDirectional.only(top: 15),
                   child: Container(
-                    height: 150,
+                    height: 180,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -245,7 +247,8 @@ class FeedsScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              "${SocialAppCubit.getObject(context).likes[index]} Likes",
+                              "${model.likes} Likes",
+                              // "${SocialAppCubit.getObject(context).likes[index]} Likes",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],
@@ -254,7 +257,18 @@ class FeedsScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          // SocialAppCubit.getObject(context)
+                          //     .getComments(postId: model.postId!);
+                          navigateTo(
+                            context,
+                            CommentsScreen(
+                              likes: model.likes,
+                              postId: model.postId,
+                              postUid: model.uId,
+                            ),
+                          );
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
@@ -265,7 +279,7 @@ class FeedsScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              "0 Comment",
+                              "${model.comments} comments",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],
@@ -301,21 +315,37 @@ class FeedsScreen extends StatelessWidget {
                                     .image!),
                           ),
                           const SizedBox(width: 10),
-                          Text(
-                            "Write a comment...",
-                            style:
-                                Theme.of(context).textTheme.bodySmall!.copyWith(
-                                      fontSize: 14,
-                                    ),
-                          )
+                          TextButton(
+                            onPressed: () {
+                              // SocialAppCubit.getObject(context)
+                              //     .getComments(postId: model.postId!);
+                              navigateTo(
+                                context,
+                                CommentsScreen(
+                                  likes: model.likes,
+                                  postId: model.postId,
+                                  postUid: model.uId,
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Write a comment...",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(
+                                    fontSize: 14,
+                                  ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      SocialAppCubit.getObject(context).likePost(
-                          SocialAppCubit.getObject(context).postsIds[index]);
+                    onTap: () async {
+                      await SocialAppCubit.getObject(context)
+                          .likedByMe(postId: model.postId!);
                     },
                     child: Row(
                       children: <Widget>[

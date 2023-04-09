@@ -4,6 +4,7 @@ import 'package:social_app/styles/iconbroken.dart';
 import '../modules/auth/auth_screen.dart';
 import '../network/local/cache_helper.dart';
 import '../styles/colors.dart';
+import 'package:intl/intl.dart';
 // import '/layout/cubit/cubit.dart';
 // import '/network/local/cache_helper.dart';
 
@@ -197,4 +198,15 @@ void buildBottomSheet({
           ),
         );
       });
+}
+
+double intToDouble(int num) {
+  double doubleNum = num.toDouble();
+  return doubleNum;
+}
+
+String getDate() {
+  DateTime dateTime = DateTime.now();
+  String date = DateFormat.yMMMd().format(dateTime);
+  return date;
 }
