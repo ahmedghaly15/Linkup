@@ -9,8 +9,8 @@ class LikesModel {
     this.dateTime,
   });
 
-  LikesModel.fromJson(Map<String, dynamic>? json) {
-    uId = json!['uId'];
+  LikesModel.fromJson(Map<String, dynamic> json) {
+    uId = json['uId'];
     name = json['name'];
     dateTime = json['dateTime'];
   }

@@ -23,6 +23,7 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
   void userSignIn({
     required String email,
     required String password,
+    // required BuildContext context,
   }) {
     emit(SignInLoadingState());
     FirebaseAuth.instance
@@ -31,6 +32,7 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
       password: password,
     )
         .then((value) {
+      // SocialAppCubit.getObject(context).getUserData(value.user!.uid);
       print(value.user!.email);
       print(value.user!.uid);
       emit(SignInSuccessState(value.user!.uid));
@@ -45,6 +47,7 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
     required String email,
     required String password,
     required String phone,
+    // required BuildContext context,
   }) {
     emit(SignUpLoadingState());
 
@@ -54,6 +57,8 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
       password: password,
     )
         .then((value) {
+      // SocialAppCubit.getObject(context).getUserData(value.user!.uid);
+
       // print(value.user);
       // print(value.user!.uid);
       firestoreCreateUSer(
@@ -82,10 +87,9 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
       uId: uId,
       isEmailVerified: false,
       image:
-          'https://media.istockphoto.com/id/1131164548/vector/avatar-5.jpg?s=612x612&w=0&k=20&c=CK49ShLJwDxE4kiroCR42kimTuuhvuo2FH5y_6aSgEo=',
+          'https://img.freepik.com/free-icon/user_318-159711.jpg?size=626&ext=jpg&ga=GA1.2.825316313.1674289475&semt=ais',
       bio: 'Write your bio...',
-      cover:
-          'https://img.freepik.com/premium-photo/woman-praying-free-bird-enjoying-nature-sunset-background-hope-concept_34200-192.jpg?size=626&ext=jpg&ga=GA1.2.825316313.1674289475&semt=ais',
+      cover: 'https://notepd.s3.amazonaws.com/default-cover.png',
     );
     FirebaseFirestore.instance
         .collection('users')

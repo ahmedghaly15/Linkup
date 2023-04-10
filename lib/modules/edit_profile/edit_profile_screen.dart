@@ -9,12 +9,11 @@ import 'package:social_app/models/user_model.dart';
 import 'package:social_app/shared/components/input_field.dart';
 import 'package:social_app/shared/constants.dart';
 import 'package:social_app/styles/colors.dart';
-import 'package:social_app/styles/iconbroken.dart';
 
 import '../../shared/components/default_button.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({super.key});
+  const EditProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +105,7 @@ class EditProfileScreen extends StatelessWidget {
                                       ),
                                     ),
                                     icon: const Icon(
-                                      IconBroken.camera,
+                                      Icons.camera_alt,
                                       color: defaultColor,
                                       size: 25,
                                     ),
@@ -145,7 +144,7 @@ class EditProfileScreen extends StatelessWidget {
                                 radius: 20,
                                 backgroundColor: Colors.white,
                                 child: Icon(
-                                  IconBroken.camera,
+                                  Icons.camera_alt,
                                   color: defaultColor,
                                   size: 20,
                                 ),
@@ -247,7 +246,7 @@ class EditProfileScreen extends StatelessWidget {
                               return null;
                             },
                             keyboardType: TextInputType.name,
-                            prefixIcon: const Icon(IconBroken.user),
+                            prefixIcon: const Icon(Icons.person),
                             // hintStyle: const TextStyle(
                             //   fontSize: 18,
                             //   color: Colors.black,
@@ -266,7 +265,7 @@ class EditProfileScreen extends StatelessWidget {
                               return null;
                             },
                             keyboardType: TextInputType.text,
-                            prefixIcon: const Icon(IconBroken.infoCircle),
+                            prefixIcon: const Icon(Icons.info),
                             // hintStyle: const TextStyle(
                             //   fontSize: 18,
                             //   color: Colors.black,
@@ -285,7 +284,7 @@ class EditProfileScreen extends StatelessWidget {
                               return null;
                             },
                             keyboardType: TextInputType.phone,
-                            prefixIcon: const Icon(IconBroken.call),
+                            prefixIcon: const Icon(Icons.phone),
                             // hintStyle: const TextStyle(
                             //   fontSize: 18,
                             //   color: Colors.black,

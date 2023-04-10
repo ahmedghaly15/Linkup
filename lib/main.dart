@@ -13,6 +13,20 @@ import 'network/local/cache_helper.dart';
 import 'styles/colors.dart';
 
 Future<void> main() async {
+  /*
+
+  TODO: متنساش ال 3 نقط بتوع كل بوست خليهم ينزلو حاجات منهم انك تمسح البوست 
+  
+ DONE  TODO: في سكرينة اليوزرز هعمل شكل زي برنامج اكلات بيديك اليوزرز ومع كل ضغطة علي كل يوزر اروح لبروفايل اليوزر ده
+
+ DONE  TODO: شوف حوار السيرش اللي في ابلكيشن تشاتر وشوف لو في اي حاجة هناك ممكن نعملها هنا
+
+ DONE  TODO: replace all IconBroken with normal icons and remove IconBroken from the project
+
+ DONE: TODO: Sign out Floating Action Button
+  
+   */
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -45,7 +59,11 @@ Future<void> main() async {
 class MainApp extends StatelessWidget {
   final Widget? startingScreen;
   final String? uId;
-  const MainApp(this.startingScreen, this.uId, {super.key});
+  const MainApp(
+    this.startingScreen,
+    this.uId, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

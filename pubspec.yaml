@@ -15,13 +15,13 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   shared_preferences: ^2.0.20
   image_picker: ^0.8.7+1
+  intl: ^0.17.0
 
   # Firebase
   firebase_auth: ^4.4.0
   firebase_core: ^2.9.0
   cloud_firestore: ^4.5.0
   firebase_storage: ^11.1.0
-  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +39,3 @@ flutter:
     - family: Janna
       fonts:
         - asset: assets/fonts/Janna LT Regular.ttf
-
-    - family: IconBroken
-      fonts:
-        - asset: assets/fonts/icons.ttf

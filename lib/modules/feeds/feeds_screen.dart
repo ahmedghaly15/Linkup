@@ -6,11 +6,10 @@ import 'package:social_app/layout/cubit/states.dart';
 import 'package:social_app/models/post_model.dart';
 import 'package:social_app/modules/comments/comments_screen.dart';
 import 'package:social_app/shared/constants.dart';
-import 'package:social_app/styles/colors.dart';
-import 'package:social_app/styles/iconbroken.dart';
+// import 'package:social_app/styles/colors.dart';
 
 class FeedsScreen extends StatelessWidget {
-  const FeedsScreen({super.key});
+  const FeedsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +74,8 @@ class FeedsScreen extends StatelessWidget {
               ],
             ),
           ),
-          fallback: (context) => const Center(
-            child: CircularProgressIndicator(
-              color: defaultColor,
-            ),
+          fallback: (context) => Column(
+            children: const <Widget>[],
           ),
         );
       },
@@ -241,7 +238,7 @@ class FeedsScreen extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             const Icon(
-                              IconBroken.heart,
+                              Icons.favorite_border,
                               size: 20,
                               color: Colors.grey,
                             ),
@@ -273,7 +270,7 @@ class FeedsScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             const Icon(
-                              IconBroken.chat,
+                              Icons.comment,
                               size: 20,
                               color: Colors.grey,
                             ),
@@ -350,7 +347,7 @@ class FeedsScreen extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         const Icon(
-                          IconBroken.heart,
+                          Icons.favorite_border,
                           size: 18,
                           color: Colors.grey,
                         ),

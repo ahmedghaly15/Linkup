@@ -14,7 +14,7 @@ import '/shared/components/input_field.dart';
 import '/styles/colors.dart';
 
 class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -291,6 +291,7 @@ class _AuthScreenState extends State<AuthScreen>
                                         FocusScope.of(context).unfocus();
                                         AuthScreenCubit.getObject(context)
                                             .userSignIn(
+                                          // context: context,
                                           email: emailController.text,
                                           password: passwordController.text,
                                         );
@@ -370,6 +371,7 @@ class _AuthScreenState extends State<AuthScreen>
                                               FocusScope.of(context).unfocus();
                                               AuthScreenCubit.getObject(context)
                                                   .userSignUp(
+                                                // context: context,
                                                 username: nameController.text,
                                                 email: emailController.text,
                                                 password:
@@ -464,7 +466,8 @@ class _AuthScreenState extends State<AuthScreen>
       if (authMode == AuthMode.signIn) {
         FocusScope.of(ctx).unfocus();
         AuthScreenCubit.getObject(ctx).userSignIn(
-          email: emailController.text,
+          // context: ctx,
+          email: emailController.text.trim(),
           password: passwordController.text,
         );
       }
@@ -472,8 +475,9 @@ class _AuthScreenState extends State<AuthScreen>
       else if (authMode == AuthMode.signUp) {
         FocusScope.of(ctx).unfocus();
         AuthScreenCubit.getObject(ctx).userSignUp(
-          username: nameController.text,
-          email: emailController.text,
+          // context: ctx,
+          username: nameController.text.trim(),
+          email: emailController.text.trim(),
           password: passwordController.text,
           phone: phoneController.text,
         );

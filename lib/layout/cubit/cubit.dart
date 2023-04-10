@@ -14,10 +14,10 @@ import 'package:social_app/modules/profile/profile_screen.dart';
 import 'package:social_app/modules/users/users_screen.dart';
 import 'package:social_app/network/local/cache_helper.dart';
 import 'package:social_app/shared/constants.dart';
-import 'package:social_app/styles/iconbroken.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import '../../models/comment_model.dart';
+import '../../models/message_model.dart';
 
 class SocialAppCubit extends Cubit<SocialAppStates> {
   SocialAppCubit() : super(SocialAppInitialState());
@@ -38,22 +38,22 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
   //============ Bottom Nav Bar Content ============
   List<BottomNavigationBarItem> bottomNavItems = const [
     BottomNavigationBarItem(
-      icon: Icon(IconBroken.home),
+      icon: Icon(Icons.home),
       label: "Home",
       // backgroundColor: defaultColor,
     ),
     BottomNavigationBarItem(
-      icon: Icon(IconBroken.chat),
+      icon: Icon(Icons.chat),
       label: "Chats",
       // backgroundColor: defaultColor,
     ),
     BottomNavigationBarItem(
-      icon: Icon(IconBroken.location),
+      icon: Icon(Icons.group_rounded),
       label: "Users",
       // backgroundColor: defaultColor,
     ),
     BottomNavigationBarItem(
-      icon: Icon(IconBroken.profile),
+      icon: Icon(Icons.person),
       label: "Profile",
       // backgroundColor: defaultColor,
     ),
@@ -69,6 +69,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   //============ For Moving Between Bottom Nav Bar Screens ============
   void changeBottomNavIndex(int index) {
+    if (index == 1 || index == 2) getAllUsers();
     currentIndex = index;
 
     emit(ChangeBottomNavState());
@@ -248,6 +249,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
       postImage: postImage ?? "",
       likes: 0,
       comments: 0,
+      dateTime: Timestamp.now(),
     );
 
     FirebaseFirestore.instance
@@ -335,7 +337,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
   }
 
   List<PostModel> posts = [];
-  List<String> postsIds = [];
+  // List<String> postsIds = [];
   List<int> likes = [];
 
   void getPosts() {
@@ -343,11 +345,12 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     FirebaseFirestore.instance
         .collection('posts')
         .orderBy(
-          'time',
-          descending: false,
+          'dateTime',
+          descending: true,
         )
         .snapshots()
         .listen((event) async {
+      posts = [];
       for (var element in event.docs) {
         posts.add(PostModel.fromJson(element.data()));
         var likes = await element.reference.collection('likes').get();
@@ -445,6 +448,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
       commentText: commentText ?? '',
       time: time,
       date: date,
+      dateTime: Timestamp.now(),
     );
 
     FirebaseFirestore.instance
@@ -488,7 +492,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
         .then((value) {
       value.ref.getDownloadURL().then((value) {
         typeNewComment(
-          commentImage: {'width': 150, 'image': value, 'height': 200},
+          commentImage: {'image': value, 'height': 150},
           postId: postId,
           time: time,
           date: date,
@@ -514,7 +518,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
         .doc(postId)
         .collection('comments')
         .orderBy(
-          'time',
+          'dateTime',
           descending: false,
         )
         .snapshots()
@@ -525,5 +529,174 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
         emit(GetCommentsSuccessState());
       }
     });
+  }
+
+  // String commentText = '';
+  void onChangeText(value, text) {
+    text = value;
+    emit(OnChangeCommentTextSuccessState());
+  }
+
+  // void controllerClearer() {
+  //   commentController.clear();
+  //   emit(ControllerClearedSuccessState());
+  // }
+
+  // void resetCommentText(String commentText) {
+  //   commentText = '';
+  //   emit(ResetCommentTextSuccessState());
+  // }
+
+  List<UserModel> users = [];
+
+  void getAllUsers() {
+    if (users.isEmpty)
+      // emit(GetAllUserLoadingState());
+      FirebaseFirestore.instance.collection('users').get().then((value) {
+        for (var element in value.docs) {
+          if (element.data()['uId'] != model!.uId)
+            users.add(UserModel.fromJson(element.data()));
+        }
+        emit(GetAllUserSuccessState());
+      }).catchError((error) {
+        print(error.toString());
+        emit(GetAllUserErrorState(error.toString()));
+      });
+  }
+
+  void sendMessage({
+    required String receiverId,
+    required String receiverName,
+    required String date,
+    required String time,
+    String? text,
+    Map<String, dynamic>? messageImage,
+  }) {
+    MessageModel messageModel = MessageModel(
+      senderId: model!.uId,
+      senderName: model!.name,
+      receiverId: receiverId,
+      receiverName: receiverName,
+      time: time,
+      date: date,
+      messageText: text ?? '',
+      messageImage: messageImage ?? {},
+      dateTime: Timestamp.now(),
+    );
+
+    // Setting up my Chats
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(model!.uId)
+        .collection('chats')
+        .doc(receiverId)
+        .collection('messages')
+        .add(messageModel.toJson())
+        .then((value) {
+      emit(SendMessageSuccessState());
+    }).catchError((error) {
+      emit(SendMessageErrorState());
+    });
+
+    // Setting up receiver Chats
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(receiverId)
+        .collection('chats')
+        .doc(model!.uId)
+        .collection('messages')
+        .add(messageModel.toJson())
+        .then((value) {
+      emit(SendMessageSuccessState());
+    }).catchError((error) {
+      emit(SendMessageErrorState());
+    });
+  }
+
+  File? messageImage;
+
+  Future<void> getMessageImage({required ImageSource source}) async {
+    final XFile? pickedImage = await picker.pickImage(source: source);
+    if (pickedImage != null) {
+      messageImage = File(pickedImage.path);
+      emit(MessageImagePickedSuccessState());
+    } else {
+      print("No image selected");
+      emit(MessageImagePickedErrorState());
+    }
+  }
+
+  void uploadMessageImage({
+    String? text,
+    required String receiverId,
+    required String receiverName,
+    required String date,
+    required String time,
+  }) {
+    emit(UploadMessageImageLoadingState());
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('messages/${Uri.file(messageImage!.path).pathSegments.last}')
+        .putFile(messageImage!)
+        .then((value) {
+      value.ref.getDownloadURL().then((value) {
+        sendMessage(
+          receiverId: receiverId,
+          receiverName: receiverName,
+          date: date,
+          time: time,
+          messageImage: {
+            'image': value,
+            'height': 150,
+          },
+          text: text,
+        );
+        emit(UploadMessageImageSuccessState());
+      }).catchError((error) {
+        emit(UploadMessageImageErrorState());
+      });
+    }).catchError((error) {
+      emit(UploadMessageImageErrorState());
+    });
+  }
+
+  void removeMessageImage() {
+    messageImage = null;
+    emit(RemovedMessageImageSuccessState());
+  }
+
+  List<MessageModel> messages = [];
+
+  void getMessages({required String receiverId}) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(model!.uId)
+        .collection('chats')
+        .doc(receiverId)
+        .collection('messages')
+        .orderBy(
+          'dateTime',
+          descending: true,
+        )
+        .snapshots()
+        .listen((event) {
+      messages = [];
+      for (var element in event.docs) {
+        messages.add(MessageModel.fromJson(element.data()));
+      }
+      emit(GetMessagesSuccessState());
+    });
+  }
+
+  List<UserModel> searchList = [];
+  bool isSearching = false;
+
+  void invertIsSearching() {
+    isSearching = !isSearching;
+    emit(InvertIsSearchingSuccessState());
+  }
+
+  void rebuildSearchList(List<UserModel> list) {
+    emit(SearchListUpdateSuccessState(list));
   }
 }

@@ -7,10 +7,10 @@ import 'package:social_app/layout/cubit/states.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/shared/constants.dart';
 import 'package:social_app/styles/colors.dart';
-import 'package:social_app/styles/iconbroken.dart';
+// import 'package:social_app/styles/iconbroken.dart';
 
 class NewPostScreen extends StatelessWidget {
-  const NewPostScreen({super.key});
+  const NewPostScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +88,7 @@ class NewPostScreen extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                       textCapitalization: TextCapitalization.sentences,
+                      keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                         hintText:
                             "What's in your mind, ${model.name!.split(' ')[0]}",
@@ -148,9 +149,9 @@ class NewPostScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: const <Widget>[
                             Icon(
-                              IconBroken.image,
+                              Icons.image,
                               color: defaultColor,
-                              size: 20,
+                              size: 22,
                             ),
                             SizedBox(width: 5),
                             Text(

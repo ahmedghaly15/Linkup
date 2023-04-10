@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/styles/iconbroken.dart';
+// import 'package:social_app/styles/iconbroken.dart';
 
 import '../modules/auth/auth_screen.dart';
 import '../network/local/cache_helper.dart';
@@ -80,7 +80,13 @@ void navigateTo(context, Widget screen) {
 }
 
 //================== For Signing The Current User Out ==================
-void signOut(context) {
+void signOut(context) async {
+  // final prefs = await SharedPreferences.getInstance();
+
+  // prefs.clear();
+
+  // navigateAndFinish(context, screen: const AuthScreen());
+  // FirebaseAuth.instance.signOut();
   CacheHelper.removeData(key: 'uId').then((value) {
     if (value) {
       navigateAndFinish(context, screen: const AuthScreen());
@@ -107,7 +113,7 @@ AppBar appBarBuilder({
       leading: IconButton(
         onPressed: () => navigateBack(context),
         icon: const Icon(
-          IconBroken.arrowLeft_2,
+          Icons.arrow_back_ios,
           color: Colors.black,
         ),
       ),
