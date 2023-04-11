@@ -32,7 +32,7 @@ void buildSnackBar({
     dismissDirection: DismissDirection.down,
     clipBehavior: Clip.hardEdge,
     backgroundColor: chooseSnackBarClr(state),
-    duration: const Duration(seconds: 5),
+    duration: const Duration(seconds: 2),
     behavior: SnackBarBehavior.floating,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(15.0),
