@@ -1,12 +1,15 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
-import 'package:social_app/shared/constants.dart';
+import 'package:get/get.dart';
 
-import '../modules/new_post/new_post_screen.dart';
-import '../styles/colors.dart';
+import '../styles/theme_services.dart';
+import '/layout/cubit/cubit.dart';
+import '/layout/cubit/states.dart';
+import '/modules/new_post/new_post_screen.dart';
+import '/shared/constants.dart';
+import '../styles/thems.dart';
 
 class SocialAppLayout extends StatelessWidget {
   const SocialAppLayout({super.key});
@@ -28,15 +31,28 @@ class SocialAppLayout extends StatelessWidget {
               return Future.value(true);
             },
             child: Scaffold(
+              backgroundColor: context.theme.colorScheme.background,
               appBar: AppBar(
+                backgroundColor: context.theme.colorScheme.background,
                 title: cubit.isSearching
                     ? buildSearchField(cubit)
                     : const Text(""),
-                // title: Text(cubit.titles[cubit.currentIndex]),
+                leading: IconButton(
+                  onPressed: () async {
+                    ThemeServices().switchTheme();
+                  },
+                  icon: Icon(
+                    Get.isDarkMode
+                        ? Icons.wb_sunny_outlined
+                        : Icons.nightlight_round_outlined,
+                    size: 28,
+                    color: Get.isDarkMode ? Colors.white : darkGreyClr,
+                  ),
+                ),
                 actions: <Widget>[
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.notifications),
+                    icon: const Icon(Icons.notifications, color: defaultColor),
                   ),
                   if (cubit.currentIndex == 1)
                     IconButton(
@@ -45,9 +61,17 @@ class SocialAppLayout extends StatelessWidget {
                       },
                       icon: Icon(
                         cubit.isSearching ? Icons.cancel : Icons.search_rounded,
+                        color: defaultColor,
                       ),
                     ),
                 ],
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  systemNavigationBarColor:
+                      Get.isDarkMode ? darkGreyClr : Colors.white,
+                  statusBarColor: Get.isDarkMode ? darkGreyClr : Colors.white,
+                  statusBarBrightness:
+                      Get.isDarkMode ? Brightness.light : Brightness.dark,
+                ),
               ),
               body: ConditionalBuilder(
                 condition: cubit.model != null,
@@ -64,7 +88,7 @@ class SocialAppLayout extends StatelessWidget {
                 notchMargin: 0.1,
                 clipBehavior: Clip.antiAlias,
                 child: BottomNavigationBar(
-                  backgroundColor: Colors.white,
+                  backgroundColor: Get.isDarkMode ? darkGreyClr : Colors.white,
                   items: cubit.bottomNavItems,
                   currentIndex: cubit.currentIndex,
                   onTap: (int index) => cubit.changeBottomNavIndex(index),
@@ -83,9 +107,14 @@ class SocialAppLayout extends StatelessWidget {
               floatingActionButton: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FloatingActionButton(
+                  heroTag: "Floating New Post Button",
                   onPressed: () => navigateTo(context, const NewPostScreen()),
                   backgroundColor: defaultColor,
-                  child: const Icon(Icons.post_add, size: 25),
+                  child: const Icon(
+                    Icons.post_add,
+                    size: 25,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -97,7 +126,6 @@ class SocialAppLayout extends StatelessWidget {
 
   Widget buildSearchField(SocialAppCubit cubit) {
     return SizedBox(
-      // margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
       height: 70,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -112,7 +140,7 @@ class SocialAppLayout extends StatelessWidget {
             hintStyle: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
-              color: Colors.grey[700], // Get.isDarkMode ? Colors.grey[100] :
+              color: Colors.grey[700],
               letterSpacing: 0.5,
             ),
             enabledBorder: OutlineInputBorder(

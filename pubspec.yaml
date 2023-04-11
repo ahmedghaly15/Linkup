@@ -16,6 +16,10 @@ dependencies:
   shared_preferences: ^2.0.20
   image_picker: ^0.8.7+1
   intl: ^0.17.0
+  flutter_chat_bubble: ^2.0.2
+  get: ^4.6.5
+  get_storage: ^2.0.3
+  google_fonts: ^4.0.3
 
   # Firebase
   firebase_auth: ^4.4.0
@@ -34,8 +38,3 @@ flutter:
   assets:
     - assets/images/camera.png
     - assets/images/add_image.png
-
-  fonts:
-    - family: Janna
-      fonts:
-        - asset: assets/fonts/Janna LT Regular.ttf

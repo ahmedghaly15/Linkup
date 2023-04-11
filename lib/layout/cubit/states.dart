@@ -1,9 +1,10 @@
-import '../../models/user_model.dart';
+import '/models/user_model.dart';
 
 abstract class SocialAppStates {}
 
 class SocialAppInitialState extends SocialAppStates {}
 
+//============ The Current User's States ============
 class GetUserLoadingState extends SocialAppStates {}
 
 class GetUserSuccessState extends SocialAppStates {}
@@ -13,8 +14,7 @@ class GetUserErrorState extends SocialAppStates {
   GetUserErrorState(this.error);
 }
 
-// class GetAllUserLoadingState extends SocialAppStates {}
-
+//============ Getting All Users States ============
 class GetAllUserSuccessState extends SocialAppStates {}
 
 class GetAllUserErrorState extends SocialAppStates {
@@ -22,6 +22,7 @@ class GetAllUserErrorState extends SocialAppStates {
   GetAllUserErrorState(this.error);
 }
 
+//============ Posts States ============
 class GetPostsLoadingState extends SocialAppStates {}
 
 class GetPostsSuccessState extends SocialAppStates {}
@@ -31,31 +32,31 @@ class GetPostsErrorState extends SocialAppStates {
   GetPostsErrorState(this.error);
 }
 
+//============ Change Bottom Nav State ============
 class ChangeBottomNavState extends SocialAppStates {}
 
+//============ Profile Image States ============
 class ProfileImagePickedSuccessState extends SocialAppStates {}
 
 class ProfileImagePickedErrorState extends SocialAppStates {}
-
-class CoverImagePickedSuccessState extends SocialAppStates {}
-
-class CoverImagePickedErrorState extends SocialAppStates {}
 
 class UploadProfileImageSuccessState extends SocialAppStates {}
 
 class UploadProfileImageErrorState extends SocialAppStates {}
 
+//============ Cover Image States ============
+class CoverImagePickedSuccessState extends SocialAppStates {}
+
+class CoverImagePickedErrorState extends SocialAppStates {}
+
 class UploadCoverImageSuccessState extends SocialAppStates {}
 
 class UploadCoverImageErrorState extends SocialAppStates {}
 
+//============ Post States ============
 class UploadPostImageSuccessState extends SocialAppStates {}
 
 class UploadPostImageErrorState extends SocialAppStates {}
-
-class UserUpdateLoadingState extends SocialAppStates {}
-
-class UserUpdateErrorState extends SocialAppStates {}
 
 class CreatePostLoadingState extends SocialAppStates {}
 
@@ -81,6 +82,12 @@ class PostImagePickedErrorState extends SocialAppStates {}
 
 class PostImageRemovedState extends SocialAppStates {}
 
+//============ Updating The Current User States ============
+class UserUpdateLoadingState extends SocialAppStates {}
+
+class UserUpdateErrorState extends SocialAppStates {}
+
+//============ Like States ============
 class LikePostSuccessState extends SocialAppStates {}
 
 class LikePostErrorState extends SocialAppStates {
@@ -88,6 +95,7 @@ class LikePostErrorState extends SocialAppStates {
   LikePostErrorState(this.error);
 }
 
+//============ Comments States ============
 class CommentCreatedLoadingState extends SocialAppStates {}
 
 class CommentCreatedSuccessState extends SocialAppStates {}
@@ -113,10 +121,7 @@ class CommentImageRemovedSuccessState extends SocialAppStates {}
 
 class OnChangeCommentTextSuccessState extends SocialAppStates {}
 
-// class ResetCommentTextSuccessState extends SocialAppStates {}
-
-// class ControllerClearedSuccessState extends SocialAppStates {}
-
+//============ Messages States ============
 class SendMessageSuccessState extends SocialAppStates {}
 
 class SendMessageErrorState extends SocialAppStates {}
@@ -135,6 +140,7 @@ class UploadMessageImageErrorState extends SocialAppStates {}
 
 class RemovedMessageImageSuccessState extends SocialAppStates {}
 
+//============ Search States ============
 class InvertIsSearchingSuccessState extends SocialAppStates {}
 
 class SearchListUpdateSuccessState extends SocialAppStates {

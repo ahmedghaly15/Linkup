@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
-import 'package:social_app/modules/edit_profile/edit_profile_screen.dart';
-import 'package:social_app/shared/components/default_button.dart';
-import 'package:social_app/shared/constants.dart';
 
-import '../../models/user_model.dart';
+import '../../styles/thems.dart';
+import '/layout/cubit/cubit.dart';
+import '/layout/cubit/states.dart';
+import '/models/user_model.dart';
+import '/modules/edit_profile/edit_profile_screen.dart';
+import '/shared/components/default_button.dart';
+import '/shared/constants.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -16,11 +17,6 @@ class ProfileScreen extends StatelessWidget {
     return BlocConsumer<SocialAppCubit, SocialAppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        // For Getting The Screen Width
-        // double screenWidth = MediaQuery.of(context).size.width;
-        // For Getting The Screen Height
-        // double screenHeight = MediaQuery.of(context).size.height;
-        // Getting the model
         UserModel userModel = SocialAppCubit.getObject(context).model!;
         return Stack(
           children: <Widget>[
@@ -64,111 +60,34 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 5),
+                    const SizedBox(height: 7),
                     Text(
                       userModel.name!,
-                      style: const TextStyle(
+                      style: bodyLarge.copyWith(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5,
                       ),
                     ),
+                    const SizedBox(height: 5),
                     Text(
                       userModel.bio!,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            fontSize: 15,
-                          ),
+                      style: caption.copyWith(fontSize: 15),
                     ),
+                    const SizedBox(height: 5),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        // horizontal: 8.0,
                         vertical: 10.0,
                       ),
                       child: Row(
                         children: <Widget>[
-                          Expanded(
-                            child: InkWell(
-                              child: Column(
-                                children: <Widget>[
-                                  const Text(
-                                    "32",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Posts",
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: InkWell(
-                              child: Column(
-                                children: <Widget>[
-                                  const Text(
-                                    "20",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Photos",
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: InkWell(
-                              child: Column(
-                                children: <Widget>[
-                                  const Text(
-                                    "100k",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Followers",
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: InkWell(
-                              child: Column(
-                                children: <Widget>[
-                                  const Text(
-                                    "1",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Following",
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          buildProfileData(context, 0, "Posts"),
+                          buildProfileData(context, 0, "Photos"),
+                          buildProfileData(context, 0, "Followers"),
+                          buildProfileData(context, 0, "Following"),
                         ],
                       ),
                     ),
+                    const SizedBox(height: 10),
                     DefaultButton(
                       buttonText: "Edit Profile",
                       onPressed: () => navigateTo(
@@ -179,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                       textStyle: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5,
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -194,15 +113,14 @@ class ProfileScreen extends StatelessWidget {
                   horizontal: 5.0,
                 ),
                 child: FloatingActionButton.extended(
+                  heroTag: "Floating Sign Out Button",
                   backgroundColor: Colors.redAccent,
                   onPressed: () => signOut(context),
-                  label: const Text(
+                  label: Text(
                     "Sign out",
-                    style: TextStyle(
-                      fontSize: 17,
+                    style: bodyLarge.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
-                      letterSpacing: 0.5,
                     ),
                   ),
                   icon: const Icon(
@@ -216,6 +134,24 @@ class ProfileScreen extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Widget buildProfileData(BuildContext context, int count, String label) {
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          Text(
+            "$count",
+            style: bodyLarge,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            label,
+            style: caption,
+          ),
+        ],
+      ),
     );
   }
 }

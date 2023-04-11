@@ -1,13 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/models/user_model.dart';
-// import '/models/sign_in_model.dart';
-import '/modules/auth/cubit/states.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import '/network/end_points.dart';
-// import '/network/remote/dio_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// For Toggling Between Sign In Screen & Sign Up Screen
+import '/layout/cubit/cubit.dart';
+import '/models/user_model.dart';
+import '/modules/auth/cubit/states.dart';
+import '/network/local/cache_helper.dart';
+
 enum AuthMode { signIn, signUp }
 
 //==================== Auth Screen Cubit ====================
@@ -17,13 +17,11 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
   //============ Getting An Object Of The Cubit ============
   static AuthScreenCubit getObject(context) => BlocProvider.of(context);
 
-  // SignInModel? signInModel;
-
   //============ For Signing In A User ============
   void userSignIn({
     required String email,
     required String password,
-    // required BuildContext context,
+    required BuildContext context,
   }) {
     emit(SignInLoadingState());
     FirebaseAuth.instance
@@ -32,12 +30,12 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
       password: password,
     )
         .then((value) {
-      // SocialAppCubit.getObject(context).getUserData(value.user!.uid);
-      print(value.user!.email);
-      print(value.user!.uid);
       emit(SignInSuccessState(value.user!.uid));
+      CacheHelper.saveData(key: 'uId', value: value.user!.uid);
+      SocialAppCubit.getObject(context).getUserData(value.user!.uid);
     }).catchError((error) {
-      emit(SignInErrorState(error.toString()));
+      if (error is FirebaseAuthException)
+        emit(SignInErrorState(error.code.toString()));
     });
   }
 
@@ -47,7 +45,7 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
     required String email,
     required String password,
     required String phone,
-    // required BuildContext context,
+    required BuildContext context,
   }) {
     emit(SignUpLoadingState());
 
@@ -57,20 +55,18 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
       password: password,
     )
         .then((value) {
-      // SocialAppCubit.getObject(context).getUserData(value.user!.uid);
-
-      // print(value.user);
-      // print(value.user!.uid);
       firestoreCreateUSer(
         name: username,
         email: email,
         phone: phone,
         uId: value.user!.uid,
       );
-      // emit(SignUpSuccessState(value.user!.uid));
+      CacheHelper.saveData(key: 'uId', value: value.user!.uid);
+      SocialAppCubit.getObject(context).getUserData(value.user!.uid);
     }).catchError((error) {
       print(error.toString());
-      emit(SignUpErrorState(error.toString()));
+      if (error is FirebaseAuthException)
+        emit(SignUpErrorState(error.code.toString()));
     });
   }
 

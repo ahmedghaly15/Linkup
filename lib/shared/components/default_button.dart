@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/styles/colors.dart';
+import 'package:social_app/styles/thems.dart';
 
 class DefaultButton extends StatelessWidget {
   final String buttonText;
@@ -19,6 +19,7 @@ class DefaultButton extends StatelessWidget {
       fontSize: 24,
       fontWeight: FontWeight.bold,
       letterSpacing: 0.5,
+      color: Colors.white,
     ),
   });
 
@@ -39,9 +40,11 @@ class DefaultButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
         ),
-        textStyle: MaterialStateProperty.all(textStyle),
       ),
-      child: Text(buttonText),
+      child: Text(
+        buttonText,
+        style: textStyle,
+      ),
     );
   }
 }

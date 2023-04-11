@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '/styles/colors.dart';
+import 'package:get/get.dart';
+import '../../styles/thems.dart';
 
 class InputField extends StatelessWidget {
   final String hint;
@@ -44,8 +45,8 @@ class InputField extends StatelessWidget {
         suffixIconColor: defaultColor,
         contentPadding: const EdgeInsets.all(10),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.grey,
+          borderSide: BorderSide(
+            color: Get.isDarkMode ? Colors.white54 : Colors.grey,
             width: 0,
           ),
           borderRadius: BorderRadius.circular(15),
@@ -65,10 +66,10 @@ class InputField extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
       ),
-      cursorColor: Colors.grey[700],
-      style: const TextStyle(
+      cursorColor: Get.isDarkMode ? Colors.white : Colors.black,
+      style: TextStyle(
         fontSize: 20,
-        color: Colors.black,
+        color: Get.isDarkMode ? Colors.white : Colors.black,
       ),
       obscureText: obsecure!,
       keyboardType: keyboardType,

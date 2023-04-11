@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-// import 'package:social_app/styles/iconbroken.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
-import '../modules/auth/auth_screen.dart';
-import '../network/local/cache_helper.dart';
-import '../styles/colors.dart';
+import '/modules/auth/auth_screen.dart';
+import '/network/local/cache_helper.dart';
+import '/styles/thems.dart';
 import 'package:intl/intl.dart';
-// import '/layout/cubit/cubit.dart';
-// import '/network/local/cache_helper.dart';
 
 //=========== For Switching Between The State Of The Snack Bar ===========
 enum SnackBarStates { success, error, warning }
@@ -81,12 +80,6 @@ void navigateTo(context, Widget screen) {
 
 //================== For Signing The Current User Out ==================
 void signOut(context) async {
-  // final prefs = await SharedPreferences.getInstance();
-
-  // prefs.clear();
-
-  // navigateAndFinish(context, screen: const AuthScreen());
-  // FirebaseAuth.instance.signOut();
   CacheHelper.removeData(key: 'uId').then((value) {
     if (value) {
       navigateAndFinish(context, screen: const AuthScreen());
@@ -108,16 +101,23 @@ AppBar appBarBuilder({
   List<Widget>? actions,
 }) =>
     AppBar(
-      title: Text(title ?? ""),
+      backgroundColor: context.theme.colorScheme.background,
+      title: Text(title ?? "", style: appBarTitleStyle),
       centerTitle: centerTitle,
       leading: IconButton(
         onPressed: () => navigateBack(context),
-        icon: const Icon(
+        icon: Icon(
           Icons.arrow_back_ios,
-          color: Colors.black,
+          color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
       actions: actions,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        systemNavigationBarColor: Get.isDarkMode ? darkGreyClr : Colors.white,
+        statusBarColor: Get.isDarkMode ? darkGreyClr : Colors.white,
+        statusBarBrightness:
+            Get.isDarkMode ? Brightness.light : Brightness.dark,
+      ),
     );
 
 //================== For Building A Default TextButton ==================
@@ -125,7 +125,7 @@ Widget defaultTextButton({
   required void Function()? onPressed,
   required String title,
   TextStyle? textStyle = const TextStyle(
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: FontWeight.bold,
     color: defaultColor,
   ),
@@ -135,6 +135,7 @@ Widget defaultTextButton({
       child: Text(title, style: textStyle),
     );
 
+//================== For Building A Bottom Sheet ==================
 void buildBottomSheet({
   required BuildContext context,
   required void Function()? onPressedGallery,
@@ -157,23 +158,26 @@ void buildBottomSheet({
                   vertical: 5,
                 ),
                 children: <Widget>[
+                  const SizedBox(height: 8),
                   Text(
                     "Pick $type Picture",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black,
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
                       letterSpacing: 0.5,
                     ),
                     textAlign: TextAlign.center,
                   ),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ElevatedButton(
                         onPressed: onPressedGallery,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          backgroundColor:
+                              Get.isDarkMode ? darkGreyClr : Colors.white,
                           shape: const CircleBorder(),
                           fixedSize: const Size(180, 130),
                         ),
@@ -186,7 +190,8 @@ void buildBottomSheet({
                       ElevatedButton(
                         onPressed: onPressedCamera,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          backgroundColor:
+                              Get.isDarkMode ? darkGreyClr : Colors.white,
                           shape: const CircleBorder(),
                           fixedSize: const Size(180, 130),
                         ),

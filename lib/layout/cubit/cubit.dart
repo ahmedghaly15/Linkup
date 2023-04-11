@@ -1,23 +1,23 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/layout/cubit/states.dart';
-import 'package:social_app/models/like_model.dart';
-import 'package:social_app/models/post_model.dart';
-import 'package:social_app/models/user_model.dart';
-import 'package:social_app/modules/chats/chats_screen.dart';
-import 'package:social_app/modules/feeds/feeds_screen.dart';
-import 'package:social_app/modules/profile/profile_screen.dart';
-import 'package:social_app/modules/users/users_screen.dart';
-import 'package:social_app/network/local/cache_helper.dart';
-import 'package:social_app/shared/constants.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-import '../../models/comment_model.dart';
-import '../../models/message_model.dart';
+import '/layout/cubit/states.dart';
+import '/models/comment_model.dart';
+import '/models/like_model.dart';
+import '/models/message_model.dart';
+import '/models/post_model.dart';
+import '/models/user_model.dart';
+import '/modules/chats/chats_screen.dart';
+import '/modules/feeds/feeds_screen.dart';
+import '/modules/profile/profile_screen.dart';
+import '/modules/users/users_screen.dart';
+import '/network/local/cache_helper.dart';
+import '/shared/constants.dart';
 
 class SocialAppCubit extends Cubit<SocialAppStates> {
   SocialAppCubit() : super(SocialAppInitialState());
@@ -40,32 +40,20 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: "Home",
-      // backgroundColor: defaultColor,
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.chat),
       label: "Chats",
-      // backgroundColor: defaultColor,
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.group_rounded),
       label: "Users",
-      // backgroundColor: defaultColor,
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.person),
       label: "Profile",
-      // backgroundColor: defaultColor,
     ),
   ];
-
-  //============ App Bar Titles Of Bottom Nav Bar Screens ============
-  // List<String> titles = [
-  //   'News Feed',
-  //   'Chats',
-  //   'Users',
-  //   'Profile',
-  // ];
 
   //============ For Moving Between Bottom Nav Bar Screens ============
   void changeBottomNavIndex(int index) {
@@ -77,13 +65,16 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   UserModel? model;
 
+  //============ Getting The Current User Data ============
   void getUserData(String? uId) {
     emit(GetUserLoadingState());
 
+    // Storing The Current User Id
     uId = CacheHelper.getStringData(key: 'uId');
 
+    // Getting Stored Data From Firebase
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
-      // print(value.data());
+      // Assign The Data
       model = UserModel.fromJson(value.data()!);
       emit(GetUserSuccessState());
     }).catchError((error) {
@@ -95,6 +86,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
   File? profileImage;
   ImagePicker picker = ImagePicker();
 
+  //============ Getting The User's Profile Image ============
   Future<void> getProfileImage({required ImageSource source}) async {
     final XFile? pickedImage = await picker.pickImage(source: source);
     if (pickedImage != null) {
@@ -106,6 +98,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     }
   }
 
+  //============ Uploading The User's Profile Image To Firebase Storage ============
   void uploadProfileImage({
     required String name,
     required String phone,
@@ -141,6 +134,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   File? coverImage;
 
+  //============ Getting The User's Cover Image ============
   Future<void> getCoverImage({required ImageSource source}) async {
     final XFile? pickedImage = await picker.pickImage(source: source);
     if (pickedImage != null) {
@@ -152,6 +146,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     }
   }
 
+  //============ Uploading The User's Cover Image To Firebase Storage ============
   void uploadCoverImage({
     required String name,
     required String phone,
@@ -185,23 +180,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  // void updateUserProfileAndCover({
-  //   required String name,
-  //   required String phone,
-  //   required String bio,
-  // }) {
-  //   emit(UserUpdateLoadingState());
-
-  //   if (profileImage != null) {
-  //     uploadProfileImage();
-  //   } else if (coverImage != null) {
-  //     uploadCoverImage();
-  //   } else if (profileImage != null && coverImage != null) {
-  //   } else {
-  //     updateUser(name: name, phone: phone, bio: bio);
-  //   }
-  // }
-
+  //============ Update The Current User's Data ============
   void updateUser({
     required String name,
     required String phone,
@@ -219,7 +198,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
       uId: model!.uId,
       isEmailVerified: false,
     );
-
+    // Update The Data Stored in Firebase
     FirebaseFirestore.instance
         .collection('users')
         .doc(userModel.uId)
@@ -231,6 +210,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
+  //============ Creating A New Post ============
   void createPost({
     required String date,
     required String time,
@@ -252,6 +232,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
       dateTime: Timestamp.now(),
     );
 
+    // Storing The Post Info In Firebase
     FirebaseFirestore.instance
         .collection('posts')
         .add(postModel.toJson())
@@ -265,11 +246,14 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
+  //============ Deleting A Post ============
   void deletePost({
     required String postId,
     required BuildContext context,
   }) {
     emit(DeletePostLoadingState());
+
+    // Delet The Post Info From Firebase
     FirebaseFirestore.instance
         .collection('posts')
         .doc(postId)
@@ -289,6 +273,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   File? postImage;
 
+  //============ Getting The Post Image ============
   Future<void> getPostImage({required ImageSource source}) async {
     final XFile? pickedImage = await picker.pickImage(source: source);
     if (pickedImage != null) {
@@ -300,6 +285,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     }
   }
 
+  //============ Uploading The Post Image To Firebase Storage ============
   void uploadPostImage({
     required String date,
     required String time,
@@ -331,17 +317,16 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
+  //============ Removing Post Image While Creating A New Post ============
   void removePostImage() {
     postImage = null;
     emit(PostImageRemovedState());
   }
 
   List<PostModel> posts = [];
-  // List<String> postsIds = [];
-  List<int> likes = [];
 
+  //============ Getting All Posts ============
   void getPosts() {
-    // emit(GetPostsLoadingState());
     FirebaseFirestore.instance
         .collection('posts')
         .orderBy(
@@ -366,23 +351,9 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
       }
       emit(GetPostsSuccessState());
     });
-
-    // FirebaseFirestore.instance.collection('posts').get().then((value) {
-    //   for (var doc in value.docs) {
-    //     doc.reference.collection('likes').get().then((value) {
-    //       likes.add(value.docs.length);
-    //       postsIds.add(doc.id);
-    //       posts.add(PostModel.fromJson(doc.data()));
-    //     }).catchError((error) {
-    //       emit(GetPostsErrorState(error.toString()));
-    //     });
-    //   }
-    //   emit(GetPostsSuccessState());
-    // }).catchError((error) {
-    //   emit(GetPostsErrorState(error.toString()));
-    // });
   }
 
+  //============ Liking A Post ============
   void likePost({required String postId}) {
     LikesModel likesModel = LikesModel(
       uId: model!.uId,
@@ -404,6 +375,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
+  //============ Check if The Post Is Liked By The Current User ============
   Future<bool> likedByMe({
     required String postId,
   }) async {
@@ -429,8 +401,8 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
   }
 
   List<CommentModel> comments = [];
-  // CommentModel? realCommentModel;
 
+  //============ Creating A New Comment ============
   void typeNewComment({
     String? commentText,
     required String postId,
@@ -467,6 +439,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   File? commentImage;
 
+  //============ Getting The Comment Image ============
   Future<void> getCommentImage({required ImageSource source}) async {
     final XFile? pickedImage = await picker.pickImage(source: source);
     if (pickedImage != null) {
@@ -478,6 +451,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     }
   }
 
+  //============ Uploading The Comment Image To Firebase ============
   void uploadCommentImage({
     String? commentText,
     required String postId,
@@ -507,11 +481,13 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
+  //============ Removing The Comment Image While Creating A Comment ============
   void removeCommentImage() {
     commentImage = null;
     emit(CommentImageRemovedSuccessState());
   }
 
+  //============ Getting All Comments ============
   void getComments({required String postId}) {
     FirebaseFirestore.instance
         .collection('posts')
@@ -531,27 +507,17 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  // String commentText = '';
+  //============ When The Search Field Text Changes ============
   void onChangeText(value, text) {
     text = value;
     emit(OnChangeCommentTextSuccessState());
   }
 
-  // void controllerClearer() {
-  //   commentController.clear();
-  //   emit(ControllerClearedSuccessState());
-  // }
-
-  // void resetCommentText(String commentText) {
-  //   commentText = '';
-  //   emit(ResetCommentTextSuccessState());
-  // }
-
   List<UserModel> users = [];
 
+  //============ Getting All Users ============
   void getAllUsers() {
     if (users.isEmpty)
-      // emit(GetAllUserLoadingState());
       FirebaseFirestore.instance.collection('users').get().then((value) {
         for (var element in value.docs) {
           if (element.data()['uId'] != model!.uId)
@@ -564,6 +530,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
       });
   }
 
+  //============ Sending A New Message ============
   void sendMessage({
     required String receiverId,
     required String receiverName,
@@ -584,7 +551,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
       dateTime: Timestamp.now(),
     );
 
-    // Setting up my Chats
+    // Setting up sender Chats
     FirebaseFirestore.instance
         .collection('users')
         .doc(model!.uId)
@@ -615,6 +582,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   File? messageImage;
 
+  //============ Getting A Message Image ============
   Future<void> getMessageImage({required ImageSource source}) async {
     final XFile? pickedImage = await picker.pickImage(source: source);
     if (pickedImage != null) {
@@ -626,6 +594,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     }
   }
 
+  //============ Uploading A Message Image To Firebase ============
   void uploadMessageImage({
     String? text,
     required String receiverId,
@@ -660,6 +629,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
+  //============ Removing A Message Image While Sending A Message ============
   void removeMessageImage() {
     messageImage = null;
     emit(RemovedMessageImageSuccessState());
@@ -667,6 +637,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   List<MessageModel> messages = [];
 
+  //============ Getting All Messages ============
   void getMessages({required String receiverId}) {
     FirebaseFirestore.instance
         .collection('users')
@@ -691,11 +662,13 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
   List<UserModel> searchList = [];
   bool isSearching = false;
 
+  //============ Inverting The Search State ============
   void invertIsSearching() {
     isSearching = !isSearching;
     emit(InvertIsSearchingSuccessState());
   }
 
+  //============ Rebuilding The Search List ============
   void rebuildSearchList(List<UserModel> list) {
     emit(SearchListUpdateSuccessState(list));
   }

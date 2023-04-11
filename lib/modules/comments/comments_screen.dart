@@ -2,25 +2,25 @@ import 'dart:io';
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
-import 'package:social_app/models/comment_model.dart';
 
-import '../../shared/constants.dart';
-import '../../styles/colors.dart';
-// import '../../styles/iconbroken.dart';
+import '/layout/cubit/cubit.dart';
+import '/layout/cubit/states.dart';
+import '/models/comment_model.dart';
+import '/shared/constants.dart';
+import '/styles/thems.dart';
 
 class CommentsScreen extends StatelessWidget {
   final int? likes;
   final String? postId;
   final String? postUid;
 
-  // final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController commentController = TextEditingController();
-  // bool autoFocus = true;
-  // final String commentText = '';
+
   CommentsScreen({Key? key, this.likes, this.postId, this.postUid})
       : super(key: key);
 
@@ -28,6 +28,7 @@ class CommentsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String? postId = this.postId;
     return Builder(builder: (context) {
+      // Getting The Comments And The User's Data
       SocialAppCubit.getObject(context).getComments(postId: postId!);
       SocialAppCubit.getObject(context).getUserData(postUid);
 
@@ -35,25 +36,33 @@ class CommentsScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           SocialAppCubit cubit = SocialAppCubit.getObject(context);
-          // TextEditingController commentController = TextEditingController();
-
-          // var commentImage = CommentModel().commentImage!['image'];
           List<CommentModel> comments = cubit.comments;
-          // UserModel user = cubit.model!;
 
           return Scaffold(
+            backgroundColor: context.theme.colorScheme.background,
             appBar: AppBar(
+              backgroundColor: context.theme.colorScheme.background,
               automaticallyImplyLeading: true,
-              title: const Text("Comments"),
+              title: Text(
+                "Comments",
+                style: appBarTitleStyle,
+              ),
               leading: IconButton(
                 onPressed: () {
                   comments.clear();
                   Navigator.pop(context);
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.black,
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
                 ),
+              ),
+              systemOverlayStyle: SystemUiOverlayStyle(
+                systemNavigationBarColor:
+                    Get.isDarkMode ? darkGreyClr : Colors.white,
+                statusBarColor: Get.isDarkMode ? darkGreyClr : Colors.white,
+                statusBarBrightness:
+                    Get.isDarkMode ? Brightness.light : Brightness.dark,
               ),
             ),
             body: Padding(
@@ -84,11 +93,13 @@ class CommentsScreen extends StatelessWidget {
                         child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const <Widget>[
+                            children: <Widget>[
                               Text(
                                 "No comments yet.",
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -124,13 +135,12 @@ class CommentsScreen extends StatelessWidget {
     required String postId,
     File? commentImage,
   }) {
-    // final GlobalKey<FormState> formKey = GlobalKey();
-
     return Row(
       children: <Widget>[
         Flexible(
           child: Card(
-            color: Colors.grey[200],
+            color:
+                Get.isDarkMode ? darkGreyClr.withOpacity(0) : Colors.grey[200],
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18),
             ),
@@ -148,7 +158,6 @@ class CommentsScreen extends StatelessWidget {
                     size: 25,
                   ),
                 ),
-                // ============== Pick Image From Gallery Button ==============
                 IconButton(
                   onPressed: () {
                     cubit.getCommentImage(
@@ -161,25 +170,29 @@ class CommentsScreen extends StatelessWidget {
                     size: 25,
                   ),
                 ),
-                // ============== Type A New Message TextField ==============
+                // ============== Type A New Comment TextField ==============
                 Expanded(
                   child: SizedBox(
                     height: 50,
-                    // width: 50,
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
                           TextFormField(
                             controller: commentController,
                             autofocus: true,
-                            // autocorrect: true,
                             enableSuggestions: true,
                             textCapitalization: TextCapitalization.sentences,
                             maxLines: null,
-                            cursorColor: Colors.grey,
+                            cursorColor:
+                                Get.isDarkMode ? Colors.white60 : Colors.black,
+                            style: bodySmall.copyWith(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              height: 1.5,
+                              letterSpacing: 0.8,
+                            ),
                             decoration: const InputDecoration(
                               hintText: 'Write a comment...',
-                              // hintStyle: bodyStyle3,
                               suffixIconColor: defaultColor,
                               contentPadding:
                                   EdgeInsets.only(left: 5, right: 10),
@@ -188,13 +201,7 @@ class CommentsScreen extends StatelessWidget {
                             keyboardType: TextInputType.multiline,
                             onChanged: (value) {
                               cubit.onChangeText(value, commentText);
-                              // cubit.changeKey(UniqueKey());
                             },
-                            // validator: (value) {
-                            //   if (value!.isEmpty)
-                            //     return "Can't send a blank comment";
-                            //   return null;
-                            // },
                           ),
                           if (commentImage != null)
                             Stack(
@@ -258,19 +265,9 @@ class CommentsScreen extends StatelessWidget {
                       commentText: commentText.trim(),
                     );
                   }
-                  // commentText = '';
-                  // commentController.clear();
-                  // autoFocus = false;
-                  // print(autoFocus);
-                  print("before Clear()");
-                  // commentController = TextEditingController();
                   commentController.clear();
-                  print("After Clear()");
-                  // formKey.currentState!.reset();
-                  // cubit.resetCommentText(commentText);
                   cubit.removeCommentImage();
                   FocusScope.of(context).unfocus();
-                  // formKey.currentState!.reset();
                 },
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -281,24 +278,11 @@ class CommentsScreen extends StatelessWidget {
                 return defaultColor; // Set enabled color
               },
             ),
-            textStyle: MaterialStateProperty.all(
-              const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Janna',
-              ),
-            ),
+            textStyle: MaterialStateProperty.all(bodySmall),
           ),
-          //   if (formKey.currentState!.validate()) {
-
-          // }
           child: const Text(
             "Comment",
           ),
-          // icon: const Icon(Icons.send),
-          // disabledColor: Colors.grey,
-          // iconSize: 30,
-          // color: defaultColor,
         ),
       ],
     );
@@ -316,92 +300,92 @@ class CommentsScreen extends StatelessWidget {
           backgroundImage: NetworkImage(commentModel.image!),
           radius: 20,
         ),
-        // const SizedBox(width: 5),
         Flexible(
-          child: Card(
+          child: ChatBubble(
+            clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
             margin: const EdgeInsets.symmetric(
-              horizontal: 8,
+              horizontal: 2,
               vertical: 5,
             ),
-            color: Colors.grey[300],
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.only(
-                bottomEnd: Radius.circular(10.0),
-                bottomStart: Radius.circular(10.0),
-                topEnd: Radius.circular(10.0),
+            backGroundColor: Get.isDarkMode
+                ? darkGreyClr.withOpacity(0.9)
+                : const Color(0xffE7E7ED),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.65,
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 10,
-              ),
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    commentModel.name!,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  if (commentModel.commentText != null)
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 10,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
                     Text(
-                      commentModel.commentText!,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        height: 1,
+                      commentModel.name!,
+                      style: bodySmall.copyWith(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
                         letterSpacing: 0.5,
-                        color: Colors.black,
                       ),
-                      maxLines: null,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  if (commentModel.commentText != null)
-                    const SizedBox(height: 5),
-                  if (commentModel.commentImage!['image'] != null)
-                    Container(
-                      width: double.infinity,
-                      height: 150,
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            commentModel.commentImage!['image'],
+                    if (commentModel.commentText != null)
+                      const SizedBox(height: 10),
+                    if (commentModel.commentText != null)
+                      Text(
+                        commentModel.commentText!,
+                        style: bodySmall.copyWith(
+                          fontWeight: FontWeight.w500,
+                          height: 1,
+                          letterSpacing: 0.5,
+                        ),
+                        maxLines: null,
+                      ),
+                    if (commentModel.commentText != null)
+                      const SizedBox(height: 5),
+                    if (commentModel.commentImage!['image'] != null)
+                      Container(
+                        width: double.infinity,
+                        height: 150,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              commentModel.commentImage!['image'],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "${commentModel.date}",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Container(
-                          width: 5,
-                          height: 5,
-                          decoration: const BoxDecoration(
-                            color: Colors.black45,
-                            shape: BoxShape.circle,
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          "${commentModel.date}",
+                          style: caption,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Container(
+                            width: 5,
+                            height: 5,
+                            decoration: BoxDecoration(
+                              color:
+                                  Get.isDarkMode ? Colors.grey : Colors.black45,
+                              shape: BoxShape.circle,
+                            ),
                           ),
                         ),
-                      ),
-                      Text(
-                        "${commentModel.time}",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                ],
+                        Text(
+                          "${commentModel.time}",
+                          style: caption,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
-import 'package:social_app/models/user_model.dart';
-import 'package:social_app/shared/constants.dart';
-import 'package:social_app/styles/colors.dart';
-// import 'package:social_app/styles/iconbroken.dart';
+
+import '/layout/cubit/cubit.dart';
+import '/layout/cubit/states.dart';
+import '/models/user_model.dart';
+import '/shared/constants.dart';
+import '/styles/thems.dart';
 
 class NewPostScreen extends StatelessWidget {
   const NewPostScreen({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class NewPostScreen extends StatelessWidget {
         UserModel model = cubit.model!;
         TextEditingController textController = TextEditingController();
         return Scaffold(
+          backgroundColor: context.theme.colorScheme.background,
           appBar: appBarBuilder(
             context: context,
             title: "Create Post",
@@ -42,9 +44,6 @@ class NewPostScreen extends StatelessWidget {
                       text: textController.text,
                     );
                   }
-                  // textController.text = '';
-                  // cubit.postImage = null;
-                  // cubit.removePostImage();
                 },
                 title: 'POST',
               ),
@@ -67,15 +66,15 @@ class NewPostScreen extends StatelessWidget {
                     Expanded(
                       child: Text(
                         model.name!,
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: bodyLarge.copyWith(
                           fontWeight: FontWeight.bold,
-                          height: 1.5,
+                          fontSize: 20,
                         ),
                       ),
                     ),
                   ],
                 ),
+                const SizedBox(height: 5),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -83,10 +82,14 @@ class NewPostScreen extends StatelessWidget {
                       maxLines: 8,
                       controller: textController,
                       enableSuggestions: true,
-                      style: const TextStyle(
+                      style: bodySmall.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.normal,
+                        height: 1.4,
+                        letterSpacing: 0.8,
                       ),
+                      cursorColor:
+                          Get.isDarkMode ? Colors.white60 : Colors.black,
                       textCapitalization: TextCapitalization.sentences,
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(

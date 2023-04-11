@@ -1,15 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
-import 'package:social_app/shared/constants.dart';
-import 'package:social_app/styles/colors.dart';
 
-import '../../models/message_model.dart';
-import '../../models/user_model.dart';
+import '/layout/cubit/cubit.dart';
+import '/layout/cubit/states.dart';
+import '/models/message_model.dart';
+import '/models/user_model.dart';
+import '/shared/constants.dart';
+import '/styles/thems.dart';
 
 class ChatDetailsScreen extends StatelessWidget {
   final UserModel userModel;
@@ -33,7 +36,9 @@ class ChatDetailsScreen extends StatelessWidget {
           builder: (context, state) {
             SocialAppCubit cubit = SocialAppCubit.getObject(context);
             return Scaffold(
+              backgroundColor: context.theme.colorScheme.background,
               appBar: AppBar(
+                backgroundColor: context.theme.colorScheme.background,
                 titleSpacing: 0.0,
                 elevation: 1,
                 title: Row(
@@ -45,19 +50,26 @@ class ChatDetailsScreen extends StatelessWidget {
                         radius: 20.0,
                       ),
                     ),
-                    const SizedBox(width: 5),
+                    const SizedBox(width: 8),
                     Text(
                       userModel.name!,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: bodyLarge.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
                 leading: IconButton(
                   onPressed: () => navigateBack(context),
-                  icon: const Icon(Icons.arrow_back_ios),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  systemNavigationBarColor:
+                      Get.isDarkMode ? darkGreyClr : Colors.white,
+                  statusBarColor: Get.isDarkMode ? darkGreyClr : Colors.white,
+                  statusBarBrightness:
+                      Get.isDarkMode ? Brightness.light : Brightness.dark,
                 ),
               ),
               body: cubit.messages.isNotEmpty
@@ -105,13 +117,15 @@ class ChatDetailsScreen extends StatelessWidget {
                       child: Column(
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Expanded(
+                          Expanded(
                             child: Center(
                               child: Text(
                                 "Say Hello \u{1F44B}",
-                                style: TextStyle(
+                                style: headingLarge.copyWith(
                                   fontSize: 30,
-                                  fontWeight: FontWeight.bold,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                             ),
@@ -134,120 +148,92 @@ class ChatDetailsScreen extends StatelessWidget {
     );
   }
 
-  // Widget buildReceiverMessage({required MessageModel messageModel }) => Align(
-  //       alignment: AlignmentDirectional.centerStart,
-  //       child: Container(
-  //         padding: const EdgeInsets.symmetric(
-  //           horizontal: 10,
-  //           vertical: 5,
-  //         ),
-  //         decoration: BoxDecoration(
-  //           color: Colors.grey[300],
-  //           borderRadius: const BorderRadiusDirectional.only(
-  //             bottomEnd: Radius.circular(10),
-  //             topEnd: Radius.circular(10),
-  //             topStart: Radius.circular(10),
-  //           ),
-  //         ),
-  //         child: const Text("Hello World"),
-  //       ),
-  //     );
-
   Widget buildMessageBubble({
     required MessageModel messageModel,
     required bool isMe,
     required BuildContext context,
   }) =>
-      Container(
-        alignment: isMe
-            ? AlignmentDirectional.centerEnd
-            : AlignmentDirectional.centerStart,
+      ChatBubble(
+        clipper: isMe
+            ? ChatBubbleClipper4(type: BubbleType.sendBubble)
+            : ChatBubbleClipper4(type: BubbleType.receiverBubble),
+        alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+        backGroundColor: isMe
+            ? defaultColor.withOpacity(0.55)
+            : (Get.isDarkMode
+                ? darkGreyClr.withOpacity(0.9)
+                : const Color(0xffE7E7ED)),
+        margin: const EdgeInsets.symmetric(
+          horizontal: 0,
+          vertical: 5,
+        ),
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.65,
           ),
-          child: Card(
-            elevation: 0,
-            margin: const EdgeInsets.symmetric(
-              horizontal: 0,
-              vertical: 5,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+              vertical: 10,
             ),
-            color: isMe ? defaultColor.withOpacity(0.55) : Colors.grey[300],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.only(
-                bottomStart: isMe
-                    ? const Radius.circular(10.0)
-                    : const Radius.circular(0.0),
-                bottomEnd: !isMe
-                    ? const Radius.circular(10.0)
-                    : const Radius.circular(0.0),
-                topStart: const Radius.circular(10.0),
-                topEnd: const Radius.circular(10.0),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 10,
-              ),
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  if (messageModel.messageText != null)
-                    Text(
-                      messageModel.messageText!,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        height: 1,
-                        letterSpacing: 0.5,
-                        color: Colors.black,
-                      ),
-                      maxLines: null,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                if (messageModel.messageText != null)
+                  Text(
+                    messageModel.messageText!,
+                    style: bodySmall.copyWith(
+                      fontSize: 15.5,
+                      fontWeight: FontWeight.w600,
+                      height: 1.5,
+                      letterSpacing: 0.8,
                     ),
-                  if (messageModel.messageText != null)
-                    const SizedBox(height: 5),
-                  if (messageModel.messageImage!['image'] != null)
-                    Container(
-                      width: double.infinity,
-                      height: 150,
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            messageModel.messageImage!['image'],
-                          ),
-                        ),
-                      ),
-                    ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "${messageModel.date}",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Container(
-                          width: 5,
-                          height: 5,
-                          decoration: const BoxDecoration(
-                            color: Colors.black45,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "${messageModel.time}",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
+                    maxLines: null,
                   ),
-                ],
-              ),
+                if (messageModel.messageText != null) const SizedBox(height: 5),
+                if (messageModel.messageImage!['image'] != null)
+                  Container(
+                    width: double.infinity,
+                    height: 150,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          messageModel.messageImage!['image'],
+                        ),
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "${messageModel.date}",
+                      style: caption.copyWith(
+                        color: Get.isDarkMode ? Colors.white54 : Colors.black38,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Container(
+                        width: 5,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: Get.isDarkMode ? Colors.grey : Colors.black45,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "${messageModel.time}",
+                      style: caption.copyWith(
+                        color: Get.isDarkMode ? Colors.white54 : Colors.black38,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -261,13 +247,12 @@ class ChatDetailsScreen extends StatelessWidget {
     required UserModel userModel,
     File? messageImage,
   }) {
-    // final GlobalKey<FormState> formKey = GlobalKey();
-
     return Row(
       children: <Widget>[
         Flexible(
           child: Card(
-            color: Colors.grey[200],
+            color:
+                Get.isDarkMode ? darkGreyClr.withOpacity(0) : Colors.grey[200],
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18),
             ),
@@ -311,27 +296,25 @@ class ChatDetailsScreen extends StatelessWidget {
                             enableSuggestions: true,
                             textCapitalization: TextCapitalization.sentences,
                             maxLines: null,
-                            cursorColor: Colors.grey,
+                            cursorColor:
+                                Get.isDarkMode ? Colors.white60 : Colors.black,
                             keyboardType: TextInputType.multiline,
+                            style: bodySmall.copyWith(
+                              fontSize: 15.5,
+                              fontWeight: FontWeight.w600,
+                              height: 1.5,
+                              letterSpacing: 0.8,
+                            ),
                             decoration: const InputDecoration(
                               hintText: 'Type a message...',
-                              // hintStyle: bodyStyle3,
                               suffixIconColor: defaultColor,
                               contentPadding:
                                   EdgeInsets.only(left: 5, right: 10),
                               border: InputBorder.none,
                             ),
-
                             onChanged: (value) {
                               cubit.onChangeText(value, messageText);
-                              // cubit.onChangeCommentText(value, commentText);
-                              // cubit.changeKey(UniqueKey());
                             },
-                            // validator: (value) {
-                            //   if (value!.isEmpty)
-                            //     return "Can't send a blank comment";
-                            //   return null;
-                            // },
                           ),
                           if (messageImage != null)
                             Stack(
@@ -397,25 +380,9 @@ class ChatDetailsScreen extends StatelessWidget {
                       text: messageText.trim(),
                     );
                   }
-                  // commentText = '';
-                  // commentController.clear();
-                  // autoFocus = false;
-                  // print(autoFocus);
-                  print("before Clear()");
-                  // commentController = TextEditingController();
                   messageController.clear();
-                  print("After Clear()");
-                  // formKey.currentState!.reset();
-                  // cubit.resetCommentText(commentText);
                   cubit.removeMessageImage();
-                  // FocusScope.of(context).unfocus();
-                  // formKey.currentState!.reset();
                 },
-
-          // if (formKey.currentState!.validate()) {
-
-          // }
-
           icon: const Icon(Icons.send_outlined),
           disabledColor: Colors.grey,
           iconSize: 30,

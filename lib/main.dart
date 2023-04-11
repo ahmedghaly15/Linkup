@@ -1,36 +1,27 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/social_layout.dart';
-import 'package:social_app/modules/auth/auth_screen.dart';
-import 'package:social_app/shared/bloc_observer.dart';
-import 'package:social_app/shared/constants.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
+import '/layout/cubit/cubit.dart';
+import '/layout/social_layout.dart';
+import '/modules/auth/auth_screen.dart';
+import '/shared/bloc_observer.dart';
+import '/shared/constants.dart';
+import '/styles/theme_services.dart';
 import 'firebase_options.dart';
 import 'network/local/cache_helper.dart';
-import 'styles/colors.dart';
+import 'styles/thems.dart';
 
 Future<void> main() async {
-  /*
-
-  TODO: متنساش ال 3 نقط بتوع كل بوست خليهم ينزلو حاجات منهم انك تمسح البوست 
-  
- DONE  TODO: في سكرينة اليوزرز هعمل شكل زي برنامج اكلات بيديك اليوزرز ومع كل ضغطة علي كل يوزر اروح لبروفايل اليوزر ده
-
- DONE  TODO: شوف حوار السيرش اللي في ابلكيشن تشاتر وشوف لو في اي حاجة هناك ممكن نعملها هنا
-
- DONE  TODO: replace all IconBroken with normal icons and remove IconBroken from the project
-
- DONE: TODO: Sign out Floating Action Button
-  
-   */
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  //===================== Initializing GetStorage =====================
+  await GetStorage.init();
 
   //===================== Observing My Bloc =====================
   Bloc.observer = MyBlocObserver();
@@ -71,32 +62,11 @@ class MainApp extends StatelessWidget {
       create: (context) => SocialAppCubit()
         ..getUserData(uId)
         ..getPosts(),
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'Janna',
-          appBarTheme: const AppBarTheme(
-            iconTheme: IconThemeData(
-              color: defaultColor,
-              size: 25,
-            ),
-            titleTextStyle: TextStyle(
-              fontSize: 23,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              letterSpacing: 0.5,
-              fontFamily: 'Janna',
-            ),
-            centerTitle: true,
-            elevation: 0,
-            backgroundColor: Colors.white,
-            systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarBrightness: Brightness.dark,
-            ),
-          ),
-          scaffoldBackgroundColor: Colors.white,
-        ),
+        theme: Themes.lightTheme,
+        darkTheme: Themes.darkTheme,
+        themeMode: ThemeServices().theme,
         home: startingScreen,
       ),
     );

@@ -1,12 +1,14 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
-import 'package:social_app/models/post_model.dart';
-import 'package:social_app/modules/comments/comments_screen.dart';
-import 'package:social_app/shared/constants.dart';
-// import 'package:social_app/styles/colors.dart';
+import 'package:get/get.dart';
+import 'package:social_app/styles/thems.dart';
+
+import '/layout/cubit/cubit.dart';
+import '/layout/cubit/states.dart';
+import '/models/post_model.dart';
+import '/modules/comments/comments_screen.dart';
+import '/shared/constants.dart';
 
 class FeedsScreen extends StatelessWidget {
   const FeedsScreen({Key? key}) : super(key: key);
@@ -23,41 +25,6 @@ class FeedsScreen extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: <Widget>[
-                Card(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 5,
-                  ),
-                  elevation: 5,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    children: const <Widget>[
-                      Image(
-                        image: NetworkImage(
-                          'https://img.freepik.com/premium-photo/group-people-jumping-mountain-sunset-friends-party-happy-time_33755-6224.jpg?size=626&ext=jpg&ga=GA1.1.825316313.1674289475&semt=sph',
-                        ),
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        height: 200,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 5,
-                        ),
-                        child: Text(
-                          "Communicate With Friends",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -82,12 +49,17 @@ class FeedsScreen extends StatelessWidget {
     );
   }
 
-  Widget buildPostItem(BuildContext context, PostModel model, int index) =>
+  Widget buildPostItem(
+    BuildContext context,
+    PostModel model,
+    int index,
+  ) =>
       Card(
         margin: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,
         ),
+        color: Get.isDarkMode ? darkGreyClr.withOpacity(0) : Colors.white,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         elevation: 5,
         child: Padding(
@@ -113,10 +85,9 @@ class FeedsScreen extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               model.name!,
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style: bodyLarge.copyWith(
                                 fontWeight: FontWeight.bold,
-                                height: 1.5,
+                                fontSize: 17,
                               ),
                             ),
                             const SizedBox(width: 5),
@@ -129,19 +100,27 @@ class FeedsScreen extends StatelessWidget {
                         ),
                         Text(
                           "${model.date} at ${model.time}",
-                          style:
-                              Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    height: 1.5,
-                                  ),
+                          style: caption,
                         ),
                       ],
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.more_horiz,
-                      size: 23,
+                    onPressed: () {
+                      SocialAppCubit.getObject(context).deletePost(
+                        postId: model.postId!,
+                        context: context,
+                      );
+                    },
+                    icon: Icon(
+                      model.uId == SocialAppCubit.getObject(context).model!.uId
+                          ? Icons.delete
+                          : Icons.more_horiz,
+                      size: 25,
+                      color: model.uId ==
+                              SocialAppCubit.getObject(context).model!.uId
+                          ? Colors.red
+                          : (Get.isDarkMode ? Colors.white : Colors.black),
                     ),
                   ),
                 ],
@@ -159,58 +138,8 @@ class FeedsScreen extends StatelessWidget {
               ),
               Text(
                 model.text!,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  height: 1.5,
-                  letterSpacing: 0.5,
-                ),
+                style: bodySmall.copyWith(letterSpacing: 0.5),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.only(
-              //     bottom: 10,
-              //     top: 5,
-              //   ),
-              //   child: SizedBox(
-              //     width: double.infinity,
-              //     child: Wrap(
-              //       children: <Widget>[
-              //         Padding(
-              //           padding: const EdgeInsetsDirectional.only(
-              //             end: 5,
-              //           ),
-              //           child: SizedBox(
-              //             height: 25,
-              //             child: MaterialButton(
-              //               onPressed: () {},
-              //               minWidth: 1.0,
-              //               padding: EdgeInsets.zero,
-              //               child: const Text(
-              //                 "#software",
-              //                 style: TextStyle(color: Colors.blue),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //         Padding(
-              //           padding: const EdgeInsetsDirectional.only(end: 5),
-              //           child: SizedBox(
-              //             height: 25,
-              //             child: MaterialButton(
-              //               onPressed: () {},
-              //               minWidth: 1.0,
-              //               padding: EdgeInsets.zero,
-              //               child: const Text(
-              //                 "#flutter",
-              //                 style: TextStyle(color: Colors.blue),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               if (model.postImage != '')
                 Padding(
                   padding: const EdgeInsetsDirectional.only(top: 15),
@@ -234,19 +163,26 @@ class FeedsScreen extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          SocialAppCubit.getObject(context)
+                              .likedByMe(postId: model.postId!);
+                          buildSnackBar(
+                            message: "Liked Successfully",
+                            state: SnackBarStates.success,
+                            context: context,
+                          );
+                        },
                         child: Row(
                           children: <Widget>[
                             const Icon(
                               Icons.favorite_border,
-                              size: 20,
+                              size: 18,
                               color: Colors.grey,
                             ),
                             const SizedBox(width: 5),
                             Text(
                               "${model.likes} Likes",
-                              // "${SocialAppCubit.getObject(context).likes[index]} Likes",
-                              style: Theme.of(context).textTheme.bodySmall,
+                              style: caption,
                             ),
                           ],
                         ),
@@ -255,8 +191,6 @@ class FeedsScreen extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          // SocialAppCubit.getObject(context)
-                          //     .getComments(postId: model.postId!);
                           navigateTo(
                             context,
                             CommentsScreen(
@@ -271,13 +205,13 @@ class FeedsScreen extends StatelessWidget {
                           children: <Widget>[
                             const Icon(
                               Icons.comment,
-                              size: 20,
+                              size: 18,
                               color: Colors.grey,
                             ),
                             const SizedBox(width: 5),
                             Text(
                               "${model.comments} comments",
-                              style: Theme.of(context).textTheme.bodySmall,
+                              style: caption,
                             ),
                           ],
                         ),
@@ -314,8 +248,6 @@ class FeedsScreen extends StatelessWidget {
                           const SizedBox(width: 10),
                           TextButton(
                             onPressed: () {
-                              // SocialAppCubit.getObject(context)
-                              //     .getComments(postId: model.postId!);
                               navigateTo(
                                 context,
                                 CommentsScreen(
@@ -327,36 +259,11 @@ class FeedsScreen extends StatelessWidget {
                             },
                             child: Text(
                               "Write a comment...",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(
-                                    fontSize: 14,
-                                  ),
+                              style: caption.copyWith(fontSize: 15),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      await SocialAppCubit.getObject(context)
-                          .likedByMe(postId: model.postId!);
-                    },
-                    child: Row(
-                      children: <Widget>[
-                        const Icon(
-                          Icons.favorite_border,
-                          size: 18,
-                          color: Colors.grey,
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          "Like",
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ],
                     ),
                   ),
                 ],

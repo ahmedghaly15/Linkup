@@ -2,13 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/states.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/shared/components/input_field.dart';
 import 'package:social_app/shared/constants.dart';
-import 'package:social_app/styles/colors.dart';
+import 'package:social_app/styles/thems.dart';
 
 import '../../shared/components/default_button.dart';
 
@@ -32,6 +33,7 @@ class EditProfileScreen extends StatelessWidget {
         File? profileImage = cubit.profileImage;
         File? coverImage = cubit.coverImage;
         return Scaffold(
+          backgroundColor: context.theme.colorScheme.background,
           appBar: appBarBuilder(
             context: context,
             title: "Edit Profile",

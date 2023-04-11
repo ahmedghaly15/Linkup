@@ -2,12 +2,13 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
-import 'package:social_app/models/user_model.dart';
-import 'package:social_app/modules/users/user_profile_screen.dart';
-import 'package:social_app/shared/constants.dart';
-import 'package:social_app/styles/colors.dart';
+
+import '/layout/cubit/cubit.dart';
+import '/layout/cubit/states.dart';
+import '/models/user_model.dart';
+import '/modules/users/user_profile_screen.dart';
+import '/shared/constants.dart';
+import '/styles/thems.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({Key? key}) : super(key: key);
@@ -89,27 +90,28 @@ class UsersScreen extends StatelessWidget {
               userModel.name!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(color: Colors.white),
+              style: bodyLarge.copyWith(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 7),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Icon(
                   Icons.touch_app,
                   color: Colors.white,
-                  size: 25,
+                  size: 22,
                 ),
                 const SizedBox(width: 5),
                 Text(
                   "Visit",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(color: Colors.white),
+                  style: bodyLarge.copyWith(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
