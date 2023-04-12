@@ -40,6 +40,8 @@ class ProfileImagePickedSuccessState extends SocialAppStates {}
 
 class ProfileImagePickedErrorState extends SocialAppStates {}
 
+class UploadingProfileImageLoadingState extends SocialAppStates {}
+
 class UploadProfileImageSuccessState extends SocialAppStates {}
 
 class UploadProfileImageErrorState extends SocialAppStates {}
@@ -48,6 +50,8 @@ class UploadProfileImageErrorState extends SocialAppStates {}
 class CoverImagePickedSuccessState extends SocialAppStates {}
 
 class CoverImagePickedErrorState extends SocialAppStates {}
+
+class UploadingCoverImageLoadingState extends SocialAppStates {}
 
 class UploadCoverImageSuccessState extends SocialAppStates {}
 
@@ -83,8 +87,6 @@ class PostImagePickedErrorState extends SocialAppStates {}
 class PostImageRemovedState extends SocialAppStates {}
 
 //============ Updating The Current User States ============
-class UserUpdateLoadingState extends SocialAppStates {}
-
 class UserUpdateErrorState extends SocialAppStates {}
 
 //============ Like States ============

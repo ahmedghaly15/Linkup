@@ -105,7 +105,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     required String bio,
     required BuildContext context,
   }) {
-    emit(UserUpdateLoadingState());
+    emit(UploadingProfileImageLoadingState());
     firebase_storage.FirebaseStorage.instance
         .ref()
         .child('users/${Uri.file(profileImage!.path).pathSegments.last}')
@@ -153,7 +153,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     required String bio,
     required BuildContext context,
   }) {
-    emit(UserUpdateLoadingState());
+    emit(UploadingCoverImageLoadingState());
     firebase_storage.FirebaseStorage.instance
         .ref()
         .child('users/${Uri.file(coverImage!.path).pathSegments.last}')
@@ -173,7 +173,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
         );
         emit(UploadCoverImageSuccessState());
       }).catchError((error) {
-        emit(UploadProfileImageErrorState());
+        emit(UploadCoverImageErrorState());
       });
     }).catchError((error) {
       emit(UploadCoverImageErrorState());

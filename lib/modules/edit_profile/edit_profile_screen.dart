@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
-import 'package:social_app/models/user_model.dart';
-import 'package:social_app/shared/components/input_field.dart';
-import 'package:social_app/shared/constants.dart';
-import 'package:social_app/styles/thems.dart';
 
-import '../../shared/components/default_button.dart';
+import '/layout/cubit/cubit.dart';
+import '/layout/cubit/states.dart';
+import '/models/user_model.dart';
+import '/shared/components/default_button.dart';
+import '/shared/components/input_field.dart';
+import '/shared/constants.dart';
+import '/styles/thems.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -57,10 +57,6 @@ class EditProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
-                  // if (state is UserUpdateLoadingState)
-                  //   const LinearProgressIndicator(color: defaultColor),
-                  // if (state is UserUpdateLoadingState)
-                  //   const SizedBox(height: 10),
                   SizedBox(
                     height: 220,
                     child: Stack(
@@ -158,75 +154,75 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  if (cubit.profileImage != null || cubit.coverImage != null)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        if (cubit.profileImage != null)
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                DefaultButton(
-                                  buttonText: "Upload Profile Image",
-                                  onPressed: () => cubit.uploadProfileImage(
-                                    context: context,
-                                    name: nameController.text,
-                                    phone: phoneController.text,
-                                    bio: bioController.text,
-                                  ),
-                                  width: 15,
-                                  height: 10,
-                                  textStyle: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
+                  // if (cubit.profileImage != null && cubit.coverImage != null)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      if (cubit.profileImage != null)
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              DefaultButton(
+                                buttonText: "Upload Profile Image",
+                                onPressed: () => cubit.uploadProfileImage(
+                                  context: context,
+                                  name: nameController.text,
+                                  phone: phoneController.text,
+                                  bio: bioController.text,
+                                ),
+                                width: 15,
+                                height: 10,
+                                textStyle: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              if (state is UploadingProfileImageLoadingState)
+                                const SizedBox(height: 5),
+                              if (state is UploadingProfileImageLoadingState)
+                                const SizedBox(
+                                  width: 150,
+                                  child: LinearProgressIndicator(
+                                    color: defaultColor,
                                   ),
                                 ),
-                                if (state is UserUpdateLoadingState)
-                                  const SizedBox(height: 5),
-                                if (state is UserUpdateLoadingState)
-                                  const SizedBox(
-                                    width: 150,
-                                    child: LinearProgressIndicator(
-                                      color: defaultColor,
-                                    ),
-                                  ),
-                              ],
-                            ),
+                            ],
                           ),
-                        const SizedBox(width: 5),
-                        if (cubit.coverImage != null)
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                DefaultButton(
-                                  buttonText: "Upload Cover Image",
-                                  onPressed: () => cubit.uploadCoverImage(
-                                    context: context,
-                                    name: nameController.text,
-                                    phone: phoneController.text,
-                                    bio: bioController.text,
-                                  ),
-                                  width: 15,
-                                  height: 10,
-                                  textStyle: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
+                        ),
+                      const SizedBox(width: 5),
+                      if (cubit.coverImage != null)
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              DefaultButton(
+                                buttonText: "Upload Cover Image",
+                                onPressed: () => cubit.uploadCoverImage(
+                                  context: context,
+                                  name: nameController.text,
+                                  phone: phoneController.text,
+                                  bio: bioController.text,
+                                ),
+                                width: 15,
+                                height: 10,
+                                textStyle: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              if (state is UploadingCoverImageLoadingState)
+                                const SizedBox(height: 5),
+                              if (state is UploadingCoverImageLoadingState)
+                                const SizedBox(
+                                  width: 150,
+                                  child: LinearProgressIndicator(
+                                    color: defaultColor,
                                   ),
                                 ),
-                                if (state is UserUpdateLoadingState)
-                                  const SizedBox(height: 5),
-                                if (state is UserUpdateLoadingState)
-                                  const SizedBox(
-                                    width: 150,
-                                    child: LinearProgressIndicator(
-                                      color: defaultColor,
-                                    ),
-                                  ),
-                              ],
-                            ),
+                            ],
                           ),
-                      ],
-                    ),
+                        ),
+                    ],
+                  ),
                   // const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -249,10 +245,6 @@ class EditProfileScreen extends StatelessWidget {
                             },
                             keyboardType: TextInputType.name,
                             prefixIcon: const Icon(Icons.person),
-                            // hintStyle: const TextStyle(
-                            //   fontSize: 18,
-                            //   color: Colors.black,
-                            // ),
                             obsecure: false,
                           ),
                           const SizedBox(height: 10),
@@ -268,10 +260,6 @@ class EditProfileScreen extends StatelessWidget {
                             },
                             keyboardType: TextInputType.text,
                             prefixIcon: const Icon(Icons.info),
-                            // hintStyle: const TextStyle(
-                            //   fontSize: 18,
-                            //   color: Colors.black,
-                            // ),
                             obsecure: false,
                           ),
                           const SizedBox(height: 10),
@@ -287,10 +275,6 @@ class EditProfileScreen extends StatelessWidget {
                             },
                             keyboardType: TextInputType.phone,
                             prefixIcon: const Icon(Icons.phone),
-                            // hintStyle: const TextStyle(
-                            //   fontSize: 18,
-                            //   color: Colors.black,
-                            // ),
                             obsecure: false,
                           ),
                         ],
