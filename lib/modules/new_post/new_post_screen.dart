@@ -78,41 +78,42 @@ class NewPostScreen extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
-                    child: TextFormField(
-                      maxLines: 8,
-                      controller: textController,
-                      enableSuggestions: true,
-                      style: bodySmall.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal,
-                        height: 1.4,
-                        letterSpacing: 0.8,
-                      ),
-                      cursorColor:
-                          Get.isDarkMode ? Colors.white60 : Colors.black,
-                      textCapitalization: TextCapitalization.sentences,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        hintText:
-                            "What's in your mind, ${model.name!.split(' ')[0]}",
-                        border: InputBorder.none,
+                    child: SingleChildScrollView(
+                      child: TextFormField(
+                        maxLines: null,
+                        controller: textController,
+                        enableSuggestions: true,
+                        style: bodySmall.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
+                          height: 1.4,
+                          letterSpacing: 0.8,
+                        ),
+                        cursorColor:
+                            Get.isDarkMode ? Colors.white60 : Colors.black,
+                        textCapitalization: TextCapitalization.sentences,
+                        keyboardType: TextInputType.multiline,
+                        decoration: InputDecoration(
+                          hintText:
+                              "What's in your mind, ${model.name!.split(' ')[0]}",
+                          border: InputBorder.none,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 50),
                 if (cubit.postImage != null)
                   Stack(
                     alignment: AlignmentDirectional.topEnd,
                     children: <Widget>[
                       Container(
-                        height: 200,
+                        height: 150,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           image: DecorationImage(
                             image: FileImage(cubit.postImage!),
-                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
