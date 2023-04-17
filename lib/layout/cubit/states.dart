@@ -121,7 +121,7 @@ class GetCommentsSuccessState extends SocialAppStates {}
 
 class CommentImageRemovedSuccessState extends SocialAppStates {}
 
-class OnChangeCommentTextSuccessState extends SocialAppStates {}
+class OnChangeTextSuccessState extends SocialAppStates {}
 
 //============ Messages States ============
 class SendMessageSuccessState extends SocialAppStates {}

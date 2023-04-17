@@ -510,7 +510,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
   //============ When The Search Field Text Changes ============
   void onChangeText(value, text) {
     text = value;
-    emit(OnChangeCommentTextSuccessState());
+    emit(OnChangeTextSuccessState());
   }
 
   List<UserModel> users = [];

@@ -91,16 +91,3 @@ TextStyle get caption {
     ),
   );
 }
-
-
-
-// TextStyle get inputFieldHintStyle {
-//   return GoogleFonts.inter(
-//     textStyle: const TextStyle(
-//       fontSize: 18,
-//       // fontWeight: FontWeight.bold,
-//       color: Colors.grey,
-//       letterSpacing: 0.5,
-//     ),
-//   );
-// }
