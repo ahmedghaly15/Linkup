@@ -2,9 +2,16 @@
 
 This is a new Flutter project. This app is designed to help user connect and interact with friends, family, and other people in a social environment. With its intuitive user interface, users can easily engage with others. The app also features a variety of social interacting tools including create profiles, share photos, and engage in real-time conversations with others.
 
+## Contents
+
+- [Preview](#preview)
+- [App Structure](#app-structure)
+- [Main File](#main-file)
+- [Getting Started](#getting-started)
+
 ## Preview
 
-https://github.com/ahmedghaly15/Social-App/assets/108659381/db0095a7-0832-4dd5-8547-162b4ac989a3
+https://github.com/ahmedghaly15/Social-App/assets/108659381/b86b8823-8572-4452-adcf-f3b8a098039a
 
 ## App Structure
 
@@ -56,6 +63,70 @@ lib
 ├── firebase_options.dart
 │
 └── main.dart
+
+```
+
+## Main File
+
+```
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  //===================== Initializing GetStorage =====================
+  await GetStorage.init();
+
+  //===================== Observing My Bloc =====================
+  Bloc.observer = MyBlocObserver();
+
+  //===================== Initializing SharedPref =====================
+  await CacheHelper.initSharedPref();
+
+  uId = CacheHelper.getStringData(key: 'uId');
+
+  Widget startingScreen;
+
+  if (uId != null) {
+    startingScreen = const SocialAppLayout();
+  } else {
+    startingScreen = const AuthScreen();
+  }
+
+  runApp(
+    SocialApp(
+      startingScreen,
+      uId,
+    ),
+  );
+}
+
+class SocialApp extends StatelessWidget {
+  final Widget? startingScreen;
+  final String? uId;
+  const SocialApp(
+    this.startingScreen,
+    this.uId, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => SocialAppCubit()
+        ..getUserData(uId)
+        ..getPosts(),
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: Themes.lightTheme,
+        darkTheme: Themes.darkTheme,
+        themeMode: ThemeServices().theme,
+        home: startingScreen,
+      ),
+    );
+  }
+}
 
 ```
 
