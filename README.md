@@ -2,7 +2,11 @@
 
 This is a new Flutter project. This app is designed to help user connect and interact with friends, family, and other people in a social environment. With its intuitive user interface, users can easily engage with others. The app also features a variety of social interacting tools including create profiles, share photos, and engage in real-time conversations with others.
 
-### App Structure
+## Preview
+
+https://github.com/ahmedghaly15/Social-App/assets/108659381/db0095a7-0832-4dd5-8547-162b4ac989a3
+
+## App Structure
 
 ```
 
@@ -21,6 +25,8 @@ lib
 │   ├── feeds
 │   │
 │   ├── comments
+│   │
+│   ├── new_post
 │   │
 │   ├── chats
 │   │   ├── chats_screen.dart
