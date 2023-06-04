@@ -45,10 +45,4 @@ app.*.map.json
 
 
 ##
-test
-web
-windows
-macos
-linux
 .vscode
-README.md
