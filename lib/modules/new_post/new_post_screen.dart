@@ -149,9 +149,9 @@ class NewPostScreen extends StatelessWidget {
                             source: ImageSource.gallery,
                           ),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Icon(
                               Icons.image,
                               color: defaultColor,

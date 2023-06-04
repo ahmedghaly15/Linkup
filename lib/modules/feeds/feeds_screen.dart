@@ -41,8 +41,8 @@ class FeedsScreen extends StatelessWidget {
               ],
             ),
           ),
-          fallback: (context) => Column(
-            children: const <Widget>[],
+          fallback: (context) => const Column(
+            children: <Widget>[],
           ),
         );
       },

@@ -40,17 +40,17 @@ Future<void> main() async {
   }
 
   runApp(
-    MainApp(
+    SocialApp(
       startingScreen,
       uId,
     ),
   );
 }
 
-class MainApp extends StatelessWidget {
+class SocialApp extends StatelessWidget {
   final Widget? startingScreen;
   final String? uId;
-  const MainApp(
+  const SocialApp(
     this.startingScreen,
     this.uId, {
     Key? key,

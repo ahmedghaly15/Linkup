@@ -1,6 +1,57 @@
 # Social-App
 
-This Is A New Flutter Project.
+This is a new Flutter project. This app is designed to help user connect and interact with friends, family, and other people in a social environment. With its intuitive user interface, users can easily engage with others. The app also features a variety of social interacting tools including create profiles, share photos, and engage in real-time conversations with others.
+
+### App Structure
+
+```
+
+lib
+├── layout
+│   ├── cubit
+│   └── layout_screen.dart
+│
+├── models
+│
+├── modules
+│   ├── auth
+│   │   ├── cubit
+│   │   └── auth_screen.dart
+│   │
+│   ├── feeds
+│   │
+│   ├── comments
+│   │
+│   ├── chats
+│   │   ├── chats_screen.dart
+│   │   └── chat_details_screen.dart
+│   │
+│   ├── users
+│   │   ├── users_screen.dart
+│   │   └── user_profile_screen.dart
+│   │
+│   ├── profile
+│   │
+│   └── edit_profile
+│
+├── network
+│   ├── local
+│   └──── cache_helper.dart
+│
+├── shared
+│   ├── components
+│   ├── bloc_observer.dart
+│   └── constants.dart
+│
+├── styles
+│   ├── themes
+│   └── theme_services
+│
+├── firebase_options.dart
+│
+└── main.dart
+
+```
 
 ## Getting Started
 
