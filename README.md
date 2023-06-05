@@ -11,6 +11,10 @@ This is a new Flutter project. This app is designed to help user connect and int
 
 ## Preview
 
+<div style="display: flex" > 
+  <img style="display: inline-block" src="https://github.com/ahmedghaly15/Social-App/assets/108659381/381cfae4-aab2-45d8-b8ec-00b0b0c20eb6" width= "300" height = "600"/>
+</div>
+
 https://github.com/ahmedghaly15/Social-App/assets/108659381/b86b8823-8572-4452-adcf-f3b8a098039a
 
 ## App Structure
