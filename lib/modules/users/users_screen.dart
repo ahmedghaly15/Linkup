@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,9 +24,19 @@ class UsersScreen extends StatelessWidget {
           builder: (context) {
             return GridView.builder(
               itemBuilder: (context, index) {
-                return buildUserItem(
-                  context: context,
-                  userModel: SocialAppCubit.getObject(context).users[index],
+                return AnimationConfiguration.staggeredGrid(
+                  position: index,
+                  duration: const Duration(milliseconds: 650),
+                  columnCount: SocialAppCubit.getObject(context).users.length,
+                  child: ScaleAnimation(
+                    child: FadeInAnimation(
+                      child: buildUserItem(
+                        context: context,
+                        userModel:
+                            SocialAppCubit.getObject(context).users[index],
+                      ),
+                    ),
+                  ),
                 );
               },
               itemCount: SocialAppCubit.getObject(context).users.length,

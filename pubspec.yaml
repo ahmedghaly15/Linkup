@@ -7,30 +7,28 @@ environment:
   sdk: ">=2.19.3 <3.0.0"
 
 dependencies:
+  bloc: ^8.1.1
+  cloud_firestore: ^4.5.0
+  conditional_builder_null_safety: ^0.0.6
+  firebase_auth: ^4.4.0
+  firebase_core: ^2.9.0
+  firebase_storage: ^11.1.0
   flutter:
     sdk: flutter
-
-  bloc: ^8.1.1
   flutter_bloc: ^8.1.2
-  conditional_builder_null_safety: ^0.0.6
-  shared_preferences: ^2.0.20
-  image_picker: ^0.8.7+1
-  intl: ^0.17.0
   flutter_chat_bubble: ^2.0.2
+  flutter_staggered_animations: ^1.1.1
   get: ^4.6.5
   get_storage: ^2.0.3
   google_fonts: ^4.0.3
-
-  # Firebase
-  firebase_auth: ^4.4.0
-  firebase_core: ^2.9.0
-  cloud_firestore: ^4.5.0
-  firebase_storage: ^11.1.0
+  image_picker: ^0.8.7+1
+  intl: ^0.17.0
+  shared_preferences: ^2.0.20
 
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
