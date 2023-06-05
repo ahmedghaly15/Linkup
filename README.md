@@ -78,7 +78,7 @@ lib
 - `Dark theme`: The app supports a dark theme, which provides a comfortable viewing experience in low-light environments.
 - `Real-time messaging`: The app utilizes Firebase Realtime Database to enable real-time messaging, allowing users to communicate with each other instantly.
 - `Search`: allows users to find specific conversations or messages within a chat by entering relevant keywords or phrases.
-- `Profile customization`: Users have the ability to set their profile image and bio, allowing them to personalize their account and make it more recognizable to other users.
+- `Profile customization`: Users have the ability to change their names, bio, profile image, and cover image, allowing them to personalize their account and make it more recognizable to other users.
 
 ## Main File
 
