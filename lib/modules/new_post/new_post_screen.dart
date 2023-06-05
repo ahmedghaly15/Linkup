@@ -140,7 +140,7 @@ class NewPostScreen extends StatelessWidget {
                     Expanded(
                       child: TextButton(
                         onPressed: () => buildBottomSheet(
-                          type: "Cover",
+                          type: "Post",
                           context: context,
                           onPressedCamera: () => cubit.getPostImage(
                             source: ImageSource.camera,
