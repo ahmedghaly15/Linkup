@@ -6,6 +6,7 @@ This is a new Flutter project. This app is designed to help user connect and int
 
 - [Preview](#preview)
 - [App Structure](#app-structure)
+- [Features](#features)
 - [Main File](#main-file)
 - [Getting Started](#getting-started)
 
@@ -69,6 +70,15 @@ lib
 └── main.dart
 
 ```
+
+## Features
+- `Create new post1`: the app makes it easy and intuitive to create new posts, with the ability to add text, images, and videos to your posts, user can easily share his thoughts and experiences with his friends.
+- `Firebase authentication`: The app uses Firebase Authentication to provide secure user authentication and authorization.
+- `Cloud firestore1`: The app uses Firebase Cloud Firestore to store users profile images, images they send to each other in chats, and the images shared in feeds.
+- `Dark theme`: The app supports a dark theme, which provides a comfortable viewing experience in low-light environments.
+- `Real-time messaging`: The app utilizes Firebase Realtime Database to enable real-time messaging, allowing users to communicate with each other instantly.
+- `Search`: allows users to find specific conversations or messages within a chat by entering relevant keywords or phrases.
+- `Profile customization`: Users have the ability to set their profile image and bio, allowing them to personalize their account and make it more recognizable to other users.
 
 ## Main File
 
