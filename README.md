@@ -72,7 +72,7 @@ lib
 ```
 
 ## Features
-- `Create new post1`: the app makes it easy and intuitive to create new posts, with the ability to add text, images, and videos to your posts, user can easily share his thoughts and experiences with his friends.
+- `Create new post`: the app makes it easy and intuitive to create new posts, with the ability to add text, images, and videos to your posts, user can easily share his thoughts and experiences with his friends.
 - `Firebase authentication`: The app uses Firebase Authentication to provide secure user authentication and authorization.
 - `Cloud firestore1`: The app uses Firebase Cloud Firestore to store users profile images, images they send to each other in chats, and the images shared in feeds.
 - `Dark theme`: The app supports a dark theme, which provides a comfortable viewing experience in low-light environments.
