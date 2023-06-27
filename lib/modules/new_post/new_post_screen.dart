@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/models/user_model.dart';
 import '/layout/cubit/cubit.dart';
 import '/layout/cubit/states.dart';
-import '/models/user_model.dart';
 import '/shared/constants.dart';
 import '/styles/thems.dart';
 

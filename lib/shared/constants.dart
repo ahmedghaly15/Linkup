@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:social_app/features/auth/presentation/view/auth_view.dart';
 
-import '/modules/auth/auth_screen.dart';
-import '/network/local/cache_helper.dart';
+import '../core/utils/cache_helper.dart';
 import '/styles/thems.dart';
 import 'package:intl/intl.dart';
 
@@ -82,7 +82,7 @@ void navigateTo(context, Widget screen) {
 void signOut(context) async {
   CacheHelper.removeData(key: 'uId').then((value) {
     if (value) {
-      navigateAndFinish(context, screen: const AuthScreen());
+      navigateAndFinish(context, screen: const AuthView());
     }
   });
 }

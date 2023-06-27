@@ -1,21 +1,25 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/features/auth/domain/auth_repo.dart';
 
-import '../../../core/models/user_model.dart';
 import '/layout/cubit/cubit.dart';
-import '/modules/auth/cubit/states.dart';
-import '../../../core/utils/cache_helper.dart';
+import '../../../../../core/utils/cache_helper.dart';
+import 'auth_view_states.dart';
 
 enum AuthMode { signIn, signUp }
 
-//==================== Auth Screen Cubit ====================
-class AuthScreenCubit extends Cubit<AuthScreenStates> {
-  AuthScreenCubit() : super(AuthScreenInitialState());
+//==================== Auth View Cubit ====================
+class AuthViewCubit extends Cubit<AuthViewStates> {
+  AuthViewCubit(this.authRepo) : super(AuthViewInitialState());
 
   //============ Getting An Object Of The Cubit ============
-  static AuthScreenCubit getObject(context) => BlocProvider.of(context);
+  static AuthViewCubit getObject(context) => BlocProvider.of(context);
+
+  AuthRepo authRepo;
+
+  bool passVisibility = true;
+  bool confirmPassVisiblity = true;
 
   //============ For Signing In A User ============
   void userSignIn({
@@ -24,10 +28,12 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
     required BuildContext context,
   }) {
     emit(SignInLoadingState());
-    FirebaseAuth.instance
-        .signInWithEmailAndPassword(
+
+    authRepo
+        .userSignIn(
       email: email,
       password: password,
+      context: context,
     )
         .then((value) {
       emit(SignInSuccessState(value.user!.uid));
@@ -49,18 +55,15 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
   }) {
     emit(SignUpLoadingState());
 
-    FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
+    authRepo
+        .userSignUp(
+      username: username,
       email: email,
       password: password,
+      phone: phone,
+      context: context,
     )
         .then((value) {
-      firestoreCreateUSer(
-        name: username,
-        email: email,
-        phone: phone,
-        uId: value.user!.uid,
-      );
       CacheHelper.saveData(key: 'uId', value: value.user!.uid);
       SocialAppCubit.getObject(context).getUserData(value.user!.uid);
     }).catchError((error) {
@@ -76,21 +79,13 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
     required String phone,
     required String uId,
   }) {
-    UserModel userModel = UserModel(
+    authRepo
+        .firestoreCreateUSer(
       name: name,
       email: email,
       phone: phone,
       uId: uId,
-      isEmailVerified: false,
-      image:
-          'https://img.freepik.com/free-icon/user_318-159711.jpg?size=626&ext=jpg&ga=GA1.2.825316313.1674289475&semt=ais',
-      bio: 'Write your bio...',
-      cover: 'https://notepd.s3.amazonaws.com/default-cover.png',
-    );
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(uId)
-        .set(userModel.toJson())
+    )
         .then((value) {
       emit(CreateUserSuccessState());
       emit(SignUpSuccessState(uId));
@@ -98,5 +93,15 @@ class AuthScreenCubit extends Cubit<AuthScreenStates> {
       print(error.toString());
       CreateUserErrorState(error.toString());
     });
+  }
+
+  void switchPassVisibility() {
+    passVisibility = !passVisibility;
+    emit(SwitchPassVisibleState());
+  }
+
+  void switchConfirmPassVisibility() {
+    confirmPassVisiblity = !confirmPassVisiblity;
+    emit(SwitchConfirmPassVisibleState());
   }
 }

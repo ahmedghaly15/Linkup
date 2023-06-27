@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../../core/models/user_model.dart';
 import '/layout/cubit/cubit.dart';
 import '/layout/cubit/states.dart';
-import '/models/user_model.dart';
 import '/shared/constants.dart';
 import '/styles/thems.dart';
 import 'chat_details_screen.dart';

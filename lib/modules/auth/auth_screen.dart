@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '/layout/social_layout.dart';
 import '/modules/auth/cubit/cubit.dart';
 import '/modules/auth/cubit/states.dart';
-import '/network/local/cache_helper.dart';
+import '../../core/utils/cache_helper.dart';
 import '/shared/components/default_button.dart';
 import '/shared/components/input_field.dart';
 import '/shared/constants.dart';

@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:social_app/styles/thems.dart';
 
+import '../../core/models/user_model.dart';
 import '/layout/cubit/cubit.dart';
 import '/layout/cubit/states.dart';
-import '/models/user_model.dart';
 import '/shared/constants.dart';
 
 class UserProfileScreen extends StatelessWidget {

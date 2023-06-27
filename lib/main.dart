@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:social_app/core/global/app_theme.dart';
+import 'package:social_app/core/utils/service_locator.dart';
+import 'package:social_app/features/auth/presentation/view/auth_view.dart';
 
 import '/layout/cubit/cubit.dart';
 import '/layout/social_layout.dart';
-import '/modules/auth/auth_screen.dart';
-import '/shared/bloc_observer.dart';
+import 'core/utils/bloc_observer.dart';
 import '/shared/constants.dart';
 import '/styles/theme_services.dart';
+import 'core/utils/size_config.dart';
 import 'firebase_options.dart';
-import 'network/local/cache_helper.dart';
-import 'styles/thems.dart';
+import 'core/utils/cache_helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +24,8 @@ Future<void> main() async {
 
   //===================== Initializing GetStorage =====================
   await GetStorage.init();
+
+  ServiceLocator().setupServiceLocators();
 
   //===================== Observing My Bloc =====================
   Bloc.observer = MyBlocObserver();
@@ -36,7 +40,7 @@ Future<void> main() async {
   if (uId != null) {
     startingScreen = const SocialAppLayout();
   } else {
-    startingScreen = const AuthScreen();
+    startingScreen = const AuthView();
   }
 
   runApp(
@@ -58,14 +62,15 @@ class SocialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return BlocProvider(
       create: (context) => SocialAppCubit()
         ..getUserData(uId)
         ..getPosts(),
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: Themes.lightTheme,
-        darkTheme: Themes.darkTheme,
+        theme: AppTheme.lightTheme(),
+        darkTheme: AppTheme.darkTheme(),
         themeMode: ThemeServices().theme,
         home: startingScreen,
       ),

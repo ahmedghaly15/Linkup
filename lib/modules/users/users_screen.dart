@@ -4,9 +4,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/models/user_model.dart';
 import '/layout/cubit/cubit.dart';
 import '/layout/cubit/states.dart';
-import '/models/user_model.dart';
 import '/modules/users/user_profile_screen.dart';
 import '/shared/constants.dart';
 import '/styles/thems.dart';

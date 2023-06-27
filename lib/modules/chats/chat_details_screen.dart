@@ -7,10 +7,11 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../core/models/message_model.dart';
+import '../../core/models/user_model.dart';
 import '/layout/cubit/cubit.dart';
 import '/layout/cubit/states.dart';
-import '/models/message_model.dart';
-import '/models/user_model.dart';
+
 import '/shared/constants.dart';
 import '/styles/thems.dart';
 

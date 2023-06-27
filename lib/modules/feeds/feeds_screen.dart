@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:social_app/styles/thems.dart';
 
+import '../../core/models/post_model.dart';
 import '/layout/cubit/cubit.dart';
 import '/layout/cubit/states.dart';
-import '/models/post_model.dart';
 import '/modules/comments/comments_screen.dart';
 import '/shared/constants.dart';
 

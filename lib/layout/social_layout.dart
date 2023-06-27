@@ -68,7 +68,8 @@ class SocialAppLayout extends StatelessWidget {
                 systemOverlayStyle: SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Get.isDarkMode ? darkGreyClr : Colors.white,
-                  statusBarColor: Get.isDarkMode ? darkGreyClr : Colors.white,
+                  statusBarColor:
+                      Get.isDarkMode ? darkGreyClr : Colors.transparent,
                   statusBarBrightness:
                       Get.isDarkMode ? Brightness.light : Brightness.dark,
                 ),
