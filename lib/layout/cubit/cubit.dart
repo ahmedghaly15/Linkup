@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:social_app/features/feeds/presentation/view/feeds_view.dart';
 
 import '../../core/models/comment_model.dart';
 import '../../core/models/like_model.dart';
@@ -13,7 +14,6 @@ import '../../core/models/post_model.dart';
 import '../../core/models/user_model.dart';
 import '/layout/cubit/states.dart';
 import '/modules/chats/chats_screen.dart';
-import '/modules/feeds/feeds_screen.dart';
 import '/modules/profile/profile_screen.dart';
 import '/modules/users/users_screen.dart';
 import '../../core/utils/cache_helper.dart';
@@ -29,7 +29,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   //============ Bottom Nav Bar Screens ============
   List<Widget> bottomNavScreens = [
-    const FeedsScreen(),
+    const FeedsView(),
     const ChatsScreen(),
     const UsersScreen(),
     const ProfileScreen(),

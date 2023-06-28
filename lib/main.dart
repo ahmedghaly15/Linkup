@@ -51,6 +51,8 @@ Future<void> main() async {
   );
 }
 
+// TODO: look at all SizedBox and use SizeConfig if it's not used
+
 class SocialApp extends StatelessWidget {
   final Widget? startingScreen;
   final String? uId;

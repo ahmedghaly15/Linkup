@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/global/app_colors.dart';
+import 'package:social_app/core/utils/helper.dart';
 import 'package:social_app/core/utils/service_locator.dart';
 
 import '../../domain/auth_repo.dart';
@@ -97,16 +96,7 @@ class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: context.theme.colorScheme.background,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        systemNavigationBarColor: Get.isDarkMode
-            ? AppColors.darkGreyClr
-            : AppColors.scaffoldBackgroundClr,
-        statusBarColor: Get.isDarkMode
-            ? AppColors.darkGreyClr
-            : AppColors.scaffoldBackgroundClr,
-        statusBarBrightness:
-            Get.isDarkMode ? Brightness.light : Brightness.dark,
-      ),
+      systemOverlayStyle: setSystemOverlayStyle(),
     );
   }
 

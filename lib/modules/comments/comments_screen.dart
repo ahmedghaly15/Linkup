@@ -15,14 +15,13 @@ import '/shared/constants.dart';
 import '/styles/thems.dart';
 
 class CommentsScreen extends StatelessWidget {
-  final int? likes;
+  // final int? likes;
   final String? postId;
   final String? postUid;
 
   final TextEditingController commentController = TextEditingController();
 
-  CommentsScreen({Key? key, this.likes, this.postId, this.postUid})
-      : super(key: key);
+  CommentsScreen({Key? key, this.postId, this.postUid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 import '../global/app_colors.dart';
 
-void setSystemUIOverlayStyle({
-  Color systemNavigationBarColor = AppColors.inputFieldColor,
-  Color statusBarColor = AppColors.inputFieldColor,
-  Brightness statusBarBrightness = Brightness.dark,
-}) {
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      systemNavigationBarColor: systemNavigationBarColor,
-      statusBarColor: statusBarColor,
-      statusBarBrightness: statusBarBrightness,
-    ),
+SystemUiOverlayStyle setSystemOverlayStyle() {
+  return SystemUiOverlayStyle(
+    systemNavigationBarColor:
+        Get.isDarkMode ? AppColors.darkGreyClr : Colors.white,
+    statusBarColor: Get.isDarkMode ? AppColors.darkGreyClr : Colors.white,
+    statusBarBrightness: Get.isDarkMode ? Brightness.light : Brightness.dark,
   );
 }
 
