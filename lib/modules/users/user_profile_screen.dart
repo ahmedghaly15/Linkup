@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:social_app/styles/thems.dart';
 
 import '../../core/models/user_model.dart';
+import '../../core/utils/helper.dart';
 import '/layout/cubit/cubit.dart';
 import '/layout/cubit/states.dart';
-import '/shared/constants.dart';
 
 class UserProfileScreen extends StatelessWidget {
   final UserModel userModel;

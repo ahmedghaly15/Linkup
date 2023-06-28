@@ -52,6 +52,7 @@ Future<void> main() async {
 }
 
 // TODO: look at all SizedBox and use SizeConfig if it's not used
+// TODO: Add functionality to tags TextButton in NewPostView
 
 class SocialApp extends StatelessWidget {
   final Widget? startingScreen;

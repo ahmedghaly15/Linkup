@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:social_app/core/global/app_navigator.dart';
+import 'package:social_app/core/global/app_styles.dart';
 
 import '../global/app_colors.dart';
+import '../widgets/custom_bottom_sheet.dart';
 
 SystemUiOverlayStyle setSystemOverlayStyle() {
   return SystemUiOverlayStyle(
@@ -61,4 +64,42 @@ Color chooseSnackBarClr(SnackBarStates state) {
       break;
   }
   return color;
+}
+
+AppBar appBarBuilder({
+  required BuildContext context,
+  bool centerTitle = true,
+  String? title,
+  List<Widget>? actions,
+}) =>
+    AppBar(
+      backgroundColor: context.theme.colorScheme.background,
+      title: Text(title ?? "", style: AppStyles.appBarTitleStyle),
+      centerTitle: centerTitle,
+      leading: IconButton(
+        onPressed: () => AppNavigator.getBack(),
+        icon: Icon(
+          Icons.arrow_back_ios,
+          color: Get.isDarkMode ? Colors.white : Colors.black,
+        ),
+      ),
+      actions: actions,
+      systemOverlayStyle: setSystemOverlayStyle(),
+    );
+
+void buildBottomSheet({
+  required BuildContext context,
+  required void Function()? onPressedGallery,
+  required void Function()? onPressedCamera,
+  required String type,
+}) {
+  showModalBottomSheet(
+    context: context,
+    builder: (context) => CustomBottomSheet(
+      context: context,
+      type: type,
+      onPressedCamera: onPressedCamera,
+      onPressedGallery: onPressedGallery,
+    ),
+  );
 }

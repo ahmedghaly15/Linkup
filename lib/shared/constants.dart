@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:social_app/features/auth/presentation/view/auth_view.dart';
 
 import '../core/utils/cache_helper.dart';
@@ -94,31 +92,6 @@ void printFullText(String text) {
 }
 
 //================== For Building An AppBar ==================
-AppBar appBarBuilder({
-  required BuildContext context,
-  bool centerTitle = true,
-  String? title,
-  List<Widget>? actions,
-}) =>
-    AppBar(
-      backgroundColor: context.theme.colorScheme.background,
-      title: Text(title ?? "", style: appBarTitleStyle),
-      centerTitle: centerTitle,
-      leading: IconButton(
-        onPressed: () => navigateBack(context),
-        icon: Icon(
-          Icons.arrow_back_ios,
-          color: Get.isDarkMode ? Colors.white : Colors.black,
-        ),
-      ),
-      actions: actions,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        systemNavigationBarColor: Get.isDarkMode ? darkGreyClr : Colors.white,
-        statusBarColor: Get.isDarkMode ? darkGreyClr : Colors.white,
-        statusBarBrightness:
-            Get.isDarkMode ? Brightness.light : Brightness.dark,
-      ),
-    );
 
 //================== For Building A Default TextButton ==================
 Widget defaultTextButton({
@@ -136,80 +109,6 @@ Widget defaultTextButton({
     );
 
 //================== For Building A Bottom Sheet ==================
-void buildBottomSheet({
-  required BuildContext context,
-  required void Function()? onPressedGallery,
-  required void Function()? onPressedCamera,
-  required String type,
-}) {
-  showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: BottomSheet(
-            enableDrag: true,
-            onClosing: () => navigateBack(context),
-            builder: (context) {
-              return ListView(
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
-                ),
-                children: <Widget>[
-                  const SizedBox(height: 8),
-                  Text(
-                    "Pick $type Picture",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Get.isDarkMode ? Colors.white : Colors.black,
-                      letterSpacing: 0.5,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      ElevatedButton(
-                        onPressed: onPressedGallery,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Get.isDarkMode ? darkGreyClr : Colors.white,
-                          shape: const CircleBorder(),
-                          fixedSize: const Size(180, 130),
-                        ),
-                        child: Image.asset(
-                          'assets/images/add_image.png',
-                          width: 180,
-                          height: 100,
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: onPressedCamera,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Get.isDarkMode ? darkGreyClr : Colors.white,
-                          shape: const CircleBorder(),
-                          fixedSize: const Size(180, 130),
-                        ),
-                        child: Image.asset(
-                          'assets/images/camera.png',
-                          width: 180,
-                          height: 100,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              );
-            },
-          ),
-        );
-      });
-}
 
 double intToDouble(int num) {
   double doubleNum = num.toDouble();

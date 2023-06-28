@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:social_app/core/global/app_navigator.dart';
+import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
 
 import '../styles/theme_services.dart';
 import '/layout/cubit/cubit.dart';
 import '/layout/cubit/states.dart';
-import '/modules/new_post/new_post_screen.dart';
-import '/shared/constants.dart';
 import '../styles/thems.dart';
 
 class SocialAppLayout extends StatelessWidget {
@@ -109,7 +109,9 @@ class SocialAppLayout extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: FloatingActionButton(
                   heroTag: "Floating New Post Button",
-                  onPressed: () => navigateTo(context, const NewPostScreen()),
+                  onPressed: () => AppNavigator.navigateTo(
+                    screen: const NewPostView(),
+                  ),
                   backgroundColor: defaultColor,
                   child: const Icon(
                     Icons.post_add,
