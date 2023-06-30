@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/core/global/app_navigator.dart';
-import 'package:social_app/features/feeds/presentation/view/comments_view.dart';
+import 'package:social_app/features/feeds/presentation/views/comments_view.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/post_model.dart';
