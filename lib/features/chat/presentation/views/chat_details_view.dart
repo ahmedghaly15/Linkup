@@ -72,7 +72,7 @@ class ChatDetailsView extends StatelessWidget {
           color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
-      systemOverlayStyle: setSystemOverlayStyle(),
+      systemOverlayStyle: Helper.setSystemOverlayStyle(),
     );
   }
 }

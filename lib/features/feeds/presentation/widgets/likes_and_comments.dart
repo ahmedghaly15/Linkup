@@ -26,7 +26,7 @@ class LikesAndComments extends StatelessWidget {
               onTap: () {
                 SocialAppCubit.getObject(context)
                     .likedByMe(postId: model.postId!);
-                buildSnackBar(
+                Helper.buildSnackBar(
                   message: "Liked Successfully",
                   state: SnackBarStates.success,
                   context: context,

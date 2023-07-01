@@ -19,7 +19,7 @@ class AddPhotosAndTagsButtons extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: TextButton(
-            onPressed: () => buildBottomSheet(
+            onPressed: () => Helper.buildBottomSheet(
               type: "Post",
               context: context,
               onPressedCamera: () => cubit.getPostImage(

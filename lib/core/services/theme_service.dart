@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 //============================= Controlling App Theme =============================
-class ThemeServices {
+class ThemeService {
   final GetStorage _box = GetStorage();
   final _key = 'isDarkMode';
 

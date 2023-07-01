@@ -7,8 +7,8 @@ import 'package:social_app/core/global/app_colors.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/user_model.dart';
+import '../../../../core/utils/helper.dart';
 import '../../../../layout/cubit/cubit.dart';
-import '../../../../shared/constants.dart';
 
 class CustomMassengerField extends StatelessWidget {
   const CustomMassengerField({
@@ -148,7 +148,7 @@ class CustomMassengerField extends StatelessWidget {
                     cubit.sendMessage(
                       receiverId: userModel.uId!,
                       receiverName: userModel.name!,
-                      date: getDate(),
+                      date: Helper.getDate(),
                       time: TimeOfDay.now().format(context),
                       text: messageText.trim(),
                     );
@@ -157,7 +157,7 @@ class CustomMassengerField extends StatelessWidget {
                     cubit.uploadMessageImage(
                       receiverId: userModel.uId!,
                       receiverName: userModel.name!,
-                      date: getDate(),
+                      date: Helper.getDate(),
                       time: TimeOfDay.now().format(context),
                       text: messageText.trim(),
                     );

@@ -20,7 +20,8 @@ class AppNavigator {
   }) {
     Get.off(
       screen,
-      transition: Transition.rightToLeft,
+      transition: Transition.upToDown,
+      duration: const Duration(milliseconds: 750),
     );
   }
 

@@ -18,7 +18,7 @@ class UserProfileView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           backgroundColor: context.theme.colorScheme.background,
-          appBar: appBarBuilder(context: context),
+          appBar: Helper.appBarBuilder(context: context),
           body: UserProfileViewBody(userModel: userModel),
         );
       },

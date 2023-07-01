@@ -122,13 +122,13 @@ class AuthForm extends StatelessWidget {
   void controlAuthViewStates(AuthViewStates state, BuildContext context) {
     if (state is SignInErrorState) {
       if (state.error == 'user-not-found') {
-        buildSnackBar(
+        Helper.buildSnackBar(
           message: "No user found for that email",
           state: SnackBarStates.error,
           context: context,
         );
       } else if (state.error == 'wrong-password') {
-        buildSnackBar(
+        Helper.buildSnackBar(
           message: "Wrong Password",
           state: SnackBarStates.error,
           context: context,
@@ -138,13 +138,13 @@ class AuthForm extends StatelessWidget {
 
     if (state is SignUpErrorState) {
       if (state.error == 'weak-password') {
-        buildSnackBar(
+        Helper.buildSnackBar(
           message: "Password is too weak",
           state: SnackBarStates.error,
           context: context,
         );
       } else if (state.error == 'email-already-in-use') {
-        buildSnackBar(
+        Helper.buildSnackBar(
           message: "Account already exists",
           state: SnackBarStates.error,
           context: context,
@@ -162,7 +162,7 @@ class AuthForm extends StatelessWidget {
       CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
         AppNavigator.navigateAndFinish(screen: const SocialAppLayout());
       });
-      buildSnackBar(
+      Helper.buildSnackBar(
         message: "Account Created Successfully",
         state: SnackBarStates.success,
         context: context,

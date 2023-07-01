@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/core/global/app_navigator.dart';
 import 'package:social_app/core/global/app_styles.dart';
 import 'package:social_app/core/widgets/custom_button.dart';
 import 'package:social_app/features/profile/presentation/views/edit_profile_view.dart';
@@ -8,7 +9,6 @@ import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/states.dart';
 
 import '../../../../core/models/user_model.dart';
-import '../../../../shared/constants.dart';
 import '../widgets/me_profile_and_cover_images.dart';
 import '../widgets/sign_out_floating_button.dart';
 
@@ -62,11 +62,10 @@ class MeView extends StatelessWidget {
                     const SizedBox(height: 10),
                     CustomButton(
                       buttonText: "Edit Profile",
-                      onPressed: () => navigateTo(
-                        context,
-                        const EditProfileView(),
+                      onPressed: () => AppNavigator.navigateTo(
+                        screen: const EditProfileView(),
                       ),
-                      height: 13,
+                      height: 50,
                       textStyle: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

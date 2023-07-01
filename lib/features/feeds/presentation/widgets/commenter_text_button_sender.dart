@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/helper.dart';
 import '../../../../layout/cubit/cubit.dart';
-import '../../../../shared/constants.dart';
 
 class CommenterTextButtonSender extends StatelessWidget {
   const CommenterTextButtonSender({
@@ -33,7 +33,7 @@ class CommenterTextButtonSender extends StatelessWidget {
                 cubit.typeNewComment(
                   postId: postId,
                   time: TimeOfDay.now().format(context),
-                  date: getDate(),
+                  date: Helper.getDate(),
                   commentText: commentText.trim(),
                 );
               }
@@ -41,7 +41,7 @@ class CommenterTextButtonSender extends StatelessWidget {
                 cubit.uploadCommentImage(
                   postId: postId,
                   time: TimeOfDay.now().format(context),
-                  date: getDate(),
+                  date: Helper.getDate(),
                   commentText: commentText.trim(),
                 );
               }

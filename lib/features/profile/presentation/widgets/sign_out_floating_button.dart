@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/core/global/app_navigator.dart';
 
 import '../../../../core/global/app_styles.dart';
-import '../../../../shared/constants.dart';
+import '../../../../core/utils/cache_helper.dart';
+import '../../../auth/presentation/view/auth_view.dart';
 
 class SignOutFloatingButton extends StatelessWidget {
   const SignOutFloatingButton({
@@ -33,5 +35,13 @@ class SignOutFloatingButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void signOut(context) async {
+    CacheHelper.removeData(key: 'uId').then((value) {
+      if (value) {
+        AppNavigator.navigateAndFinish(screen: const AuthView());
+      }
+    });
   }
 }

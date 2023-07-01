@@ -15,9 +15,9 @@ import '../../core/models/like_model.dart';
 import '../../core/models/message_model.dart';
 import '../../core/models/post_model.dart';
 import '../../core/models/user_model.dart';
+import '../../core/utils/helper.dart';
 import '/layout/cubit/states.dart';
 import '../../core/utils/cache_helper.dart';
-import '/shared/constants.dart';
 
 class SocialAppCubit extends Cubit<SocialAppStates> {
   SocialAppCubit() : super(SocialAppInitialState());
@@ -119,7 +119,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
           bio: bio,
           image: value,
         );
-        buildSnackBar(
+        Helper.buildSnackBar(
           message: "Profile Image Updated Successfully",
           state: SnackBarStates.success,
           context: context,
@@ -166,7 +166,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
           bio: bio,
           cover: value,
         );
-        buildSnackBar(
+        Helper.buildSnackBar(
           message: "Cover Image Updated Successfully",
           state: SnackBarStates.success,
           context: context,
@@ -204,7 +204,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
         .doc(userModel.uId)
         .update(userModel.toJson())
         .then((value) {
-      getUserData(uId);
+      getUserData(Helper.uId);
     }).catchError((error) {
       emit(UserUpdateErrorState());
     });
@@ -260,7 +260,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
         .delete()
         .then((value) {
       emit(DeletePostSuccessState());
-      buildSnackBar(
+      Helper.buildSnackBar(
         message: "Post Deleted Successfully",
         state: SnackBarStates.success,
         context: context,

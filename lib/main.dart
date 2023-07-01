@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:social_app/core/global/app_texts.dart';
 import 'package:social_app/core/global/app_theme.dart';
 import 'package:social_app/core/utils/service_locator.dart';
 import 'package:social_app/features/auth/presentation/view/auth_view.dart';
 
 import '/layout/cubit/cubit.dart';
 import '/layout/social_layout.dart';
+import 'core/services/theme_service.dart';
 import 'core/utils/bloc_observer.dart';
-import '/shared/constants.dart';
-import '/styles/theme_services.dart';
+
+import 'core/utils/helper.dart';
 import 'core/utils/size_config.dart';
 import 'firebase_options.dart';
 import 'core/utils/cache_helper.dart';
@@ -33,11 +35,11 @@ Future<void> main() async {
   //===================== Initializing SharedPref =====================
   await CacheHelper.initSharedPref();
 
-  uId = CacheHelper.getStringData(key: 'uId');
+  Helper.uId = CacheHelper.getStringData(key: 'uId');
 
   Widget startingScreen;
 
-  if (uId != null) {
+  if (Helper.uId != null) {
     startingScreen = const SocialAppLayout();
   } else {
     startingScreen = const AuthView();
@@ -46,7 +48,7 @@ Future<void> main() async {
   runApp(
     SocialApp(
       startingScreen,
-      uId,
+      Helper.uId,
     ),
   );
 }
@@ -71,10 +73,11 @@ class SocialApp extends StatelessWidget {
         ..getUserData(uId)
         ..getPosts(),
       child: GetMaterialApp(
+        title: AppTexts.appTitle,
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme(),
         darkTheme: AppTheme.darkTheme(),
-        themeMode: ThemeServices().theme,
+        themeMode: ThemeService().theme,
         home: startingScreen,
       ),
     );

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:social_app/core/global/app_colors.dart';
 import 'package:social_app/core/global/app_navigator.dart';
 import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
 
-import '../styles/theme_services.dart';
+import '../core/services/theme_service.dart';
 import '/layout/cubit/cubit.dart';
 import '/layout/cubit/states.dart';
-import '../styles/thems.dart';
 
 class SocialAppLayout extends StatelessWidget {
   const SocialAppLayout({super.key});
@@ -39,20 +39,22 @@ class SocialAppLayout extends StatelessWidget {
                     : const Text(""),
                 leading: IconButton(
                   onPressed: () async {
-                    ThemeServices().switchTheme();
+                    ThemeService().switchTheme();
                   },
                   icon: Icon(
                     Get.isDarkMode
                         ? Icons.wb_sunny_outlined
                         : Icons.nightlight_round_outlined,
                     size: 28,
-                    color: Get.isDarkMode ? Colors.white : darkGreyClr,
+                    color:
+                        Get.isDarkMode ? Colors.white : AppColors.darkGreyClr,
                   ),
                 ),
                 actions: <Widget>[
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.notifications, color: defaultColor),
+                    icon: const Icon(Icons.notifications,
+                        color: AppColors.primaryColor),
                   ),
                   if (cubit.currentIndex == 1)
                     IconButton(
@@ -61,15 +63,16 @@ class SocialAppLayout extends StatelessWidget {
                       },
                       icon: Icon(
                         cubit.isSearching ? Icons.cancel : Icons.search_rounded,
-                        color: defaultColor,
+                        color: AppColors.primaryColor,
                       ),
                     ),
                 ],
                 systemOverlayStyle: SystemUiOverlayStyle(
                   systemNavigationBarColor:
-                      Get.isDarkMode ? darkGreyClr : Colors.white,
-                  statusBarColor:
-                      Get.isDarkMode ? darkGreyClr : Colors.transparent,
+                      Get.isDarkMode ? AppColors.darkGreyClr : Colors.white,
+                  statusBarColor: Get.isDarkMode
+                      ? AppColors.darkGreyClr
+                      : Colors.transparent,
                   statusBarBrightness:
                       Get.isDarkMode ? Brightness.light : Brightness.dark,
                 ),
@@ -80,7 +83,7 @@ class SocialAppLayout extends StatelessWidget {
                     cubit.bottomNavScreens[cubit.currentIndex],
                 fallback: (context) => const Center(
                   child: CircularProgressIndicator(
-                    color: defaultColor,
+                    color: AppColors.primaryColor,
                   ),
                 ),
               ),
@@ -89,7 +92,8 @@ class SocialAppLayout extends StatelessWidget {
                 notchMargin: 0.1,
                 clipBehavior: Clip.antiAlias,
                 child: BottomNavigationBar(
-                  backgroundColor: Get.isDarkMode ? darkGreyClr : Colors.white,
+                  backgroundColor:
+                      Get.isDarkMode ? AppColors.darkGreyClr : Colors.white,
                   items: cubit.bottomNavItems,
                   currentIndex: cubit.currentIndex,
                   onTap: (int index) => cubit.changeBottomNavIndex(index),
@@ -98,7 +102,7 @@ class SocialAppLayout extends StatelessWidget {
                       const TextStyle(fontWeight: FontWeight.bold),
                   showSelectedLabels: true,
                   showUnselectedLabels: false,
-                  selectedItemColor: defaultColor,
+                  selectedItemColor: AppColors.primaryColor,
                   selectedIconTheme: const IconThemeData(size: 25),
                   unselectedIconTheme: const IconThemeData(size: 22),
                 ),
@@ -112,7 +116,7 @@ class SocialAppLayout extends StatelessWidget {
                   onPressed: () => AppNavigator.navigateTo(
                     screen: const NewPostView(),
                   ),
-                  backgroundColor: defaultColor,
+                  backgroundColor: AppColors.primaryColor,
                   child: const Icon(
                     Icons.post_add,
                     size: 25,
@@ -155,7 +159,7 @@ class SocialAppLayout extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
-                color: defaultColor,
+                color: AppColors.primaryColor,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(20),

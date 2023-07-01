@@ -61,7 +61,7 @@ class EditProfileView extends StatelessWidget {
       TextEditingController nameController,
       TextEditingController phoneController,
       TextEditingController bioController) {
-    return appBarBuilder(
+    return Helper.appBarBuilder(
       context: context,
       title: "Edit Profile",
       actions: <Widget>[

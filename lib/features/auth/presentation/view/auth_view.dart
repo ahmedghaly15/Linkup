@@ -96,7 +96,7 @@ class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: context.theme.colorScheme.background,
-      systemOverlayStyle: setSystemOverlayStyle(),
+      systemOverlayStyle: Helper.setSystemOverlayStyle(),
     );
   }
 
