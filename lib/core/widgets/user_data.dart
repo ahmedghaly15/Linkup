@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../global/app_styles.dart';
 
-class MeData extends StatelessWidget {
-  const MeData({
+class UserData extends StatelessWidget {
+  const UserData({
     Key? key,
     required this.count,
     required this.label,

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/core/global/app_styles.dart';
 import 'package:social_app/core/widgets/custom_button.dart';
 import 'package:social_app/features/profile/presentation/views/edit_profile_view.dart';
-import 'package:social_app/features/profile/presentation/widgets/me_data.dart';
+import 'package:social_app/core/widgets/user_data.dart';
 import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/states.dart';
 
@@ -52,10 +52,10 @@ class MeView extends StatelessWidget {
                       ),
                       child: Row(
                         children: <Widget>[
-                          MeData(count: 0, label: "Posts"),
-                          MeData(count: 0, label: "Photos"),
-                          MeData(count: 0, label: "Followers"),
-                          MeData(count: 0, label: "Following"),
+                          UserData(count: 0, label: "Posts"),
+                          UserData(count: 0, label: "Photos"),
+                          UserData(count: 0, label: "Followers"),
+                          UserData(count: 0, label: "Following"),
                         ],
                       ),
                     ),

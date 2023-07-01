@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/features/chat/presentation/views/chats_view.dart';
 import 'package:social_app/features/feeds/presentation/views/feeds_view.dart';
+import 'package:social_app/features/profile/presentation/views/me_view.dart';
+import 'package:social_app/features/users/presentation/views/users_view.dart';
 
 import '../../core/models/comment_model.dart';
 import '../../core/models/like_model.dart';
@@ -14,8 +16,6 @@ import '../../core/models/message_model.dart';
 import '../../core/models/post_model.dart';
 import '../../core/models/user_model.dart';
 import '/layout/cubit/states.dart';
-import '/modules/profile/profile_screen.dart';
-import '/modules/users/users_screen.dart';
 import '../../core/utils/cache_helper.dart';
 import '/shared/constants.dart';
 
@@ -31,8 +31,8 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
   List<Widget> bottomNavScreens = [
     const FeedsView(),
     const ChatsView(),
-    const UsersScreen(),
-    const ProfileScreen(),
+    const UsersView(),
+    const MeView(),
   ];
 
   //============ Bottom Nav Bar Content ============
@@ -51,7 +51,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.person),
-      label: "Profile",
+      label: "Me",
     ),
   ];
 
