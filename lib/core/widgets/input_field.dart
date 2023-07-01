@@ -5,7 +5,7 @@ import '../global/app_colors.dart';
 import '../global/app_styles.dart';
 
 class InputField extends StatelessWidget {
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
   final String hint;
   final TextStyle? hintStyle;
   final bool? obsecure;
@@ -20,7 +20,6 @@ class InputField extends StatelessWidget {
 
   const InputField({
     Key? key,
-    required this.focusNode,
     required this.hint,
     this.hintStyle = AppStyles.hintStyle,
     required this.controller,
@@ -32,6 +31,7 @@ class InputField extends StatelessWidget {
     this.icon,
     this.onSubmit,
     this.onEditingComplete,
+    this.focusNode,
   }) : super(key: key);
 
   @override
