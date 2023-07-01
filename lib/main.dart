@@ -15,7 +15,7 @@ import 'core/utils/bloc_observer.dart';
 
 import 'core/utils/helper.dart';
 import 'core/utils/size_config.dart';
-import 'firebase_options.dart';
+import 'core/utils/firebase_options.dart';
 import 'core/utils/cache_helper.dart';
 
 Future<void> main() async {
