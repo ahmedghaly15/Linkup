@@ -36,20 +36,21 @@ class TopPostItemSection extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 5),
-                  if (SocialAppCubit.getObject(context).model!.name ==
-                          "Ahmed Ghaly" ||
-                      SocialAppCubit.getObject(context).model!.name ==
-                          "Abo Ghaly")
-                    const Icon(
-                      Icons.verified,
-                      size: 16,
-                      color: Colors.blue,
-                    ),
+                  Icon(
+                    SocialAppCubit.getObject(context).model!.name ==
+                                "Ahmed Ghaly" ||
+                            SocialAppCubit.getObject(context).model!.name ==
+                                "Abo Ghaly"
+                        ? Icons.verified
+                        : null,
+                    size: 16,
+                    color: Colors.blue,
+                  ),
                 ],
               ),
               Text(
                 "${model.date} at ${model.time}",
-                style: AppStyles.bodySmall,
+                style: AppStyles.caption,
               ),
             ],
           ),

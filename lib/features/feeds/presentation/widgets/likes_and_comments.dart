@@ -42,7 +42,7 @@ class LikesAndComments extends StatelessWidget {
                   const SizedBox(width: 5),
                   Text(
                     "${model.likes} Likes",
-                    style: AppStyles.bodySmall,
+                    style: AppStyles.caption,
                   ),
                 ],
               ),
@@ -69,7 +69,7 @@ class LikesAndComments extends StatelessWidget {
                   const SizedBox(width: 5),
                   Text(
                     "${model.comments} comments",
-                    style: AppStyles.bodySmall,
+                    style: AppStyles.caption,
                   ),
                 ],
               ),

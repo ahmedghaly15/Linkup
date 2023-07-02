@@ -18,6 +18,7 @@ class ChatsView extends StatelessWidget {
           condition: cubit.users.isNotEmpty,
           builder: (context) {
             return ListView.builder(
+              padding: const EdgeInsets.only(bottom: 35),
               itemCount: cubit.isSearching
                   ? cubit.searchList.length
                   : cubit.users.length,

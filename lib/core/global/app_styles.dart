@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:social_app/core/global/app_colors.dart';
 
 class AppStyles {
@@ -17,16 +16,16 @@ class AppStyles {
     color: Colors.white,
   );
 
-  static TextStyle appBarTitleStyle = TextStyle(
+  static TextStyle appBarTitleStyle = const TextStyle(
     fontSize: 23,
     fontWeight: FontWeight.bold,
-    color: Get.isDarkMode ? Colors.white : Colors.black,
+    // color: ThemeCubit.isDark ? Colors.white : Colors.black,
     letterSpacing: 0.7,
   );
 
-  static TextStyle inputFieldTextStyle = TextStyle(
+  static TextStyle inputFieldTextStyle = const TextStyle(
     fontSize: 20,
-    color: Get.isDarkMode ? Colors.white : Colors.black,
+    // color: ThemeCubit.isDark ? Colors.white : Colors.black,
   );
 
   static const TextStyle hintStyle = TextStyle(
@@ -36,9 +35,9 @@ class AppStyles {
     color: Colors.grey,
   );
 
-  static TextStyle bodyLarge = TextStyle(
+  static TextStyle bodyLarge = const TextStyle(
     fontSize: 18,
-    color: Get.isDarkMode ? Colors.white : Colors.black,
+    // color: ThemeCubit.isDark ? Colors.white : Colors.black,
     letterSpacing: 0.5,
   );
 
@@ -48,15 +47,15 @@ class AppStyles {
     color: AppColors.primaryColor,
   );
 
-  static TextStyle bodySmall = TextStyle(
+  static TextStyle bodySmall = const TextStyle(
     fontSize: 16,
-    color: Get.isDarkMode ? Colors.white : Colors.black,
+    // color: ThemeCubit.isDark ? Colors.white : Colors.black,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle caption = TextStyle(
-    fontSize: 12,
+    fontSize: 13,
     color: Colors.grey,
-    height: 1.7,
+    height: 1.5,
   );
 }

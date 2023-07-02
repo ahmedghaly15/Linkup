@@ -1,25 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/core/utils/cache_helper.dart';
 
-//============================= Controlling App Theme =============================
-class ThemeService {
-  final GetStorage _box = GetStorage();
-  final _key = 'isDarkMode';
+class ThemeService extends Cubit<bool> {
+  ThemeService() : super(false) {
+    _loadTheme();
+  }
 
-//============================= Save App Theme =============================
-  _saveThemeToBox(bool isDarkMode) => _box.write(_key, isDarkMode);
+  static ThemeService getObject(context) => BlocProvider.of(context);
 
-//============================= Load App Theme =============================
-  bool _loadThemeFromBox() => _box.read<bool>(_key) ?? false;
-  // (false means it's light mode)
+  static bool isDark = false;
 
-//============================= Getting App Theme =============================
-  ThemeMode get theme => _loadThemeFromBox() ? ThemeMode.dark : ThemeMode.light;
+  Future<void> toggleTheme() async {
+    await _saveTheme(!state);
+    emit(!state);
+  }
 
-//============================= Switch App Theme =============================
-  void switchTheme() {
-    Get.changeThemeMode(_loadThemeFromBox() ? ThemeMode.light : ThemeMode.dark);
-    _saveThemeToBox(!_loadThemeFromBox());
+  Future<void> _loadTheme() async {
+    isDark = CacheHelper.getBoolData(key: 'isDark') ?? false;
+    emit(isDark);
+  }
+
+  Future<void> _saveTheme(bool isDark) async {
+    await CacheHelper.saveData(key: 'isDark', value: isDark);
   }
 }

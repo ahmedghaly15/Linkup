@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/layout/presenetation/view/layout_view.dart';
 
 import '../../../../core/global/app_navigator.dart';
 import '../../../../core/utils/cache_helper.dart';
@@ -7,7 +8,6 @@ import '../../../../core/utils/cache_helper.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../core/utils/size_config.dart';
 
-import '../../../../layout/social_layout.dart';
 import '../view/manager/auth_view_cubit.dart';
 import '../view/manager/auth_view_states.dart';
 import 'auth_button.dart';
@@ -154,13 +154,13 @@ class AuthForm extends StatelessWidget {
 
     if (state is SignInSuccessState) {
       CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
-        AppNavigator.navigateAndFinish(screen: const SocialAppLayout());
+        AppNavigator.navigateAndFinish(screen: const LayoutView());
       });
     }
 
     if (state is SignUpSuccessState) {
       CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
-        AppNavigator.navigateAndFinish(screen: const SocialAppLayout());
+        AppNavigator.navigateAndFinish(screen: const LayoutView());
       });
       Helper.buildSnackBar(
         message: "Account Created Successfully",
@@ -170,7 +170,7 @@ class AuthForm extends StatelessWidget {
     }
 
     if (state is CreateUserSuccessState) {
-      AppNavigator.navigateAndFinish(screen: const SocialAppLayout());
+      AppNavigator.navigateAndFinish(screen: const LayoutView());
     }
   }
 

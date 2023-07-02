@@ -5,12 +5,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:social_app/core/global/app_texts.dart';
 import 'package:social_app/core/global/app_theme.dart';
+import 'package:social_app/core/services/theme_service.dart';
 import 'package:social_app/core/utils/service_locator.dart';
 import 'package:social_app/features/auth/presentation/view/auth_view.dart';
+import 'package:social_app/layout/presenetation/view/layout_view.dart';
 
 import '/layout/cubit/cubit.dart';
-import '/layout/social_layout.dart';
-import 'core/services/theme_service.dart';
+
 import 'core/utils/bloc_observer.dart';
 
 import 'core/utils/helper.dart';
@@ -40,7 +41,7 @@ Future<void> main() async {
   Widget startingScreen;
 
   if (Helper.uId != null) {
-    startingScreen = const SocialAppLayout();
+    startingScreen = const LayoutView();
   } else {
     startingScreen = const AuthView();
   }
@@ -68,17 +69,28 @@ class SocialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return BlocProvider(
-      create: (context) => SocialAppCubit()
-        ..getUserData(uId)
-        ..getPosts(),
-      child: GetMaterialApp(
-        title: AppTexts.appTitle,
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme(),
-        darkTheme: AppTheme.darkTheme(),
-        themeMode: ThemeService().theme,
-        home: startingScreen,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SocialAppCubit()
+            ..getUserData(uId)
+            ..getPosts(),
+        ),
+        BlocProvider(create: (context) => ThemeService()),
+      ],
+      child: BlocBuilder<ThemeService, bool>(
+        buildWhen: (previousState, currentState) =>
+            previousState != currentState,
+        builder: (context, isDark) {
+          return GetMaterialApp(
+            title: AppTexts.appTitle,
+            debugShowCheckedModeBanner: false,
+            theme: isDark ? AppTheme.darkTheme() : AppTheme.lightTheme(),
+            // darkTheme: AppTheme.darkTheme(),
+            // themeMode: ThemeService().theme,
+            home: startingScreen,
+          );
+        },
       ),
     );
   }

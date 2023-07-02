@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:social_app/core/utils/helper.dart';
 import 'package:social_app/core/utils/service_locator.dart';
 
+import '../../../../core/global/app_colors.dart';
+import '../../../../core/services/theme_service.dart';
 import '../../domain/auth_repo.dart';
 import '../widgets/auth_view_body.dart';
 import 'manager/auth_view_cubit.dart';
@@ -96,6 +98,18 @@ class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: context.theme.colorScheme.background,
+      leading: IconButton(
+        onPressed: () {
+          BlocProvider.of<ThemeService>(context).toggleTheme();
+        },
+        icon: Icon(
+          Get.isDarkMode
+              ? Icons.wb_sunny_outlined
+              : Icons.nightlight_round_outlined,
+          size: 28,
+          color: Get.isDarkMode ? Colors.white : AppColors.darkGreyClr,
+        ),
+      ),
       systemOverlayStyle: Helper.setSystemOverlayStyle(),
     );
   }

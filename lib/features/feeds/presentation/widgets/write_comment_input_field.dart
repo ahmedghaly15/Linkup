@@ -19,33 +19,33 @@ class WriteCommentInputField extends StatelessWidget {
     return Row(
       children: <Widget>[
         Expanded(
-          child: InkWell(
-            onTap: () {},
-            child: Row(
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 18,
-                  backgroundImage: NetworkImage(
-                    SocialAppCubit.getObject(context).model!.image!,
+          child: Row(
+            children: <Widget>[
+              CircleAvatar(
+                radius: 18,
+                backgroundImage: NetworkImage(
+                  SocialAppCubit.getObject(context).model!.image!,
+                ),
+              ),
+              const SizedBox(width: 10),
+              TextButton(
+                onPressed: () {
+                  AppNavigator.navigateTo(
+                    screen: CommentsView(
+                      postId: model.postId,
+                      postUid: model.uId,
+                    ),
+                  );
+                },
+                child: Text(
+                  "Write a comment...",
+                  style: AppStyles.bodySmall.copyWith(
+                    fontSize: 14,
+                    color: Colors.grey,
                   ),
                 ),
-                const SizedBox(width: 10),
-                TextButton(
-                  onPressed: () {
-                    AppNavigator.navigateTo(
-                      screen: CommentsView(
-                        postId: model.postId,
-                        postUid: model.uId,
-                      ),
-                    );
-                  },
-                  child: Text(
-                    "Write a comment...",
-                    style: AppStyles.bodySmall.copyWith(fontSize: 15),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],
