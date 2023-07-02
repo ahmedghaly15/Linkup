@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/widgets/custom_bottom_sheet.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class EditCoverImage extends StatelessWidget {
   const EditCoverImage({
@@ -18,7 +18,7 @@ class EditCoverImage extends StatelessWidget {
 
   final File? coverImage;
   final UserModel userModel;
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
 
   @override
   Widget build(BuildContext context) {

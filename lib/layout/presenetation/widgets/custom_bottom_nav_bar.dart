@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/global/app_colors.dart';
-import '../../cubit/cubit.dart';
+import '../view/manager/app_cubit.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({
@@ -10,7 +10,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
 
   @override
   Widget build(BuildContext context) {

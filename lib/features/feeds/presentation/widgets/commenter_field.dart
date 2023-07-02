@@ -7,7 +7,7 @@ import 'package:social_app/core/global/app_colors.dart';
 import 'package:social_app/features/feeds/presentation/widgets/commenter_text_button_sender.dart';
 import 'package:social_app/features/feeds/presentation/widgets/get_comment_image_icon_button.dart';
 
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import 'commenter_text_field.dart';
 
 class CommenterField extends StatelessWidget {
@@ -24,7 +24,7 @@ class CommenterField extends StatelessWidget {
   final String commentText;
   final TextEditingController commentController;
   final BuildContext context;
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
   final String postId;
   final File? commentImage;
 

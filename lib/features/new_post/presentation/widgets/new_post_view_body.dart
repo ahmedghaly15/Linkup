@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/core/global/app_colors.dart';
 import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
 
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_states.dart';
 import 'add_photos_and_tags_buttons.dart';
 import 'new_post_text_field.dart';
 import 'post_image.dart';
@@ -18,10 +18,10 @@ class NewPostViewBody extends StatelessWidget {
     required this.model,
   }) : super(key: key);
 
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
   final TextEditingController textController;
   final UserModel model;
-  final SocialAppStates state;
+  final AppStates state;
 
   @override
   Widget build(BuildContext context) {

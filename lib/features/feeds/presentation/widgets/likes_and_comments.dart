@@ -5,7 +5,7 @@ import 'package:social_app/features/feeds/presentation/views/comments_view.dart'
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/post_model.dart';
 import '../../../../core/utils/helper.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class LikesAndComments extends StatelessWidget {
   const LikesAndComments({
@@ -24,8 +24,7 @@ class LikesAndComments extends StatelessWidget {
           Expanded(
             child: InkWell(
               onTap: () {
-                SocialAppCubit.getObject(context)
-                    .likedByMe(postId: model.postId!);
+                AppCubit.getObject(context).likedByMe(postId: model.postId!);
                 Helper.buildSnackBar(
                   message: "Liked Successfully",
                   state: SnackBarStates.success,

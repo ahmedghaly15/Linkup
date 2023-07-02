@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/post_model.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../core/utils/helper.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class TopPostItemSection extends StatelessWidget {
   const TopPostItemSection({
@@ -35,17 +36,15 @@ class TopPostItemSection extends StatelessWidget {
                       fontSize: 17,
                     ),
                   ),
-                  const SizedBox(width: 5),
-                  Icon(
-                    SocialAppCubit.getObject(context).model!.name ==
-                                "Ahmed Ghaly" ||
-                            SocialAppCubit.getObject(context).model!.name ==
-                                "Abo Ghaly"
-                        ? Icons.verified
-                        : null,
-                    size: 16,
-                    color: Colors.blue,
-                  ),
+                  // const SizedBox(width: 5),
+                  // Icon(
+                  //   Helper.model!.name == "Ahmed Ghaly" ||
+                  //           Helper.model!.name == "Abo Ghaly"
+                  //       ? Icons.verified
+                  //       : null,
+                  //   size: 16,
+                  //   color: Colors.blue,
+                  // ),
                 ],
               ),
               Text(
@@ -57,17 +56,15 @@ class TopPostItemSection extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            SocialAppCubit.getObject(context).deletePost(
+            AppCubit.getObject(context).deletePost(
               postId: model.postId!,
               context: context,
             );
           },
           icon: Icon(
-            model.uId == SocialAppCubit.getObject(context).model!.uId
-                ? Icons.delete
-                : Icons.more_horiz,
+            model.uId == Helper.model!.uId ? Icons.delete : Icons.more_horiz,
             size: 25,
-            color: model.uId == SocialAppCubit.getObject(context).model!.uId
+            color: model.uId == Helper.model!.uId
                 ? Colors.red
                 : (Get.isDarkMode ? Colors.white : Colors.black),
           ),

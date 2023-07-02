@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/global/app_colors.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class PostImage extends StatelessWidget {
   const PostImage({
@@ -9,7 +9,7 @@ class PostImage extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
 
   @override
   Widget build(BuildContext context) {

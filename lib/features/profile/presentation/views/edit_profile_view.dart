@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:social_app/core/widgets/custom_text_button.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
-import 'package:social_app/layout/cubit/states.dart';
 
 import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/helper.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_states.dart';
 import '../widgets/edit_profile_view_body.dart';
 
 class EditProfileView extends StatelessWidget {
@@ -16,9 +16,9 @@ class EditProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SocialAppCubit, SocialAppStates>(
+    return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
-        UserModel userModel = SocialAppCubit.getObject(context).model!;
+        UserModel userModel = Helper.model!;
         final TextEditingController nameController = TextEditingController();
         final TextEditingController bioController = TextEditingController();
         final TextEditingController phoneController = TextEditingController();
@@ -26,7 +26,7 @@ class EditProfileView extends StatelessWidget {
         nameController.text = userModel.name!;
         bioController.text = userModel.bio!;
         phoneController.text = userModel.phone!;
-        SocialAppCubit cubit = SocialAppCubit.getObject(context);
+        AppCubit cubit = AppCubit.getObject(context);
         File? profileImage = cubit.profileImage;
         File? coverImage = cubit.coverImage;
 
@@ -57,7 +57,7 @@ class EditProfileView extends StatelessWidget {
 
   AppBar buildAppBar(
       BuildContext context,
-      SocialAppCubit cubit,
+      AppCubit cubit,
       TextEditingController nameController,
       TextEditingController phoneController,
       TextEditingController bioController) {

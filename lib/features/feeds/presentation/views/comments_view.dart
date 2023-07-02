@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:social_app/core/global/app_styles.dart';
 import 'package:social_app/features/feeds/presentation/widgets/comments_view_body.dart';
-import 'package:social_app/layout/cubit/states.dart';
 
 import '../../../../core/models/comment_model.dart';
 import '../../../../core/utils/helper.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_states.dart';
 
 class CommentsView extends StatelessWidget {
   CommentsView({Key? key, this.postId, this.postUid}) : super(key: key);
@@ -22,12 +22,12 @@ class CommentsView extends StatelessWidget {
     String? postId = this.postId;
     return Builder(builder: (context) {
       // Getting The Comments And The User's Data
-      SocialAppCubit.getObject(context).getComments(postId: postId!);
-      SocialAppCubit.getObject(context).getUserData(postUid);
+      AppCubit.getObject(context).getComments(postId: postId!);
+      AppCubit.getObject(context).getUserData(postUid);
 
-      return BlocBuilder<SocialAppCubit, SocialAppStates>(
+      return BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {
-          SocialAppCubit cubit = SocialAppCubit.getObject(context);
+          AppCubit cubit = AppCubit.getObject(context);
           List<CommentModel> comments = cubit.comments;
 
           return Scaffold(

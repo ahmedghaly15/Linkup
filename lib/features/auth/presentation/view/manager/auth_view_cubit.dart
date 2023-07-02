@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/features/auth/domain/auth_repo.dart';
 
-import '/layout/cubit/cubit.dart';
 import '../../../../../core/utils/cache_helper.dart';
+import '../../../../../layout/presenetation/view/manager/app_cubit.dart';
 import 'auth_view_states.dart';
 
 enum AuthMode { signIn, signUp }
@@ -38,7 +38,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
         .then((value) {
       emit(SignInSuccessState(value.user!.uid));
       CacheHelper.saveData(key: 'uId', value: value.user!.uid);
-      SocialAppCubit.getObject(context).getUserData(value.user!.uid);
+      AppCubit.getObject(context).getUserData(value.user!.uid);
     }).catchError((error) {
       if (error is FirebaseAuthException)
         emit(SignInErrorState(error.code.toString()));
@@ -65,7 +65,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
     )
         .then((value) {
       CacheHelper.saveData(key: 'uId', value: value.user!.uid);
-      SocialAppCubit.getObject(context).getUserData(value.user!.uid);
+      AppCubit.getObject(context).getUserData(value.user!.uid);
     }).catchError((error) {
       print(error.toString());
       if (error is FirebaseAuthException)

@@ -72,6 +72,7 @@ lib
 ```
 
 ## Features
+
 - `Create new post`: the app makes it easy and intuitive to create new posts, with the ability to add text, images, and videos to your posts, user can easily share his thoughts and experiences with his friends.
 - `Firebase authentication`: The app uses Firebase Authentication to provide secure user authentication and authorization.
 - `Cloud firestore1`: The app uses Firebase Cloud Firestore to store users profile images, images they send to each other in chats, and the images shared in feeds.
@@ -128,7 +129,7 @@ class SocialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SocialAppCubit()
+      create: (context) => AppCubit()
         ..getUserData(uId)
         ..getPosts(),
       child: GetMaterialApp(

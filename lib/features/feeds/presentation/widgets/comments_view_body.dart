@@ -7,7 +7,7 @@ import 'package:social_app/features/feeds/presentation/widgets/comment_item.dart
 import 'package:social_app/features/feeds/presentation/widgets/commenter_field.dart';
 
 import '../../../../core/models/comment_model.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class CommentsViewBody extends StatelessWidget {
   const CommentsViewBody({
@@ -24,7 +24,7 @@ class CommentsViewBody extends StatelessWidget {
   final String commentText;
   final File? commentImage;
   final TextEditingController commentController;
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
   final String postId;
 
   @override

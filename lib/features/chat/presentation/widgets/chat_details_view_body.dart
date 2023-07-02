@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/chat/presentation/widgets/custom_massenger_field.dart';
 import 'package:social_app/features/chat/presentation/widgets/custom_message_bubble.dart';
-import 'package:social_app/layout/cubit/cubit.dart';
 
 import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/helper.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class ChatDetailsViewBody extends StatelessWidget {
   const ChatDetailsViewBody({
@@ -15,7 +16,7 @@ class ChatDetailsViewBody extends StatelessWidget {
     required this.messageController,
   }) : super(key: key);
 
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
   final UserModel userModel;
   final TextEditingController messageController;
 
@@ -38,8 +39,9 @@ class ChatDetailsViewBody extends StatelessWidget {
                       var message = cubit.messages[index];
                       return CustomMessageBubble(
                         messageModel: message,
-                        isMe:
-                            cubit.model!.uId == message.senderId ? true : false,
+                        isMe: Helper.model!.uId == message.senderId
+                            ? true
+                            : false,
                       );
                       // return buildReceiverMessage();
                     },

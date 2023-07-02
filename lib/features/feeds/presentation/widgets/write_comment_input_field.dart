@@ -4,7 +4,7 @@ import 'package:social_app/features/feeds/presentation/views/comments_view.dart'
 import '../../../../core/global/app_navigator.dart';
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/post_model.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../core/utils/helper.dart';
 
 class WriteCommentInputField extends StatelessWidget {
   const WriteCommentInputField({
@@ -24,7 +24,7 @@ class WriteCommentInputField extends StatelessWidget {
               CircleAvatar(
                 radius: 18,
                 backgroundImage: NetworkImage(
-                  SocialAppCubit.getObject(context).model!.image!,
+                  Helper.model!.image!,
                 ),
               ),
               const SizedBox(width: 10),

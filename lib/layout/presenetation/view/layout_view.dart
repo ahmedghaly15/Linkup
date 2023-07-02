@@ -9,17 +9,17 @@ import 'package:social_app/layout/presenetation/widgets/layout_view_body.dart';
 import '../../../core/services/theme_service.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 import '../widgets/new_post_floating_button.dart';
-import '/layout/cubit/cubit.dart';
-import '/layout/cubit/states.dart';
+import 'manager/app_cubit.dart';
+import 'manager/app_states.dart';
 
 class LayoutView extends StatelessWidget {
   const LayoutView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SocialAppCubit, SocialAppStates>(
+    return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
-        SocialAppCubit cubit = SocialAppCubit.getObject(context);
+        AppCubit cubit = AppCubit.getObject(context);
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: WillPopScope(
@@ -45,7 +45,7 @@ class LayoutView extends StatelessWidget {
     );
   }
 
-  AppBar buildAppBar(BuildContext context, SocialAppCubit cubit) {
+  AppBar buildAppBar(BuildContext context, AppCubit cubit) {
     return AppBar(
       backgroundColor: context.theme.colorScheme.background,
       title:

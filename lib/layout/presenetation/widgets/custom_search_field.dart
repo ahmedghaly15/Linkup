@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/global/app_colors.dart';
-import '../../cubit/cubit.dart';
+import '../view/manager/app_cubit.dart';
 
 class CustomSearchField extends StatelessWidget {
   const CustomSearchField({Key? key, required this.cubit}) : super(key: key);
 
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
 
   @override
   Widget build(BuildContext context) {

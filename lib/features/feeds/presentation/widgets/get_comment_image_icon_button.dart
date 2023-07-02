@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/global/app_colors.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class GetCommentImageIconButton extends StatelessWidget {
   const GetCommentImageIconButton({
@@ -13,7 +13,7 @@ class GetCommentImageIconButton extends StatelessWidget {
   }) : super(key: key);
 
   final ImageSource source;
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
   final IconData icon;
 
   @override

@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:social_app/core/global/app_navigator.dart';
 import 'package:social_app/core/utils/helper.dart';
 import 'package:social_app/features/chat/presentation/widgets/chat_details_view_body.dart';
-import 'package:social_app/layout/cubit/states.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/user_model.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_states.dart';
 
 class ChatDetailsView extends StatelessWidget {
   ChatDetailsView({Key? key, required this.userModel}) : super(key: key);
@@ -21,13 +21,13 @@ class ChatDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        SocialAppCubit.getObject(context).getMessages(
+        AppCubit.getObject(context).getMessages(
           receiverId: userModel.uId!,
         );
 
-        return BlocBuilder<SocialAppCubit, SocialAppStates>(
+        return BlocBuilder<AppCubit, AppStates>(
           builder: (context, state) {
-            SocialAppCubit cubit = SocialAppCubit.getObject(context);
+            AppCubit cubit = AppCubit.getObject(context);
 
             return Scaffold(
               backgroundColor: context.theme.colorScheme.background,

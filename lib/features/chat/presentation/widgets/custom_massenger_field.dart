@@ -8,7 +8,7 @@ import 'package:social_app/core/global/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/helper.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class CustomMassengerField extends StatelessWidget {
   const CustomMassengerField({
@@ -22,7 +22,7 @@ class CustomMassengerField extends StatelessWidget {
 
   final String messageText;
   final TextEditingController messageController;
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
   final UserModel userModel;
   final File? messageImage;
 

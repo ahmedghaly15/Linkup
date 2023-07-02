@@ -3,7 +3,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/utils/helper.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class AddPhotosAndTagsButtons extends StatelessWidget {
   const AddPhotosAndTagsButtons({
@@ -11,7 +11,7 @@ class AddPhotosAndTagsButtons extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
 
   @override
   Widget build(BuildContext context) {

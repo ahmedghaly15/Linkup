@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:social_app/layout/cubit/states.dart';
 
 import '../../../../core/models/user_model.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_states.dart';
 import 'confirm_editing_buttons.dart';
 import 'edit_cover_image.dart';
 import 'edit_profile_image.dart';
@@ -26,8 +26,8 @@ class EditProfileViewBody extends StatelessWidget {
 
   final File? coverImage;
   final UserModel userModel;
-  final SocialAppCubit cubit;
-  final SocialAppStates state;
+  final AppCubit cubit;
+  final AppStates state;
   final File? profileImage;
   final TextEditingController nameController;
   final TextEditingController phoneController;

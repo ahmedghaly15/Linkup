@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/widgets/custom_button.dart';
-import '../../../../layout/cubit/cubit.dart';
-import '../../../../layout/cubit/states.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_states.dart';
 
 class ConfirmEditingButtons extends StatelessWidget {
   const ConfirmEditingButtons({
@@ -15,11 +15,11 @@ class ConfirmEditingButtons extends StatelessWidget {
     required this.state,
   }) : super(key: key);
 
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
   final TextEditingController nameController;
   final TextEditingController phoneController;
   final TextEditingController bioController;
-  final SocialAppStates state;
+  final AppStates state;
 
   @override
   Widget build(BuildContext context) {

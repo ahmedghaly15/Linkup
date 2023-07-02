@@ -1,30 +1,31 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/features/chat/presentation/views/chats_view.dart';
-import 'package:social_app/features/feeds/presentation/views/feeds_view.dart';
-import 'package:social_app/features/profile/presentation/views/me_view.dart';
-import 'package:social_app/features/users/presentation/views/users_view.dart';
 
-import '../../core/models/comment_model.dart';
-import '../../core/models/like_model.dart';
-import '../../core/models/message_model.dart';
-import '../../core/models/post_model.dart';
-import '../../core/models/user_model.dart';
-import '../../core/utils/helper.dart';
-import '/layout/cubit/states.dart';
-import '../../core/utils/cache_helper.dart';
+import '../../../../core/models/comment_model.dart';
+import '../../../../core/models/like_model.dart';
+import '../../../../core/models/message_model.dart';
+import '../../../../core/models/post_model.dart';
+import '../../../../core/models/user_model.dart';
+import '../../../../core/utils/cache_helper.dart';
+import '../../../../core/utils/helper.dart';
+import '../../../../features/chat/presentation/views/chats_view.dart';
+import '../../../../features/feeds/presentation/views/feeds_view.dart';
+import '../../../../features/profile/presentation/views/me_view.dart';
+import '../../../../features/users/presentation/views/users_view.dart';
+import '../../../domain/app_repo.dart';
+import 'app_states.dart';
 
-class SocialAppCubit extends Cubit<SocialAppStates> {
-  SocialAppCubit() : super(SocialAppInitialState());
+class AppCubit extends Cubit<AppStates> {
+  AppCubit(this.appRepo) : super(AppInitialState());
 
-  static SocialAppCubit getObject(context) => BlocProvider.of(context);
+  static AppCubit getObject(context) => BlocProvider.of(context);
 
-  //============ Current Index Of Bottom Nav Bar Item ============
+  AppRepo appRepo;
+
   int currentIndex = 0;
 
   //============ Bottom Nav Bar Screens ============
@@ -55,7 +56,6 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     ),
   ];
 
-  //============ For Moving Between Bottom Nav Bar Screens ============
   void changeBottomNavIndex(int index) {
     if (index == 1 || index == 2) getAllUsers();
     currentIndex = index;
@@ -63,19 +63,32 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     emit(ChangeBottomNavState());
   }
 
-  UserModel? model;
+  // =============== Users Logic ===============
+  List<UserModel> users = [];
 
-  //============ Getting The Current User Data ============
+  void getAllUsers() {
+    if (users.isEmpty) {
+      appRepo.getAllUsers().then((value) {
+        for (var element in value.docs) {
+          if (element.data()['uId'] != Helper.model!.uId)
+            users.add(UserModel.fromJson(element.data()));
+        }
+        emit(GetAllUserSuccessState());
+      }).catchError((error) {
+        print(error.toString());
+        emit(GetAllUserErrorState(error.toString()));
+      });
+    }
+  }
+
   void getUserData(String? uId) {
     emit(GetUserLoadingState());
 
     // Storing The Current User Id
-    uId = CacheHelper.getStringData(key: 'uId');
+    Helper.uId = CacheHelper.getStringData(key: 'uId');
 
-    // Getting Stored Data From Firebase
-    FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
-      // Assign The Data
-      model = UserModel.fromJson(value.data()!);
+    appRepo.getUserData(uId).then((value) {
+      Helper.model = UserModel.fromJson(value.data()!);
       emit(GetUserSuccessState());
     }).catchError((error) {
       print(error.toString());
@@ -83,22 +96,47 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
+  void updateUser({
+    required String name,
+    required String phone,
+    required String bio,
+    String? cover,
+    String? image,
+  }) {
+    UserModel userModel = UserModel(
+      name: name,
+      phone: phone,
+      bio: bio,
+      image: image ?? Helper.model!.image,
+      cover: cover ?? Helper.model!.cover,
+      email: Helper.model!.email,
+      uId: Helper.model!.uId,
+      isEmailVerified: false,
+    );
+
+    appRepo.updateUser(userModel: userModel).then((value) {
+      getUserData(Helper.uId);
+    }).catchError((error) {
+      emit(UserUpdateErrorState());
+    });
+  }
+
+  // =============== ProfileImage Logic ===============
   File? profileImage;
   ImagePicker picker = ImagePicker();
 
-  //============ Getting The User's Profile Image ============
   Future<void> getProfileImage({required ImageSource source}) async {
-    final XFile? pickedImage = await picker.pickImage(source: source);
-    if (pickedImage != null) {
-      profileImage = File(pickedImage.path);
-      emit(ProfileImagePickedSuccessState());
-    } else {
-      print("No image has been selected");
-      emit(ProfileImagePickedErrorState());
-    }
+    await appRepo.getProfileImage(source: source).then((value) {
+      if (value != null) {
+        profileImage = File(value.path);
+        emit(ProfileImagePickedSuccessState());
+      } else {
+        print("No image selected");
+        emit(ProfileImagePickedErrorState());
+      }
+    });
   }
 
-  //============ Uploading The User's Profile Image To Firebase Storage ============
   void uploadProfileImage({
     required String name,
     required String phone,
@@ -106,11 +144,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     required BuildContext context,
   }) {
     emit(UploadingProfileImageLoadingState());
-    firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child('users/${Uri.file(profileImage!.path).pathSegments.last}')
-        .putFile(profileImage!)
-        .then((value) {
+    appRepo.uploadProfileImage(profileImage: profileImage).then((value) {
       value.ref.getDownloadURL().then((value) {
         emit(UploadProfileImageSuccessState());
         updateUser(
@@ -132,21 +166,21 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
+  // =============== CoverImage Logic ===============
   File? coverImage;
 
-  //============ Getting The User's Cover Image ============
   Future<void> getCoverImage({required ImageSource source}) async {
-    final XFile? pickedImage = await picker.pickImage(source: source);
-    if (pickedImage != null) {
-      coverImage = File(pickedImage.path);
-      emit(CoverImagePickedSuccessState());
-    } else {
-      print("No image has been selected");
-      emit(CoverImagePickedErrorState());
-    }
+    await appRepo.getCoverImage(source: source).then((value) {
+      if (value != null) {
+        coverImage = File(value.path);
+        emit(CoverImagePickedSuccessState());
+      } else {
+        print("No image selected");
+        emit(CoverImagePickedErrorState());
+      }
+    });
   }
 
-  //============ Uploading The User's Cover Image To Firebase Storage ============
   void uploadCoverImage({
     required String name,
     required String phone,
@@ -154,11 +188,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     required BuildContext context,
   }) {
     emit(UploadingCoverImageLoadingState());
-    firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child('users/${Uri.file(coverImage!.path).pathSegments.last}')
-        .putFile(coverImage!)
-        .then((value) {
+    appRepo.uploadCoverImage(coverImage: coverImage).then((value) {
       value.ref.getDownloadURL().then((value) {
         updateUser(
           name: name,
@@ -180,37 +210,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  //============ Update The Current User's Data ============
-  void updateUser({
-    required String name,
-    required String phone,
-    required String bio,
-    String? cover,
-    String? image,
-  }) {
-    UserModel userModel = UserModel(
-      name: name,
-      phone: phone,
-      bio: bio,
-      image: image ?? model!.image,
-      cover: cover ?? model!.cover,
-      email: model!.email,
-      uId: model!.uId,
-      isEmailVerified: false,
-    );
-    // Update The Data Stored in Firebase
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(userModel.uId)
-        .update(userModel.toJson())
-        .then((value) {
-      getUserData(Helper.uId);
-    }).catchError((error) {
-      emit(UserUpdateErrorState());
-    });
-  }
-
-  //============ Creating A New Post ============
+  // =============== Posts Logic ===============
   void createPost({
     required String date,
     required String time,
@@ -220,9 +220,9 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     emit(CreatePostLoadingState());
 
     PostModel postModel = PostModel(
-      name: model!.name,
-      image: model!.image,
-      uId: model!.uId,
+      name: Helper.model!.name,
+      image: Helper.model!.image,
+      uId: Helper.model!.uId,
       date: date,
       time: time,
       text: text,
@@ -233,10 +233,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     );
 
     // Storing The Post Info In Firebase
-    FirebaseFirestore.instance
-        .collection('posts')
-        .add(postModel.toJson())
-        .then((value) {
+    appRepo.createPost(postModel: postModel).then((value) {
       emit(CreatePostSuccessState());
       text = '';
       postImage = null;
@@ -246,7 +243,6 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  //============ Deleting A Post ============
   void deletePost({
     required String postId,
     required BuildContext context,
@@ -254,11 +250,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     emit(DeletePostLoadingState());
 
     // Delet The Post Info From Firebase
-    FirebaseFirestore.instance
-        .collection('posts')
-        .doc(postId)
-        .delete()
-        .then((value) {
+    appRepo.deletePost(postId: postId).then((value) {
       emit(DeletePostSuccessState());
       Helper.buildSnackBar(
         message: "Post Deleted Successfully",
@@ -273,30 +265,25 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   File? postImage;
 
-  //============ Getting The Post Image ============
   Future<void> getPostImage({required ImageSource source}) async {
-    final XFile? pickedImage = await picker.pickImage(source: source);
-    if (pickedImage != null) {
-      postImage = File(pickedImage.path);
-      emit(PostImagePickedSuccessState());
-    } else {
-      print("No image has been selected");
-      emit(PostImagePickedErrorState());
-    }
+    await appRepo.getPostImage(source: source).then((value) {
+      if (value != null) {
+        postImage = File(value.path);
+        emit(PostImagePickedSuccessState());
+      } else {
+        print("No image has been selected");
+        emit(PostImagePickedErrorState());
+      }
+    });
   }
 
-  //============ Uploading The Post Image To Firebase Storage ============
   void uploadPostImage({
     required String date,
     required String time,
     required String text,
   }) {
     emit(CreatePostLoadingState());
-    firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child('posts/${Uri.file(postImage!.path).pathSegments.last}')
-        .putFile(postImage!)
-        .then((value) {
+    appRepo.uploadPostImage().then((value) {
       value.ref.getDownloadURL().then((value) {
         createPost(
           date: date,
@@ -317,24 +304,15 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  //============ Removing Post Image While Creating A New Post ============
   void removePostImage() {
-    postImage = null;
+    appRepo.removePostImage(postImage: postImage);
     emit(PostImageRemovedState());
   }
 
   List<PostModel> posts = [];
 
-  //============ Getting All Posts ============
   void getPosts() {
-    FirebaseFirestore.instance
-        .collection('posts')
-        .orderBy(
-          'dateTime',
-          descending: true,
-        )
-        .snapshots()
-        .listen((event) async {
+    appRepo.getPosts().listen((event) async {
       posts = [];
       for (var element in event.docs) {
         posts.add(PostModel.fromJson(element.data()));
@@ -353,20 +331,18 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  //============ Liking A Post ============
   void likePost({required String postId}) {
     LikesModel likesModel = LikesModel(
-      uId: model!.uId,
-      name: model!.name,
+      uId: Helper.model!.uId,
+      name: Helper.model!.name,
       dateTime: DateTime.now().toString(),
     );
 
-    FirebaseFirestore.instance
-        .collection('posts')
-        .doc(postId)
-        .collection('likes')
-        .doc(model!.uId)
-        .set(likesModel.toJson())
+    appRepo
+        .likePost(
+      likesModel: likesModel,
+      postId: postId,
+    )
         .then((value) {
       getPosts();
       emit(LikePostSuccessState());
@@ -375,19 +351,12 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  //============ Check if The Post Is Liked By The Current User ============
-  Future<bool> likedByMe({
-    required String postId,
-  }) async {
+  Future<bool> likedByMe({required String postId}) async {
     bool isLikedByMe = false;
-    FirebaseFirestore.instance
-        .collection('posts')
-        .doc(postId)
-        .get()
-        .then((post) async {
+    appRepo.likeByMe(postId: postId).then((post) async {
       var likes = await post.reference.collection('likes').get();
       for (var element in likes.docs) {
-        if (element.id == model!.uId) {
+        if (element.id == Helper.model!.uId) {
           isLikedByMe = true;
         }
       }
@@ -400,9 +369,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     return isLikedByMe;
   }
 
-  List<CommentModel> comments = [];
-
-  //============ Creating A New Comment ============
+  // =============== Comments Logic ===============
   void typeNewComment({
     String? commentText,
     required String postId,
@@ -413,9 +380,9 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     emit(CommentCreatedLoadingState());
 
     CommentModel commentModel = CommentModel(
-      name: model!.name,
-      image: model!.image,
-      uId: model!.uId,
+      name: Helper.model!.name,
+      image: Helper.model!.image,
+      uId: Helper.model!.uId,
       commentImage: commentImage ?? {},
       commentText: commentText ?? '',
       time: time,
@@ -423,11 +390,11 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
       dateTime: Timestamp.now(),
     );
 
-    FirebaseFirestore.instance
-        .collection('posts')
-        .doc(postId)
-        .collection('comments')
-        .add(commentModel.toJson())
+    appRepo
+        .typeNewComment(
+      commentModel: commentModel,
+      postId: postId,
+    )
         .then((value) {
       getPosts();
       emit(CommentCreatedSuccessState());
@@ -439,19 +406,18 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   File? commentImage;
 
-  //============ Getting The Comment Image ============
   Future<void> getCommentImage({required ImageSource source}) async {
-    final XFile? pickedImage = await picker.pickImage(source: source);
-    if (pickedImage != null) {
-      commentImage = File(pickedImage.path);
-      emit(CommentImagePickedSuccessState());
-    } else {
-      print("No image selected");
-      emit(CommentImagePickedErrorState());
-    }
+    await appRepo.getCommentImage(source: source).then((value) {
+      if (value != null) {
+        commentImage = File(value.path);
+        emit(CommentImagePickedSuccessState());
+      } else {
+        print("No image selected");
+        emit(CommentImagePickedErrorState());
+      }
+    });
   }
 
-  //============ Uploading The Comment Image To Firebase ============
   void uploadCommentImage({
     String? commentText,
     required String postId,
@@ -459,11 +425,8 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     required String date,
   }) {
     emit(UploadCommentImageLoadingState());
-    firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child('comments/${Uri.file(commentImage!.path).pathSegments.last}')
-        .putFile(commentImage!)
-        .then((value) {
+
+    appRepo.uploadCommentImage(commentImage: commentImage).then((value) {
       value.ref.getDownloadURL().then((value) {
         typeNewComment(
           commentImage: {'image': value, 'height': 150},
@@ -481,24 +444,15 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  //============ Removing The Comment Image While Creating A Comment ============
   void removeCommentImage() {
-    commentImage = null;
+    appRepo.removeCommentImage(commentImage: commentImage);
     emit(CommentImageRemovedSuccessState());
   }
 
-  //============ Getting All Comments ============
+  List<CommentModel> comments = [];
+
   void getComments({required String postId}) {
-    FirebaseFirestore.instance
-        .collection('posts')
-        .doc(postId)
-        .collection('comments')
-        .orderBy(
-          'dateTime',
-          descending: false,
-        )
-        .snapshots()
-        .listen((event) {
+    appRepo.getComments(postId: postId).listen((event) {
       comments.clear();
       for (var element in event.docs) {
         comments.add(CommentModel.fromJson(element.data()));
@@ -507,30 +461,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  //============ When The Search Field Text Changes ============
-  void onChangeText(value, text) {
-    text = value;
-    emit(OnChangeTextSuccessState());
-  }
-
-  List<UserModel> users = [];
-
-  //============ Getting All Users ============
-  void getAllUsers() {
-    if (users.isEmpty)
-      FirebaseFirestore.instance.collection('users').get().then((value) {
-        for (var element in value.docs) {
-          if (element.data()['uId'] != model!.uId)
-            users.add(UserModel.fromJson(element.data()));
-        }
-        emit(GetAllUserSuccessState());
-      }).catchError((error) {
-        print(error.toString());
-        emit(GetAllUserErrorState(error.toString()));
-      });
-  }
-
-  //============ Sending A New Message ============
+  // =============== Chat & Messages Logic ===============
   void sendMessage({
     required String receiverId,
     required String receiverName,
@@ -540,8 +471,8 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     Map<String, dynamic>? messageImage,
   }) {
     MessageModel messageModel = MessageModel(
-      senderId: model!.uId,
-      senderName: model!.name,
+      senderId: Helper.model!.uId,
+      senderName: Helper.model!.name,
       receiverId: receiverId,
       receiverName: receiverName,
       time: time,
@@ -552,13 +483,11 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     );
 
     // Setting up sender Chats
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(model!.uId)
-        .collection('chats')
-        .doc(receiverId)
-        .collection('messages')
-        .add(messageModel.toJson())
+    appRepo
+        .settingUpSenderChat(
+      receiverId: receiverId,
+      messageModel: messageModel,
+    )
         .then((value) {
       emit(SendMessageSuccessState());
     }).catchError((error) {
@@ -566,13 +495,11 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
 
     // Setting up receiver Chats
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(receiverId)
-        .collection('chats')
-        .doc(model!.uId)
-        .collection('messages')
-        .add(messageModel.toJson())
+    appRepo
+        .settingUpReceiverChat(
+      receiverId: receiverId,
+      messageModel: messageModel,
+    )
         .then((value) {
       emit(SendMessageSuccessState());
     }).catchError((error) {
@@ -582,19 +509,18 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
 
   File? messageImage;
 
-  //============ Getting A Message Image ============
   Future<void> getMessageImage({required ImageSource source}) async {
-    final XFile? pickedImage = await picker.pickImage(source: source);
-    if (pickedImage != null) {
-      messageImage = File(pickedImage.path);
-      emit(MessageImagePickedSuccessState());
-    } else {
-      print("No image selected");
-      emit(MessageImagePickedErrorState());
-    }
+    await appRepo.getMessageImage(source: source).then((value) {
+      if (value != null) {
+        messageImage = File(value.path);
+        emit(MessageImagePickedSuccessState());
+      } else {
+        print("No image selected");
+        emit(MessageImagePickedErrorState());
+      }
+    });
   }
 
-  //============ Uploading A Message Image To Firebase ============
   void uploadMessageImage({
     String? text,
     required String receiverId,
@@ -603,11 +529,7 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     required String time,
   }) {
     emit(UploadMessageImageLoadingState());
-    firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child('messages/${Uri.file(messageImage!.path).pathSegments.last}')
-        .putFile(messageImage!)
-        .then((value) {
+    appRepo.uploadMessageImage(messageImage: messageImage).then((value) {
       value.ref.getDownloadURL().then((value) {
         sendMessage(
           receiverId: receiverId,
@@ -629,34 +551,26 @@ class SocialAppCubit extends Cubit<SocialAppStates> {
     });
   }
 
-  //============ Removing A Message Image While Sending A Message ============
   void removeMessageImage() {
-    messageImage = null;
+    appRepo.removeMessageImage(messageImage: messageImage);
     emit(RemovedMessageImageSuccessState());
   }
 
   List<MessageModel> messages = [];
 
-  //============ Getting All Messages ============
   void getMessages({required String receiverId}) {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(model!.uId)
-        .collection('chats')
-        .doc(receiverId)
-        .collection('messages')
-        .orderBy(
-          'dateTime',
-          descending: true,
-        )
-        .snapshots()
-        .listen((event) {
+    appRepo.getMessages(receiverId: receiverId).listen((event) {
       messages = [];
       for (var element in event.docs) {
         messages.add(MessageModel.fromJson(element.data()));
       }
       emit(GetMessagesSuccessState());
     });
+  }
+
+  void onChangeText(value, text) {
+    text = value;
+    emit(OnChangeTextSuccessState());
   }
 
   List<UserModel> searchList = [];

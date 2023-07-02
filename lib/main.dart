@@ -8,9 +8,8 @@ import 'package:social_app/core/global/app_theme.dart';
 import 'package:social_app/core/services/theme_service.dart';
 import 'package:social_app/core/utils/service_locator.dart';
 import 'package:social_app/features/auth/presentation/view/auth_view.dart';
+import 'package:social_app/layout/domain/app_repo.dart';
 import 'package:social_app/layout/presenetation/view/layout_view.dart';
-
-import '/layout/cubit/cubit.dart';
 
 import 'core/utils/bloc_observer.dart';
 
@@ -18,6 +17,7 @@ import 'core/utils/helper.dart';
 import 'core/utils/size_config.dart';
 import 'core/utils/firebase_options.dart';
 import 'core/utils/cache_helper.dart';
+import 'layout/presenetation/view/manager/app_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +72,7 @@ class SocialApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SocialAppCubit()
+          create: (context) => AppCubit(serviceLocator.get<AppRepo>())
             ..getUserData(uId)
             ..getPosts(),
         ),

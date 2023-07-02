@@ -6,6 +6,7 @@ import 'package:social_app/core/global/app_navigator.dart';
 import 'package:social_app/core/global/app_styles.dart';
 
 import '../global/app_colors.dart';
+import '../models/user_model.dart';
 import '../widgets/custom_bottom_sheet.dart';
 
 enum SnackBarStates { success, error, warning }
@@ -19,6 +20,8 @@ class Helper {
       statusBarBrightness: Get.isDarkMode ? Brightness.light : Brightness.dark,
     );
   }
+
+  static UserModel? model;
 
 // The User's Id
   static String? uId;

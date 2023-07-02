@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class CommenterTextField extends StatelessWidget {
   const CommenterTextField({
@@ -17,7 +17,7 @@ class CommenterTextField extends StatelessWidget {
   });
 
   final TextEditingController commentController;
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
   final String commentText;
   final File? commentImage;
 

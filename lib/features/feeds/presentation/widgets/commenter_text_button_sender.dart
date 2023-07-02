@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/utils/helper.dart';
-import '../../../../layout/cubit/cubit.dart';
+import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class CommenterTextButtonSender extends StatelessWidget {
   const CommenterTextButtonSender({
@@ -19,7 +19,7 @@ class CommenterTextButtonSender extends StatelessWidget {
 
   final String commentText;
   final TextEditingController commentController;
-  final SocialAppCubit cubit;
+  final AppCubit cubit;
   final String postId;
   final File? commentImage;
 
