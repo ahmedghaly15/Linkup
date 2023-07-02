@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/models/user_model.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/widgets/user_data.dart';
+import '/core/models/user_model.dart';
 
 class UserProfileViewBody extends StatelessWidget {
   const UserProfileViewBody({Key? key, required this.userModel})

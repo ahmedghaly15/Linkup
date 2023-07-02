@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/global/app_colors.dart';
-import 'package:social_app/core/utils/helper.dart';
-import 'package:social_app/layout/presenetation/widgets/custom_search_field.dart';
-import 'package:social_app/layout/presenetation/widgets/layout_view_body.dart';
 
 import '../../../core/services/theme_service.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 import '../widgets/new_post_floating_button.dart';
+import '/core/global/app_colors.dart';
+import '/core/utils/helper.dart';
+import '/layout/presenetation/widgets/custom_search_field.dart';
+import '/layout/presenetation/widgets/layout_view_body.dart';
 import 'manager/app_cubit.dart';
 import 'manager/app_states.dart';
 

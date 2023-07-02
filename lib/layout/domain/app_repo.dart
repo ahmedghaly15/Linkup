@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/core/models/comment_model.dart';
-import 'package:social_app/core/models/like_model.dart';
 
 import '../../core/models/message_model.dart';
 import '../../core/models/post_model.dart';
 import '../../core/models/user_model.dart';
+import '/core/models/comment_model.dart';
+import '/core/models/like_model.dart';
 
 abstract class AppRepo {
   // =============== Users Logic ===============

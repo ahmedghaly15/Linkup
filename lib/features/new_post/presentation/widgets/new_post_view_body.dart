@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/global/app_colors.dart';
-import 'package:social_app/core/models/user_model.dart';
 
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '/core/global/app_colors.dart';
+import '/core/models/user_model.dart';
 import 'add_photos_and_tags_buttons.dart';
 import 'new_post_text_field.dart';
 import 'post_image.dart';

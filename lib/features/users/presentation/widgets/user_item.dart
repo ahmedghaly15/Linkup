@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/global/app_colors.dart';
-import 'package:social_app/core/global/app_navigator.dart';
-import 'package:social_app/core/global/app_styles.dart';
-import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/features/users/presentation/views/user_profile_view.dart';
+
+import '/core/global/app_colors.dart';
+import '/core/global/app_navigator.dart';
+import '/core/global/app_styles.dart';
+import '/core/models/user_model.dart';
+import '/features/users/presentation/views/user_profile_view.dart';
 
 class UserItem extends StatelessWidget {
   const UserItem({Key? key, required this.userModel}) : super(key: key);

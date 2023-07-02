@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/global/app_styles.dart';
-import 'package:social_app/features/feeds/presentation/widgets/comments_view_body.dart';
 
 import '../../../../core/models/comment_model.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '/core/global/app_styles.dart';
+import '/features/feeds/presentation/widgets/comments_view_body.dart';
 
 class CommentsView extends StatelessWidget {
   CommentsView({Key? key, this.postId, this.postUid}) : super(key: key);

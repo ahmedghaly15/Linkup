@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/global/app_colors.dart';
+
+import '/core/global/app_colors.dart';
 
 class AppStyles {
   static const TextStyle headingLarge = TextStyle(

@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_app/features/feeds/presentation/widgets/comment_item.dart';
-import 'package:social_app/features/feeds/presentation/widgets/commenter_field.dart';
 
 import '../../../../core/models/comment_model.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '/features/feeds/presentation/widgets/comment_item.dart';
+import '/features/feeds/presentation/widgets/commenter_field.dart';
 
 class CommentsViewBody extends StatelessWidget {
   const CommentsViewBody({

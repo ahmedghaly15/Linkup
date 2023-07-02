@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/core/global/app_colors.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '/core/global/app_colors.dart';
 
 class CustomMassengerField extends StatelessWidget {
   const CustomMassengerField({

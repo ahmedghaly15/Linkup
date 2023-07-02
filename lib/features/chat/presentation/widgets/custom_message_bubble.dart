@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/models/message_model.dart';
 
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
+import '/core/models/message_model.dart';
 
 class CustomMessageBubble extends StatelessWidget {
   const CustomMessageBubble({

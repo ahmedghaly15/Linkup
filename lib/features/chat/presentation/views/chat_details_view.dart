@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/global/app_navigator.dart';
-import 'package:social_app/core/utils/helper.dart';
-import 'package:social_app/features/chat/presentation/widgets/chat_details_view_body.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '/core/global/app_navigator.dart';
+import '/core/utils/helper.dart';
+import '/features/chat/presentation/widgets/chat_details_view_body.dart';
 
 class ChatDetailsView extends StatelessWidget {
   ChatDetailsView({Key? key, required this.userModel}) : super(key: key);

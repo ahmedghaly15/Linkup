@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/global/app_colors.dart';
-import 'package:social_app/core/global/app_navigator.dart';
+
+import '/core/global/app_colors.dart';
+import '/core/global/app_navigator.dart';
 
 class CustomBottomSheet extends StatelessWidget {
   const CustomBottomSheet({

@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:social_app/core/global/app_texts.dart';
-import 'package:social_app/core/global/app_theme.dart';
-import 'package:social_app/core/services/theme_service.dart';
-import 'package:social_app/core/utils/service_locator.dart';
-import 'package:social_app/features/auth/presentation/view/auth_view.dart';
-import 'package:social_app/layout/domain/app_repo.dart';
-import 'package:social_app/layout/presenetation/view/layout_view.dart';
 
+import '/core/global/app_texts.dart';
+import '/core/global/app_theme.dart';
+import '/core/services/theme_service.dart';
+import '/core/utils/service_locator.dart';
+import '/features/auth/presentation/view/auth_view.dart';
+import '/layout/domain/app_repo.dart';
+import '/layout/presenetation/view/layout_view.dart';
 import 'core/utils/bloc_observer.dart';
-
+import 'core/utils/cache_helper.dart';
+import 'core/utils/firebase_options.dart';
 import 'core/utils/helper.dart';
 import 'core/utils/size_config.dart';
-import 'core/utils/firebase_options.dart';
-import 'core/utils/cache_helper.dart';
 import 'layout/presenetation/view/manager/app_cubit.dart';
 
 Future<void> main() async {

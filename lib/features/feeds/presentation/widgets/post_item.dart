@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/global/app_colors.dart';
-import 'package:social_app/core/models/post_model.dart';
-import 'package:social_app/features/feeds/presentation/widgets/post_item_content.dart';
+
+import '/core/global/app_colors.dart';
+import '/core/models/post_model.dart';
+import '/features/feeds/presentation/widgets/post_item_content.dart';
 
 class PostItem extends StatelessWidget {
   const PostItem({

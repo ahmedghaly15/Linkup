@@ -1,12 +1,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/widgets/custom_button.dart';
 
 import '../../../../core/global/app_colors.dart';
-
 import '../view/manager/auth_view_cubit.dart';
 import '../view/manager/auth_view_states.dart';
+import '/core/widgets/custom_button.dart';
 
 class AuthButton extends StatelessWidget {
   const AuthButton({

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/global/app_navigator.dart';
-import 'package:social_app/features/feeds/presentation/views/comments_view.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/post_model.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '/core/global/app_navigator.dart';
+import '/features/feeds/presentation/views/comments_view.dart';
 
 class LikesAndComments extends StatelessWidget {
   const LikesAndComments({

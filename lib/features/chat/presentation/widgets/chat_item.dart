@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/global/app_colors.dart';
-import 'package:social_app/core/global/app_navigator.dart';
-import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/features/chat/presentation/views/chat_details_view.dart';
 
 import '../../../../core/global/app_styles.dart';
+import '/core/global/app_colors.dart';
+import '/core/global/app_navigator.dart';
+import '/core/models/user_model.dart';
+import '/features/chat/presentation/views/chat_details_view.dart';
 
 class ChatItem extends StatelessWidget {
   const ChatItem({Key? key, required this.model}) : super(key: key);

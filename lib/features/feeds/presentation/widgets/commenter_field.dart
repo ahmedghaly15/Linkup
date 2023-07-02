@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/core/global/app_colors.dart';
-import 'package:social_app/features/feeds/presentation/widgets/commenter_text_button_sender.dart';
-import 'package:social_app/features/feeds/presentation/widgets/get_comment_image_icon_button.dart';
 
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '/core/global/app_colors.dart';
+import '/features/feeds/presentation/widgets/commenter_text_button_sender.dart';
+import '/features/feeds/presentation/widgets/get_comment_image_icon_button.dart';
 import 'commenter_text_field.dart';
 
 class CommenterField extends StatelessWidget {

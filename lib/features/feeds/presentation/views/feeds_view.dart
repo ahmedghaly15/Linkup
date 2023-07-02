@@ -1,11 +1,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/features/feeds/presentation/widgets/post_item.dart';
 
 import '../../../../core/utils/helper.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '/features/feeds/presentation/widgets/post_item.dart';
 
 class FeedsView extends StatelessWidget {
   const FeedsView({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/models/post_model.dart';
 
 import '../../../../core/global/app_styles.dart';
+import '/core/models/post_model.dart';
 
 class PostTextAndImage extends StatelessWidget {
   const PostTextAndImage({Key? key, required this.model}) : super(key: key);

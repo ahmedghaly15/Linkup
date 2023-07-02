@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/utils/helper.dart';
-import 'package:social_app/core/utils/service_locator.dart';
 
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/services/theme_service.dart';
 import '../../domain/auth_repo.dart';
 import '../widgets/auth_view_body.dart';
+import '/core/utils/helper.dart';
+import '/core/utils/service_locator.dart';
 import 'manager/auth_view_cubit.dart';
 
 class AuthView extends StatefulWidget {

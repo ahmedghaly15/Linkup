@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/global/app_texts.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/utils/size_config.dart';
 import '../view/manager/auth_view_cubit.dart';
+import '/core/global/app_texts.dart';
 import 'auth_form.dart';
 
 class AuthViewBody extends StatelessWidget {

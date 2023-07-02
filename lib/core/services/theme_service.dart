@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/core/utils/cache_helper.dart';
+
+import '/core/utils/cache_helper.dart';
 
 class ThemeService extends Cubit<bool> {
   ThemeService() : super(false) {

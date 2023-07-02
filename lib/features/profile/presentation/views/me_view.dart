@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/core/global/app_navigator.dart';
-import 'package:social_app/core/global/app_styles.dart';
-import 'package:social_app/core/widgets/custom_button.dart';
-import 'package:social_app/features/profile/presentation/views/edit_profile_view.dart';
-import 'package:social_app/core/widgets/user_data.dart';
 
 import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/helper.dart';
@@ -12,6 +7,11 @@ import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
 import '../widgets/me_profile_and_cover_images.dart';
 import '../widgets/sign_out_floating_button.dart';
+import '/core/global/app_navigator.dart';
+import '/core/global/app_styles.dart';
+import '/core/widgets/custom_button.dart';
+import '/core/widgets/user_data.dart';
+import '/features/profile/presentation/views/edit_profile_view.dart';
 
 class MeView extends StatelessWidget {
   const MeView({Key? key}) : super(key: key);

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:social_app/core/global/app_colors.dart';
+
+import '/core/global/app_colors.dart';
 
 class AppTheme {
   static ThemeData lightTheme() => ThemeData.light().copyWith(

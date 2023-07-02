@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/global/app_navigator.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/utils/cache_helper.dart';
 import '../../../auth/presentation/view/auth_view.dart';
+import '/core/global/app_navigator.dart';
 
 class SignOutFloatingButton extends StatelessWidget {
   const SignOutFloatingButton({

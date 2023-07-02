@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/features/chat/presentation/widgets/custom_massenger_field.dart';
-import 'package:social_app/features/chat/presentation/widgets/custom_message_bubble.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '/core/models/user_model.dart';
+import '/features/chat/presentation/widgets/custom_massenger_field.dart';
+import '/features/chat/presentation/widgets/custom_message_bubble.dart';
 
 class ChatDetailsViewBody extends StatelessWidget {
   const ChatDetailsViewBody({

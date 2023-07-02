@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:social_app/core/global/app_navigator.dart';
-import 'package:social_app/core/global/app_styles.dart';
 
 import '../global/app_colors.dart';
 import '../models/user_model.dart';
 import '../widgets/custom_bottom_sheet.dart';
+import '/core/global/app_navigator.dart';
+import '/core/global/app_styles.dart';
 
 enum SnackBarStates { success, error, warning }
 

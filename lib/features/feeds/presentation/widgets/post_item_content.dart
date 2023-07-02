@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/models/post_model.dart';
-import 'package:social_app/features/feeds/presentation/widgets/post_text_and_image.dart';
 
+import '/core/models/post_model.dart';
+import '/features/feeds/presentation/widgets/post_text_and_image.dart';
 import 'custom_divider.dart';
 import 'likes_and_comments.dart';
 import 'top_post_item_section.dart';
