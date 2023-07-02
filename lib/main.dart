@@ -24,15 +24,12 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  //===================== Initializing GetStorage =====================
   await GetStorage.init();
 
   ServiceLocator().setupServiceLocators();
 
-  //===================== Observing My Bloc =====================
   Bloc.observer = MyBlocObserver();
 
-  //===================== Initializing SharedPref =====================
   await CacheHelper.initSharedPref();
 
   Helper.uId = CacheHelper.getStringData(key: 'uId');

@@ -1,4 +1,4 @@
-# Social-App
+# LinkUp-App
 
 This is a new Flutter project. This app is designed to help users connect and interact with friends, family, and other people in a social environment. With its intuitive user interface, users can easily engage with others. The app also features a variety of social interacting tools including create profiles, share photos, and engage in real-time conversations with others.
 
@@ -23,49 +23,25 @@ https://github.com/ahmedghaly15/Social-App/assets/108659381/b86b8823-8572-4452-a
 ```
 
 lib
-├── layout
-│   ├── cubit
-│   └── layout_screen.dart
+├── core
+│   ├── global
+│   ├── models
+│   ├── services
+│   ├── utils
+│   └── widgets
 │
-├── models
-│
-├── modules
+├── features
 │   ├── auth
-│   │   ├── cubit
-│   │   └── auth_screen.dart
-│   │
+│   ├── chat
 │   ├── feeds
-│   │
-│   ├── comments
-│   │
 │   ├── new_post
-│   │
-│   ├── chats
-│   │   ├── chats_screen.dart
-│   │   └── chat_details_screen.dart
-│   │
-│   ├── users
-│   │   ├── users_screen.dart
-│   │   └── user_profile_screen.dart
-│   │
 │   ├── profile
-│   │
-│   └── edit_profile
+│   └── users
 │
-├── network
-│   ├── local
-│   └──── cache_helper.dart
-│
-├── shared
-│   ├── components
-│   ├── bloc_observer.dart
-│   └── constants.dart
-│
-├── styles
-│   ├── themes
-│   └── theme_services
-│
-├── firebase_options.dart
+├── layout
+│   ├── data
+│   ├── domain
+│   └── presentation
 │
 └── main.dart
 
@@ -90,37 +66,37 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  //===================== Initializing GetStorage =====================
   await GetStorage.init();
 
-  //===================== Observing My Bloc =====================
+  ServiceLocator().setupServiceLocators();
+
   Bloc.observer = MyBlocObserver();
 
-  //===================== Initializing SharedPref =====================
   await CacheHelper.initSharedPref();
 
-  uId = CacheHelper.getStringData(key: 'uId');
+  Helper.uId = CacheHelper.getStringData(key: 'uId');
 
   Widget startingScreen;
 
-  if (uId != null) {
-    startingScreen = const SocialAppLayout();
+  if (Helper.uId != null) {
+    startingScreen = const LayoutView();
   } else {
-    startingScreen = const AuthScreen();
+    startingScreen = const AuthView();
   }
 
   runApp(
-    SocialApp(
+    LinkUpApp(
       startingScreen,
-      uId,
+      Helper.uId,
     ),
   );
 }
 
-class SocialApp extends StatelessWidget {
+
+class LinkUpApp extends StatelessWidget {
   final Widget? startingScreen;
   final String? uId;
-  const SocialApp(
+  const LinkUpApp(
     this.startingScreen,
     this.uId, {
     Key? key,
@@ -128,16 +104,27 @@ class SocialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit()
-        ..getUserData(uId)
-        ..getPosts(),
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: Themes.lightTheme,
-        darkTheme: Themes.darkTheme,
-        themeMode: ThemeServices().theme,
-        home: startingScreen,
+    SizeConfig().init(context);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AppCubit(serviceLocator.get<AppRepo>())
+            ..getUserData(uId)
+            ..getPosts(),
+        ),
+        BlocProvider(create: (context) => ThemeService()),
+      ],
+      child: BlocBuilder<ThemeService, bool>(
+        buildWhen: (previousState, currentState) =>
+            previousState != currentState,
+        builder: (context, isDark) {
+          return GetMaterialApp(
+            title: AppTexts.appTitle,
+            debugShowCheckedModeBanner: false,
+            theme: isDark ? AppTheme.darkTheme() : AppTheme.lightTheme(),
+            home: startingScreen,
+          );
+        },
       ),
     );
   }
