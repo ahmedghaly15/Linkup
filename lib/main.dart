@@ -46,7 +46,7 @@ Future<void> main() async {
   }
 
   runApp(
-    SocialApp(
+    LinkUpApp(
       startingScreen,
       Helper.uId,
     ),
@@ -56,10 +56,10 @@ Future<void> main() async {
 // TODO: look at all SizedBox and use SizeConfig if it's not used
 // TODO: Add functionality to tags TextButton in NewPostView
 
-class SocialApp extends StatelessWidget {
+class LinkUpApp extends StatelessWidget {
   final Widget? startingScreen;
   final String? uId;
-  const SocialApp(
+  const LinkUpApp(
     this.startingScreen,
     this.uId, {
     Key? key,
