@@ -6,6 +6,7 @@ import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '../../../users/presentation/views/user_profile_view.dart';
 import '/core/global/app_navigator.dart';
 import '/core/utils/helper.dart';
 import '/features/chat/presentation/widgets/chat_details_view_body.dart';
@@ -49,24 +50,29 @@ class ChatDetailsView extends StatelessWidget {
       backgroundColor: context.theme.colorScheme.background,
       titleSpacing: 0.0,
       elevation: 1,
-      title: Row(
-        children: <Widget>[
-          Hero(
-            tag: userModel.uId!,
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(userModel.image!),
-              radius: 20.0,
+      title: InkWell(
+        onTap: () => AppNavigator.navigateTo(
+          screen: UserProfileView(userModel: userModel),
+        ),
+        child: Row(
+          children: <Widget>[
+            Hero(
+              tag: userModel.uId!,
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(userModel.image!),
+                radius: 20.0,
+              ),
             ),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            userModel.name!,
-            style: AppStyles.bodyLarge.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Get.isDarkMode ? Colors.white : Colors.black,
+            const SizedBox(width: 8),
+            Text(
+              userModel.name!,
+              style: AppStyles.bodyLarge.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       leading: IconButton(
         onPressed: () => AppNavigator.getBack(),
