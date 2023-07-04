@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/helper.dart';
+import '../../../../core/utils/size_config.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
 import '/features/feeds/presentation/widgets/post_item.dart';
@@ -28,11 +29,14 @@ class FeedsView extends StatelessWidget {
                     context: context,
                     postModel: AppCubit.getObject(context).posts[index],
                   ),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 8),
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: SizeConfig.screenHeight! * 0.005,
+                  ),
                   itemCount: AppCubit.getObject(context).posts.length,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(
+                  height: SizeConfig.screenHeight! * 0.008,
+                ),
               ],
             ),
           ),

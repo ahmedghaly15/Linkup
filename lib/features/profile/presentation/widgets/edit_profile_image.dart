@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/models/user_model.dart';
-import '../../../../core/widgets/custom_bottom_sheet.dart';
+import '../../../../core/utils/helper.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class EditProfileImage extends StatelessWidget {
@@ -36,7 +36,7 @@ class EditProfileImage extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () => CustomBottomSheet(
+          onPressed: () => Helper.buildBottomSheet(
             type: "Profile",
             context: context,
             onPressedCamera: () => cubit.getProfileImage(

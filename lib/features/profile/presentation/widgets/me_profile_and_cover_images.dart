@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/models/user_model.dart';
+import '../../../../core/utils/size_config.dart';
 
 class MeProfileAndCoverImages extends StatelessWidget {
   const MeProfileAndCoverImages({
@@ -18,7 +19,7 @@ class MeProfileAndCoverImages extends StatelessWidget {
         Align(
           alignment: AlignmentDirectional.topCenter,
           child: Container(
-            height: 180,
+            height: SizeConfig.screenHeight! * 0.25,
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/size_config.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
 import '/core/global/app_colors.dart';
@@ -31,13 +32,22 @@ class NewPostViewBody extends StatelessWidget {
         children: <Widget>[
           if (state is CreatePostLoadingState)
             const LinearProgressIndicator(color: AppColors.primaryColor),
-          if (state is CreatePostLoadingState) const SizedBox(height: 10),
+          if (state is CreatePostLoadingState)
+            SizedBox(
+              height: SizeConfig.screenHeight! * 0.01,
+            ),
           UserNameAndImage(model: model),
-          const SizedBox(height: 5),
+          SizedBox(
+            height: SizeConfig.screenHeight! * 0.006,
+          ),
           NewPostTextField(textController: textController, model: model),
-          const SizedBox(height: 50),
+          SizedBox(
+            height: SizeConfig.screenHeight! * 0.01,
+          ),
           if (cubit.postImage != null) PostImage(cubit: cubit),
-          const SizedBox(height: 20),
+          SizedBox(
+            height: SizeConfig.screenHeight! * 0.008,
+          ),
           AddPhotosAndTagsButtons(cubit: cubit),
         ],
       ),

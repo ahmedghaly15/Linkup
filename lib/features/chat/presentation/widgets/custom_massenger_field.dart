@@ -9,6 +9,7 @@ import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '/core/global/app_colors.dart';
+import '/core/utils/size_config.dart';
 
 class CustomMassengerField extends StatelessWidget {
   const CustomMassengerField({
@@ -68,7 +69,7 @@ class CustomMassengerField extends StatelessWidget {
                 // ============== Type A New Message TextField ==============
                 Expanded(
                   child: SizedBox(
-                    height: 50,
+                    height: SizeConfig.screenHeight! * 0.06,
                     // width: 50,
                     child: SingleChildScrollView(
                       child: Column(
@@ -82,8 +83,7 @@ class CustomMassengerField extends StatelessWidget {
                                 Get.isDarkMode ? Colors.white60 : Colors.black,
                             keyboardType: TextInputType.multiline,
                             style: AppStyles.bodySmall.copyWith(
-                              fontSize: 15.5,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
                               height: 1.5,
                               letterSpacing: 0.8,
                             ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../../../../core/models/user_model.dart';
+import '../../../../core/utils/size_config.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
 import 'confirm_editing_buttons.dart';
@@ -43,7 +44,7 @@ class EditProfileViewBody extends StatelessWidget {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 220,
+              height: SizeConfig.screenHeight! * 0.3,
               child: Stack(
                 alignment: AlignmentDirectional.bottomCenter,
                 children: <Widget>[
@@ -63,7 +64,9 @@ class EditProfileViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 15),
+            SizedBox(
+              height: SizeConfig.screenHeight! * 0.015,
+            ),
             // if (cubit.profileImage != null && cubit.coverImage != null)
             ConfirmEditingButtons(
               cubit: cubit,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/models/comment_model.dart';
+import '../../../../core/utils/size_config.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '/features/feeds/presentation/widgets/comment_item.dart';
 import '/features/feeds/presentation/widgets/commenter_field.dart';
@@ -45,8 +46,8 @@ class CommentsViewBody extends StatelessWidget {
                       commentModel: comments[index],
                     );
                   },
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 5,
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: SizeConfig.screenHeight! * 0.006,
                   ),
                 ),
               );
@@ -70,7 +71,9 @@ class CommentsViewBody extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 10),
+          SizedBox(
+            height: SizeConfig.screenHeight! * 0.01,
+          ),
           CommenterField(
             commentText: commentText,
             commentController: commentController,

@@ -15,6 +15,8 @@ class GetUserErrorState extends AppStates {
 }
 
 //============ Getting All Users States ============
+class GetAllUsersLoadingState extends AppStates {}
+
 class GetAllUserSuccessState extends AppStates {}
 
 class GetAllUserErrorState extends AppStates {

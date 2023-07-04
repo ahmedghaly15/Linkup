@@ -45,8 +45,6 @@ abstract class AppRepo {
     File? postImage,
   });
 
-  void removePostImage({File? postImage});
-
   Stream<QuerySnapshot<Map<String, dynamic>>> getPosts();
 
   Future<void> likePost({
@@ -70,8 +68,6 @@ abstract class AppRepo {
     File? commentImage,
   });
 
-  void removeCommentImage({File? commentImage});
-
   Stream<QuerySnapshot<Map<String, dynamic>>> getComments({
     required String postId,
   });
@@ -91,8 +87,6 @@ abstract class AppRepo {
   Future<TaskSnapshot> uploadMessageImage({
     File? messageImage,
   });
-
-  void removeMessageImage({File? messageImage});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getMessages({
     required String receiverId,

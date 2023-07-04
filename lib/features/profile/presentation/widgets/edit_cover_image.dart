@@ -5,7 +5,8 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/models/user_model.dart';
-import '../../../../core/widgets/custom_bottom_sheet.dart';
+import '../../../../core/utils/helper.dart';
+import '../../../../core/utils/size_config.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class EditCoverImage extends StatelessWidget {
@@ -26,7 +27,7 @@ class EditCoverImage extends StatelessWidget {
       alignment: AlignmentDirectional.topEnd,
       children: <Widget>[
         Container(
-          height: 180,
+          height: SizeConfig.screenHeight! * 0.25,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
@@ -47,7 +48,7 @@ class EditCoverImage extends StatelessWidget {
             radius: 20,
             backgroundColor: Colors.white,
             child: IconButton(
-              onPressed: () => CustomBottomSheet(
+              onPressed: () => Helper.buildBottomSheet(
                 type: "Cover",
                 context: context,
                 onPressedCamera: () => cubit.getCoverImage(

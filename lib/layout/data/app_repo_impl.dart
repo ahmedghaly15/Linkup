@@ -18,34 +18,34 @@ class AppRepoImpl extends AppRepo {
   @override
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserData(
     String? uId,
-  ) {
-    return FirebaseFirestore.instance.collection('users').doc(uId).get();
+  ) async {
+    return await FirebaseFirestore.instance.collection('users').doc(uId).get();
   }
 
   @override
-  Future<QuerySnapshot<Map<String, dynamic>>> getAllUsers() {
-    return FirebaseFirestore.instance.collection('users').get();
+  Future<QuerySnapshot<Map<String, dynamic>>> getAllUsers() async {
+    return await FirebaseFirestore.instance.collection('users').get();
   }
 
   @override
-  Future<void> updateUser({required UserModel userModel}) {
-    return FirebaseFirestore.instance
+  Future<void> updateUser({required UserModel userModel}) async {
+    return await FirebaseFirestore.instance
         .collection('users')
-        .doc(userModel.uId)
+        .doc(Helper.model!.uId)
         .update(userModel.toJson());
   }
 
   // =============== ProfileImage Logic ===============
   @override
-  Future<XFile?> getProfileImage({required ImageSource source}) {
-    return ImagePicker().pickImage(source: source);
+  Future<XFile?> getProfileImage({required ImageSource source}) async {
+    return await ImagePicker().pickImage(source: source);
   }
 
   @override
   Future<TaskSnapshot> uploadProfileImage({
     File? profileImage,
-  }) {
-    return firebase_storage.FirebaseStorage.instance
+  }) async {
+    return await firebase_storage.FirebaseStorage.instance
         .ref()
         .child('users/${Uri.file(profileImage!.path).pathSegments.last}')
         .putFile(profileImage);
@@ -53,13 +53,14 @@ class AppRepoImpl extends AppRepo {
 
   // =============== CoverImage Logic ===============
   @override
-  Future<XFile?> getCoverImage({required ImageSource source}) {
-    return ImagePicker().pickImage(source: source);
+  Future<XFile?> getCoverImage({required ImageSource source}) async {
+    return await ImagePicker().pickImage(source: source);
   }
 
   @override
-  Future<firebase_storage.TaskSnapshot> uploadCoverImage({File? coverImage}) {
-    return firebase_storage.FirebaseStorage.instance
+  Future<firebase_storage.TaskSnapshot> uploadCoverImage(
+      {File? coverImage}) async {
+    return await firebase_storage.FirebaseStorage.instance
         .ref()
         .child('users/${Uri.file(coverImage!.path).pathSegments.last}')
         .putFile(coverImage);
@@ -69,8 +70,8 @@ class AppRepoImpl extends AppRepo {
   @override
   Future<DocumentReference<Map<String, dynamic>>> createPost({
     required PostModel postModel,
-  }) {
-    return FirebaseFirestore.instance
+  }) async {
+    return await FirebaseFirestore.instance
         .collection('posts')
         .add(postModel.toJson());
   }
@@ -81,23 +82,18 @@ class AppRepoImpl extends AppRepo {
   }
 
   @override
-  Future<XFile?> getPostImage({required ImageSource source}) {
-    return ImagePicker().pickImage(source: source);
+  Future<XFile?> getPostImage({required ImageSource source}) async {
+    return await ImagePicker().pickImage(source: source);
   }
 
   @override
   Future<TaskSnapshot> uploadPostImage({
     File? postImage,
-  }) {
-    return firebase_storage.FirebaseStorage.instance
+  }) async {
+    return await firebase_storage.FirebaseStorage.instance
         .ref()
         .child('posts/${Uri.file(postImage!.path).pathSegments.last}')
         .putFile(postImage);
-  }
-
-  @override
-  void removePostImage({File? postImage}) {
-    postImage = null;
   }
 
   @override
@@ -115,8 +111,8 @@ class AppRepoImpl extends AppRepo {
   Future<void> likePost({
     required LikesModel likesModel,
     required String postId,
-  }) {
-    return FirebaseFirestore.instance
+  }) async {
+    return await FirebaseFirestore.instance
         .collection('posts')
         .doc(postId)
         .collection('likes')
@@ -127,8 +123,11 @@ class AppRepoImpl extends AppRepo {
   @override
   Future<DocumentSnapshot<Map<String, dynamic>>> likeByMe({
     required String postId,
-  }) {
-    return FirebaseFirestore.instance.collection('posts').doc(postId).get();
+  }) async {
+    return await FirebaseFirestore.instance
+        .collection('posts')
+        .doc(postId)
+        .get();
   }
 
   // =============== Comments Logic ===============
@@ -136,8 +135,8 @@ class AppRepoImpl extends AppRepo {
   Future<DocumentReference<Map<String, dynamic>>> typeNewComment({
     required CommentModel commentModel,
     required String postId,
-  }) {
-    return FirebaseFirestore.instance
+  }) async {
+    return await FirebaseFirestore.instance
         .collection('posts')
         .doc(postId)
         .collection('comments')
@@ -145,23 +144,18 @@ class AppRepoImpl extends AppRepo {
   }
 
   @override
-  Future<XFile?> getCommentImage({required ImageSource source}) {
-    return ImagePicker().pickImage(source: source);
+  Future<XFile?> getCommentImage({required ImageSource source}) async {
+    return await ImagePicker().pickImage(source: source);
   }
 
   @override
   Future<TaskSnapshot> uploadCommentImage({
     File? commentImage,
-  }) {
-    return firebase_storage.FirebaseStorage.instance
+  }) async {
+    return await firebase_storage.FirebaseStorage.instance
         .ref()
         .child('comments/${Uri.file(commentImage!.path).pathSegments.last}')
         .putFile(commentImage);
-  }
-
-  @override
-  void removeCommentImage({File? commentImage}) {
-    commentImage = null;
   }
 
   @override
@@ -181,8 +175,8 @@ class AppRepoImpl extends AppRepo {
 
   // =============== Chat & Messages Logic ===============
   @override
-  Future<XFile?> getMessageImage({required ImageSource source}) {
-    return ImagePicker().pickImage(source: source);
+  Future<XFile?> getMessageImage({required ImageSource source}) async {
+    return await ImagePicker().pickImage(source: source);
   }
 
   @override
@@ -203,16 +197,11 @@ class AppRepoImpl extends AppRepo {
   }
 
   @override
-  void removeMessageImage({File? messageImage}) {
-    messageImage = null;
-  }
-
-  @override
   Future<DocumentReference<Map<String, dynamic>>> settingUpSenderChat({
     required String receiverId,
     required MessageModel messageModel,
-  }) {
-    return FirebaseFirestore.instance
+  }) async {
+    return await FirebaseFirestore.instance
         .collection('users')
         .doc(Helper.model!.uId)
         .collection('chats')
@@ -225,8 +214,8 @@ class AppRepoImpl extends AppRepo {
   Future<DocumentReference<Map<String, dynamic>>> settingUpReceiverChat({
     required String receiverId,
     required MessageModel messageModel,
-  }) {
-    return FirebaseFirestore.instance
+  }) async {
+    return await FirebaseFirestore.instance
         .collection('users')
         .doc(receiverId)
         .collection('chats')
@@ -238,8 +227,8 @@ class AppRepoImpl extends AppRepo {
   @override
   Future<TaskSnapshot> uploadMessageImage({
     File? messageImage,
-  }) {
-    return firebase_storage.FirebaseStorage.instance
+  }) async {
+    return await firebase_storage.FirebaseStorage.instance
         .ref()
         .child('messages/${Uri.file(messageImage!.path).pathSegments.last}')
         .putFile(messageImage);

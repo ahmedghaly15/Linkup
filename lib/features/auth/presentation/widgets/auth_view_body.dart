@@ -55,7 +55,6 @@ class AuthViewBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: SizeConfig.screenHeight! * 0.1),
               Text(
                 authMode == AuthMode.signIn ? "SIGN IN" : "SIGN UP",
                 style: AppStyles.headingLarge,

@@ -58,7 +58,17 @@ class CommenterTextButtonSender extends StatelessWidget {
             return AppColors.primaryColor; // Set enabled color
           },
         ),
-        textStyle: MaterialStateProperty.all(AppStyles.bodySmall),
+        textStyle: MaterialStateProperty.resolveWith<TextStyle>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return AppStyles.bodySmall;
+            }
+            return AppStyles.bodySmall.copyWith(
+              fontWeight: FontWeight.bold,
+            );
+          },
+        ),
+        // textStyle: MaterialStateProperty.all(AppStyles.bodySmall),
       ),
       child: const Text(
         "Comment",

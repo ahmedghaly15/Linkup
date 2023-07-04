@@ -64,6 +64,12 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
       context: context,
     )
         .then((value) {
+      firestoreCreateUSer(
+        name: username,
+        email: email,
+        phone: phone,
+        uId: value.user!.uid,
+      );
       CacheHelper.saveData(key: 'uId', value: value.user!.uid);
       AppCubit.getObject(context).getUserData(value.user!.uid);
     }).catchError((error) {

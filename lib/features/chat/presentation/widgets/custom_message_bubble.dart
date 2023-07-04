@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
 import '/core/models/message_model.dart';
+import '/core/utils/size_config.dart';
 
 class CustomMessageBubble extends StatelessWidget {
   const CustomMessageBubble({
@@ -55,7 +56,10 @@ class CustomMessageBubble extends StatelessWidget {
                   ),
                   maxLines: null,
                 ),
-              if (messageModel.messageText != null) const SizedBox(height: 5),
+              if (messageModel.messageText != null)
+                SizedBox(
+                  height: SizeConfig.screenHeight! * 0.008,
+                ),
               if (messageModel.messageImage!['image'] != null)
                 Container(
                   width: double.infinity,
@@ -69,7 +73,9 @@ class CustomMessageBubble extends StatelessWidget {
                     ),
                   ),
                 ),
-              const SizedBox(height: 5),
+              SizedBox(
+                height: SizeConfig.screenHeight! * 0.005,
+              ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[

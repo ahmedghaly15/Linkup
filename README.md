@@ -1,4 +1,4 @@
-# LinkUp-App
+# Linkup-App
 
 This is a new Flutter project. This app is designed to help users connect and interact with friends, family, and other people in a social environment. With its intuitive user interface, users can easily engage with others. The app also features a variety of social interacting tools including create profiles, share photos, and engage in real-time conversations with others.
 

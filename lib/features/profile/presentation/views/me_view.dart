@@ -9,6 +9,7 @@ import '../widgets/me_profile_and_cover_images.dart';
 import '../widgets/sign_out_floating_button.dart';
 import '/core/global/app_navigator.dart';
 import '/core/global/app_styles.dart';
+import '/core/utils/size_config.dart';
 import '/core/widgets/custom_button.dart';
 import '/core/widgets/user_data.dart';
 import '/features/profile/presentation/views/edit_profile_view.dart';
@@ -30,10 +31,10 @@ class MeView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     SizedBox(
-                      height: 220,
+                      height: SizeConfig.screenHeight! * 0.3,
                       child: MeProfileAndCoverImages(userModel: userModel),
                     ),
-                    const SizedBox(height: 7),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.015),
                     Text(
                       userModel.name!,
                       style: AppStyles.bodyLarge.copyWith(
@@ -41,12 +42,12 @@ class MeView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 5),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.008),
                     Text(
                       userModel.bio!,
                       style: AppStyles.caption.copyWith(fontSize: 15),
                     ),
-                    const SizedBox(height: 5),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.008),
                     const Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: 10.0,
@@ -60,13 +61,13 @@ class MeView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.015),
                     CustomButton(
                       buttonText: "Edit Profile",
                       onPressed: () => AppNavigator.navigateTo(
                         screen: const EditProfileView(),
                       ),
-                      height: 50,
+                      height: SizeConfig.screenHeight! * 0.065,
                       textStyle: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

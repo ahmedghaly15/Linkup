@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/comment_model.dart';
+import '../../../../core/utils/size_config.dart';
 
 class CommentItemContent extends StatelessWidget {
   const CommentItemContent({Key? key, required this.commentModel})
@@ -25,7 +26,10 @@ class CommentItemContent extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        if (commentModel.commentText != null) const SizedBox(height: 10),
+        if (commentModel.commentText != null)
+          SizedBox(
+            height: SizeConfig.screenHeight! * 0.02,
+          ),
         if (commentModel.commentText != null)
           Text(
             commentModel.commentText!,
@@ -36,7 +40,10 @@ class CommentItemContent extends StatelessWidget {
             ),
             maxLines: null,
           ),
-        if (commentModel.commentText != null) const SizedBox(height: 5),
+        if (commentModel.commentText != null)
+          SizedBox(
+            height: SizeConfig.screenHeight! * 0.01,
+          ),
         if (commentModel.commentImage!['image'] != null)
           Container(
             width: double.infinity,
@@ -55,7 +62,9 @@ class CommentItemContent extends StatelessWidget {
           children: <Widget>[
             Text(
               "${commentModel.date}",
-              style: AppStyles.bodySmall,
+              style: AppStyles.caption.copyWith(
+                color: Get.isDarkMode ? Colors.white54 : Colors.black38,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -70,7 +79,9 @@ class CommentItemContent extends StatelessWidget {
             ),
             Text(
               "${commentModel.time}",
-              style: AppStyles.bodySmall,
+              style: AppStyles.caption.copyWith(
+                color: Get.isDarkMode ? Colors.white54 : Colors.black38,
+              ),
             ),
           ],
         ),

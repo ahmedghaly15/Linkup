@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/size_config.dart';
 import '../../../../core/widgets/input_field.dart';
 
 class EditUserInfo extends StatelessWidget {
@@ -41,7 +42,7 @@ class EditUserInfo extends StatelessWidget {
               prefixIcon: const Icon(Icons.person),
               obsecure: false,
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: SizeConfig.screenHeight! * 0.01),
             InputField(
               hint: "Bio",
               controller: bioController,
@@ -56,7 +57,7 @@ class EditUserInfo extends StatelessWidget {
               prefixIcon: const Icon(Icons.info),
               obsecure: false,
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: SizeConfig.screenHeight! * 0.01),
             InputField(
               hint: "Phone",
               controller: phoneController,

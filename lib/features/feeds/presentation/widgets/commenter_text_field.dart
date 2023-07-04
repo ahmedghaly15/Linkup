@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/global/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/size_config.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 
 class CommenterTextField extends StatelessWidget {
@@ -25,7 +26,7 @@ class CommenterTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: SizedBox(
-        height: 50,
+        height: SizeConfig.screenHeight! * 0.06,
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -37,10 +38,10 @@ class CommenterTextField extends StatelessWidget {
                 maxLines: null,
                 cursorColor: Get.isDarkMode ? Colors.white60 : Colors.black,
                 style: AppStyles.bodySmall.copyWith(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
                   height: 1.5,
-                  letterSpacing: 0.8,
+                  letterSpacing: 0.5,
                 ),
                 decoration: const InputDecoration(
                   hintText: 'Write a comment...',

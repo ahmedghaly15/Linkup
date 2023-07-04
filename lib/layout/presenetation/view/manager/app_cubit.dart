@@ -85,7 +85,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(GetUserLoadingState());
 
     // Storing The Current User Id
-    Helper.uId = CacheHelper.getStringData(key: 'uId');
+    uId = CacheHelper.getStringData(key: 'uId');
 
     appRepo.getUserData(uId).then((value) {
       Helper.model = UserModel.fromJson(value.data()!);
@@ -305,7 +305,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void removePostImage() {
-    appRepo.removePostImage(postImage: postImage);
+    postImage = null;
     emit(PostImageRemovedState());
   }
 
@@ -445,7 +445,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void removeCommentImage() {
-    appRepo.removeCommentImage(commentImage: commentImage);
+    commentImage = null;
     emit(CommentImageRemovedSuccessState());
   }
 
@@ -552,7 +552,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void removeMessageImage() {
-    appRepo.removeMessageImage(messageImage: messageImage);
+    messageImage = null;
     emit(RemovedMessageImageSuccessState());
   }
 

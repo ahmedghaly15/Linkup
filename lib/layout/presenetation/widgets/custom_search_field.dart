@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/global/app_colors.dart';
 import '../view/manager/app_cubit.dart';
+import '/core/utils/size_config.dart';
 
 class CustomSearchField extends StatelessWidget {
   const CustomSearchField({Key? key, required this.cubit}) : super(key: key);
@@ -11,7 +12,7 @@ class CustomSearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 70,
+      height: SizeConfig.screenHeight! * 0.08,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextFormField(

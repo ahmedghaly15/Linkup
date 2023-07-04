@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/size_config.dart';
 import '../../../../core/widgets/user_data.dart';
 import '/core/models/user_model.dart';
 
@@ -19,14 +20,14 @@ class UserProfileViewBody extends StatelessWidget {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 220,
+              height: SizeConfig.screenHeight! * 0.3,
               child: Stack(
                 alignment: AlignmentDirectional.bottomCenter,
                 children: <Widget>[
                   Align(
                     alignment: AlignmentDirectional.topCenter,
                     child: Container(
-                      height: 180,
+                      height: SizeConfig.screenHeight! * 0.25,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
@@ -51,7 +52,7 @@ class UserProfileViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 7),
+            SizedBox(height: SizeConfig.screenHeight! * 0.015),
             Text(
               userModel.name!,
               style: AppStyles.bodyLarge.copyWith(
@@ -59,12 +60,12 @@ class UserProfileViewBody extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 5),
+            SizedBox(height: SizeConfig.screenHeight! * 0.008),
             Text(
               userModel.bio!,
               style: AppStyles.bodySmall.copyWith(fontSize: 15),
             ),
-            const SizedBox(height: 5),
+            SizedBox(height: SizeConfig.screenHeight! * 0.008),
             const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 10.0,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/size_config.dart';
 import '/core/global/app_colors.dart';
 import '/core/global/app_navigator.dart';
 import '/core/global/app_styles.dart';
@@ -36,7 +37,7 @@ class UserItem extends StatelessWidget {
                 radius: 45.5,
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: SizeConfig.screenHeight! * 0.03),
             Text(
               userModel.name!,
               maxLines: 1,
@@ -47,7 +48,7 @@ class UserItem extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 7),
+            SizedBox(height: SizeConfig.screenHeight! * 0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[

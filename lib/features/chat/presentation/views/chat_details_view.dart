@@ -61,7 +61,10 @@ class ChatDetailsView extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             userModel.name!,
-            style: AppStyles.bodyLarge.copyWith(fontWeight: FontWeight.bold),
+            style: AppStyles.bodyLarge.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Get.isDarkMode ? Colors.white : Colors.black,
+            ),
           ),
         ],
       ),

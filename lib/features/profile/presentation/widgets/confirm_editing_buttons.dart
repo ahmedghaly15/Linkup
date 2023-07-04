@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/global/app_colors.dart';
-import '../../../../core/widgets/custom_button.dart';
 import '../../../../layout/presenetation/view/manager/app_cubit.dart';
 import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '/core/utils/size_config.dart';
+import 'confirm_editing_button.dart';
 
 class ConfirmEditingButtons extends StatelessWidget {
   const ConfirmEditingButtons({
@@ -30,7 +31,7 @@ class ConfirmEditingButtons extends StatelessWidget {
           Expanded(
             child: Column(
               children: <Widget>[
-                CustomButton(
+                ConfirmEditingButton(
                   buttonText: "Upload Profile Image",
                   onPressed: () => cubit.uploadProfileImage(
                     context: context,
@@ -38,31 +39,25 @@ class ConfirmEditingButtons extends StatelessWidget {
                     phone: phoneController.text,
                     bio: bioController.text,
                   ),
-                  width: 15,
-                  height: 10,
-                  textStyle: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
                 if (state is UploadingProfileImageLoadingState)
-                  const SizedBox(height: 5),
+                  SizedBox(height: SizeConfig.screenHeight! * 0.01),
                 if (state is UploadingProfileImageLoadingState)
-                  const SizedBox(
-                    width: 150,
-                    child: LinearProgressIndicator(
+                  SizedBox(
+                    width: SizeConfig.screenWidth! * 0.4,
+                    child: const LinearProgressIndicator(
                       color: AppColors.primaryColor,
                     ),
                   ),
               ],
             ),
           ),
-        const SizedBox(width: 5),
+        SizedBox(width: SizeConfig.screenWidth! * 0.03),
         if (cubit.coverImage != null)
           Expanded(
             child: Column(
               children: <Widget>[
-                CustomButton(
+                ConfirmEditingButton(
                   buttonText: "Upload Cover Image",
                   onPressed: () => cubit.uploadCoverImage(
                     context: context,
@@ -70,19 +65,13 @@ class ConfirmEditingButtons extends StatelessWidget {
                     phone: phoneController.text,
                     bio: bioController.text,
                   ),
-                  width: 15,
-                  height: 10,
-                  textStyle: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
                 if (state is UploadingCoverImageLoadingState)
-                  const SizedBox(height: 5),
+                  SizedBox(height: SizeConfig.screenHeight! * 0.01),
                 if (state is UploadingCoverImageLoadingState)
-                  const SizedBox(
-                    width: 150,
-                    child: LinearProgressIndicator(
+                  SizedBox(
+                    width: SizeConfig.screenWidth! * 0.4,
+                    child: const LinearProgressIndicator(
                       color: AppColors.primaryColor,
                     ),
                   ),
