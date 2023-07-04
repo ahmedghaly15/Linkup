@@ -18,10 +18,23 @@ class PostItemContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TopPostItemSection(model: model),
-        const CustomDivider(),
+        const Padding(
+          padding: EdgeInsetsDirectional.only(
+            start: 5,
+            end: 5,
+            top: 15,
+          ),
+          child: CustomDivider(),
+        ),
         PostTextAndImage(model: model),
         LikesAndComments(model: model),
-        const CustomDivider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 15.0,
+            horizontal: 5,
+          ),
+          child: CustomDivider(),
+        ),
         WriteCommentInputField(model: model),
       ],
     );

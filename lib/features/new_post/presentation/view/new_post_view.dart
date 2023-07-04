@@ -50,7 +50,9 @@ class NewPostView extends StatelessWidget {
                 time: DateFormat.jm().format(DateTime.now()),
                 text: textController.text,
               );
-            } else {
+            }
+
+            if (cubit.postImage != null) {
               cubit.uploadPostImage(
                 date: Helper.getDate(),
                 time: DateFormat.jm().format(DateTime.now()),

@@ -11,24 +11,30 @@ class PostTextAndImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          model.text!,
-          style: AppStyles.bodySmall.copyWith(letterSpacing: 0.5),
-        ),
+        if (model.text != null) ...[
+          const SizedBox(height: 15),
+          Text(
+            model.text!,
+            style: AppStyles.bodySmall.copyWith(
+              letterSpacing: 0.5,
+              fontSize: 17,
+            ),
+          ),
+        ],
+        if (model.postImage != '' && model.text != '')
+          const SizedBox(height: 15),
         if (model.postImage != '')
-          Padding(
-            padding: const EdgeInsetsDirectional.only(top: 15),
-            child: Container(
-              height: 180,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    model.postImage!,
-                  ),
+          Container(
+            height: 180,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                  model.postImage!,
                 ),
               ),
             ),

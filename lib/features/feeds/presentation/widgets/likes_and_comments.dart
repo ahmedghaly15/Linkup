@@ -18,7 +18,7 @@ class LikesAndComments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 15),
       child: Row(
         children: <Widget>[
           Expanded(

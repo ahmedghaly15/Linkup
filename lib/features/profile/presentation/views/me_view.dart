@@ -48,6 +48,22 @@ class MeView extends StatelessWidget {
                       style: AppStyles.caption.copyWith(fontSize: 15),
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.008),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Icon(
+                          Icons.phone,
+                          color: Colors.grey,
+                          size: 20,
+                        ),
+                        SizedBox(width: SizeConfig.screenWidth! * 0.008),
+                        Text(
+                          userModel.phone!,
+                          style: AppStyles.caption.copyWith(fontSize: 15),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.008),
                     const Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: 10.0,

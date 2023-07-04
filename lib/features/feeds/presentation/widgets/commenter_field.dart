@@ -58,7 +58,6 @@ class CommenterField extends StatelessWidget {
                   commentController: commentController,
                   cubit: cubit,
                   commentText: commentText,
-                  commentImage: commentImage,
                 ),
               ],
             ),

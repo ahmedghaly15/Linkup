@@ -283,7 +283,7 @@ class AppCubit extends Cubit<AppStates> {
     required String text,
   }) {
     emit(CreatePostLoadingState());
-    appRepo.uploadPostImage().then((value) {
+    appRepo.uploadPostImage(postImage: postImage).then((value) {
       value.ref.getDownloadURL().then((value) {
         createPost(
           date: date,

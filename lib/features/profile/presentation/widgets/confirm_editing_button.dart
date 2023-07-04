@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/widgets/custom_button.dart';
+import '/core/widgets/custom_button.dart';
 import '/core/utils/size_config.dart';
 
 class ConfirmEditingButton extends StatelessWidget {
@@ -23,6 +23,7 @@ class ConfirmEditingButton extends StatelessWidget {
       textStyle: const TextStyle(
         fontSize: 15,
         fontWeight: FontWeight.bold,
+        color: Colors.white,
       ),
     );
   }

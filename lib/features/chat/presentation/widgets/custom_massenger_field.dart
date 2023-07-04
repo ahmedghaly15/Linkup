@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,14 +16,12 @@ class CustomMassengerField extends StatelessWidget {
     required this.messageController,
     required this.cubit,
     required this.userModel,
-    this.messageImage,
   }) : super(key: key);
 
   final String messageText;
   final TextEditingController messageController;
   final AppCubit cubit;
   final UserModel userModel;
-  final File? messageImage;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +94,7 @@ class CustomMassengerField extends StatelessWidget {
                               cubit.onChangeText(value, messageText);
                             },
                           ),
-                          if (messageImage != null)
+                          if (cubit.messageImage != null)
                             Stack(
                               alignment: AlignmentDirectional.topEnd,
                               children: <Widget>[
@@ -108,7 +104,7 @@ class CustomMassengerField extends StatelessWidget {
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: FileImage(messageImage!),
+                                      image: FileImage(cubit.messageImage!),
                                     ),
                                   ),
                                 ),
@@ -141,7 +137,7 @@ class CustomMassengerField extends StatelessWidget {
         ),
         // ============== Send New Message Button ==============
         IconButton(
-          onPressed: (messageText.trim().isEmpty && messageImage == null)
+          onPressed: (messageText.trim().isEmpty && cubit.messageImage == null)
               ? null
               : () {
                   if (cubit.messageImage == null) {

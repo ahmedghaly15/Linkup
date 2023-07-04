@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,13 +12,11 @@ class CommenterTextField extends StatelessWidget {
     required this.commentController,
     required this.cubit,
     required this.commentText,
-    required this.commentImage,
   });
 
   final TextEditingController commentController;
   final AppCubit cubit;
   final String commentText;
-  final File? commentImage;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +50,7 @@ class CommenterTextField extends StatelessWidget {
                   cubit.onChangeText(value, commentText);
                 },
               ),
-              if (commentImage != null)
+              if (cubit.commentImage != null)
                 Stack(
                   alignment: AlignmentDirectional.topEnd,
                   children: <Widget>[
@@ -64,7 +60,7 @@ class CommenterTextField extends StatelessWidget {
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: FileImage(commentImage!),
+                          image: FileImage(cubit.commentImage!),
                         ),
                       ),
                     ),

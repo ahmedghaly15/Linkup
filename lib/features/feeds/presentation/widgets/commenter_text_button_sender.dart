@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import '../../../../core/global/app_colors.dart';
@@ -14,19 +12,17 @@ class CommenterTextButtonSender extends StatelessWidget {
     required this.commentController,
     required this.cubit,
     required this.postId,
-    this.commentImage,
   }) : super(key: key);
 
   final String commentText;
   final TextEditingController commentController;
   final AppCubit cubit;
   final String postId;
-  final File? commentImage;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: (commentText.trim().isEmpty && commentImage == null)
+      onPressed: (commentText.trim().isEmpty && cubit.commentImage == null)
           ? null
           : () {
               if (cubit.commentImage == null) {

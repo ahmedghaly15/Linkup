@@ -38,14 +38,19 @@ class UserItem extends StatelessWidget {
               ),
             ),
             SizedBox(height: SizeConfig.screenHeight! * 0.03),
-            Text(
-              userModel.name!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppStyles.bodyLarge.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: Text(
+                userModel.name!,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppStyles.bodyLarge.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
             SizedBox(height: SizeConfig.screenHeight! * 0.01),
