@@ -13,10 +13,10 @@ This is a new Flutter project. This app is designed to help users connect and in
 ## Preview
 
 <div style="display: flex" > 
-  <img style="display: inline-block" src="https://github.com/ahmedghaly15/Social-App/assets/108659381/ae5a1813-8e3b-4fac-a28a-e8d90a60c2b3" width= "300" height = "600"/>
+  <img style="display: inline-block" src="https://github.com/ahmedghaly15/Social-App/assets/108659381/3cec1455-b2ec-4179-aaf5-4e6f69e1302f" width= "300" height = "600"/>
 </div>
 
-https://github.com/ahmedghaly15/Social-App/assets/108659381/b86b8823-8572-4452-adcf-f3b8a098039a
+https://github.com/ahmedghaly15/Social-App/assets/108659381/1735c2fa-275c-4da4-bf27-bf491e6ef829
 
 ## App Structure
 

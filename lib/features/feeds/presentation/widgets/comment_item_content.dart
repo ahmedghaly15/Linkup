@@ -57,6 +57,9 @@ class CommentItemContent extends StatelessWidget {
               ),
             ),
           ),
+        SizedBox(
+          height: SizeConfig.screenHeight! * 0.02,
+        ),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
