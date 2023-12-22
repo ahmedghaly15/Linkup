@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/helpers/cache_helper.dart';
 import '../../../../../layout/presentation/view/manager/app_cubit.dart';
-import '/features/auth/domain/auth_repo.dart';
+import '../../../logic/auth_repo.dart';
 import 'auth_view_states.dart';
 
 enum AuthMode { signIn, signUp }

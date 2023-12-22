@@ -58,4 +58,20 @@ class SignUpCubit extends Cubit<SignUpState> {
       );
     });
   }
+
+  bool signUpPassVisibility = true;
+
+  void switchSignUpPassVisibility() {
+    signUpPassVisibility = !signUpPassVisibility;
+
+    emit(SwitchSignUpPassVisible(signUpPassVisibility: signUpPassVisibility));
+  }
+
+  bool confirmPassVisibility = true;
+
+  void switchConfirmPassVisibility() {
+    confirmPassVisibility = !confirmPassVisibility;
+
+    emit(SwitchSignUpPassVisible(signUpPassVisibility: confirmPassVisibility));
+  }
 }

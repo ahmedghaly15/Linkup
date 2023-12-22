@@ -7,7 +7,7 @@ class CustomTextButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.title,
-    this.textStyle = AppTextStyles.customTextButtonTextStyle,
+    this.textStyle,
   });
 
   final void Function()? onPressed;

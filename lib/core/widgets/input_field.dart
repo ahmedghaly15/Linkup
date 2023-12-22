@@ -7,7 +7,7 @@ import '../utils/app_text_styles.dart';
 class InputField extends StatelessWidget {
   final FocusNode? focusNode;
   final String hint;
-  final TextStyle? hintStyle;
+  // final TextStyle? hintStyle;
   final bool? obsecure;
   final Widget? icon;
   final Widget? prefixIcon;
@@ -21,7 +21,7 @@ class InputField extends StatelessWidget {
   const InputField({
     Key? key,
     required this.hint,
-    this.hintStyle = AppTextStyles.hintStyle,
+    // this.hintStyle = AppTextStyles.hintStyle,
     required this.controller,
     required this.textCapitalization,
     required this.validating,
@@ -49,7 +49,7 @@ class InputField extends StatelessWidget {
         focusNode: focusNode,
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: hintStyle,
+          // hintStyle: hintStyle,
           prefixIcon: prefixIcon,
           prefixIconColor: AppColors.primaryColor,
           suffixIcon: icon,
@@ -63,7 +63,7 @@ class InputField extends StatelessWidget {
           errorBorder: buildOutlineInputBorder(Colors.redAccent, 2),
         ),
         cursorColor: AppColors.primaryColor,
-        style: AppTextStyles.inputFieldTextStyle,
+        // style: AppTextStyles.inputFieldTextStyle,
         obscureText: obsecure!,
         keyboardType: keyboardType,
         textCapitalization: textCapitalization,

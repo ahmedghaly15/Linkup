@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/features/auth/presentation/widgets/auth_view_sub_title.dart';
 import 'package:social_app/features/auth/presentation/widgets/auth_view_title.dart';
 import 'package:social_app/features/auth/presentation/widgets/custom_auth_sliver_app_bar.dart';
 import 'package:social_app/features/auth/presentation/widgets/have_account_or_not_text.dart';
-import 'package:social_app/features/auth/presentation/widgets/sign_in/sign_in_form.dart';
+import 'package:social_app/features/auth/presentation/widgets/sign_up/sign_up_form.dart';
 
-class SignInView extends StatelessWidget {
-  const SignInView({super.key});
+class SignUpView extends StatelessWidget {
+  const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +17,19 @@ class SignInView extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const CustomAuthSliverAppBar(hasLeading: false),
+            const CustomAuthSliverAppBar(hasLeading: true),
             SliverPadding(
               padding: AppConstants.authHorizontalPadding,
               sliver: SliverToBoxAdapter(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    const AuthViewTitle(title: 'SIGN IN'),
+                    const AuthViewTitle(title: 'SIGN UP'),
                     const AuthViewSubTitle(
-                      subTitle: "Sign in to communicate with friends",
+                      subTitle: "Let's create you a new account",
                     ),
                     SizedBox(height: 30.h),
-                    const SignInForm(),
+                    const SignUpForm(),
                     SizedBox(height: 10.h),
                   ],
                 ),
@@ -44,11 +43,9 @@ class SignInView extends StatelessWidget {
                   children: <Widget>[
                     const Spacer(),
                     HaveAccountOrNotText(
-                      question: "Don't have an account?",
-                      buttonText: 'Sign up',
-                      onTap: () => context.navigateTo(
-                        routeName: Routes.signUpRoute,
-                      ),
+                      question: 'Already have an account?',
+                      buttonText: 'Sign in',
+                      onTap: () => context.getBack(),
                     ),
                   ],
                 ),

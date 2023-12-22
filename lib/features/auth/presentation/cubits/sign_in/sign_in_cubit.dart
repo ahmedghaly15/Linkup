@@ -11,13 +11,12 @@ class SignInCubit extends Cubit<SignInState> {
   SignInCubit({required this.signInUseCase}) : super(const SignInInitial());
 
   void signIn({required SignInParams params}) {
-    const SignInLoadingState();
+    emit(const SignInLoading());
 
     signInUseCase(params).then((value) {
       value.fold(
-        (failure) =>
-            emit(SignInErrorState(error: failure.failureMsg.toString())),
-        (credential) => emit(SignInSuccessState(uId: credential.user!.uid)),
+        (failure) => emit(SignInError(error: failure.failureMsg.toString())),
+        (credential) => emit(SignInSuccess(uId: credential.user!.uid)),
       );
     });
   }

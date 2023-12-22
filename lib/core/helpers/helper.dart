@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 import '../utils/app_colors.dart';
 import '../models/user_model.dart';
 import '../widgets/custom_bottom_sheet.dart';
-import '/core/global/app_navigator.dart';
-import '/core/global/app_styles.dart';
+import '../utils/app_navigator.dart';
+import '../utils/app_text_styles.dart';
 
 enum SnackBarStates { success, error, warning }
 
@@ -21,7 +21,7 @@ class Helper {
     );
   }
 
-  static UserModel? model;
+  static UserModel? currentUser;
 
 // The User's Id
   static String? uId;
@@ -79,10 +79,10 @@ class Helper {
   }) =>
       AppBar(
         backgroundColor: context.theme.colorScheme.background,
-        title: Text(title ?? "", style: AppTextStyles.appBarTitleStyle),
+        title: Text(title ?? "", style: AppTextStyles.textStyle23Bold),
         centerTitle: centerTitle,
         leading: IconButton(
-          onPressed: () => AppNavigator.getBack(),
+          onPressed: () => context.getBack(),
           icon: Icon(
             Icons.arrow_back_ios,
             color: Get.isDarkMode ? Colors.white : Colors.black,

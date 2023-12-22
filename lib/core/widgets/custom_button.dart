@@ -16,7 +16,7 @@ class CustomButton extends StatelessWidget {
     required this.buttonText,
     required this.onPressed,
     this.radius = 32.0,
-    this.textStyle = AppTextStyles.customButtonTextStyle,
+    this.textStyle,
     this.height = 60,
     this.width = double.maxFinite,
   });

@@ -39,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
     this.hintStyle,
     this.autofocus = false,
     this.disabledBorder,
+    this.prefixIcon,
   });
 
   final TextEditingController? controller;
@@ -72,6 +73,7 @@ class CustomTextFormField extends StatelessWidget {
   final Color? fillColor;
   final TextStyle? hintStyle;
   final bool autofocus;
+  final IconData? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +95,7 @@ class CustomTextFormField extends StatelessWidget {
           onFieldSubmitted: onSubmit,
           onChanged: onChanged,
           style: _customTextFieldTextStyle(),
-          cursorColor: state.brightness == Brightness.light
-              ? Colors.black
-              : Colors.white,
+          cursorColor: AppColors.primaryColor,
           decoration: InputDecoration(
             filled: true,
             fillColor: fillColor ??
@@ -106,13 +106,21 @@ class CustomTextFormField extends StatelessWidget {
             hintText: hintText,
             hintStyle: hintStyle ?? _customTextFieldTextStyle(),
             errorMaxLines: null,
-            prefixIcon: prefix,
+            prefix: prefix,
+            prefixIcon: Icon(prefixIcon, color: Colors.grey),
             suffixIcon: suffix,
             labelText: label,
             labelStyle: Theme.of(context).textTheme.titleSmall,
-            contentPadding: contentPadding,
+            contentPadding: contentPadding ??
+                EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                  vertical: 8.h,
+                ),
             enabledBorder: enabledBorder ?? _buildUnderlineInputBorder(),
-            focusedBorder: focusedBorder ?? _buildUnderlineInputBorder(),
+            focusedBorder: focusedBorder ??
+                _buildUnderlineInputBorder(
+                  borderColor: AppColors.primaryColor,
+                ),
             errorBorder: errorBorder ?? _buildUnderlineInputBorder(),
             focusedErrorBorder:
                 focusedErrorBorder ?? _buildUnderlineInputBorder(),
@@ -127,14 +135,15 @@ class CustomTextFormField extends StatelessWidget {
   }
 
   TextStyle _customTextFieldTextStyle() {
-    return AppTextStyles.bodySmall;
+    return AppTextStyles.textStyle16;
   }
 
-  UnderlineInputBorder _buildUnderlineInputBorder({Color? borderColor}) {
-    return UnderlineInputBorder(
+  OutlineInputBorder _buildUnderlineInputBorder({Color? borderColor}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16.r),
       borderSide: BorderSide(
-        color: borderColor ?? AppColors.primaryColor,
-        width: 0.75,
+        color: borderColor ?? Colors.grey,
+        width: 2,
       ),
     );
   }

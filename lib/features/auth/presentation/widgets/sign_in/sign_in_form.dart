@@ -8,7 +8,6 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/main_button.dart';
@@ -78,6 +77,7 @@ class _SignInFormState extends State<SignInForm> {
                 hintText: 'Email',
                 controller: _emailController,
                 focusNode: _emailFocusNode,
+                prefixIcon: Icons.email,
                 autofillHints: const <String>[AutofillHints.email],
                 keyboardType: TextInputType.emailAddress,
                 validating: (String? val) =>
@@ -92,6 +92,7 @@ class _SignInFormState extends State<SignInForm> {
                 hintText: 'Password',
                 controller: _passwordController,
                 focusNode: _passwordFocusNode,
+                prefixIcon: Icons.lock,
                 keyboardType: TextInputType.visiblePassword,
                 autofillHints: const <String>[AutofillHints.password],
                 obscureText: cubit.signInPassVisibility,
@@ -110,16 +111,8 @@ class _SignInFormState extends State<SignInForm> {
               SizedBox(height: 40.h),
               MainButton(
                 onPressed: () => _signIn(context),
-                child: state is SignInLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : Text(
-                        'Login',
-                        style: AppTextStyles.textStyle23Bold.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
+                text: 'Login',
               ),
-              SizedBox(height: 10.h),
             ],
           ),
         );

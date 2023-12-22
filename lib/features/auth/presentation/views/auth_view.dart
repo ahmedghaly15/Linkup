@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/utils/app_colors.dart';
 // import '../../../../core/services/theme_service.dart';
-import '../../domain/auth_repo.dart';
+import '../../logic/auth_repo.dart';
 import '../widgets/auth_view_body.dart';
 import '../../../../core/helpers/helper.dart';
 import '../../../../service_locator.dart';

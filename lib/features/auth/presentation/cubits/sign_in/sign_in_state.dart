@@ -20,22 +20,22 @@ class SwitchSignInPassVisible extends SignInState {
   List<Object> get props => [passVisibility];
 }
 
-class SignInLoadingState extends SignInState {
-  const SignInLoadingState();
+class SignInLoading extends SignInState {
+  const SignInLoading();
 }
 
-class SignInSuccessState extends SignInState {
+class SignInSuccess extends SignInState {
   final String uId;
 
-  const SignInSuccessState({required this.uId});
+  const SignInSuccess({required this.uId});
 
   @override
   List<Object> get props => [uId];
 }
 
-class SignInErrorState extends SignInState {
+class SignInError extends SignInState {
   final String error;
-  const SignInErrorState({required this.error});
+  const SignInError({required this.error});
 
   @override
   List<Object> get props => [error];
