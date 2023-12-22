@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/global/app_navigator.dart';
-import '../../../../core/utils/cache_helper.dart';
-import '../../../../core/utils/helper.dart';
+import '../../../../core/helpers/cache_helper.dart';
+import '../../../../core/helpers/helper.dart';
 import '../../../../core/utils/size_config.dart';
 import '../view/manager/auth_view_cubit.dart';
 import '../view/manager/auth_view_states.dart';
-import '/layout/presenetation/view/layout_view.dart';
+import '../../../../layout/presentation/view/layout_view.dart';
 import 'auth_button.dart';
 import 'confirm_pass_and_phone.dart';
 import 'sign_in_mode_and_username_components.dart';
@@ -151,20 +151,20 @@ class AuthForm extends StatelessWidget {
     }
 
     if (state is SignInSuccessState) {
-      CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
-        AppNavigator.navigateAndFinish(screen: const LayoutView());
-      });
+      // CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
+      //   AppNavigator.navigateAndFinish(screen: const LayoutView());
+      // });
     }
 
     if (state is SignUpSuccessState) {
-      CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
-        AppNavigator.navigateAndFinish(screen: const LayoutView());
-      });
-      Helper.buildSnackBar(
-        message: "Account Created Successfully",
-        state: SnackBarStates.success,
-        context: context,
-      );
+      // CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
+      //   AppNavigator.navigateAndFinish(screen: const LayoutView());
+      // });
+      // Helper.buildSnackBar(
+      //   message: "Account Created Successfully",
+      //   state: SnackBarStates.success,
+      //   context: context,
+      // );
     }
 
     if (state is CreateUserSuccessState) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../global/app_colors.dart';
+import '../utils/app_colors.dart';
 import '../global/app_styles.dart';
 
 class InputField extends StatelessWidget {
@@ -21,7 +21,7 @@ class InputField extends StatelessWidget {
   const InputField({
     Key? key,
     required this.hint,
-    this.hintStyle = AppStyles.hintStyle,
+    this.hintStyle = AppTextStyles.hintStyle,
     required this.controller,
     required this.textCapitalization,
     required this.validating,
@@ -63,7 +63,7 @@ class InputField extends StatelessWidget {
           errorBorder: buildOutlineInputBorder(Colors.redAccent, 2),
         ),
         cursorColor: AppColors.primaryColor,
-        style: AppStyles.inputFieldTextStyle,
+        style: AppTextStyles.inputFieldTextStyle,
         obscureText: obsecure!,
         keyboardType: keyboardType,
         textCapitalization: textCapitalization,

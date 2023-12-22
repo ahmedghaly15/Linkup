@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/global/app_navigator.dart';
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/post_model.dart';
-import '../../../../core/utils/helper.dart';
+import '../../../../core/helpers/helper.dart';
 import '/features/feeds/presentation/views/comments_view.dart';
 
 class WriteCommentInputField extends StatelessWidget {
@@ -39,7 +39,7 @@ class WriteCommentInputField extends StatelessWidget {
                 },
                 child: Text(
                   "Write a comment...",
-                  style: AppStyles.bodySmall.copyWith(
+                  style: AppTextStyles.bodySmall.copyWith(
                     fontSize: 14,
                     color: Colors.grey,
                   ),

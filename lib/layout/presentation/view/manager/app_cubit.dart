@@ -10,8 +10,8 @@ import '../../../../core/models/like_model.dart';
 import '../../../../core/models/message_model.dart';
 import '../../../../core/models/post_model.dart';
 import '../../../../core/models/user_model.dart';
-import '../../../../core/utils/cache_helper.dart';
-import '../../../../core/utils/helper.dart';
+import '../../../../core/helpers/cache_helper.dart';
+import '../../../../core/helpers/helper.dart';
 import '../../../../features/chat/presentation/views/chats_view.dart';
 import '../../../../features/feeds/presentation/views/feeds_view.dart';
 import '../../../../features/profile/presentation/views/me_view.dart';
@@ -85,7 +85,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(GetUserLoadingState());
 
     // Storing The Current User Id
-    uId = CacheHelper.getStringData(key: 'uId');
+    // uId = CacheHelper.getStringData(key: 'uId');
 
     appRepo.getUserData(uId).then((value) {
       Helper.model = UserModel.fromJson(value.data()!);

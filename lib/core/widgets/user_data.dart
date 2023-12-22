@@ -19,12 +19,12 @@ class UserData extends StatelessWidget {
         children: <Widget>[
           Text(
             "$count",
-            style: AppStyles.bodyLarge,
+            style: AppTextStyles.bodyLarge,
           ),
           const SizedBox(height: 5),
           Text(
             label,
-            style: AppStyles.bodySmall,
+            style: AppTextStyles.bodySmall,
           ),
         ],
       ),

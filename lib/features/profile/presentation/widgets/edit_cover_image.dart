@@ -7,7 +7,7 @@ import '../../../../core/global/app_colors.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../core/utils/size_config.dart';
-import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../layout/presentation/view/manager/app_cubit.dart';
 
 class EditCoverImage extends StatelessWidget {
   const EditCoverImage({

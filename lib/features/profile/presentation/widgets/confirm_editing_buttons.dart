@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/global/app_colors.dart';
-import '../../../../layout/presenetation/view/manager/app_cubit.dart';
-import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../layout/presentation/view/manager/app_states.dart';
 import '/core/utils/size_config.dart';
 import 'confirm_editing_button.dart';
 

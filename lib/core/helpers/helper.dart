@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../global/app_colors.dart';
+import '../utils/app_colors.dart';
 import '../models/user_model.dart';
 import '../widgets/custom_bottom_sheet.dart';
 import '/core/global/app_navigator.dart';
@@ -79,7 +79,7 @@ class Helper {
   }) =>
       AppBar(
         backgroundColor: context.theme.colorScheme.background,
-        title: Text(title ?? "", style: AppStyles.appBarTitleStyle),
+        title: Text(title ?? "", style: AppTextStyles.appBarTitleStyle),
         centerTitle: centerTitle,
         leading: IconButton(
           onPressed: () => AppNavigator.getBack(),

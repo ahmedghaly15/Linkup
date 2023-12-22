@@ -17,7 +17,7 @@ class PostTextAndImage extends StatelessWidget {
           const SizedBox(height: 15),
           Text(
             model.text!,
-            style: AppStyles.bodySmall.copyWith(
+            style: AppTextStyles.bodySmall.copyWith(
               letterSpacing: 0.5,
               fontSize: 17,
             ),

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/global/app_colors.dart';
-import '../../../../core/services/theme_service.dart';
+import '../../../../core/utils/app_colors.dart';
+// import '../../../../core/services/theme_service.dart';
 import '../../domain/auth_repo.dart';
 import '../widgets/auth_view_body.dart';
-import '/core/utils/helper.dart';
-import '/core/utils/service_locator.dart';
+import '../../../../core/helpers/helper.dart';
+import '../../../../service_locator.dart';
 import 'manager/auth_view_cubit.dart';
 
 class AuthView extends StatefulWidget {
@@ -65,8 +65,7 @@ class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>
-          AuthViewCubit(serviceLocator.get<AuthRepo>()),
+      create: (BuildContext context) => AuthViewCubit(getIt.get<AuthRepo>()),
       child: GestureDetector(
         // For Closing The Keyboard When The View Is Tapped
         onTap: () => FocusScope.of(context).unfocus(),
@@ -99,7 +98,7 @@ class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
       backgroundColor: context.theme.colorScheme.background,
       leading: IconButton(
         onPressed: () {
-          BlocProvider.of<ThemeService>(context).toggleTheme();
+          // BlocProvider.of<ThemeService>(context).toggleTheme();
         },
         icon: Icon(
           Get.isDarkMode

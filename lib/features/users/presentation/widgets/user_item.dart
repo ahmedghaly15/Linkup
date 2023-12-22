@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/size_config.dart';
-import '/core/global/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import '/core/global/app_navigator.dart';
 import '/core/global/app_styles.dart';
 import '/core/models/user_model.dart';
@@ -46,7 +46,7 @@ class UserItem extends StatelessWidget {
                 userModel.name!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppStyles.bodyLarge.copyWith(
+                style: AppTextStyles.bodyLarge.copyWith(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -65,7 +65,7 @@ class UserItem extends StatelessWidget {
                 const SizedBox(width: 5),
                 Text(
                   "Visit",
-                  style: AppStyles.bodyLarge.copyWith(
+                  style: AppTextStyles.bodyLarge.copyWith(
                     fontSize: 16,
                     color: Colors.white,
                   ),

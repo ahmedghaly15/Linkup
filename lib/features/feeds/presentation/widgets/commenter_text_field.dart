@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/global/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/utils/size_config.dart';
-import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../layout/presentation/view/manager/app_cubit.dart';
 
 class CommenterTextField extends StatelessWidget {
   const CommenterTextField({
@@ -33,7 +33,7 @@ class CommenterTextField extends StatelessWidget {
                 textCapitalization: TextCapitalization.sentences,
                 maxLines: null,
                 cursorColor: Get.isDarkMode ? Colors.white60 : Colors.black,
-                style: AppStyles.bodySmall.copyWith(
+                style: AppTextStyles.bodySmall.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   height: 1.5,

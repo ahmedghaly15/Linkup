@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/user_model.dart';
-import '../../../../layout/presenetation/view/manager/app_cubit.dart';
-import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../layout/presentation/view/manager/app_states.dart';
 import '../../../users/presentation/views/user_profile_view.dart';
 import '/core/global/app_navigator.dart';
-import '/core/utils/helper.dart';
+import '../../../../core/helpers/helper.dart';
 import '/features/chat/presentation/widgets/chat_details_view_body.dart';
 
 class ChatDetailsView extends StatelessWidget {
@@ -66,7 +66,7 @@ class ChatDetailsView extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               userModel.name!,
-              style: AppStyles.bodyLarge.copyWith(
+              style: AppTextStyles.bodyLarge.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),

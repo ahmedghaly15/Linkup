@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/global/app_styles.dart';
-import '../../../../core/utils/cache_helper.dart';
+import '../../../../core/utils/app_text_styles.dart';
+import '../../../../core/helpers/cache_helper.dart';
 import '../../../auth/presentation/view/auth_view.dart';
 import '/core/global/app_navigator.dart';
 
@@ -23,7 +23,7 @@ class SignOutFloatingButton extends StatelessWidget {
         onPressed: () => signOut(context),
         label: Text(
           "Sign out",
-          style: AppStyles.bodyLarge.copyWith(
+          style: AppTextStyles.bodyLarge.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -38,10 +38,10 @@ class SignOutFloatingButton extends StatelessWidget {
   }
 
   void signOut(context) async {
-    CacheHelper.removeData(key: 'uId').then((value) {
-      if (value) {
-        AppNavigator.navigateAndFinish(screen: const AuthView());
-      }
-    });
+    // CacheHelper.removeData(key: 'uId').then((value) {
+    //   if (value) {
+    //     AppNavigator.navigateAndFinish(screen: const AuthView());
+    //   }
+    // });
   }
 }

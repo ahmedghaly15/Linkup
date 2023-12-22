@@ -55,7 +55,7 @@ class UserProfileViewBody extends StatelessWidget {
             SizedBox(height: SizeConfig.screenHeight! * 0.015),
             Text(
               userModel.name!,
-              style: AppStyles.bodyLarge.copyWith(
+              style: AppTextStyles.bodyLarge.copyWith(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -63,7 +63,7 @@ class UserProfileViewBody extends StatelessWidget {
             SizedBox(height: SizeConfig.screenHeight! * 0.008),
             Text(
               userModel.bio!,
-              style: AppStyles.bodySmall.copyWith(fontSize: 15),
+              style: AppTextStyles.bodySmall.copyWith(fontSize: 15),
             ),
             SizedBox(height: SizeConfig.screenHeight! * 0.008),
             Row(
@@ -77,7 +77,7 @@ class UserProfileViewBody extends StatelessWidget {
                 SizedBox(width: SizeConfig.screenWidth! * 0.008),
                 Text(
                   userModel.phone!,
-                  style: AppStyles.caption.copyWith(fontSize: 15),
+                  style: AppTextStyles.caption.copyWith(fontSize: 15),
                 ),
               ],
             ),

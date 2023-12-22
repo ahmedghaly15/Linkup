@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/models/post_model.dart';
-import '../../../../core/utils/helper.dart';
-import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../core/helpers/helper.dart';
+import '../../../../layout/presentation/view/manager/app_cubit.dart';
 
 class TopPostItemSection extends StatelessWidget {
   const TopPostItemSection({
@@ -31,7 +31,7 @@ class TopPostItemSection extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     model.name!,
-                    style: AppStyles.bodyLarge.copyWith(
+                    style: AppTextStyles.bodyLarge.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 17,
                     ),
@@ -49,7 +49,7 @@ class TopPostItemSection extends StatelessWidget {
               ),
               Text(
                 "${model.date} at ${model.time}",
-                style: AppStyles.caption,
+                style: AppTextStyles.caption,
               ),
             ],
           ),

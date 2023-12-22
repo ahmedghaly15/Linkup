@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/global/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
 import '/core/models/message_model.dart';
 import '/core/utils/size_config.dart';
@@ -48,7 +48,7 @@ class CustomMessageBubble extends StatelessWidget {
               if (messageModel.messageText != null)
                 Text(
                   messageModel.messageText!,
-                  style: AppStyles.bodySmall.copyWith(
+                  style: AppTextStyles.bodySmall.copyWith(
                     fontSize: 15.5,
                     fontWeight: FontWeight.w600,
                     height: 1.5,
@@ -81,7 +81,7 @@ class CustomMessageBubble extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "${messageModel.date}",
-                    style: AppStyles.caption.copyWith(
+                    style: AppTextStyles.caption.copyWith(
                       color: Get.isDarkMode ? Colors.white54 : Colors.black38,
                     ),
                   ),
@@ -98,7 +98,7 @@ class CustomMessageBubble extends StatelessWidget {
                   ),
                   Text(
                     "${messageModel.time}",
-                    style: AppStyles.caption.copyWith(
+                    style: AppTextStyles.caption.copyWith(
                       color: Get.isDarkMode ? Colors.white54 : Colors.black38,
                     ),
                   ),

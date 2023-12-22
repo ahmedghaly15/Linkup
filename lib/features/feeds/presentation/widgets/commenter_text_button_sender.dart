@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/global/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/global/app_styles.dart';
-import '../../../../core/utils/helper.dart';
-import '../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../core/helpers/helper.dart';
+import '../../../../layout/presentation/view/manager/app_cubit.dart';
 
 class CommenterTextButtonSender extends StatelessWidget {
   const CommenterTextButtonSender({
@@ -57,9 +57,9 @@ class CommenterTextButtonSender extends StatelessWidget {
         textStyle: MaterialStateProperty.resolveWith<TextStyle>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return AppStyles.bodySmall;
+              return AppTextStyles.bodySmall;
             }
-            return AppStyles.bodySmall.copyWith(
+            return AppTextStyles.bodySmall.copyWith(
               fontWeight: FontWeight.bold,
             );
           },

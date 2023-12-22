@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/utils/size_config.dart';
 import '../view/manager/auth_view_cubit.dart';
-import '/core/global/app_texts.dart';
+import '../../../../core/utils/app_strings.dart';
 import 'auth_form.dart';
 
 class AuthViewBody extends StatelessWidget {
@@ -57,16 +57,16 @@ class AuthViewBody extends StatelessWidget {
             children: <Widget>[
               Text(
                 authMode == AuthMode.signIn ? "SIGN IN" : "SIGN UP",
-                style: AppStyles.headingLarge,
+                style: AppTextStyles.headingLarge,
                 textAlign: TextAlign.left,
               ),
               // For Adding Some Space
               SizedBox(height: SizeConfig.screenHeight! * 0.01),
               Text(
                 authMode == AuthMode.signIn
-                    ? AppTexts.subTitleSignInText
-                    : AppTexts.subTitleSignUpText,
-                style: AppStyles.bodyLarge,
+                    ? AppStrings.subTitleSignInText
+                    : AppStrings.subTitleSignUpText,
+                style: AppTextStyles.bodyLarge,
               ),
               SizedBox(height: SizeConfig.screenHeight! * 0.03),
               //======================= Auth Form =======================

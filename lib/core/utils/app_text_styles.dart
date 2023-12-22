@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/core/utils/app_colors.dart';
 
-import '/core/global/app_colors.dart';
-
-class AppStyles {
+class AppTextStyles {
   static const TextStyle headingLarge = TextStyle(
     fontSize: 50,
     fontWeight: FontWeight.bold,
@@ -20,13 +19,11 @@ class AppStyles {
   static TextStyle appBarTitleStyle = const TextStyle(
     fontSize: 23,
     fontWeight: FontWeight.bold,
-    // color: ThemeCubit.isDark ? Colors.white : Colors.black,
     letterSpacing: 0.7,
   );
 
   static TextStyle inputFieldTextStyle = const TextStyle(
     fontSize: 20,
-    // color: ThemeCubit.isDark ? Colors.white : Colors.black,
   );
 
   static const TextStyle hintStyle = TextStyle(
@@ -38,7 +35,6 @@ class AppStyles {
 
   static TextStyle bodyLarge = const TextStyle(
     fontSize: 18,
-    // color: ThemeCubit.isDark ? Colors.white : Colors.black,
     letterSpacing: 0.5,
   );
 
@@ -50,7 +46,6 @@ class AppStyles {
 
   static TextStyle bodySmall = const TextStyle(
     fontSize: 16,
-    // color: ThemeCubit.isDark ? Colors.white : Colors.black,
     fontWeight: FontWeight.w400,
   );
 

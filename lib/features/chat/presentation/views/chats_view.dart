@@ -2,8 +2,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../layout/presenetation/view/manager/app_cubit.dart';
-import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../layout/presentation/view/manager/app_states.dart';
 import '/core/global/app_colors.dart';
 import '/features/chat/presentation/widgets/chat_item.dart';
 

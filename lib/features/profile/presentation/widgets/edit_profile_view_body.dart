@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/size_config.dart';
-import '../../../../layout/presenetation/view/manager/app_cubit.dart';
-import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../layout/presentation/view/manager/app_states.dart';
 import 'confirm_editing_buttons.dart';
 import 'edit_cover_image.dart';
 import 'edit_profile_image.dart';

@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/utils/cache_helper.dart';
-import '../../../../../layout/presenetation/view/manager/app_cubit.dart';
+import '../../../../../core/helpers/cache_helper.dart';
+import '../../../../../layout/presentation/view/manager/app_cubit.dart';
 import '/features/auth/domain/auth_repo.dart';
 import 'auth_view_states.dart';
 
@@ -37,7 +37,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
     )
         .then((value) {
       emit(SignInSuccessState(value.user!.uid));
-      CacheHelper.saveData(key: 'uId', value: value.user!.uid);
+      // CacheHelper.saveData(key: 'uId', value: value.user!.uid);
       AppCubit.getObject(context).getUserData(value.user!.uid);
     }).catchError((error) {
       if (error is FirebaseAuthException)
@@ -70,7 +70,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
         phone: phone,
         uId: value.user!.uid,
       );
-      CacheHelper.saveData(key: 'uId', value: value.user!.uid);
+      // CacheHelper.saveData(key: 'uId', value: value.user!.uid);
       AppCubit.getObject(context).getUserData(value.user!.uid);
     }).catchError((error) {
       print(error.toString());

@@ -24,7 +24,7 @@ class SwitchAuthMode extends StatelessWidget {
           authMode == AuthMode.signIn
               ? "Don't have an account?"
               : "Already have an account?",
-          style: AppStyles.bodySmall,
+          style: AppTextStyles.bodySmall,
         ),
         CustomTextButton(
           onPressed: switchAuthMode,

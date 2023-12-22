@@ -23,7 +23,7 @@ class UserNameAndImage extends StatelessWidget {
         Expanded(
           child: Text(
             model.name!,
-            style: AppStyles.bodyLarge.copyWith(
+            style: AppTextStyles.bodyLarge.copyWith(
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),

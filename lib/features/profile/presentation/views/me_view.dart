@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/models/user_model.dart';
-import '../../../../core/utils/helper.dart';
-import '../../../../layout/presenetation/view/manager/app_cubit.dart';
-import '../../../../layout/presenetation/view/manager/app_states.dart';
+import '../../../../core/helpers/helper.dart';
+import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../layout/presentation/view/manager/app_states.dart';
 import '../widgets/me_profile_and_cover_images.dart';
 import '../widgets/sign_out_floating_button.dart';
 import '/core/global/app_navigator.dart';
@@ -37,7 +37,7 @@ class MeView extends StatelessWidget {
                     SizedBox(height: SizeConfig.screenHeight! * 0.015),
                     Text(
                       userModel.name!,
-                      style: AppStyles.bodyLarge.copyWith(
+                      style: AppTextStyles.bodyLarge.copyWith(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
@@ -45,7 +45,7 @@ class MeView extends StatelessWidget {
                     SizedBox(height: SizeConfig.screenHeight! * 0.008),
                     Text(
                       userModel.bio!,
-                      style: AppStyles.caption.copyWith(fontSize: 15),
+                      style: AppTextStyles.caption.copyWith(fontSize: 15),
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.008),
                     Row(
@@ -59,7 +59,7 @@ class MeView extends StatelessWidget {
                         SizedBox(width: SizeConfig.screenWidth! * 0.008),
                         Text(
                           userModel.phone!,
-                          style: AppStyles.caption.copyWith(fontSize: 15),
+                          style: AppTextStyles.caption.copyWith(fontSize: 15),
                         ),
                       ],
                     ),

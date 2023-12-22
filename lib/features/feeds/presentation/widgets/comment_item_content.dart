@@ -18,7 +18,7 @@ class CommentItemContent extends StatelessWidget {
       children: <Widget>[
         Text(
           commentModel.name!,
-          style: AppStyles.bodySmall.copyWith(
+          style: AppTextStyles.bodySmall.copyWith(
             fontSize: 17,
             fontWeight: FontWeight.bold,
             letterSpacing: 0.5,
@@ -33,7 +33,7 @@ class CommentItemContent extends StatelessWidget {
         if (commentModel.commentText != null)
           Text(
             commentModel.commentText!,
-            style: AppStyles.bodySmall.copyWith(
+            style: AppTextStyles.bodySmall.copyWith(
               fontWeight: FontWeight.w500,
               height: 1,
               letterSpacing: 0.5,
@@ -65,7 +65,7 @@ class CommentItemContent extends StatelessWidget {
           children: <Widget>[
             Text(
               "${commentModel.date}",
-              style: AppStyles.caption.copyWith(
+              style: AppTextStyles.caption.copyWith(
                 color: Get.isDarkMode ? Colors.white54 : Colors.black38,
               ),
             ),
@@ -82,7 +82,7 @@ class CommentItemContent extends StatelessWidget {
             ),
             Text(
               "${commentModel.time}",
-              style: AppStyles.caption.copyWith(
+              style: AppTextStyles.caption.copyWith(
                 color: Get.isDarkMode ? Colors.white54 : Colors.black38,
               ),
             ),

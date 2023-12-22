@@ -24,7 +24,7 @@ class NewPostTextField extends StatelessWidget {
             maxLines: null,
             controller: textController,
             enableSuggestions: true,
-            style: AppStyles.bodySmall.copyWith(
+            style: AppTextStyles.bodySmall.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.normal,
               height: 1.4,
