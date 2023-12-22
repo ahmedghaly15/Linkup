@@ -7,33 +7,66 @@ environment:
   sdk: ">=2.19.3 <3.0.0"
 
 dependencies:
-  bloc: ^8.1.1
+  flutter:
+    sdk: flutter
+
+  # Firebase
   cloud_firestore: ^4.5.0
-  conditional_builder_null_safety: ^0.0.6
   firebase_auth: ^4.4.0
   firebase_core: ^2.9.0
   firebase_storage: ^11.1.0
-  flutter:
-    sdk: flutter
+  conditional_builder_null_safety: ^0.0.6
+  # State management
   flutter_bloc: ^8.1.2
+  # Create diverse designs like WhatsApp and Telegram.
   flutter_chat_bubble: ^2.0.2
+  # To add staggered animations to your ListView, GridView
   flutter_staggered_animations: ^1.1.1
   get: ^4.6.5
+  # Purify dart code
+  dartz: ^0.10.1
+  # Implement value based equality
+  equatable: ^2.0.5
+  # Simple direct Service Locator that allows to access the concrete implementation from everywhere
   get_it: ^7.6.0
   get_storage: ^2.0.3
+  # A Flutter package to use fonts from fonts.google.com.
   google_fonts: ^4.0.3
+  # A Flutter package to use fonts from fonts.google.com.
   image_picker: ^0.8.7+1
+  # For date/number formatting and parsing
   intl: ^0.17.0
+  # Flutter plugin for reading and writing simple key-value pairs for cache
   shared_preferences: ^2.0.20
+  # Dart library that checks for internet
+  internet_connection_checker: ^1.0.0+1
+  # A collection of loading indicators animated with flutter
+  flutter_spinkit: ^5.2.0
+  # A declarative router for Flutter
+  go_router: ^13.0.0
+  # Updating app's launcher icon
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+
+  # Recommended lints to encourage good coding practices
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/camera.png
-    - assets/images/add_image.png
+    - assets/images/
+
+flutter_assets:
+  assets_path: assets/
+  output_path: lib/core/utils/
+  filename: app_assets.dart
+  field_prefix: null
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/app_icon.png"
