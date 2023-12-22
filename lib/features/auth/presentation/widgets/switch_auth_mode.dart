@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/app_text_styles.dart';
 
 import '../../../../core/widgets/custom_text_button.dart';
-import '../view/manager/auth_view_cubit.dart';
+import '../views/manager/auth_view_cubit.dart';
 
 class SwitchAuthMode extends StatelessWidget {
   const SwitchAuthMode({

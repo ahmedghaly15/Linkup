@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/size_config.dart';
 
 import '../../../../core/widgets/input_field.dart';
-import '../view/manager/auth_view_cubit.dart';
+import '../views/manager/auth_view_cubit.dart';
 import 'user_name_component.dart';
 
 class SignInModeAndUsernameComponents extends StatelessWidget {

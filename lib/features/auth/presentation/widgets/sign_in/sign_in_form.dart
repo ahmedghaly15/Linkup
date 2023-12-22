@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/auth_helper.dart';
+import 'package:social_app/core/helpers/cache_helper.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_strings.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
+import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/main_button.dart';
+import 'package:social_app/features/auth/domain/entities/sign_in_params.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
+import 'package:social_app/features/auth/presentation/widgets/custom_auth_loading.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
+import 'package:social_app/service_locator.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -56,7 +66,7 @@ class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignInCubit, SignInState>(
-      listener: (BuildContext context, SignInState state) {},
+      listener: (context, state) => _controlSignInState(state, context),
       builder: (context, state) {
         final SignInCubit cubit = BlocProvider.of<SignInCubit>(context);
         return Form(
@@ -99,8 +109,15 @@ class _SignInFormState extends State<SignInForm> {
               ),
               SizedBox(height: 40.h),
               MainButton(
-                onPressed: () {},
-                text: 'Login',
+                onPressed: () => _signIn(context),
+                child: state is SignInLoading
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : Text(
+                        'Login',
+                        style: AppTextStyles.textStyle23Bold.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
               ),
               SizedBox(height: 10.h),
             ],
@@ -108,5 +125,52 @@ class _SignInFormState extends State<SignInForm> {
         );
       },
     );
+  }
+
+  void _signIn(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      AuthHelper.keyboardUnfocus(context);
+      BlocProvider.of<SignInCubit>(context).signIn(
+        params: SignInParams(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        ),
+      );
+    } else {
+      setState(() {
+        autoValidateMode = AutovalidateMode.always;
+      });
+    }
+  }
+
+  void _controlSignInState(SignInState state, BuildContext context) {
+    if (state is SignInLoading) {
+      CustomAuthLoading.show(context);
+    }
+
+    if (state is SignInSuccess) {
+      context.getBack();
+      getIt
+          .get<CacheHelper>()
+          .saveData(
+            key: AppStrings.uId,
+            value: state.uId,
+          )
+          .then((value) {
+        if (value) {
+          Helper.uId = state.uId;
+          // TODO: get user data here
+          context.navigateAndReplacement(newRoute: Routes.layoutRoute);
+        }
+      });
+    }
+
+    if (state is SignInError) {
+      context.getBack();
+      CustomToast.showToast(
+        text: state.error,
+        state: CustomToastState.error,
+      );
+    }
   }
 }

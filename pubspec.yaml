@@ -41,11 +41,17 @@ dependencies:
   # Dart library that checks for internet
   internet_connection_checker: ^1.0.0+1
   # A collection of loading indicators animated with flutter
-  flutter_spinkit: ^5.2.0
+  loading_indicator: ^3.1.1
   # A declarative router for Flutter
   go_router: ^13.0.0
   # Updating app's launcher icon
   flutter_launcher_icons: ^0.13.1
+  # Flutter plugin for displaying inline video
+  video_player: ^2.8.1
+  # Easily create toast messages
+  fluttertoast: ^8.2.4
+  # A flutter plugin for adapting screen and font size.Guaranteed to look good on different models
+  flutter_screenutil: ^5.9.0
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +65,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/
 
 flutter_assets:
   assets_path: assets/
