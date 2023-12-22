@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/core/global/app_colors.dart';
-import '/core/global/app_navigator.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_navigator.dart';
 
 class CustomBottomSheet extends StatelessWidget {
   const CustomBottomSheet({
@@ -24,7 +24,7 @@ class CustomBottomSheet extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: BottomSheet(
         enableDrag: true,
-        onClosing: () => AppNavigator.getBack(),
+        onClosing: () => context.getBack(),
         builder: (context) {
           return ListView(
             shrinkWrap: true,
