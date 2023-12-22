@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 
 import '../../../../core/widgets/custom_text_button.dart';
 import '../view/manager/auth_view_cubit.dart';
@@ -24,7 +24,7 @@ class SwitchAuthMode extends StatelessWidget {
           authMode == AuthMode.signIn
               ? "Don't have an account?"
               : "Already have an account?",
-          style: AppTextStyles.bodySmall,
+          style: AppTextStyles.textStyle16,
         ),
         CustomTextButton(
           onPressed: switchAuthMode,

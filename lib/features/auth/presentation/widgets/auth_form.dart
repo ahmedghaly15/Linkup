@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/global/app_navigator.dart';
+import '../../../../core/utils/app_navigator.dart';
 import '../../../../core/helpers/cache_helper.dart';
 import '../../../../core/helpers/helper.dart';
 import '../../../../core/utils/size_config.dart';
@@ -168,7 +168,7 @@ class AuthForm extends StatelessWidget {
     }
 
     if (state is CreateUserSuccessState) {
-      AppNavigator.navigateAndFinish(screen: const LayoutView());
+      // AppNavigator.navigateAndFinish(screen: const LayoutView());
     }
   }
 
