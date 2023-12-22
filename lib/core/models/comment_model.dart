@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-class CommentModel {
-  String? name;
-  String? uId;
-  String? image;
-  Map<String, dynamic>? commentImage;
-  String? commentText;
-  String? time;
-  String? date;
-  Timestamp? dateTime;
+class CommentModel extends Equatable {
+  final String? name;
+  final String? uId;
+  final String? image;
+  final Map<String, dynamic>? commentImage;
+  final String? commentText;
+  final String? time;
+  final String? date;
+  final Timestamp? dateTime;
 
-  CommentModel({
+  const CommentModel({
     this.name,
     this.uId,
     this.image,
@@ -21,15 +22,17 @@ class CommentModel {
     this.dateTime,
   });
 
-  CommentModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    uId = json['uId'];
-    image = json['image'];
-    commentImage = json['commentImage'];
-    commentText = json['commentText'];
-    time = json['time'];
-    date = json['date'];
-    dateTime = json['dateTime'];
+  factory CommentModel.fromJson(Map<String, dynamic> json) {
+    return CommentModel(
+      name: json['name'] as String?,
+      uId: json['uId'] as String?,
+      image: json['image'] as String?,
+      commentImage: json['commentImage'] as Map<String, dynamic>?,
+      commentText: json['commentText'] as String?,
+      time: json['time'] as String?,
+      date: json['date'] as String?,
+      dateTime: json['dateTime'] as Timestamp?,
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -44,4 +47,16 @@ class CommentModel {
       'dateTime': dateTime,
     };
   }
+
+  @override
+  List<Object?> get props => [
+        name,
+        uId,
+        image,
+        commentText,
+        commentImage,
+        time,
+        date,
+        dateTime,
+      ];
 }

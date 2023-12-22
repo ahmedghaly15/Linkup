@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:social_app/core/errors/failure.dart';
 import 'package:social_app/core/errors/firebase_failure.dart';
 import 'package:social_app/core/internet/internet_checker.dart';
@@ -9,7 +8,6 @@ import 'package:social_app/service_locator.dart';
 
 Future<Either<Failure, T>> executeAndHandleErrors<T>({
   required Future<T> Function() function,
-  required BuildContext context,
 }) async {
   if (await getIt.get<InternetChecker>().isConnected) {
     try {
