@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 import '../../../../core/models/comment_model.dart';
 import '../../../../core/helpers/helper.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
-import '../../../../layout/presentation/view/manager/app_states.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_states.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '/features/feeds/presentation/widgets/comments_view_body.dart';
 

@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/helpers/helper.dart';
 import '../../../../core/utils/size_config.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
-import '../../../../layout/presentation/view/manager/app_states.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_states.dart';
 import '/features/feeds/presentation/widgets/post_item.dart';
 
 class FeedsView extends StatelessWidget {

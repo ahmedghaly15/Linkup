@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 import '../../../../core/models/user_model.dart';
 import '../../../../core/helpers/helper.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
-import '../../../../layout/presentation/view/manager/app_states.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_states.dart';
 import '../widgets/edit_profile_view_body.dart';
 import '/core/widgets/custom_text_button.dart';
 

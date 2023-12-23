@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/models/user_model.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
-import '../../../../layout/presentation/view/manager/app_states.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_states.dart';
 import '../../../../core/helpers/helper.dart';
 import '/core/widgets/custom_text_button.dart';
 import '/features/new_post/presentation/widgets/new_post_view_body.dart';

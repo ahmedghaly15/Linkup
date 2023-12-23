@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '/features/feeds/presentation/widgets/commenter_text_button_sender.dart';
 import '/features/feeds/presentation/widgets/get_comment_image_icon_button.dart';

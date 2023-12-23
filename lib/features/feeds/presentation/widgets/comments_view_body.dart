@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/models/comment_model.dart';
 import '../../../../core/utils/size_config.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
 import '/features/feeds/presentation/widgets/comment_item.dart';
 import '/features/feeds/presentation/widgets/commenter_field.dart';
 

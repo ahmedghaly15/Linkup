@@ -7,7 +7,7 @@ import 'package:social_app/firebase_options.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/service_locator.dart';
 
-import 'package:social_app/layout/presentation/view/layout_view.dart';
+import 'package:social_app/linkup/presentation/views/layout_view.dart';
 import 'package:social_app/linkup_app.dart';
 
 Future<void> main() async {

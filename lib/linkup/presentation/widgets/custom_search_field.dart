@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/app_colors.dart';
-import '../view/manager/app_cubit.dart';
+import '../views/manager/app_cubit.dart';
 import '/core/utils/size_config.dart';
 
 class CustomSearchField extends StatelessWidget {

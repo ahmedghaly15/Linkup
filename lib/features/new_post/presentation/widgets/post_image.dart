@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
 
 class PostImage extends StatelessWidget {
   const PostImage({

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:social_app/layout/presentation/widgets/custom_search_field.dart';
-import 'package:social_app/layout/presentation/widgets/layout_view_body.dart';
+import 'package:social_app/linkup/presentation/widgets/custom_search_field.dart';
+import 'package:social_app/linkup/presentation/widgets/layout_view_body.dart';
 
 // import '../../../core/services/theme_service.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
@@ -80,7 +80,7 @@ class LayoutView extends StatelessWidget {
             ),
           ),
       ],
-      systemOverlayStyle: Helper.setSystemOverlayStyle(),
+      // systemOverlayStyle: Helper.setSystemOverlayStyle(),
     );
   }
 }

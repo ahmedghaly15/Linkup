@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/utils/size_config.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
 
 class CommenterTextField extends StatelessWidget {
   const CommenterTextField({

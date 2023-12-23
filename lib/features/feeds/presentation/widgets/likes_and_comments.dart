@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/models/post_model.dart';
 import '../../../../core/helpers/helper.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
 import '../../../../core/utils/app_navigator.dart';
 import '/features/feeds/presentation/views/comments_view.dart';
 

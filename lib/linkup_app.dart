@@ -8,8 +8,8 @@ import 'package:social_app/config/themes/app_themes.dart';
 
 import 'package:social_app/service_locator.dart';
 import 'package:social_app/core/utils/size_config.dart';
-import 'package:social_app/layout/domain/app_repo.dart';
-import 'package:social_app/layout/presentation/view/manager/app_cubit.dart';
+import 'package:social_app/linkup/domain/app_repo.dart';
+import 'package:social_app/linkup/presentation/views/manager/app_cubit.dart';
 
 class LinkupApp extends StatelessWidget {
   // final Widget? startingScreen;

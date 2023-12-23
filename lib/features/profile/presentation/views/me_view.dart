@@ -4,8 +4,8 @@ import 'package:social_app/config/router/routes.dart';
 
 import '../../../../core/models/user_model.dart';
 import '../../../../core/helpers/helper.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
-import '../../../../layout/presentation/view/manager/app_states.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_states.dart';
 import '../widgets/me_profile_and_cover_images.dart';
 import '../widgets/sign_out_floating_button.dart';
 import '../../../../core/utils/app_navigator.dart';

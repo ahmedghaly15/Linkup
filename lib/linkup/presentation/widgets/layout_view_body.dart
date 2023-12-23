@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/helpers/helper.dart';
-import '../view/manager/app_cubit.dart';
+import '../views/manager/app_cubit.dart';
 
 class LayoutViewBody extends StatelessWidget {
   const LayoutViewBody({Key? key, required this.cubit}) : super(key: key);

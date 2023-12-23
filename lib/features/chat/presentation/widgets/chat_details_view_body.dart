@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/helpers/helper.dart';
-import '../../../../layout/presentation/view/manager/app_cubit.dart';
+import '../../../../linkup/presentation/views/manager/app_cubit.dart';
 import '/core/models/user_model.dart';
 import '/features/chat/presentation/widgets/custom_massenger_field.dart';
 import '/features/chat/presentation/widgets/custom_message_bubble.dart';
