@@ -1,57 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 
 class AppTextStyles {
-  static const TextStyle headingLarge = TextStyle(
-    fontSize: 50,
+  static TextStyle textStyle50Bold = TextStyle(
+    fontSize: 50.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.primaryColor,
     letterSpacing: 0.5,
   );
 
-  static const TextStyle customButtonTextStyle = TextStyle(
-    fontSize: 28,
+  static TextStyle textStyle28Bold = TextStyle(
+    fontSize: 28.sp,
     fontWeight: FontWeight.bold,
     letterSpacing: 0.5,
-    color: Colors.white,
   );
 
-  static TextStyle appBarTitleStyle = const TextStyle(
-    fontSize: 23,
+  static TextStyle textStyle23Bold = TextStyle(
+    fontSize: 23.sp,
     fontWeight: FontWeight.bold,
     letterSpacing: 0.7,
   );
 
-  static TextStyle inputFieldTextStyle = const TextStyle(
-    fontSize: 20,
-  );
-
-  static const TextStyle hintStyle = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.5,
-    color: Colors.grey,
-  );
-
-  static TextStyle bodyLarge = const TextStyle(
-    fontSize: 18,
+  static TextStyle textStyle18 = TextStyle(
+    fontSize: 18.sp,
     letterSpacing: 0.5,
   );
 
-  static const TextStyle customTextButtonTextStyle = TextStyle(
-    fontSize: 17,
+  static TextStyle textStyle18Bold = TextStyle(
+    fontSize: 18.sp,
     fontWeight: FontWeight.bold,
-    color: AppColors.primaryColor,
+    letterSpacing: 0.5,
   );
 
-  static TextStyle bodySmall = const TextStyle(
-    fontSize: 16,
+  static TextStyle textStyle16 = TextStyle(
+    fontSize: 16.sp,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle caption = TextStyle(
-    fontSize: 13,
-    color: Colors.grey,
-    height: 1.5,
+  static TextStyle textStyle16SemiBold = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle textStyle13 = TextStyle(
+    fontSize: 13.sp,
+    height: 1.5.h,
   );
 }

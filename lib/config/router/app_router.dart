@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/config/router/routes.dart';
+import 'package:social_app/features/auth/presentation/cubits/forgot_password/forgot_password_cubit.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
+import 'package:social_app/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:social_app/features/auth/presentation/views/sign_in_view.dart';
 import 'package:social_app/features/auth/presentation/views/sign_up_view.dart';
 import 'package:social_app/features/splash/presentation/views/splash_view.dart';
@@ -28,6 +30,14 @@ class AppRouter {
           builder: (context) => BlocProvider(
             create: (context) => getIt.get<SignUpCubit>(),
             child: const SignUpView(),
+          ),
+        );
+
+      case Routes.forgotPasswordRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<ForgotPasswordCubit>(),
+            child: const ForgotPasswordView(),
           ),
         );
 

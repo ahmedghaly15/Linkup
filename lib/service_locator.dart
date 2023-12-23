@@ -6,8 +6,6 @@ import 'package:social_app/config/locator/setup_for_external.dart';
 import 'package:social_app/config/locator/setup_for_repos.dart';
 import 'package:social_app/config/locator/setup_for_usecases.dart';
 
-import 'features/auth/logic/auth_repo_impl.dart';
-import 'features/auth/logic/auth_repo.dart';
 import '/layout/data/app_repo_impl.dart';
 import '/layout/domain/app_repo.dart';
 
@@ -27,7 +25,6 @@ class ServiceLocator {
 
     SetupLocatorForCubits().setup();
 
-    getIt.registerLazySingleton<AuthRepo>(() => AuthRepoImpl());
     getIt.registerLazySingleton<AppRepo>(() => AppRepoImpl());
   }
 }

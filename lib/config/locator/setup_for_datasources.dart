@@ -1,3 +1,5 @@
+import 'package:social_app/features/auth/data/datasources/forgot_password/forgot_password_datasource.dart';
+import 'package:social_app/features/auth/data/datasources/forgot_password/forgot_password_datasource_impl.dart';
 import 'package:social_app/features/auth/data/datasources/sign_in/sign_in_datasource.dart';
 import 'package:social_app/features/auth/data/datasources/sign_in/sign_in_datasource_impl.dart';
 import 'package:social_app/features/auth/data/datasources/sign_up/sign_up_datasource.dart';
@@ -9,5 +11,9 @@ class SetupLocatorForDataSource {
     getIt.registerLazySingleton<SignInDataSource>(() => SignInDataSourceImpl());
 
     getIt.registerLazySingleton<SignUpDataSource>(() => SignUpDataSourceImpl());
+
+    getIt.registerLazySingleton<ForgotPasswordDataSource>(
+      () => ForgotPasswordDataSourceImpl(),
+    );
   }
 }

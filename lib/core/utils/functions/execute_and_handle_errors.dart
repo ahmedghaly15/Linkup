@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:social_app/core/errors/failure.dart';
 import 'package:social_app/core/errors/firebase_failure.dart';
 import 'package:social_app/core/internet/internet_checker.dart';
@@ -16,6 +17,7 @@ Future<Either<Failure, T>> executeAndHandleErrors<T>({
       return Right(result);
     } catch (failure) {
       if (failure is FirebaseException) {
+        debugPrint('CODE: ${failure.code}');
         return Left(FirebaseFailure.fromFirebaseException(failure.code));
       }
       return Left(FirebaseFailure(failureMsg: failure.toString()));

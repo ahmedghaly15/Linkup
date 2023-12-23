@@ -19,6 +19,9 @@ class FirebaseFailure extends Failure {
       case 'email-already-in-use':
         return const FirebaseFailure(failureMsg: 'Account already exists');
 
+      case 'invalid-email':
+        return const FirebaseFailure(failureMsg: 'An Invalid Email');
+
       default:
         return const FirebaseFailure(failureMsg: AppStrings.opps);
     }
