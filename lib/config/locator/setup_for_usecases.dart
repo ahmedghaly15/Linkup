@@ -43,5 +43,25 @@ class SetupLocatorForUseCases {
     getIt.registerLazySingleton<GetAllUsersUseCase>(
       () => GetAllUsersUseCase(linkupRepo: getIt.get<LinkupRepo>()),
     );
+
+    getIt.registerLazySingleton<GetPostsUseCase>(
+      () => GetPostsUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+    );
+
+    getIt.registerLazySingleton<CreatePostUseCase>(
+      () => CreatePostUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+    );
+
+    getIt.registerLazySingleton<DeletePostUseCase>(
+      () => DeletePostUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+    );
+
+    getIt.registerLazySingleton<GetPostImageUseCase>(
+      () => GetPostImageUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+    );
+
+    getIt.registerLazySingleton<UploadPostImageUseCase>(
+      () => UploadPostImageUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+    );
   }
 }

@@ -1,37 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../../core/utils/app_colors.dart';
-import '/core/models/post_model.dart';
-import '/features/feeds/presentation/widgets/post_item_content.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/models/post_model.dart';
+import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/features/feeds/presentation/widgets/custom_divider.dart';
+import 'package:social_app/features/feeds/presentation/widgets/likes_and_comments.dart';
+import 'package:social_app/features/feeds/presentation/widgets/post_text_and_image.dart';
+import 'package:social_app/features/feeds/presentation/widgets/top_post_item_section.dart';
+import 'package:social_app/features/feeds/presentation/widgets/write_comment_input_field.dart';
 
 class PostItem extends StatelessWidget {
   const PostItem({
     Key? key,
-    required this.context,
-    required this.postModel,
+    required this.post,
   }) : super(key: key);
 
-  final BuildContext context;
-  final PostModel postModel;
+  final PostModel post;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
-      ),
-      color:
-          Get.isDarkMode ? AppColors.darkGreyClr.withOpacity(0) : Colors.white,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 8.0,
-          vertical: 10,
+    return BlocBuilder<ThemesCubit, ThemeData>(
+      builder: (context, state) => Container(
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(
+          horizontal: 8.0.w,
+          vertical: 10.h,
         ),
-        child: PostItemContent(model: postModel),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(16.r)),
+          color: state.brightness == Brightness.dark
+              ? AppColors.darkGreyClr
+              : Colors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              offset: Offset(0, 1.73.h),
+              blurRadius: 10.h,
+              color: state.brightness == Brightness.dark
+                  ? Colors.grey.shade700
+                  : Colors.grey,
+            )
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            TopPostItemSection(post: post),
+            Padding(
+              padding: EdgeInsetsDirectional.only(
+                start: 5.w,
+                end: 5.w,
+                top: 15.h,
+              ),
+              child: const CustomDivider(),
+            ),
+            PostTextAndImage(post: post),
+            LikesAndComments(post: post),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 15.0.h,
+                horizontal: 5.w,
+              ),
+              child: const CustomDivider(),
+            ),
+            const WriteCommentInputField(),
+          ],
+        ),
       ),
     );
   }

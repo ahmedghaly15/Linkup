@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/core/models/post_model.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
-
-import '../../../../core/utils/app_text_styles.dart';
-import '../../../../core/models/post_model.dart';
-import '../../../../core/helpers/helper.dart';
-
-import '../../../../core/utils/app_navigator.dart';
-import '/features/feeds/presentation/views/comments_view.dart';
 
 class LikesAndComments extends StatelessWidget {
   const LikesAndComments({
     Key? key,
-    required this.model,
+    required this.post,
   }) : super(key: key);
 
-  final PostModel model;
+  final PostModel post;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15),
+      padding: EdgeInsets.only(top: 15.h),
       child: Row(
         children: <Widget>[
           Expanded(
             child: InkWell(
               onTap: () {
-                AppCubit.getObject(context).likedByMe(postId: model.postId!);
+                AppCubit.getObject(context).likedByMe(postId: post.postId!);
                 Helper.buildSnackBar(
                   message: "Liked Successfully",
                   state: SnackBarStates.success,
@@ -34,14 +31,14 @@ class LikesAndComments extends StatelessWidget {
               },
               child: Row(
                 children: <Widget>[
-                  const Icon(
+                  Icon(
                     Icons.favorite_border,
-                    size: 18,
+                    size: 18.w,
                     color: Colors.grey,
                   ),
-                  const SizedBox(width: 5),
+                  SizedBox(width: 5.w),
                   Text(
-                    "${model.likes} Likes",
+                    "${post.likes} Likes",
                     style: AppTextStyles.textStyle13,
                   ),
                 ],
@@ -61,14 +58,14 @@ class LikesAndComments extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  const Icon(
+                  Icon(
                     Icons.comment,
-                    size: 18,
+                    size: 18.w,
                     color: Colors.grey,
                   ),
-                  const SizedBox(width: 5),
+                  SizedBox(width: 5.w),
                   Text(
-                    "${model.comments} comments",
+                    "${post.comments} comments",
                     style: AppTextStyles.textStyle13,
                   ),
                 ],

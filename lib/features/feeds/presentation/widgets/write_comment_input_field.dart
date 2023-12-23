@@ -1,51 +1,34 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/app_navigator.dart';
-import '../../../../core/utils/app_text_styles.dart';
-import '../../../../core/models/post_model.dart';
-import '../../../../core/helpers/helper.dart';
-import '/features/feeds/presentation/views/comments_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
 
 class WriteCommentInputField extends StatelessWidget {
-  const WriteCommentInputField({
-    Key? key,
-    required this.model,
-  }) : super(key: key);
-
-  final PostModel model;
+  const WriteCommentInputField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Expanded(
-          child: Row(
-            children: <Widget>[
-              CircleAvatar(
-                radius: 18,
-                backgroundImage: NetworkImage(
-                  Helper.currentUser!.image!,
-                ),
+        CircleAvatar(
+          radius: 18.r,
+          backgroundImage: const NetworkImage(
+              'https://img.freepik.com/free-icon/user_318-159711.jpg?size=626&ext=jpg&ga=GA1.2.825316313.1674289475&semt=ais'
+              // Helper.currentUser!.image!,
               ),
-              const SizedBox(width: 10),
-              TextButton(
-                onPressed: () {
-                  // AppNavigator.navigateTo(
-                  //   screen: CommentsView(
-                  //     postId: model.postId,
-                  //     postUid: model.uId,
-                  //   ),
-                  // );
-                },
-                child: Text(
-                  "Write a comment...",
-                  style: AppTextStyles.textStyle16.copyWith(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-            ],
+        ),
+        SizedBox(width: 10.w),
+        TextButton(
+          onPressed: () {
+            // AppNavigator.navigateTo(
+            //   screen: CommentsView(
+            //     postId: model.postId,
+            //     postUid: model.uId,
+            //   ),
+            // );
+          },
+          child: Text(
+            "Write a comment...",
+            style: AppTextStyles.textStyle13,
           ),
         ),
       ],

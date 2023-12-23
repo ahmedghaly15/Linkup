@@ -31,5 +31,15 @@ class SetupLocatorForCubits {
         getUserDataUseCase: getIt.get<GetUserDataUseCase>(),
       ),
     );
+
+    getIt.registerFactory<FeedsCubit>(
+      () => FeedsCubit(
+        getPostsUseCase: getIt.get<GetPostsUseCase>(),
+        createPostUseCase: getIt.get<CreatePostUseCase>(),
+        deletePostUseCase: getIt.get<DeletePostUseCase>(),
+        getPostImageUseCase: getIt.get<GetPostImageUseCase>(),
+        uploadPostImageUseCase: getIt.get<UploadPostImageUseCase>(),
+      ),
+    );
   }
 }

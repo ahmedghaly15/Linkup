@@ -33,11 +33,7 @@ class LoadingWidget extends StatelessWidget {
           ),
           child: LoadingIndicator(
             indicatorType: Indicator.ballRotateChase,
-            colors: const <Color>[
-              Color.fromRGBO(186, 166, 234, 1),
-              Color.fromRGBO(146, 63, 211, 1),
-              AppColors.primaryColor,
-            ],
+            colors: AppColors.loadingColors,
             strokeWidth: 5.w,
           ),
         ),

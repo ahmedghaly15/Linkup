@@ -4,6 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/app_router.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/utils/app_strings.dart';
+import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
+import 'package:social_app/features/linkup/domain/app_repo.dart';
+import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
 
 import 'package:social_app/service_locator.dart';
 import 'package:social_app/core/utils/size_config.dart';
@@ -30,12 +34,21 @@ class LinkupApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => getIt.get<ThemesCubit>(),
-          )
-          // BlocProvider(
-          //   create: (context) => AppCubit(getIt.get<AppRepo>())
-          //     ..getUserData(uId)
-          //     ..getPosts(),
-          // ),
+          ),
+
+          BlocProvider(
+            create: (context) => getIt.get<LinkupCubit>(),
+          ),
+
+          BlocProvider(
+            create: (context) => getIt.get<FeedsCubit>()..getPosts(),
+          ),
+
+          BlocProvider(
+            create: (context) => AppCubit(getIt.get<AppRepo>()),
+            // ..getUserData()
+            // ..getPosts(),
+          ),
           // BlocProvider(create: (context) => ThemeService()),
         ],
         child: BlocBuilder<ThemesCubit, ThemeData>(

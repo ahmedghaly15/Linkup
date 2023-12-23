@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/core/models/post_model.dart';
 import 'package:social_app/core/models/user_model.dart';
+import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 import 'package:social_app/features/linkup/domain/entities/change_index_params.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_bottom_nav_index.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_nav_to_home.dart';
@@ -46,9 +49,17 @@ class LinkupCubit extends Cubit<LinkupState> {
       index: index,
     ));
 
+    // if (currentIndex == 0) BlocProvider.of<FeedsCubit>(context).getPosts();
+
     if (currentIndex == 1 || currentIndex == 2) getAllUsers();
 
     emit(ChangeBottomNavIndex(index: index));
+  }
+
+  void changeBottomNavToHome(BuildContext context) {
+    changeNavToHomeUseCase(ChangeIndexParams(context: context));
+
+    emit(const ChangeBottomNavToHome());
   }
 
   List<UserModel> users = [];
@@ -78,8 +89,23 @@ class LinkupCubit extends Cubit<LinkupState> {
       value.fold(
         (failure) =>
             emit(GetUserDataError(error: failure.failureMsg.toString())),
-        (success) => emit(const GetUserDataSuccess()),
+        (success) {
+          Helper.currentUser = UserModel.fromJson(success.data()!);
+          emit(const GetUserDataSuccess());
+        },
       );
     });
+  }
+
+  List<UserModel> searchList = [];
+  bool isSearching = false;
+
+  void invertIsSearching() {
+    isSearching = !isSearching;
+    emit(const InvertIsSearchingSuccess());
+  }
+
+  void rebuildSearchList(List<UserModel> list) {
+    emit(SearchListUpdateSuccess(list: list));
   }
 }

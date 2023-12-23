@@ -9,6 +9,8 @@ import 'package:social_app/service_locator.dart';
 
 import 'package:social_app/linkup_app.dart';
 
+// TODO: split comments from feeds feature & make it a feature
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/utils/app_colors.dart';
-
-import '../views/manager/app_cubit.dart';
+import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({
@@ -10,27 +10,26 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final AppCubit cubit;
+  final LinkupCubit cubit;
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 0.1,
-      clipBehavior: Clip.antiAlias,
-      child: BottomNavigationBar(
-        backgroundColor: Get.isDarkMode ? AppColors.darkGreyClr : Colors.white,
-        items: cubit.bottomNavItems,
-        currentIndex: cubit.currentIndex,
-        onTap: (int index) => cubit.changeBottomNavIndex(index),
-        type: BottomNavigationBarType.fixed,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        showSelectedLabels: true,
-        showUnselectedLabels: false,
-        selectedItemColor: AppColors.primaryColor,
-        selectedIconTheme: const IconThemeData(size: 25),
-        unselectedIconTheme: const IconThemeData(size: 22),
-      ),
+    return BlocBuilder<ThemesCubit, ThemeData>(
+      builder: (context, themeState) {
+        return BottomNavigationBar(
+          backgroundColor: themeState.brightness == Brightness.dark
+              ? AppColors.darkGreyClr
+              : Colors.white,
+          items: cubit.getBottomNavItems(),
+          currentIndex: cubit.currentIndex,
+          onTap: (int index) => cubit.changeBottomNavIndex(index, context),
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: AppColors.primaryColor,
+        );
+      },
     );
   }
 }

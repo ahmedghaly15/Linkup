@@ -1,75 +1,73 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
-
-import '../../../../core/utils/app_text_styles.dart';
-import '../../../../core/models/post_model.dart';
-import '../../../../core/helpers/helper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/core/models/post_model.dart';
+import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
 
 class TopPostItemSection extends StatelessWidget {
   const TopPostItemSection({
     super.key,
-    required this.model,
+    required this.post,
   });
 
-  final PostModel model;
+  final PostModel post;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        CircleAvatar(
-          radius: 25,
-          backgroundImage: NetworkImage(model.image!),
+        CachedNetworkImage(
+          imageUrl: post.image!,
+          imageBuilder: (_, image) {
+            return CircleAvatar(
+              backgroundImage: image,
+              radius: 25.r,
+              backgroundColor: AppColors.primaryColor,
+            );
+          },
         ),
-        const SizedBox(width: 10),
+        SizedBox(width: 10.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Text(
-                    model.name!,
-                    style: AppTextStyles.textStyle18.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                    ),
-                  ),
-                  // const SizedBox(width: 5),
-                  // Icon(
-                  //   Helper.model!.name == "Ahmed Ghaly" ||
-                  //           Helper.model!.name == "Abo Ghaly"
-                  //       ? Icons.verified
-                  //       : null,
-                  //   size: 16,
-                  //   color: Colors.blue,
-                  // ),
-                ],
+              Text(
+                post.name!,
+                style: AppTextStyles.textStyle16SemiBold,
               ),
               Text(
-                "${model.date} at ${model.time}",
+                "${post.date} at ${post.time}",
                 style: AppTextStyles.textStyle13,
               ),
             ],
           ),
         ),
-        IconButton(
-          onPressed: () {
-            AppCubit.getObject(context).deletePost(
-              postId: model.postId!,
-              context: context,
+        BlocBuilder<ThemesCubit, ThemeData>(
+          builder: (context, state) {
+            return IconButton(
+              onPressed: () {
+                // AppCubit.getObject(context).deletePost(
+                //   postId: post.postId!,
+                //   context: context,
+                // );
+              },
+              icon: Icon(
+                post.uId == Helper.currentUser!.uId
+                    ? Icons.delete
+                    : Icons.more_horiz,
+                size: 25.w,
+                color: post.uId == Helper.currentUser!.uId
+                    ? Colors.red
+                    : (state.brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black),
+              ),
             );
           },
-          icon: Icon(
-            model.uId == Helper.currentUser!.uId
-                ? Icons.delete
-                : Icons.more_horiz,
-            size: 25,
-            color: model.uId == Helper.currentUser!.uId
-                ? Colors.red
-                : (Get.isDarkMode ? Colors.white : Colors.black),
-          ),
         ),
       ],
     );

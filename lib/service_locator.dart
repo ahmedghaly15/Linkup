@@ -25,6 +25,12 @@ import 'package:social_app/features/auth/domain/usecases/sign_up/sign_up_usecase
 import 'package:social_app/features/auth/presentation/cubits/forgot_password/forgot_password_cubit.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
+import 'package:social_app/features/feeds/data/datasources/feeds_datasource.dart';
+import 'package:social_app/features/feeds/data/datasources/feeds_datasource_impl.dart';
+import 'package:social_app/features/feeds/data/repositories/feeds_repo_impl.dart';
+import 'package:social_app/features/feeds/domain/repositories/feeds_repo.dart';
+import 'package:social_app/features/feeds/domain/usecases/get_posts.dart';
+import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 import 'package:social_app/features/linkup/data/app_repo_impl.dart';
 import 'package:social_app/features/linkup/data/datasources/linkup_datasource.dart';
 import 'package:social_app/features/linkup/data/datasources/linkup_datasource_impl.dart';

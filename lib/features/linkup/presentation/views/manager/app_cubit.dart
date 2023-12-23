@@ -84,14 +84,14 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void getUserData(String? uId) {
-    emit(GetUserLoadingState());
+    emit(GetUserLoading());
 
     // Storing The Current User Id
     // uId = CacheHelper.getStringData(key: 'uId');
 
     appRepo.getUserData(uId).then((value) {
       Helper.currentUser = UserModel.fromJson(value.data()!);
-      emit(GetUserSuccessState());
+      emit(GetUserSuccess());
     }).catchError((error) {
       print(error.toString());
       emit(GetUserErrorState(error.toString()));

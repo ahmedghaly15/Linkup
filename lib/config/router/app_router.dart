@@ -7,8 +7,8 @@ import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cub
 import 'package:social_app/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:social_app/features/auth/presentation/views/sign_in_view.dart';
 import 'package:social_app/features/auth/presentation/views/sign_up_view.dart';
+import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
 import 'package:social_app/features/splash/presentation/views/splash_view.dart';
-import 'package:social_app/home.dart';
 import 'package:social_app/service_locator.dart';
 
 class AppRouter {
@@ -41,8 +41,10 @@ class AppRouter {
           ),
         );
 
-      case Routes.layoutRoute:
-        return MaterialPageRoute(builder: (context) => const HomeView());
+      case Routes.linkupRoute:
+        return MaterialPageRoute(
+          builder: (context) => const LinkupView(),
+        );
 
       default:
         return unFoundRoute();

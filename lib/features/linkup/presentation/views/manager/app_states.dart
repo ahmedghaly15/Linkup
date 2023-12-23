@@ -5,9 +5,9 @@ abstract class AppStates {}
 class AppInitialState extends AppStates {}
 
 //============ The Current User's States ============
-class GetUserLoadingState extends AppStates {}
+class GetUserLoading extends AppStates {}
 
-class GetUserSuccessState extends AppStates {}
+class GetUserSuccess extends AppStates {}
 
 class GetUserErrorState extends AppStates {
   final String error;

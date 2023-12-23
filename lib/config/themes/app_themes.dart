@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/utils/app_colors.dart';
@@ -10,6 +9,7 @@ class AppTheme {
         // colorScheme: const ColorScheme.light(
         //   background: AppColors.scaffoldBackgroundClr,
         // ),
+
         textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
         bottomAppBarTheme: const BottomAppBarTheme(
           color: AppColors.scaffoldBackgroundClr,

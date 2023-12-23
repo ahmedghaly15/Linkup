@@ -19,5 +19,9 @@ class SetupLocatorForRepos {
     getIt.registerLazySingleton<LinkupRepo>(
       () => LinkupRepoImpl(linkupDataSource: getIt.get<LinkupDataSource>()),
     );
+
+    getIt.registerLazySingleton<FeedsRepo>(
+      () => FeedsRepoImpl(feedsDataSource: getIt.get<FeedsDataSource>()),
+    );
   }
 }
