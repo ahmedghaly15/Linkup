@@ -25,20 +25,19 @@ import 'package:social_app/features/auth/domain/usecases/sign_up/sign_up_usecase
 import 'package:social_app/features/auth/presentation/cubits/forgot_password/forgot_password_cubit.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
-import 'package:social_app/linkup/data/datasources/linkup_datasource.dart';
-import 'package:social_app/linkup/data/datasources/linkup_datasource_impl.dart';
-import 'package:social_app/linkup/data/repositories/linkup_repo_impl.dart';
-import 'package:social_app/linkup/domain/repositories/linkup_repo.dart';
-import 'package:social_app/linkup/domain/usecases/change_bottom_nav_index.dart';
-import 'package:social_app/linkup/domain/usecases/change_nav_to_home.dart';
-import 'package:social_app/linkup/domain/usecases/get_all_users.dart';
-import 'package:social_app/linkup/domain/usecases/get_body.dart';
-import 'package:social_app/linkup/domain/usecases/get_bottom_nav_items.dart';
-import 'package:social_app/linkup/domain/usecases/get_user_data.dart';
-import 'package:social_app/linkup/presentation/cubits/linkup_cubit.dart';
-
-import 'linkup/data/app_repo_impl.dart';
-import 'linkup/domain/app_repo.dart';
+import 'package:social_app/features/linkup/data/app_repo_impl.dart';
+import 'package:social_app/features/linkup/data/datasources/linkup_datasource.dart';
+import 'package:social_app/features/linkup/data/datasources/linkup_datasource_impl.dart';
+import 'package:social_app/features/linkup/data/repositories/linkup_repo_impl.dart';
+import 'package:social_app/features/linkup/domain/app_repo.dart';
+import 'package:social_app/features/linkup/domain/repositories/linkup_repo.dart';
+import 'package:social_app/features/linkup/domain/usecases/change_bottom_nav_index.dart';
+import 'package:social_app/features/linkup/domain/usecases/change_nav_to_home.dart';
+import 'package:social_app/features/linkup/domain/usecases/get_all_users.dart';
+import 'package:social_app/features/linkup/domain/usecases/get_body.dart';
+import 'package:social_app/features/linkup/domain/usecases/get_bottom_nav_items.dart';
+import 'package:social_app/features/linkup/domain/usecases/get_user_data.dart';
+import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 
 part 'config/locator/setup_for_usecases.dart';
 part 'config/locator/setup_for_core.dart';

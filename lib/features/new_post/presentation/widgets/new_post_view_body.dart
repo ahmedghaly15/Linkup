@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_states.dart';
 
 import '../../../../core/utils/size_config.dart';
-import '../../../../linkup/presentation/views/manager/app_cubit.dart';
-import '../../../../linkup/presentation/views/manager/app_states.dart';
+
 import '../../../../core/utils/app_colors.dart';
 import '/core/models/user_model.dart';
 import 'add_photos_and_tags_buttons.dart';

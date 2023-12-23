@@ -4,12 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/app_router.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/utils/app_strings.dart';
-import 'package:social_app/config/themes/app_themes.dart';
 
 import 'package:social_app/service_locator.dart';
 import 'package:social_app/core/utils/size_config.dart';
-import 'package:social_app/linkup/domain/app_repo.dart';
-import 'package:social_app/linkup/presentation/views/manager/app_cubit.dart';
 
 class LinkupApp extends StatelessWidget {
   // final Widget? startingScreen;

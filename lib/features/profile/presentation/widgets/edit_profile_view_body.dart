@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_states.dart';
 
 import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/size_config.dart';
-import '../../../../linkup/presentation/views/manager/app_cubit.dart';
-import '../../../../linkup/presentation/views/manager/app_states.dart';
+
 import 'confirm_editing_buttons.dart';
 import 'edit_cover_image.dart';
 import 'edit_profile_image.dart';

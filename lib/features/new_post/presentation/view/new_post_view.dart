@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_states.dart';
 
 import '../../../../core/models/user_model.dart';
-import '../../../../linkup/presentation/views/manager/app_cubit.dart';
-import '../../../../linkup/presentation/views/manager/app_states.dart';
+
 import '../../../../core/helpers/helper.dart';
 import '/core/widgets/custom_text_button.dart';
 import '/features/new_post/presentation/widgets/new_post_view_body.dart';

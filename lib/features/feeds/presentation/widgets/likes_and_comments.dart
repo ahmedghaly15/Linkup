@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/models/post_model.dart';
 import '../../../../core/helpers/helper.dart';
-import '../../../../linkup/presentation/views/manager/app_cubit.dart';
+
 import '../../../../core/utils/app_navigator.dart';
 import '/features/feeds/presentation/views/comments_view.dart';
 

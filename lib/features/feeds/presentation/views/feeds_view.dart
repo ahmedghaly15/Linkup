@@ -1,11 +1,12 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_states.dart';
 
 import '../../../../core/helpers/helper.dart';
 import '../../../../core/utils/size_config.dart';
-import '../../../../linkup/presentation/views/manager/app_cubit.dart';
-import '../../../../linkup/presentation/views/manager/app_states.dart';
+
 import '/features/feeds/presentation/widgets/post_item.dart';
 
 class FeedsView extends StatelessWidget {

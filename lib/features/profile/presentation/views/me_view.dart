@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/config/router/routes.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_states.dart';
 
 import '../../../../core/models/user_model.dart';
 import '../../../../core/helpers/helper.dart';
-import '../../../../linkup/presentation/views/manager/app_cubit.dart';
-import '../../../../linkup/presentation/views/manager/app_states.dart';
+
 import '../widgets/me_profile_and_cover_images.dart';
 import '../widgets/sign_out_floating_button.dart';
 import '../../../../core/utils/app_navigator.dart';

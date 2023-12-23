@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
 
-import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/helpers/helper.dart';
-import '../../../../linkup/presentation/views/manager/app_cubit.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '/core/models/user_model.dart';
 import '/features/chat/presentation/widgets/custom_massenger_field.dart';
 import '/features/chat/presentation/widgets/custom_message_bubble.dart';

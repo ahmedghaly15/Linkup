@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/helpers/helper.dart';
-import '../../../../linkup/presentation/views/manager/app_cubit.dart';
 
 class EditProfileImage extends StatelessWidget {
   const EditProfileImage({
