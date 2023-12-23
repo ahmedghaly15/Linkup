@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/helpers/helper.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
 import '/core/models/user_model.dart';
@@ -39,7 +39,7 @@ class ChatDetailsViewBody extends StatelessWidget {
                       var message = cubit.messages[index];
                       return CustomMessageBubble(
                         messageModel: message,
-                        isMe: Helper.model!.uId == message.senderId
+                        isMe: Helper.currentUser!.uId == message.senderId
                             ? true
                             : false,
                       );
@@ -68,7 +68,7 @@ class ChatDetailsViewBody extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "Say Hello \u{1F44B}",
-                      style: AppTextStyles.headingLarge.copyWith(
+                      style: AppTextStyles.textStyle50Bold.copyWith(
                         fontSize: 30,
                         color: Get.isDarkMode ? Colors.white : Colors.black,
                       ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/size_config.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
 import '../../../../layout/presentation/view/manager/app_states.dart';
-import '/core/global/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import '/core/models/user_model.dart';
 import 'add_photos_and_tags_buttons.dart';
 import 'new_post_text_field.dart';

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
 import '../../../../layout/presentation/view/manager/app_states.dart';
 import '../../../users/presentation/views/user_profile_view.dart';
-import '/core/global/app_navigator.dart';
+import '../../../../core/utils/app_navigator.dart';
 import '../../../../core/helpers/helper.dart';
 import '/features/chat/presentation/widgets/chat_details_view_body.dart';
 
@@ -51,9 +51,11 @@ class ChatDetailsView extends StatelessWidget {
       titleSpacing: 0.0,
       elevation: 1,
       title: InkWell(
-        onTap: () => AppNavigator.navigateTo(
-          screen: UserProfileView(userModel: userModel),
-        ),
+        onTap: () {
+          //   AppNavigator.navigateTo(
+          //   screen: UserProfileView(userModel: userModel),
+          // );
+        },
         child: Row(
           children: <Widget>[
             Hero(
@@ -66,7 +68,7 @@ class ChatDetailsView extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               userModel.name!,
-              style: AppTextStyles.bodyLarge.copyWith(
+              style: AppTextStyles.textStyle18.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
@@ -75,7 +77,9 @@ class ChatDetailsView extends StatelessWidget {
         ),
       ),
       leading: IconButton(
-        onPressed: () => AppNavigator.getBack(),
+        onPressed: () {
+          // AppNavigator.getBack();
+        },
         icon: Icon(
           Icons.arrow_back_ios,
           color: Get.isDarkMode ? Colors.white : Colors.black,

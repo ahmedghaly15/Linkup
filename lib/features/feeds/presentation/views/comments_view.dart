@@ -6,7 +6,7 @@ import '../../../../core/models/comment_model.dart';
 import '../../../../core/helpers/helper.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
 import '../../../../layout/presentation/view/manager/app_states.dart';
-import '/core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '/features/feeds/presentation/widgets/comments_view_body.dart';
 
 class CommentsView extends StatelessWidget {
@@ -53,7 +53,7 @@ class CommentsView extends StatelessWidget {
       automaticallyImplyLeading: true,
       title: Text(
         "Comments",
-        style: AppTextStyles.appBarTitleStyle,
+        style: AppTextStyles.textStyle23Bold,
       ),
       leading: IconButton(
         onPressed: () {

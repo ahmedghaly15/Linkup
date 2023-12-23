@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/models/user_model.dart';
-import '../../../../core/utils/helper.dart';
+import '../../../../core/helpers/helper.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
 import '../../../../layout/presentation/view/manager/app_states.dart';
 import '../widgets/edit_profile_view_body.dart';
@@ -18,7 +18,7 @@ class EditProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
-        UserModel userModel = Helper.model!;
+        UserModel userModel = Helper.currentUser!;
         final TextEditingController nameController = TextEditingController();
         final TextEditingController bioController = TextEditingController();
         final TextEditingController phoneController = TextEditingController();

@@ -70,7 +70,7 @@ class AppCubit extends Cubit<AppStates> {
     if (users.isEmpty) {
       appRepo.getAllUsers().then((value) {
         for (var element in value.docs) {
-          if (element.data()['uId'] != Helper.model!.uId)
+          if (element.data()['uId'] != Helper.currentUser!.uId)
             users.add(UserModel.fromJson(element.data()));
         }
         emit(GetAllUserSuccessState());
@@ -88,7 +88,7 @@ class AppCubit extends Cubit<AppStates> {
     // uId = CacheHelper.getStringData(key: 'uId');
 
     appRepo.getUserData(uId).then((value) {
-      Helper.model = UserModel.fromJson(value.data()!);
+      Helper.currentUser = UserModel.fromJson(value.data()!);
       emit(GetUserSuccessState());
     }).catchError((error) {
       print(error.toString());
@@ -107,10 +107,10 @@ class AppCubit extends Cubit<AppStates> {
       name: name,
       phone: phone,
       bio: bio,
-      image: image ?? Helper.model!.image,
-      cover: cover ?? Helper.model!.cover,
-      email: Helper.model!.email,
-      uId: Helper.model!.uId,
+      image: image ?? Helper.currentUser!.image,
+      cover: cover ?? Helper.currentUser!.cover,
+      email: Helper.currentUser!.email,
+      uId: Helper.currentUser!.uId,
       isEmailVerified: false,
     );
 
@@ -220,9 +220,9 @@ class AppCubit extends Cubit<AppStates> {
     emit(CreatePostLoadingState());
 
     PostModel postModel = PostModel(
-      name: Helper.model!.name,
-      image: Helper.model!.image,
-      uId: Helper.model!.uId,
+      name: Helper.currentUser!.name,
+      image: Helper.currentUser!.image,
+      uId: Helper.currentUser!.uId,
       date: date,
       time: time,
       text: text,
@@ -333,8 +333,8 @@ class AppCubit extends Cubit<AppStates> {
 
   void likePost({required String postId}) {
     LikesModel likesModel = LikesModel(
-      uId: Helper.model!.uId,
-      name: Helper.model!.name,
+      uId: Helper.currentUser!.uId,
+      name: Helper.currentUser!.name,
       dateTime: DateTime.now().toString(),
     );
 
@@ -356,7 +356,7 @@ class AppCubit extends Cubit<AppStates> {
     appRepo.likeByMe(postId: postId).then((post) async {
       var likes = await post.reference.collection('likes').get();
       for (var element in likes.docs) {
-        if (element.id == Helper.model!.uId) {
+        if (element.id == Helper.currentUser!.uId) {
           isLikedByMe = true;
         }
       }
@@ -380,9 +380,9 @@ class AppCubit extends Cubit<AppStates> {
     emit(CommentCreatedLoadingState());
 
     CommentModel commentModel = CommentModel(
-      name: Helper.model!.name,
-      image: Helper.model!.image,
-      uId: Helper.model!.uId,
+      name: Helper.currentUser!.name,
+      image: Helper.currentUser!.image,
+      uId: Helper.currentUser!.uId,
       commentImage: commentImage ?? {},
       commentText: commentText ?? '',
       time: time,
@@ -471,8 +471,8 @@ class AppCubit extends Cubit<AppStates> {
     Map<String, dynamic>? messageImage,
   }) {
     MessageModel messageModel = MessageModel(
-      senderId: Helper.model!.uId,
-      senderName: Helper.model!.name,
+      senderId: Helper.currentUser!.uId,
+      senderName: Helper.currentUser!.name,
       receiverId: receiverId,
       receiverName: receiverName,
       time: time,

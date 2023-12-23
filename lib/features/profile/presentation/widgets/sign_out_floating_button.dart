@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
-import '../../../../core/helpers/cache_helper.dart';
-import '../../../auth/presentation/view/auth_view.dart';
-import '/core/global/app_navigator.dart';
 
 class SignOutFloatingButton extends StatelessWidget {
   const SignOutFloatingButton({
@@ -23,7 +20,7 @@ class SignOutFloatingButton extends StatelessWidget {
         onPressed: () => signOut(context),
         label: Text(
           "Sign out",
-          style: AppTextStyles.bodyLarge.copyWith(
+          style: AppTextStyles.textStyle18.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),

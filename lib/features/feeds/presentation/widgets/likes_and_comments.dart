@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/models/post_model.dart';
 import '../../../../core/helpers/helper.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
-import '/core/global/app_navigator.dart';
+import '../../../../core/utils/app_navigator.dart';
 import '/features/feeds/presentation/views/comments_view.dart';
 
 class LikesAndComments extends StatelessWidget {
@@ -41,7 +41,7 @@ class LikesAndComments extends StatelessWidget {
                   const SizedBox(width: 5),
                   Text(
                     "${model.likes} Likes",
-                    style: AppTextStyles.caption,
+                    style: AppTextStyles.textStyle13,
                   ),
                 ],
               ),
@@ -50,12 +50,12 @@ class LikesAndComments extends StatelessWidget {
           Expanded(
             child: InkWell(
               onTap: () {
-                AppNavigator.navigateTo(
-                  screen: CommentsView(
-                    postId: model.postId,
-                    postUid: model.uId,
-                  ),
-                );
+                // AppNavigator.navigateTo(
+                //   screen: CommentsView(
+                //     postId: model.postId,
+                //     postUid: model.uId,
+                //   ),
+                // );
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -68,7 +68,7 @@ class LikesAndComments extends StatelessWidget {
                   const SizedBox(width: 5),
                   Text(
                     "${model.comments} comments",
-                    style: AppTextStyles.caption,
+                    style: AppTextStyles.textStyle13,
                   ),
                 ],
               ),

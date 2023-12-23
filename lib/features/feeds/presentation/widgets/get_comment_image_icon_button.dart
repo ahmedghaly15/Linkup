@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/global/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
 
 class GetCommentImageIconButton extends StatelessWidget {

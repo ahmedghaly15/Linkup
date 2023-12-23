@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../core/models/message_model.dart';
-import '../../core/utils/helper.dart';
+import '../../core/helpers/helper.dart';
 import '../domain/app_repo.dart';
 import '/core/models/comment_model.dart';
 import '/core/models/like_model.dart';
@@ -31,7 +31,7 @@ class AppRepoImpl extends AppRepo {
   Future<void> updateUser({required UserModel userModel}) async {
     return await FirebaseFirestore.instance
         .collection('users')
-        .doc(Helper.model!.uId)
+        .doc(Helper.currentUser!.uId)
         .update(userModel.toJson());
   }
 
@@ -116,7 +116,7 @@ class AppRepoImpl extends AppRepo {
         .collection('posts')
         .doc(postId)
         .collection('likes')
-        .doc(Helper.model!.uId)
+        .doc(Helper.currentUser!.uId)
         .set(likesModel.toJson());
   }
 
@@ -185,7 +185,7 @@ class AppRepoImpl extends AppRepo {
   }) {
     return FirebaseFirestore.instance
         .collection('users')
-        .doc(Helper.model!.uId)
+        .doc(Helper.currentUser!.uId)
         .collection('chats')
         .doc(receiverId)
         .collection('messages')
@@ -203,7 +203,7 @@ class AppRepoImpl extends AppRepo {
   }) async {
     return await FirebaseFirestore.instance
         .collection('users')
-        .doc(Helper.model!.uId)
+        .doc(Helper.currentUser!.uId)
         .collection('chats')
         .doc(receiverId)
         .collection('messages')
@@ -219,7 +219,7 @@ class AppRepoImpl extends AppRepo {
         .collection('users')
         .doc(receiverId)
         .collection('chats')
-        .doc(Helper.model!.uId)
+        .doc(Helper.currentUser!.uId)
         .collection('messages')
         .add(messageModel.toJson());
   }

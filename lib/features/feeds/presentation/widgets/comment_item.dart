@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/global/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/models/comment_model.dart';
 import '/features/feeds/presentation/widgets/comment_item_content.dart';
 

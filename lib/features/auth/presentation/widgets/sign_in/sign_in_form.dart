@@ -8,6 +8,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/main_button.dart';
@@ -108,7 +109,20 @@ class _SignInFormState extends State<SignInForm> {
                 validating: (String? val) =>
                     AuthHelper.validatingPasswordField(value: val),
               ),
-              SizedBox(height: 40.h),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () =>
+                      context.navigateTo(routeName: Routes.forgotPasswordRoute),
+                  child: Text(
+                    'Forgot Password?',
+                    style: AppTextStyles.textStyle16SemiBold.copyWith(
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.h),
               MainButton(
                 onPressed: () => _signIn(context),
                 text: 'Login',
@@ -142,28 +156,36 @@ class _SignInFormState extends State<SignInForm> {
     }
 
     if (state is SignInSuccess) {
-      context.getBack();
-      getIt
-          .get<CacheHelper>()
-          .saveData(
-            key: AppStrings.uId,
-            value: state.uId,
-          )
-          .then((value) {
-        if (value) {
-          Helper.uId = state.uId;
-          // TODO: get user data here
-          context.navigateAndReplacement(newRoute: Routes.layoutRoute);
-        }
-      });
+      _handleSignInSuccess(context, state);
     }
 
     if (state is SignInError) {
-      context.getBack();
-      CustomToast.showToast(
-        text: state.error,
-        state: CustomToastState.error,
-      );
+      _handleSignInError(context, state);
     }
+  }
+
+  void _handleSignInError(BuildContext context, SignInError state) {
+    context.getBack();
+    CustomToast.showToast(
+      text: state.error,
+      state: CustomToastState.error,
+    );
+  }
+
+  void _handleSignInSuccess(BuildContext context, SignInSuccess state) {
+    context.getBack();
+    getIt
+        .get<CacheHelper>()
+        .saveData(
+          key: AppStrings.uId,
+          value: state.uId,
+        )
+        .then((value) {
+      if (value) {
+        Helper.uId = state.uId;
+        // TODO: get user data here
+        context.navigateAndReplacement(newRoute: Routes.layoutRoute);
+      }
+    });
   }
 }

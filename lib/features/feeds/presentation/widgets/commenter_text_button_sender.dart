@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/helpers/helper.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
 
@@ -57,9 +57,9 @@ class CommenterTextButtonSender extends StatelessWidget {
         textStyle: MaterialStateProperty.resolveWith<TextStyle>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return AppTextStyles.bodySmall;
+              return AppTextStyles.textStyle16;
             }
-            return AppTextStyles.bodySmall.copyWith(
+            return AppTextStyles.textStyle16.copyWith(
               fontWeight: FontWeight.bold,
             );
           },

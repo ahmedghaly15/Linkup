@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '/core/models/post_model.dart';
 
 class PostTextAndImage extends StatelessWidget {
@@ -17,7 +17,7 @@ class PostTextAndImage extends StatelessWidget {
           const SizedBox(height: 15),
           Text(
             model.text!,
-            style: AppTextStyles.bodySmall.copyWith(
+            style: AppTextStyles.textStyle16.copyWith(
               letterSpacing: 0.5,
               fontSize: 17,
             ),

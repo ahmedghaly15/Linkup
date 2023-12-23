@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/models/user_model.dart';
 
 class NewPostTextField extends StatelessWidget {
@@ -24,7 +24,7 @@ class NewPostTextField extends StatelessWidget {
             maxLines: null,
             controller: textController,
             enableSuggestions: true,
-            style: AppTextStyles.bodySmall.copyWith(
+            style: AppTextStyles.textStyle16.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.normal,
               height: 1.4,

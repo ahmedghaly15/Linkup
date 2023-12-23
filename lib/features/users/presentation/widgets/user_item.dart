@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/size_config.dart';
 import '../../../../core/utils/app_colors.dart';
-import '/core/global/app_navigator.dart';
-import '/core/global/app_styles.dart';
+import '../../../../core/utils/app_navigator.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '/core/models/user_model.dart';
 import '/features/users/presentation/views/user_profile_view.dart';
 
@@ -16,9 +16,9 @@ class UserItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AppNavigator.navigateTo(
-          screen: UserProfileView(userModel: userModel),
-        );
+        // AppNavigator.navigateTo(
+        //   screen: UserProfileView(userModel: userModel),
+        // );
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -46,7 +46,7 @@ class UserItem extends StatelessWidget {
                 userModel.name!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.bodyLarge.copyWith(
+                style: AppTextStyles.textStyle18.copyWith(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -65,7 +65,7 @@ class UserItem extends StatelessWidget {
                 const SizedBox(width: 5),
                 Text(
                   "Visit",
-                  style: AppTextStyles.bodyLarge.copyWith(
+                  style: AppTextStyles.textStyle18.copyWith(
                     fontSize: 16,
                     color: Colors.white,
                   ),

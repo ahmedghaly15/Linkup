@@ -24,7 +24,7 @@ class LoadingWidget extends StatelessWidget {
         child: Container(
           height: 80.h,
           width: 80.h,
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8.h),
           decoration: BoxDecoration(
             color: state.brightness == Brightness.light
                 ? Colors.white

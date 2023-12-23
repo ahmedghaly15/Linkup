@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/models/post_model.dart';
 import '../../../../core/helpers/helper.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
@@ -31,7 +31,7 @@ class TopPostItemSection extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     model.name!,
-                    style: AppTextStyles.bodyLarge.copyWith(
+                    style: AppTextStyles.textStyle18.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 17,
                     ),
@@ -49,7 +49,7 @@ class TopPostItemSection extends StatelessWidget {
               ),
               Text(
                 "${model.date} at ${model.time}",
-                style: AppTextStyles.caption,
+                style: AppTextStyles.textStyle13,
               ),
             ],
           ),
@@ -62,9 +62,11 @@ class TopPostItemSection extends StatelessWidget {
             );
           },
           icon: Icon(
-            model.uId == Helper.model!.uId ? Icons.delete : Icons.more_horiz,
+            model.uId == Helper.currentUser!.uId
+                ? Icons.delete
+                : Icons.more_horiz,
             size: 25,
-            color: model.uId == Helper.model!.uId
+            color: model.uId == Helper.currentUser!.uId
                 ? Colors.red
                 : (Get.isDarkMode ? Colors.white : Colors.black),
           ),

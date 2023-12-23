@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/features/auth/domain/entities/sign_in_params.dart';
-import 'package:social_app/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:social_app/features/auth/domain/usecases/sign_in/sign_in_usecase.dart';
 
 part 'sign_in_state.dart';
 
@@ -16,7 +16,10 @@ class SignInCubit extends Cubit<SignInState> {
     signInUseCase(params).then((value) {
       value.fold(
         (failure) => emit(SignInError(error: failure.failureMsg.toString())),
-        (credential) => emit(SignInSuccess(uId: credential.user!.uid)),
+        (credential) {
+          print('VERIFY: ${credential.user!.emailVerified}');
+          emit(SignInSuccess(uId: credential.user!.uid));
+        },
       );
     });
   }

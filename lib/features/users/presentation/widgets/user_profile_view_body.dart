@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/utils/size_config.dart';
 import '../../../../core/widgets/user_data.dart';
 import '/core/models/user_model.dart';
@@ -55,7 +55,7 @@ class UserProfileViewBody extends StatelessWidget {
             SizedBox(height: SizeConfig.screenHeight! * 0.015),
             Text(
               userModel.name!,
-              style: AppTextStyles.bodyLarge.copyWith(
+              style: AppTextStyles.textStyle18.copyWith(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -63,7 +63,7 @@ class UserProfileViewBody extends StatelessWidget {
             SizedBox(height: SizeConfig.screenHeight! * 0.008),
             Text(
               userModel.bio!,
-              style: AppTextStyles.bodySmall.copyWith(fontSize: 15),
+              style: AppTextStyles.textStyle16.copyWith(fontSize: 15),
             ),
             SizedBox(height: SizeConfig.screenHeight! * 0.008),
             Row(
@@ -77,7 +77,7 @@ class UserProfileViewBody extends StatelessWidget {
                 SizedBox(width: SizeConfig.screenWidth! * 0.008),
                 Text(
                   userModel.phone!,
-                  style: AppTextStyles.caption.copyWith(fontSize: 15),
+                  style: AppTextStyles.textStyle13.copyWith(fontSize: 15),
                 ),
               ],
             ),

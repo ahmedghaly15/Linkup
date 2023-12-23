@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/helpers/helper.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
@@ -78,7 +78,7 @@ class CustomMassengerField extends StatelessWidget {
                             cursorColor:
                                 Get.isDarkMode ? Colors.white60 : Colors.black,
                             keyboardType: TextInputType.multiline,
-                            style: AppTextStyles.bodySmall.copyWith(
+                            style: AppTextStyles.textStyle16.copyWith(
                               fontSize: 16,
                               height: 1.5,
                               letterSpacing: 0.8,

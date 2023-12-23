@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/config/router/routes.dart';
 
-import '../../../core/global/app_colors.dart';
-import '../../../core/global/app_navigator.dart';
-import '../../../features/new_post/presentation/view/new_post_view.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_navigator.dart';
 
 class NewPostFloatingButton extends StatelessWidget {
   const NewPostFloatingButton({
@@ -15,8 +15,8 @@ class NewPostFloatingButton extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: FloatingActionButton(
         heroTag: "Floating New Post Button",
-        onPressed: () => AppNavigator.navigateTo(
-          screen: const NewPostView(),
+        onPressed: () => context.navigateTo(
+          routeName: Routes.newPostRoute,
         ),
         backgroundColor: AppColors.primaryColor,
         child: const Icon(

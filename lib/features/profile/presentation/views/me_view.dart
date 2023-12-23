@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/config/router/routes.dart';
 
 import '../../../../core/models/user_model.dart';
 import '../../../../core/helpers/helper.dart';
@@ -7,8 +8,8 @@ import '../../../../layout/presentation/view/manager/app_cubit.dart';
 import '../../../../layout/presentation/view/manager/app_states.dart';
 import '../widgets/me_profile_and_cover_images.dart';
 import '../widgets/sign_out_floating_button.dart';
-import '/core/global/app_navigator.dart';
-import '/core/global/app_styles.dart';
+import '../../../../core/utils/app_navigator.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '/core/utils/size_config.dart';
 import '/core/widgets/custom_button.dart';
 import '/core/widgets/user_data.dart';
@@ -21,7 +22,7 @@ class MeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
-        UserModel userModel = Helper.model!;
+        UserModel userModel = Helper.currentUser!;
         return Stack(
           children: <Widget>[
             SingleChildScrollView(
@@ -37,7 +38,7 @@ class MeView extends StatelessWidget {
                     SizedBox(height: SizeConfig.screenHeight! * 0.015),
                     Text(
                       userModel.name!,
-                      style: AppTextStyles.bodyLarge.copyWith(
+                      style: AppTextStyles.textStyle18.copyWith(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
@@ -45,7 +46,7 @@ class MeView extends StatelessWidget {
                     SizedBox(height: SizeConfig.screenHeight! * 0.008),
                     Text(
                       userModel.bio!,
-                      style: AppTextStyles.caption.copyWith(fontSize: 15),
+                      style: AppTextStyles.textStyle13.copyWith(fontSize: 15),
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.008),
                     Row(
@@ -59,7 +60,8 @@ class MeView extends StatelessWidget {
                         SizedBox(width: SizeConfig.screenWidth! * 0.008),
                         Text(
                           userModel.phone!,
-                          style: AppTextStyles.caption.copyWith(fontSize: 15),
+                          style:
+                              AppTextStyles.textStyle13.copyWith(fontSize: 15),
                         ),
                       ],
                     ),
@@ -80,8 +82,8 @@ class MeView extends StatelessWidget {
                     SizedBox(height: SizeConfig.screenHeight! * 0.015),
                     CustomButton(
                       buttonText: "Edit Profile",
-                      onPressed: () => AppNavigator.navigateTo(
-                        screen: const EditProfileView(),
+                      onPressed: () => context.navigateTo(
+                        routeName: Routes.editProfileRoute,
                       ),
                       height: SizeConfig.screenHeight! * 0.065,
                       textStyle: const TextStyle(

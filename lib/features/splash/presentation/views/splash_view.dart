@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/cache_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/splash/presentation/widgets/splash_view_body.dart';
 import 'package:social_app/service_locator.dart';
@@ -21,7 +22,7 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   void initState() {
-    // _startDelay();
+    _startDelay();
     super.initState();
   }
 
@@ -32,17 +33,17 @@ class _SplashViewState extends State<SplashView> {
   }
 
   void _startDelay() {
-    _timer = Timer(const Duration(milliseconds: 2500), () => _goToNext());
+    _timer = Timer(const Duration(seconds: 5), () => _goToNext());
   }
 
   void _goToNext() {
-    // Helper.uId = getIt.get<CacheHelper>().getStringData(key: AppStrings.uId);
+    Helper.uId = getIt.get<CacheHelper>().getStringData(key: AppStrings.uId);
 
-    // if (Helper.uId != null) {
-    //   context.navigateAndReplacement(newRoute: Routes.layoutRoute);
-    // } else {
-    //   context.navigateAndReplacement(newRoute: Routes.loginRoute);
-    // }
+    if (Helper.uId != null) {
+      context.navigateAndReplacement(newRoute: Routes.layoutRoute);
+    } else {
+      context.navigateAndReplacement(newRoute: Routes.signInRoute);
+    }
   }
 
   void _setSystemUIOverlayStyle() {

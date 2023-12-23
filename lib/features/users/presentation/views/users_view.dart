@@ -6,7 +6,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
 import '../../../../layout/presentation/view/manager/app_states.dart';
-import '/core/global/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import '/features/users/presentation/widgets/user_item.dart';
 
 class UsersView extends StatelessWidget {

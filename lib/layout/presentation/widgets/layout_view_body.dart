@@ -1,8 +1,8 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/global/app_colors.dart';
-import '../../../core/utils/helper.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/helpers/helper.dart';
 import '../view/manager/app_cubit.dart';
 
 class LayoutViewBody extends StatelessWidget {
@@ -13,7 +13,7 @@ class LayoutViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConditionalBuilder(
-      condition: Helper.model != null,
+      condition: Helper.currentUser != null,
       builder: (context) => cubit.bottomNavScreens[cubit.currentIndex],
       fallback: (context) => const Center(
         child: CircularProgressIndicator(

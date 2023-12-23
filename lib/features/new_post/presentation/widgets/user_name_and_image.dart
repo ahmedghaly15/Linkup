@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/models/user_model.dart';
 
 class UserNameAndImage extends StatelessWidget {
@@ -23,7 +23,7 @@ class UserNameAndImage extends StatelessWidget {
         Expanded(
           child: Text(
             model.name!,
-            style: AppTextStyles.bodyLarge.copyWith(
+            style: AppTextStyles.textStyle18.copyWith(
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),

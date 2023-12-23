@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/auth_helper.dart';
+import 'package:social_app/core/helpers/cache_helper.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
+import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/main_button.dart';
+import 'package:social_app/features/auth/domain/entities/sign_up_params.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
+import 'package:social_app/features/auth/presentation/widgets/custom_auth_loading.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
+import 'package:social_app/service_locator.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -70,7 +79,7 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpCubit, SignUpState>(
-      listener: (context, state) {},
+      listener: (context, state) => _controlSignUpState(state, context),
       builder: (context, state) {
         final SignUpCubit cubit = BlocProvider.of<SignUpCubit>(context);
         return Form(
@@ -174,7 +183,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               SizedBox(height: 40.h),
               MainButton(
-                onPressed: () {},
+                onPressed: () => _signUp(context),
                 text: 'Sign up',
               ),
             ],
@@ -182,5 +191,65 @@ class _SignUpFormState extends State<SignUpForm> {
         );
       },
     );
+  }
+
+  void _signUp(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      AuthHelper.keyboardUnfocus(context);
+
+      BlocProvider.of<SignUpCubit>(context).signUp(
+        params: SignUpParams(
+          username: _usernameController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+          phone: _phoneController.text,
+        ),
+      );
+    } else {
+      setState(() {
+        autoValidateMode = AutovalidateMode.always;
+      });
+    }
+  }
+
+  void _controlSignUpState(SignUpState state, BuildContext context) {
+    if (state is SignUpLoading) {
+      CustomAuthLoading.show(context);
+    }
+
+    if (state is SignUpSuccess) {
+      _handleSignUpSuccess(context, state);
+    }
+
+    if (state is SignUpError) {
+      _handleSignUpError(context, state);
+    }
+  }
+
+  void _handleSignUpError(BuildContext context, SignUpError state) {
+    context.getBack();
+    CustomToast.showToast(
+      text: state.error,
+      state: CustomToastState.error,
+    );
+  }
+
+  void _handleSignUpSuccess(BuildContext context, SignUpSuccess state) {
+    context.getBack();
+
+    getIt
+        .get<CacheHelper>()
+        .saveData(key: AppStrings.uId, value: state.uId)
+        .then((value) {
+      if (value) {
+        Helper.uId = state.uId;
+        // TODO: get user data here
+        CustomToast.showToast(
+          text: 'Account created successfully',
+          state: CustomToastState.success,
+        );
+        context.navigateAndReplacement(newRoute: Routes.layoutRoute);
+      }
+    });
   }
 }

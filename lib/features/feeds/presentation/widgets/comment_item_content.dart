@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/global/app_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 import '../../../../core/models/comment_model.dart';
 import '../../../../core/utils/size_config.dart';
 
@@ -18,7 +18,7 @@ class CommentItemContent extends StatelessWidget {
       children: <Widget>[
         Text(
           commentModel.name!,
-          style: AppTextStyles.bodySmall.copyWith(
+          style: AppTextStyles.textStyle16.copyWith(
             fontSize: 17,
             fontWeight: FontWeight.bold,
             letterSpacing: 0.5,
@@ -33,7 +33,7 @@ class CommentItemContent extends StatelessWidget {
         if (commentModel.commentText != null)
           Text(
             commentModel.commentText!,
-            style: AppTextStyles.bodySmall.copyWith(
+            style: AppTextStyles.textStyle16.copyWith(
               fontWeight: FontWeight.w500,
               height: 1,
               letterSpacing: 0.5,
@@ -65,7 +65,7 @@ class CommentItemContent extends StatelessWidget {
           children: <Widget>[
             Text(
               "${commentModel.date}",
-              style: AppTextStyles.caption.copyWith(
+              style: AppTextStyles.textStyle13.copyWith(
                 color: Get.isDarkMode ? Colors.white54 : Colors.black38,
               ),
             ),
@@ -82,7 +82,7 @@ class CommentItemContent extends StatelessWidget {
             ),
             Text(
               "${commentModel.time}",
-              style: AppTextStyles.caption.copyWith(
+              style: AppTextStyles.textStyle13.copyWith(
                 color: Get.isDarkMode ? Colors.white54 : Colors.black38,
               ),
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/global/app_colors.dart';
+import '../../../core/utils/app_colors.dart';
 import '../view/manager/app_cubit.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {

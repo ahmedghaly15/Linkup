@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utils/helper.dart';
+import '../../../../core/helpers/helper.dart';
 import '../../../../core/utils/size_config.dart';
 import '../../../../layout/presentation/view/manager/app_cubit.dart';
 import '../../../../layout/presentation/view/manager/app_states.dart';
@@ -17,7 +17,7 @@ class FeedsView extends StatelessWidget {
       builder: (context, state) {
         return ConditionalBuilder(
           condition: AppCubit.getObject(context).posts.isNotEmpty &&
-              Helper.model != null,
+              Helper.currentUser != null,
           builder: (context) => SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
