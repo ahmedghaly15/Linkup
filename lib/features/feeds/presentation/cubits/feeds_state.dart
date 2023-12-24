@@ -73,7 +73,12 @@ class DeletePostError extends FeedsState {
 }
 
 class PostImagePickedSuccess extends FeedsState {
-  const PostImagePickedSuccess();
+  final File postImage;
+
+  const PostImagePickedSuccess({required this.postImage});
+
+  @override
+  List<Object> get props => [postImage];
 }
 
 class PostImagePickedError extends FeedsState {

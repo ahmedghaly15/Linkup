@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
 
 import '../../core/utils/app_colors.dart';
 
@@ -18,6 +19,10 @@ class AppTheme {
 
         primaryColor: AppColors.primaryColor,
         appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(
+            color: AppColors.primaryColor,
+            size: 25,
+          ),
           centerTitle: true,
           elevation: 0,
           backgroundColor: AppColors.scaffoldBackgroundClr,
@@ -27,6 +32,26 @@ class AppTheme {
           //   statusBarBrightness: Brightness.dark,
           // ),
         ),
+
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: AppColors.primaryColor,
+          backgroundColor: AppColors.scaffoldBackgroundClr,
+          elevation: 20,
+        ),
+
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            textStyle: MaterialStateProperty.all(
+              AppTextStyles.textStyle16SemiBold.copyWith(
+                color: AppColors.primaryColor,
+              ),
+            ),
+          ),
+        ),
       );
   static ThemeData get darkTheme => ThemeData.dark().copyWith(
         brightness: Brightness.dark,
@@ -34,8 +59,17 @@ class AppTheme {
         //   background: AppColors.darkGreyClr,
         // ),
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
-        bottomAppBarTheme:
-            const BottomAppBarTheme(color: AppColors.darkGreyClr),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: AppColors.primaryColor,
+          backgroundColor: AppColors.darkGreyClr,
+          elevation: 20,
+        ),
+        // bottomAppBarTheme:
+        //     const BottomAppBarTheme(color: AppColors.darkGreyClr),
         primaryColor: AppColors.primaryColor,
         scaffoldBackgroundColor: AppColors.darkGreyClr,
         appBarTheme: const AppBarTheme(
@@ -51,6 +85,15 @@ class AppTheme {
           //   statusBarColor: AppColors.darkGreyClr,
           //   statusBarBrightness: Brightness.light,
           // ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            textStyle: MaterialStateProperty.all(
+              AppTextStyles.textStyle16SemiBold.copyWith(
+                color: AppColors.primaryColor,
+              ),
+            ),
+          ),
         ),
       );
 }

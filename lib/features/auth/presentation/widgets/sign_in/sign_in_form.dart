@@ -8,7 +8,6 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/main_button.dart';
@@ -115,12 +114,7 @@ class _SignInFormState extends State<SignInForm> {
                 child: TextButton(
                   onPressed: () =>
                       context.navigateTo(routeName: Routes.forgotPasswordRoute),
-                  child: Text(
-                    'Forgot Password?',
-                    style: AppTextStyles.textStyle16SemiBold.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
+                  child: const Text('Forgot Password?'),
                 ),
               ),
               SizedBox(height: 10.h),

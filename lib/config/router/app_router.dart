@@ -8,6 +8,7 @@ import 'package:social_app/features/auth/presentation/views/forgot_password_view
 import 'package:social_app/features/auth/presentation/views/sign_in_view.dart';
 import 'package:social_app/features/auth/presentation/views/sign_up_view.dart';
 import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
+import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
 import 'package:social_app/features/splash/presentation/views/splash_view.dart';
 import 'package:social_app/service_locator.dart';
 
@@ -40,6 +41,9 @@ class AppRouter {
             child: const ForgotPasswordView(),
           ),
         );
+
+      case Routes.newPostRoute:
+        return MaterialPageRoute(builder: (context) => const NewPostView());
 
       case Routes.linkupRoute:
         return MaterialPageRoute(

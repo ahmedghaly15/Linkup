@@ -19,7 +19,7 @@ class SignUpView extends StatelessWidget {
           slivers: [
             const CustomAuthSliverAppBar(hasLeading: true),
             SliverPadding(
-              padding: AppConstants.authHorizontalPadding,
+              padding: AppConstants.horizontalPadding,
               sliver: SliverToBoxAdapter(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class SignUpView extends StatelessWidget {
               ),
             ),
             SliverPadding(
-              padding: AppConstants.authHorizontalPadding,
+              padding: AppConstants.horizontalPadding,
               sliver: SliverFillRemaining(
                 hasScrollBody: false,
                 child: Column(

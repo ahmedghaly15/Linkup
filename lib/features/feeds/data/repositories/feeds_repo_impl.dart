@@ -46,7 +46,7 @@ class FeedsRepoImpl implements FeedsRepo {
   @override
   Future<Either<Failure, TaskSnapshot>> uploadPostImage({File? postImage}) {
     return executeAndHandleErrors<TaskSnapshot>(
-      function: () => feedsDataSource.uploadPostImage(),
+      function: () => feedsDataSource.uploadPostImage(postImage: postImage),
     );
   }
 }

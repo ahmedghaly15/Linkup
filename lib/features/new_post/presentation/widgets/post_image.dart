@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
-
-import '../../../../core/utils/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 
 class PostImage extends StatelessWidget {
   const PostImage({
@@ -9,7 +9,7 @@ class PostImage extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final AppCubit cubit;
+  final FeedsCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -17,26 +17,27 @@ class PostImage extends StatelessWidget {
       alignment: AlignmentDirectional.topEnd,
       children: <Widget>[
         Container(
-          height: 150,
+          height: 180.h,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(8.r),
             image: DecorationImage(
+              fit: BoxFit.fill,
               image: FileImage(cubit.postImage!),
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0.h),
           child: CircleAvatar(
-            radius: 20,
+            radius: 20.r,
             backgroundColor: Colors.white,
             child: IconButton(
               onPressed: () => cubit.removePostImage(),
-              icon: const Icon(
+              icon: Icon(
                 Icons.close,
                 color: AppColors.primaryColor,
-                size: 25,
+                size: 25.w,
               ),
             ),
           ),

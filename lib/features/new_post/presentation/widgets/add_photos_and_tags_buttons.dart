@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
-
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/helpers/helper.dart';
+import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/widgets/custom_image_bottom_sheet.dart';
+import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 
 class AddPhotosAndTagsButtons extends StatelessWidget {
   const AddPhotosAndTagsButtons({
@@ -11,52 +11,34 @@ class AddPhotosAndTagsButtons extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final AppCubit cubit;
+  final FeedsCubit cubit;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Expanded(
-          child: TextButton(
-            onPressed: () => Helper.buildBottomSheet(
-              type: "Post",
-              context: context,
-              onPressedCamera: () => cubit.getPostImage(
-                source: ImageSource.camera,
-              ),
-              onPressedGallery: () => cubit.getPostImage(
-                source: ImageSource.gallery,
-              ),
+        TextButton.icon(
+          onPressed: () => ShowCustomImageBottomSheet.show(
+            type: "Post",
+            context: context,
+            onPressedCamera: () => cubit.getPostImage(
+              source: ImageSource.camera,
             ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.image,
-                  color: AppColors.primaryColor,
-                  size: 22,
-                ),
-                SizedBox(width: 5),
-                Text(
-                  "Add photo",
-                  style: TextStyle(fontSize: 16, color: AppColors.primaryColor),
-                ),
-              ],
+            onPressedGallery: () => cubit.getPostImage(
+              source: ImageSource.gallery,
             ),
           ),
+          icon: Icon(
+            Icons.image,
+            color: AppColors.primaryColor,
+            size: 22.w,
+          ),
+          label: const Text("Add photo"),
         ),
-        Expanded(
-          child: TextButton(
-            onPressed: () {},
-            child: const Text(
-              "# Tags",
-              style: TextStyle(
-                fontSize: 16,
-                color: AppColors.primaryColor,
-              ),
-            ),
-          ),
+        TextButton(
+          onPressed: () {},
+          child: const Text("# Tags"),
         ),
       ],
     );

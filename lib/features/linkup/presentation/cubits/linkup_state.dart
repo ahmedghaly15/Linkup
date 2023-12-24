@@ -29,7 +29,12 @@ class GetUserDataLoading extends LinkupState {
 }
 
 class GetUserDataSuccess extends LinkupState {
-  const GetUserDataSuccess();
+  final UserModel user;
+
+  const GetUserDataSuccess({required this.user});
+
+  @override
+  List<Object> get props => [user];
 }
 
 class GetUserDataError extends LinkupState {

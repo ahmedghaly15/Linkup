@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../utils/app_colors.dart';
 import '../models/user_model.dart';
-import '../widgets/custom_bottom_sheet.dart';
+import '../widgets/custom_image_bottom_sheet.dart';
 import '../utils/app_navigator.dart';
 import '../utils/app_text_styles.dart';
 
@@ -100,8 +100,7 @@ class Helper {
   }) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => CustomBottomSheet(
-        context: context,
+      builder: (context) => CustomImageBottomSheet(
         type: type,
         onPressedCamera: onPressedCamera,
         onPressedGallery: onPressedGallery,

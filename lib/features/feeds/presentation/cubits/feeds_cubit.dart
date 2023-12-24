@@ -52,7 +52,9 @@ class FeedsCubit extends Cubit<FeedsState> {
         (failure) =>
             emit(CreatePostError(error: failure.failureMsg.toString())),
         (success) {
+          postImage = null;
           emit(CreatePostSuccess(post: post));
+          // getPosts();
         },
       );
     });
@@ -78,6 +80,7 @@ class FeedsCubit extends Cubit<FeedsState> {
     const GetPostsLoading();
     getPostsUseCase(const NoParams()).listen((event) async {
       for (var element in event.docs) {
+        posts = [];
         posts.add(PostModel.fromJson(element.data()));
         var likes = await element.reference.collection('likes').get();
         var comments = await element.reference.collection('comments').get();
@@ -104,7 +107,13 @@ class FeedsCubit extends Cubit<FeedsState> {
       value.fold(
         (failure) =>
             emit(PostImagePickedError(error: failure.failureMsg.toString())),
-        (r) => emit(const PostImagePickedSuccess()),
+        (result) {
+          if (result != null) {
+            postImage = File(result.path);
+
+            emit(PostImagePickedSuccess(postImage: postImage!));
+          }
+        },
       );
     });
   }
@@ -120,11 +129,14 @@ class FeedsCubit extends Cubit<FeedsState> {
           result.ref.getDownloadURL().then((value) {
             createPost(
               createPostParams: CreatePostParams(
-                  date: createPostParams.date,
-                  time: createPostParams.time,
-                  text: createPostParams.text,
-                  postImage: value),
+                date: createPostParams.date,
+                time: createPostParams.time,
+                text: createPostParams.text,
+                postImage: value,
+              ),
             );
+            postImage = null;
+            emit(UploadPostImageSuccess(imageUrl: value));
           }).catchError((error) {
             emit(UploadPostImageError(error: error.toString()));
           });

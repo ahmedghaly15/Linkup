@@ -20,7 +20,7 @@ class ForgotPasswordView extends StatelessWidget {
         leading: const GetBackArrow(),
       ),
       body: Padding(
-        padding: AppConstants.authHorizontalPadding,
+        padding: AppConstants.horizontalPadding,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,

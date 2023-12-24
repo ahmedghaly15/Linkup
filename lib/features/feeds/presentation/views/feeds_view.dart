@@ -17,18 +17,18 @@ class FeedsView extends StatelessWidget {
         final FeedsCubit cubit = BlocProvider.of<FeedsCubit>(context);
 
         if (state is GetPostsSuccess) {
-          return cubit.posts.isNotEmpty
+          return state.posts.isNotEmpty
               ? SafeArea(
                   child: ListView.separated(
                     shrinkWrap: true,
                     padding: EdgeInsets.only(top: 10.h, bottom: 15.h),
                     physics: AppConstants.physics,
                     itemBuilder: (context, index) => PostItem(
-                      post: cubit.posts[index],
+                      post: state.posts[index],
                     ),
                     separatorBuilder: (context, index) =>
                         SizedBox(height: 24.h),
-                    itemCount: cubit.posts.length,
+                    itemCount: state.posts.length,
                   ),
                 )
               : Container();

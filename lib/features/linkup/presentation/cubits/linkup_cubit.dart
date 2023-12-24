@@ -88,7 +88,7 @@ class LinkupCubit extends Cubit<LinkupState> {
             emit(GetUserDataError(error: failure.failureMsg.toString())),
         (success) {
           Helper.currentUser = UserModel.fromJson(success.data()!);
-          emit(const GetUserDataSuccess());
+          emit(GetUserDataSuccess(user: Helper.currentUser!));
         },
       );
     });

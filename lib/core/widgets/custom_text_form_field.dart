@@ -40,6 +40,9 @@ class CustomTextFormField extends StatelessWidget {
     this.autofocus = false,
     this.disabledBorder,
     this.prefixIcon,
+    this.maxLines = 1,
+    this.enableSuggestions = true,
+    this.hasPrefixIcon = true,
   });
 
   final TextEditingController? controller;
@@ -74,6 +77,9 @@ class CustomTextFormField extends StatelessWidget {
   final TextStyle? hintStyle;
   final bool autofocus;
   final IconData? prefixIcon;
+  final int? maxLines;
+  final bool enableSuggestions;
+  final bool hasPrefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +90,7 @@ class CustomTextFormField extends StatelessWidget {
           focusNode: focusNode,
           enabled: enabled,
           autofocus: autofocus,
+          enableSuggestions: enableSuggestions,
           textCapitalization: textCapitalization,
           textAlign: textAlign ?? TextAlign.start,
           keyboardType: keyboardType ?? TextInputType.text,
@@ -95,6 +102,7 @@ class CustomTextFormField extends StatelessWidget {
           onFieldSubmitted: onSubmit,
           onChanged: onChanged,
           style: _customTextFieldTextStyle(),
+          maxLines: maxLines,
           cursorColor: AppColors.primaryColor,
           decoration: InputDecoration(
             filled: true,
@@ -107,7 +115,8 @@ class CustomTextFormField extends StatelessWidget {
             hintStyle: hintStyle ?? _customTextFieldTextStyle(),
             errorMaxLines: null,
             prefix: prefix,
-            prefixIcon: Icon(prefixIcon, color: Colors.grey),
+            prefixIcon:
+                hasPrefixIcon ? Icon(prefixIcon, color: Colors.grey) : null,
             suffixIcon: suffix,
             labelText: label,
             labelStyle: Theme.of(context).textTheme.titleSmall,
@@ -135,7 +144,7 @@ class CustomTextFormField extends StatelessWidget {
   }
 
   TextStyle _customTextFieldTextStyle() {
-    return AppTextStyles.textStyle16;
+    return AppTextStyles.textStyle18;
   }
 
   OutlineInputBorder _buildUnderlineInputBorder({Color? borderColor}) {

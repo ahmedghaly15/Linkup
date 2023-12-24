@@ -20,7 +20,7 @@ class SignInView extends StatelessWidget {
           slivers: [
             const CustomAuthSliverAppBar(hasLeading: false),
             SliverPadding(
-              padding: AppConstants.authHorizontalPadding,
+              padding: AppConstants.horizontalPadding,
               sliver: SliverToBoxAdapter(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +37,7 @@ class SignInView extends StatelessWidget {
               ),
             ),
             SliverPadding(
-              padding: AppConstants.authHorizontalPadding,
+              padding: AppConstants.horizontalPadding,
               sliver: SliverFillRemaining(
                 hasScrollBody: false,
                 child: Column(

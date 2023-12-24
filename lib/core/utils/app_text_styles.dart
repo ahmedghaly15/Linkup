@@ -22,6 +22,11 @@ class AppTextStyles {
     letterSpacing: 0.7,
   );
 
+  static TextStyle textStyle20Bold = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+  );
+
   static TextStyle textStyle18 = TextStyle(
     fontSize: 18.sp,
     letterSpacing: 0.5,
