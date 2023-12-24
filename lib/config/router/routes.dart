@@ -6,4 +6,5 @@ class Routes {
   static const String linkupRoute = '/layout';
   static const String newPostRoute = '/newPost';
   static const String editProfileRoute = '/editProfile';
+  static const String commentsRoute = '/comments';
 }

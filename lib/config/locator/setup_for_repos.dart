@@ -20,8 +20,8 @@ class SetupLocatorForRepos {
       () => LinkupRepoImpl(linkupDataSource: getIt.get<LinkupDataSource>()),
     );
 
-    getIt.registerLazySingleton<FeedsRepo>(
-      () => FeedsRepoImpl(feedsDataSource: getIt.get<FeedsDataSource>()),
+    getIt.registerLazySingleton<PostsRepo>(
+      () => PostsRepoImpl(postsDataSource: getIt.get<PostsDataSource>()),
     );
   }
 }

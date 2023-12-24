@@ -8,6 +8,10 @@ class SetupLocatorForExternal {
 
     getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
+    getIt.registerLazySingleton<FirebaseFirestore>(
+      () => FirebaseFirestore.instance,
+    );
+
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   }

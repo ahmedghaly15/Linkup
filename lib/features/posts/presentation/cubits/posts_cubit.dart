@@ -1,0 +1,251 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:social_app/core/entities/no_params.dart';
+import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/features/posts/data/models/like_model.dart';
+import 'package:social_app/features/posts/data/models/post_model.dart';
+import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
+import 'package:social_app/features/posts/domain/entities/like_post_params.dart';
+import 'package:social_app/features/posts/domain/usecases/create_post.dart';
+import 'package:social_app/features/posts/domain/usecases/delete_post.dart';
+import 'package:social_app/features/posts/domain/usecases/get_post_image.dart';
+import 'package:social_app/features/posts/domain/usecases/get_posts.dart';
+import 'package:social_app/features/posts/domain/usecases/like_post.dart';
+import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart';
+import 'package:social_app/features/posts/domain/usecases/unlike_post.dart';
+import 'package:social_app/features/posts/domain/usecases/upload_post_image.dart';
+import 'package:social_app/service_locator.dart';
+
+part 'posts_state.dart';
+
+class PostsCubit extends Cubit<PostsState> {
+  final GetPostsUseCase getPostsUseCase;
+  final CreatePostUseCase createPostUseCase;
+  final DeletePostUseCase deletePostUseCase;
+  final GetPostImageUseCase getPostImageUseCase;
+  final UploadPostImageUseCase uploadPostImageUseCase;
+  final LikePostUseCase likePostUseCase;
+  final UnLikePostUseCase unLikePostUseCase;
+  final LikedPostsByMeUseCase likedPostsByMeUseCase;
+
+  PostsCubit({
+    required this.getPostsUseCase,
+    required this.createPostUseCase,
+    required this.deletePostUseCase,
+    required this.getPostImageUseCase,
+    required this.uploadPostImageUseCase,
+    required this.likePostUseCase,
+    required this.unLikePostUseCase,
+    required this.likedPostsByMeUseCase,
+  }) : super(const PostsInitial());
+
+  void createPost({required CreatePostParams createPostParams}) {
+    emit(const CreatePostLoading());
+
+    final PostModel post = PostModel(
+      name: Helper.currentUser!.name,
+      image: Helper.currentUser!.image,
+      uId: Helper.currentUser!.uId,
+      date: createPostParams.date,
+      time: createPostParams.time,
+      text: createPostParams.text,
+      postImage: createPostParams.postImage ?? '',
+      likes: 0,
+      comments: 0,
+      dateTime: Timestamp.now(),
+    );
+
+    createPostUseCase(post).then((value) {
+      value.fold(
+        (failure) =>
+            emit(CreatePostError(error: failure.failureMsg.toString())),
+        (success) {
+          postImage = null;
+          getPosts();
+          emit(CreatePostSuccess(post: post));
+        },
+      );
+    });
+  }
+
+  void deletePost({required String postId}) {
+    emit(const DeletePostLoading());
+
+    deletePostUseCase(postId).then((value) {
+      value.fold(
+        (failure) =>
+            emit(DeletePostError(error: failure.failureMsg.toString())),
+        (success) {
+          getPosts();
+          emit(const DeletePostSuccess());
+        },
+      );
+    });
+  }
+
+  List<PostModel> posts = <PostModel>[];
+
+  void _clearPosts() {
+    posts.clear();
+
+    emit(ClearPostsList(posts: posts));
+  }
+
+  Future<int> _numberOf({
+    required QueryDocumentSnapshot<Map<String, dynamic>> element,
+    required String collection,
+  }) async {
+    final QuerySnapshot<Map<String, dynamic>> number =
+        await element.reference.collection(collection).get();
+
+    return number.docs.length;
+  }
+
+  Future<void> _updatePosts(QuerySnapshot<Map<String, dynamic>> result) async {
+    for (var element in result.docs) {
+      posts.add(PostModel.fromJson(element.data()));
+
+      final int likes = await _numberOf(
+        element: element,
+        collection: 'likes',
+      );
+
+      final int comments = await _numberOf(
+        element: element,
+        collection: 'comments',
+      );
+
+      await getIt
+          .get<FirebaseFirestore>()
+          .collection('posts')
+          .doc(element.id)
+          .update({
+        'likes': likes,
+        'comments': comments,
+        'postId': element.id,
+      });
+    }
+  }
+
+  Future<void> getPosts() async {
+    emit(const GetPostsLoading());
+    getPostsUseCase(const NoParams()).then((value) {
+      value.fold(
+        (failure) => emit(GetPostsError(error: failure.failureMsg.toString())),
+        (result) async {
+          _clearPosts();
+          await _updatePosts(result);
+
+          emit(GetPostsSuccess(posts: posts));
+        },
+      );
+    });
+  }
+
+  File? postImage;
+
+  void getPostImage({required ImageSource source}) {
+    getPostImageUseCase(source).then((value) {
+      value.fold(
+        (failure) =>
+            emit(PostImagePickedError(error: failure.failureMsg.toString())),
+        (result) {
+          if (result != null) {
+            postImage = File(result.path);
+
+            emit(PostImagePickedSuccess(postImage: postImage!));
+          }
+        },
+      );
+    });
+  }
+
+  void uploadPostImage({required CreatePostParams createPostParams}) {
+    emit(const UploadPostImageLoading());
+
+    uploadPostImageUseCase(postImage).then((value) {
+      value.fold(
+        (failure) =>
+            emit(UploadPostImageError(error: failure.failureMsg.toString())),
+        (result) {
+          result.ref.getDownloadURL().then((value) {
+            createPost(
+              createPostParams: CreatePostParams(
+                date: createPostParams.date,
+                time: createPostParams.time,
+                text: createPostParams.text,
+                postImage: value,
+              ),
+            );
+            postImage = null;
+            emit(UploadPostImageSuccess(imageUrl: value));
+          }).catchError((error) {
+            emit(UploadPostImageError(error: error.toString()));
+          });
+        },
+      );
+    });
+  }
+
+  void removePostImage() {
+    postImage = null;
+    emit(const PostImageRemoved());
+  }
+
+  void likePost({required String postId}) {
+    LikeModel likeModel = LikeModel(
+      uId: Helper.currentUser!.uId,
+      name: Helper.currentUser!.name,
+      email: Helper.currentUser!.email,
+      profileImage: Helper.currentUser!.image,
+      dateTime: DateTime.now().toString(),
+    );
+
+    likePostUseCase(LikePostParams(likesModel: likeModel, postId: postId)).then(
+      (value) {
+        value.fold(
+          (failure) =>
+              emit(LikePostError(error: failure.failureMsg.toString())),
+          (success) async {
+            await getLikedPostsByMe();
+            await getPosts();
+            emit(const LikePostSuccess());
+          },
+        );
+      },
+    );
+  }
+
+  List<PostModel> likedPosts = <PostModel>[];
+
+  Future<void> getLikedPostsByMe() async {
+    likedPostsByMeUseCase(const NoParams()).then((value) {
+      value.fold(
+        (failure) =>
+            emit(GetLikedPostsByMeError(error: failure.failureMsg.toString())),
+        (posts) {
+          likedPosts = posts;
+          emit(GetLikedPostsByMeSuccess(likedPosts: posts));
+        },
+      );
+    });
+  }
+
+  void unLikePost({required String postId}) {
+    unLikePostUseCase(postId).then((value) {
+      value.fold(
+        (failure) =>
+            emit(UnLikePostError(error: failure.failureMsg.toString())),
+        (success) async {
+          await getLikedPostsByMe();
+          await getPosts();
+          emit(const UnLikePostSuccess());
+        },
+      );
+    });
+  }
+}

@@ -12,6 +12,6 @@ class SetupLocatorForDataSource {
 
     getIt.registerLazySingleton<LinkupDataSource>(() => LinkupDataSourceImpl());
 
-    getIt.registerLazySingleton<FeedsDataSource>(() => FeedsDataSourceImpl());
+    getIt.registerLazySingleton<PostsDataSource>(() => PostsDataSourceImpl());
   }
 }

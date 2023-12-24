@@ -5,24 +5,15 @@ import 'package:social_app/config/router/app_router.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_strings.dart';
-import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 import 'package:social_app/features/linkup/domain/app_repo.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
-
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 import 'package:social_app/service_locator.dart';
 import 'package:social_app/core/utils/size_config.dart';
 
 class LinkupApp extends StatelessWidget {
-  // final Widget? startingScreen;
-  // final String? uId;
-  const LinkupApp(
-      // this.startingScreen,
-      // this.uId,
-
-      {
-    Key? key,
-  }) : super(key: key);
+  const LinkupApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +28,9 @@ class LinkupApp extends StatelessWidget {
             create: (context) => getIt.get<ThemesCubit>(),
           ),
           BlocProvider(
-            create: (context) => getIt.get<FeedsCubit>()..getPosts(),
+            create: (context) => getIt.get<PostsCubit>()
+              ..getPosts()
+              ..getLikedPostsByMe(),
           ),
           BlocProvider(
             create: (context) =>

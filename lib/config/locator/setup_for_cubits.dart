@@ -32,13 +32,17 @@ class SetupLocatorForCubits {
       ),
     );
 
-    getIt.registerFactory<FeedsCubit>(
-      () => FeedsCubit(
+    getIt.registerFactory<PostsCubit>(
+      () => PostsCubit(
         getPostsUseCase: getIt.get<GetPostsUseCase>(),
         createPostUseCase: getIt.get<CreatePostUseCase>(),
         deletePostUseCase: getIt.get<DeletePostUseCase>(),
         getPostImageUseCase: getIt.get<GetPostImageUseCase>(),
         uploadPostImageUseCase: getIt.get<UploadPostImageUseCase>(),
+        likePostUseCase: getIt.get<LikePostUseCase>(),
+        unLikePostUseCase: getIt.get<UnLikePostUseCase>(),
+        likedPostsByMeUseCase: getIt.get<LikedPostsByMeUseCase>(),
+        
       ),
     );
   }

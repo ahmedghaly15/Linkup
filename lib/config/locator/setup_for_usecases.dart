@@ -45,23 +45,36 @@ class SetupLocatorForUseCases {
     );
 
     getIt.registerLazySingleton<GetPostsUseCase>(
-      () => GetPostsUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+      () => GetPostsUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
 
     getIt.registerLazySingleton<CreatePostUseCase>(
-      () => CreatePostUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+      () => CreatePostUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
 
     getIt.registerLazySingleton<DeletePostUseCase>(
-      () => DeletePostUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+      () => DeletePostUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
 
     getIt.registerLazySingleton<GetPostImageUseCase>(
-      () => GetPostImageUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+      () => GetPostImageUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
 
     getIt.registerLazySingleton<UploadPostImageUseCase>(
-      () => UploadPostImageUseCase(feedsRepo: getIt.get<FeedsRepo>()),
+      () => UploadPostImageUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
+
+    getIt.registerLazySingleton<LikePostUseCase>(
+      () => LikePostUseCase(postsRepo: getIt.get<PostsRepo>()),
+    );
+
+    getIt.registerLazySingleton<UnLikePostUseCase>(
+      () => UnLikePostUseCase(postsRepo: getIt.get<PostsRepo>()),
+    );
+
+    getIt.registerLazySingleton<LikedPostsByMeUseCase>(
+      () => LikedPostsByMeUseCase(postsRepo: getIt.get<PostsRepo>()),
+    );
+
   }
 }
