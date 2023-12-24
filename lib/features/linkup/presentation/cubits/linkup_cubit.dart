@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/models/post_model.dart';
 import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 import 'package:social_app/features/linkup/domain/entities/change_index_params.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_bottom_nav_index.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_nav_to_home.dart';

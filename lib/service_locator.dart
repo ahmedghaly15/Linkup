@@ -29,7 +29,11 @@ import 'package:social_app/features/feeds/data/datasources/feeds_datasource.dart
 import 'package:social_app/features/feeds/data/datasources/feeds_datasource_impl.dart';
 import 'package:social_app/features/feeds/data/repositories/feeds_repo_impl.dart';
 import 'package:social_app/features/feeds/domain/repositories/feeds_repo.dart';
+import 'package:social_app/features/feeds/domain/usecases/create_post.dart';
+import 'package:social_app/features/feeds/domain/usecases/delete_post.dart';
+import 'package:social_app/features/feeds/domain/usecases/get_post_image.dart';
 import 'package:social_app/features/feeds/domain/usecases/get_posts.dart';
+import 'package:social_app/features/feeds/domain/usecases/upload_post_image.dart';
 import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 import 'package:social_app/features/linkup/data/app_repo_impl.dart';
 import 'package:social_app/features/linkup/data/datasources/linkup_datasource.dart';
@@ -45,12 +49,12 @@ import 'package:social_app/features/linkup/domain/usecases/get_bottom_nav_items.
 import 'package:social_app/features/linkup/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 
-part 'config/locator/setup_for_usecases.dart';
 part 'config/locator/setup_for_core.dart';
 part 'config/locator/setup_for_cubits.dart';
 part 'config/locator/setup_for_datasources.dart';
 part 'config/locator/setup_for_external.dart';
 part 'config/locator/setup_for_repos.dart';
+part 'config/locator/setup_for_usecases.dart';
 
 final GetIt getIt = GetIt.instance;
 

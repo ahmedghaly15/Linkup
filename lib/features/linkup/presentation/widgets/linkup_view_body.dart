@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:loading_indicator/loading_indicator.dart';
-import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 
 class LinkupViewBody extends StatelessWidget {

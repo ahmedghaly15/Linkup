@@ -7,6 +7,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/post_model.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 
 class TopPostItemSection extends StatelessWidget {
   const TopPostItemSection({
@@ -38,6 +39,8 @@ class TopPostItemSection extends StatelessWidget {
               Text(
                 post.name!,
                 style: AppTextStyles.textStyle16SemiBold,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
                 "${post.date} at ${post.time}",
@@ -46,16 +49,16 @@ class TopPostItemSection extends StatelessWidget {
             ],
           ),
         ),
-        BlocBuilder<ThemesCubit, ThemeData>(
-          builder: (context, state) {
-            return IconButton(
-              onPressed: () {
-                // AppCubit.getObject(context).deletePost(
-                //   postId: post.postId!,
-                //   context: context,
-                // );
-              },
-              icon: Icon(
+        IconButton(
+          onPressed: () {
+            post.uId == Helper.currentUser!.uId
+                ? BlocProvider.of<FeedsCubit>(context)
+                    .deletePost(postId: post.postId!)
+                : null;
+          },
+          icon: BlocBuilder<ThemesCubit, ThemeData>(
+            builder: (context, state) {
+              return Icon(
                 post.uId == Helper.currentUser!.uId
                     ? Icons.delete
                     : Icons.more_horiz,
@@ -65,9 +68,9 @@ class TopPostItemSection extends StatelessWidget {
                     : (state.brightness == Brightness.dark
                         ? Colors.white
                         : Colors.black),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ],
     );

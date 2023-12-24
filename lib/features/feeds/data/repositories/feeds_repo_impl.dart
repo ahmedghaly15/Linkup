@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cross_file/src/types/interface.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker_platform_interface/src/types/image_source.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/errors/failure.dart';
 import 'package:social_app/core/models/post_model.dart';
 import 'package:social_app/core/utils/functions/execute_and_handle_errors.dart';
