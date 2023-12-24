@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/errors/failure.dart';
-import 'package:social_app/core/models/post_model.dart';
+import 'package:social_app/features/feeds/data/models/post_model.dart';
 import 'package:social_app/core/utils/functions/execute_and_handle_errors.dart';
 import 'package:social_app/features/feeds/data/datasources/feeds_datasource.dart';
 import 'package:social_app/features/feeds/domain/repositories/feeds_repo.dart';

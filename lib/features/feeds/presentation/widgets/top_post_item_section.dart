@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/models/post_model.dart';
+import 'package:social_app/features/feeds/data/models/post_model.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';

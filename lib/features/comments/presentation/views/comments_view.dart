@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
 import 'package:social_app/features/linkup/presentation/views/manager/app_states.dart';
 
-import '../../../../core/models/comment_model.dart';
+import '../../data/models/comment_model.dart';
 import '../../../../core/helpers/helper.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
-import '/features/feeds/presentation/widgets/comments_view_body.dart';
+import '../widgets/comments_view_body.dart';
 
 class CommentsView extends StatelessWidget {
   CommentsView({Key? key, this.postId, this.postUid}) : super(key: key);

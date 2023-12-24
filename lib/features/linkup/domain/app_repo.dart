@@ -4,10 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/models/message_model.dart';
-import 'package:social_app/core/models/post_model.dart';
+import 'package:social_app/features/feeds/data/models/post_model.dart';
 import 'package:social_app/core/models/user_model.dart';
 
-import '/core/models/comment_model.dart';
+import '../../comments/data/models/comment_model.dart';
 import '/core/models/like_model.dart';
 
 abstract class AppRepo {

@@ -8,9 +8,9 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/message_model.dart';
 
 import '../domain/app_repo.dart';
-import '/core/models/comment_model.dart';
+import '../../comments/data/models/comment_model.dart';
 import '/core/models/like_model.dart';
-import '/core/models/post_model.dart';
+import '../../feeds/data/models/post_model.dart';
 import '/core/models/user_model.dart';
 
 class AppRepoImpl extends AppRepo {

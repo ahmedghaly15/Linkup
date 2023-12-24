@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/models/post_model.dart';
+import 'package:social_app/features/feeds/data/models/post_model.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
 

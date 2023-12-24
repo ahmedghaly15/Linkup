@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
-import '../../../../core/models/comment_model.dart';
+import '../../data/models/comment_model.dart';
 import '../../../../core/utils/size_config.dart';
 
 class CommentItemContent extends StatelessWidget {

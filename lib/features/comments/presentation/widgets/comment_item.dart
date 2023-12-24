@@ -3,8 +3,8 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/models/comment_model.dart';
-import '/features/feeds/presentation/widgets/comment_item_content.dart';
+import '../../data/models/comment_model.dart';
+import 'comment_item_content.dart';
 
 class CommentItem extends StatelessWidget {
   const CommentItem({Key? key, required this.commentModel}) : super(key: key);

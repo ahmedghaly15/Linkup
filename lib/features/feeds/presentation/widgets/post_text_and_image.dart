@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
-import '/core/models/post_model.dart';
+import '../../data/models/post_model.dart';
 
 class PostTextAndImage extends StatelessWidget {
   const PostTextAndImage({

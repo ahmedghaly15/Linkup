@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
 
-import '../../../../core/models/comment_model.dart';
+import '../../data/models/comment_model.dart';
 import '../../../../core/utils/size_config.dart';
 
-import '/features/feeds/presentation/widgets/comment_item.dart';
-import '/features/feeds/presentation/widgets/commenter_field.dart';
+import 'comment_item.dart';
+import 'commenter_field.dart';
 
 class CommentsViewBody extends StatelessWidget {
   const CommentsViewBody({

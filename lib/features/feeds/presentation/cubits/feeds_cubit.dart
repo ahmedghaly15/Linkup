@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/models/post_model.dart';
+import 'package:social_app/features/feeds/data/models/post_model.dart';
 import 'package:social_app/features/feeds/domain/entities/create_post_params.dart';
 import 'package:social_app/features/feeds/domain/usecases/create_post.dart';
 import 'package:social_app/features/feeds/domain/usecases/delete_post.dart';
