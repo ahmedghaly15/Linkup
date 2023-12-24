@@ -32,17 +32,15 @@ class CustomErrorWidget extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 12.h),
-              child: Flexible(
-                child: Text(
-                  error == AppStrings.noInternet ? '$error. Tap to try' : error,
-                  style: AppTextStyles.textStyle18Bold.copyWith(
-                    color: state.brightness == Brightness.light
-                        ? Colors.black
-                        : Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  textAlign: TextAlign.center,
+              child: Text(
+                error == AppStrings.noInternet ? '$error. Tap to try' : error,
+                style: AppTextStyles.textStyle18Bold.copyWith(
+                  color: state.brightness == Brightness.light
+                      ? Colors.black
+                      : Colors.white,
+                  fontWeight: FontWeight.w600,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             if (error == AppStrings.noInternet)

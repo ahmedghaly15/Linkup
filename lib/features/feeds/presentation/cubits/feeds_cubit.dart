@@ -53,23 +53,24 @@ class FeedsCubit extends Cubit<FeedsState> {
             emit(CreatePostError(error: failure.failureMsg.toString())),
         (success) {
           postImage = null;
+          getPosts();
           emit(CreatePostSuccess(post: post));
-          // getPosts();
         },
       );
     });
   }
 
   void deletePost({required String postId}) {
-    // TODO: build a toast in listener in bloc consumer saying that post deleted succesffully
-
     emit(const DeletePostLoading());
 
     deletePostUseCase(postId).then((value) {
       value.fold(
         (failure) =>
             emit(DeletePostError(error: failure.failureMsg.toString())),
-        (success) => emit(const DeletePostSuccess()),
+        (success) {
+          getPosts();
+          emit(const DeletePostSuccess());
+        },
       );
     });
   }
@@ -77,10 +78,10 @@ class FeedsCubit extends Cubit<FeedsState> {
   List<PostModel> posts = [];
 
   void getPosts() {
-    const GetPostsLoading();
+    emit(const GetPostsLoading());
     getPostsUseCase(const NoParams()).listen((event) async {
+      posts = [];
       for (var element in event.docs) {
-        posts = [];
         posts.add(PostModel.fromJson(element.data()));
         var likes = await element.reference.collection('likes').get();
         var comments = await element.reference.collection('comments').get();

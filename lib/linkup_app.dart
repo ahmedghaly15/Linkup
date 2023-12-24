@@ -37,11 +37,11 @@ class LinkupApp extends StatelessWidget {
             create: (context) => getIt.get<ThemesCubit>(),
           ),
           BlocProvider(
-            create: (context) =>
-                getIt.get<LinkupCubit>()..getUserData(uId: Helper.uId),
+            create: (context) => getIt.get<FeedsCubit>()..getPosts(),
           ),
           BlocProvider(
-            create: (context) => getIt.get<FeedsCubit>()..getPosts(),
+            create: (context) =>
+                getIt.get<LinkupCubit>()..getUserData(uId: Helper.uId),
           ),
           BlocProvider(
             create: (context) => AppCubit(getIt.get<AppRepo>()),

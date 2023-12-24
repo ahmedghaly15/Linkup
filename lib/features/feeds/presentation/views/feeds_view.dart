@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
+import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 import 'package:social_app/features/feeds/presentation/widgets/post_item.dart';
 
@@ -12,7 +13,8 @@ class FeedsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FeedsCubit, FeedsState>(
+    return BlocConsumer<FeedsCubit, FeedsState>(
+      listener: (context, state) => _controlFeedsState(state),
       builder: (context, state) {
         final FeedsCubit cubit = BlocProvider.of<FeedsCubit>(context);
 
@@ -40,37 +42,16 @@ class FeedsView extends StatelessWidget {
         } else {
           return const BodyLoadingIndicator();
         }
-
-        // return ConditionalBuilder(
-        //   condition: AppCubit.getObject(context).posts.isNotEmpty &&
-        //       Helper.currentUser != null,
-        //   builder: (context) => SingleChildScrollView(
-        //     physics: AppConstants.physics,
-        //     child: Column(
-        //       children: <Widget>[
-        //         ListView.separated(
-        //           shrinkWrap: true,
-        //           physics: const NeverScrollableScrollPhysics(),
-        //           itemBuilder: (context, index) => PostItem(
-        //             context: context,
-        //             postModel: AppCubit.getObject(context).posts[index],
-        //           ),
-        //           separatorBuilder: (context, index) => SizedBox(
-        //             height: SizeConfig.screenHeight! * 0.005,
-        //           ),
-        //           itemCount: AppCubit.getObject(context).posts.length,
-        //         ),
-        //         SizedBox(
-        //           height: SizeConfig.screenHeight! * 0.008,
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        //   fallback: (context) => const Column(
-        //     children: <Widget>[],
-        //   ),
-        // );
       },
     );
+  }
+
+  void _controlFeedsState(FeedsState state) {
+    if (state is DeletePostSuccess) {
+      CustomToast.showToast(
+        text: 'Post deleted successfully',
+        state: CustomToastState.success,
+      );
+    }
   }
 }
