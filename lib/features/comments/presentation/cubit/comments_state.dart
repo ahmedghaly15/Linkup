@@ -27,3 +27,74 @@ class TypeNewCommentError extends CommentsState {
   @override
   List<Object> get props => [error];
 }
+
+class CommentImagePickedSuccess extends CommentsState {
+  final File commentImage;
+
+  const CommentImagePickedSuccess({required this.commentImage});
+
+  @override
+  List<Object> get props => [commentImage];
+}
+
+class CommentImagePickedError extends CommentsState {
+  final String error;
+
+  const CommentImagePickedError({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}
+
+class UploadCommentImageLoading extends CommentsState {
+  const UploadCommentImageLoading();
+}
+
+class UploadCommentImageSuccess extends CommentsState {
+  final String imageUrl;
+
+  const UploadCommentImageSuccess({required this.imageUrl});
+
+  @override
+  List<Object> get props => [imageUrl];
+}
+
+class UploadCommentImageError extends CommentsState {
+  final String error;
+
+  const UploadCommentImageError({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}
+
+class GetCommentsSuccess extends CommentsState {
+  final List<CommentModel> comments;
+
+  const GetCommentsSuccess({required this.comments});
+
+  @override
+  List<Object> get props => [comments];
+}
+
+class GetCommentsError extends CommentsState {
+  final String error;
+
+  const GetCommentsError({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}
+
+class CommentImageRemovedSuccess extends CommentsState {
+  const CommentImageRemovedSuccess();
+}
+
+class ClearCommentsList extends CommentsState {
+  final List<CommentModel> comments;
+
+  const ClearCommentsList({required this.comments});
+
+  @override
+  List<Object> get props => [comments];
+}
