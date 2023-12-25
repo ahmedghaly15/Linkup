@@ -33,8 +33,7 @@ class LinkupApp extends StatelessWidget {
               ..getLikedPostsByMe(),
           ),
           BlocProvider(
-            create: (context) =>
-                getIt.get<LinkupCubit>()..getUserData(uId: Helper.uId),
+            create: (context) => getIt.get<LinkupCubit>()..getUserData(),
           ),
           BlocProvider(
             create: (context) => AppCubit(getIt.get<AppRepo>()),

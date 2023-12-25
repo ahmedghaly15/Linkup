@@ -52,7 +52,8 @@ class AppRouter {
         final args = routeSettings.arguments as CommentsViewParams;
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt.get<CommentsCubit>(),
+            create: (context) =>
+                getIt.get<CommentsCubit>()..getComments(postId: args.postId!),
             child: CommentsView(params: args),
           ),
         );

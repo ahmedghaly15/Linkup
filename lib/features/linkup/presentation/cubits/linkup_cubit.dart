@@ -106,9 +106,11 @@ class LinkupCubit extends Cubit<LinkupState> {
     emit(SearchListUpdateSuccess(list: list));
   }
 
-  void onChangeText({required String value, required String text}) {
-    text = value;
+  String commentText = '';
 
-    emit(OnChangeTextSuccess(text: text));
+  void onChangeText({required String value}) {
+    commentText = value;
+
+    emit(OnChangeTextSuccess(text: commentText));
   }
 }

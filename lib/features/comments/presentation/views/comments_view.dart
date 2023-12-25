@@ -1,72 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_states.dart';
-
-import '../../data/models/comment_model.dart';
-import '../../../../core/helpers/helper.dart';
-
-import '../../../../core/utils/app_text_styles.dart';
-import '../widgets/comments_view_body.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/get_back_arrow.dart';
+import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
+import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
+import 'package:social_app/features/comments/presentation/widgets/comment_item.dart';
+import 'package:social_app/features/comments/presentation/widgets/commenter_field.dart';
 
 class CommentsView extends StatelessWidget {
-  CommentsView({Key? key, this.postId, this.postUid}) : super(key: key);
+  const CommentsView({
+    Key? key,
+    required this.params,
+  }) : super(key: key);
 
-  final String? postId;
-  final String? postUid;
-
-  final TextEditingController commentController = TextEditingController();
+  final CommentsViewParams params;
 
   @override
   Widget build(BuildContext context) {
-    String? postId = this.postId;
-    return Builder(builder: (context) {
-      // Getting The Comments And The User's Data
-      AppCubit.getObject(context).getComments(postId: postId!);
-      AppCubit.getObject(context).getUserData(postUid);
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(bottom: 60.h),
+              child: CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    title: Text(
+                      "Comments",
+                      style: AppTextStyles.textStyle23Bold,
+                    ),
+                    centerTitle: true,
+                    leading: GetBackArrow(
+                      onPressed: () {
+                        BlocProvider.of<CommentsCubit>(context).clearComments();
 
-      return BlocBuilder<AppCubit, AppStates>(
-        builder: (context, state) {
-          AppCubit cubit = AppCubit.getObject(context);
-          List<CommentModel> comments = cubit.comments;
-
-          return Scaffold(
-            backgroundColor: context.theme.colorScheme.background,
-            appBar: buildAppBar(context, comments),
-            body: CommentsViewBody(
-              comments: comments,
-              commentText: commentController.text,
-              cubit: cubit,
-              postId: postId,
-              commentController: commentController,
-              commentImage: cubit.commentImage,
+                        context.getBack();
+                      },
+                    ),
+                  ),
+                  BlocBuilder<CommentsCubit, CommentsState>(
+                      builder: (context, state) {
+                    final cubit = BlocProvider.of<CommentsCubit>(context);
+                    return cubit.comments.isNotEmpty
+                        ? SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              (context, index) {
+                                return CommentItem(
+                                  comment: cubit.comments[index],
+                                );
+                              },
+                              childCount: cubit.comments.length,
+                            ),
+                          )
+                        : SliverFillRemaining(child: Container());
+                  }),
+                ],
+              ),
             ),
-          );
-        },
-      );
-    });
-  }
-
-  AppBar buildAppBar(BuildContext context, List<CommentModel> comments) {
-    return AppBar(
-      backgroundColor: context.theme.colorScheme.background,
-      automaticallyImplyLeading: true,
-      title: Text(
-        "Comments",
-        style: AppTextStyles.textStyle23Bold,
-      ),
-      leading: IconButton(
-        onPressed: () {
-          comments.clear();
-          Navigator.pop(context);
-        },
-        icon: Icon(
-          Icons.arrow_back_ios,
-          color: Get.isDarkMode ? Colors.white : Colors.black,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: CommenterField(postId: params.postId!),
+            ),
+          ],
         ),
       ),
-      systemOverlayStyle: Helper.setSystemOverlayStyle(),
     );
   }
 }
