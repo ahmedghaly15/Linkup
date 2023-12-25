@@ -38,12 +38,7 @@ class CreatePostLoading extends PostsState {
 }
 
 class CreatePostSuccess extends PostsState {
-  final PostModel post;
-
-  const CreatePostSuccess({required this.post});
-
-  @override
-  List<Object> get props => [post];
+  const CreatePostSuccess();
 }
 
 class CreatePostError extends PostsState {

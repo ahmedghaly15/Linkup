@@ -8,7 +8,7 @@ import 'package:social_app/core/errors/failure.dart';
 import 'package:social_app/core/utils/functions/execute_and_handle_errors.dart';
 import 'package:social_app/features/posts/data/datasources/posts_datasource.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
-import 'package:social_app/features/posts/domain/entities/like_post_params.dart';
+import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 import 'package:social_app/features/posts/domain/repositories/posts_repo.dart';
 
 class PostsRepoImpl implements PostsRepo {
@@ -25,10 +25,12 @@ class PostsRepoImpl implements PostsRepo {
 
   @override
   Future<Either<Failure, DocumentReference<Map<String, dynamic>>>> createPost({
-    required PostModel post,
+    required CreatePostParams createPostParams,
   }) {
     return executeAndHandleErrors<DocumentReference<Map<String, dynamic>>>(
-      function: () => postsDataSource.createPost(post: post),
+      function: () => postsDataSource.createPost(
+        createPostParams: createPostParams,
+      ),
     );
   }
 
@@ -54,11 +56,9 @@ class PostsRepoImpl implements PostsRepo {
   }
 
   @override
-  Future<Either<Failure, void>> likePost({
-    required LikePostParams likePostParams,
-  }) {
+  Future<Either<Failure, void>> likePost({required String postId}) {
     return executeAndHandleErrors<void>(
-      function: () => postsDataSource.likePost(likePostParams: likePostParams),
+      function: () => postsDataSource.likePost(postId: postId),
     );
   }
 

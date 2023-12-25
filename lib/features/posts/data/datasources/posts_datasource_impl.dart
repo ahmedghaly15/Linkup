@@ -5,9 +5,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/posts/data/datasources/posts_datasource.dart';
+import 'package:social_app/features/posts/data/models/like_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
-import 'package:social_app/features/posts/domain/entities/like_post_params.dart';
+import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 import 'package:social_app/service_locator.dart';
 
 class PostsDataSourceImpl implements PostsDataSource {
@@ -15,7 +17,7 @@ class PostsDataSourceImpl implements PostsDataSource {
   Future<QuerySnapshot<Map<String, dynamic>>> getPosts() async {
     return await getIt
         .get<FirebaseFirestore>()
-        .collection('posts')
+        .collection(AppStrings.posts)
         .orderBy(
           'dateTime',
           descending: true,
@@ -25,11 +27,24 @@ class PostsDataSourceImpl implements PostsDataSource {
 
   @override
   Future<DocumentReference<Map<String, dynamic>>> createPost({
-    required PostModel post,
+    required CreatePostParams createPostParams,
   }) async {
+    final PostModel post = PostModel(
+      name: Helper.currentUser!.name,
+      image: Helper.currentUser!.image,
+      uId: Helper.currentUser!.uId,
+      date: createPostParams.date,
+      time: createPostParams.time,
+      text: createPostParams.text,
+      postImage: createPostParams.postImage ?? '',
+      likes: 0,
+      comments: 0,
+      dateTime: Timestamp.now(),
+    );
+
     return await getIt
         .get<FirebaseFirestore>()
-        .collection('posts')
+        .collection(AppStrings.posts)
         .add(post.toJson());
   }
 
@@ -37,7 +52,7 @@ class PostsDataSourceImpl implements PostsDataSource {
   Future<void> deletePost({required String postId}) async {
     await getIt
         .get<FirebaseFirestore>()
-        .collection('posts')
+        .collection(AppStrings.posts)
         .doc(postId)
         .delete();
   }
@@ -51,28 +66,37 @@ class PostsDataSourceImpl implements PostsDataSource {
   Future<TaskSnapshot> uploadPostImage({File? postImage}) async {
     return await firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('posts/${Uri.file(postImage!.path).pathSegments.last}')
+        .child(
+            '${AppStrings.posts}/${Uri.file(postImage!.path).pathSegments.last}')
         .putFile(postImage);
   }
 
   @override
-  Future<void> likePost({required LikePostParams likePostParams}) async {
+  Future<void> likePost({required String postId}) async {
+    final LikeModel likeModel = LikeModel(
+      uId: Helper.currentUser!.uId,
+      name: Helper.currentUser!.name,
+      email: Helper.currentUser!.email,
+      profileImage: Helper.currentUser!.image,
+      dateTime: DateTime.now().toString(),
+    );
+
     return await getIt
         .get<FirebaseFirestore>()
-        .collection('posts')
-        .doc(likePostParams.postId)
-        .collection('likes')
+        .collection(AppStrings.posts)
+        .doc(postId)
+        .collection(AppStrings.likes)
         .doc(Helper.currentUser!.uId)
-        .set(likePostParams.likesModel.toJson());
+        .set(likeModel.toJson());
   }
 
   @override
   Future<void> unLikePost({required String postId}) async {
     return await getIt
         .get<FirebaseFirestore>()
-        .collection('posts')
+        .collection(AppStrings.posts)
         .doc(postId)
-        .collection('likes')
+        .collection(AppStrings.likes)
         .doc(Helper.currentUser!.uId)
         .delete();
   }
@@ -82,10 +106,10 @@ class PostsDataSourceImpl implements PostsDataSource {
     List<PostModel> likedPosts = <PostModel>[];
 
     final posts =
-        await getIt.get<FirebaseFirestore>().collection('posts').get();
+        await getIt.get<FirebaseFirestore>().collection(AppStrings.posts).get();
 
     for (var post in posts.docs) {
-      var likes = await post.reference.collection('likes').get();
+      var likes = await post.reference.collection(AppStrings.likes).get();
 
       for (var element in likes.docs) {
         if (element.id == Helper.currentUser!.uId) {

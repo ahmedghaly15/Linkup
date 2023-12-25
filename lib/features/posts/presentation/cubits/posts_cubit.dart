@@ -5,11 +5,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/entities/no_params.dart';
-import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/features/posts/data/models/like_model.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
-import 'package:social_app/features/posts/domain/entities/like_post_params.dart';
 import 'package:social_app/features/posts/domain/usecases/create_post.dart';
 import 'package:social_app/features/posts/domain/usecases/delete_post.dart';
 import 'package:social_app/features/posts/domain/usecases/get_post_image.dart';
@@ -46,27 +44,14 @@ class PostsCubit extends Cubit<PostsState> {
   void createPost({required CreatePostParams createPostParams}) {
     emit(const CreatePostLoading());
 
-    final PostModel post = PostModel(
-      name: Helper.currentUser!.name,
-      image: Helper.currentUser!.image,
-      uId: Helper.currentUser!.uId,
-      date: createPostParams.date,
-      time: createPostParams.time,
-      text: createPostParams.text,
-      postImage: createPostParams.postImage ?? '',
-      likes: 0,
-      comments: 0,
-      dateTime: Timestamp.now(),
-    );
-
-    createPostUseCase(post).then((value) {
+    createPostUseCase(createPostParams).then((value) {
       value.fold(
         (failure) =>
             emit(CreatePostError(error: failure.failureMsg.toString())),
         (success) {
           postImage = null;
           getPosts();
-          emit(CreatePostSuccess(post: post));
+          emit(const CreatePostSuccess());
         },
       );
     });
@@ -121,7 +106,7 @@ class PostsCubit extends Cubit<PostsState> {
 
       await getIt
           .get<FirebaseFirestore>()
-          .collection('posts')
+          .collection(AppStrings.posts)
           .doc(element.id)
           .update({
         'likes': likes,
@@ -133,6 +118,7 @@ class PostsCubit extends Cubit<PostsState> {
 
   Future<void> getPosts() async {
     emit(const GetPostsLoading());
+
     getPostsUseCase(const NoParams()).then((value) {
       value.fold(
         (failure) => emit(GetPostsError(error: failure.failureMsg.toString())),
@@ -197,15 +183,7 @@ class PostsCubit extends Cubit<PostsState> {
   }
 
   void likePost({required String postId}) {
-    LikeModel likeModel = LikeModel(
-      uId: Helper.currentUser!.uId,
-      name: Helper.currentUser!.name,
-      email: Helper.currentUser!.email,
-      profileImage: Helper.currentUser!.image,
-      dateTime: DateTime.now().toString(),
-    );
-
-    likePostUseCase(LikePostParams(likesModel: likeModel, postId: postId)).then(
+    likePostUseCase(postId).then(
       (value) {
         value.fold(
           (failure) =>

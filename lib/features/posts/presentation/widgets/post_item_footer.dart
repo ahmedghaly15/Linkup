@@ -6,6 +6,7 @@ import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 
@@ -61,9 +62,9 @@ class PostItemFooter extends StatelessWidget {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> _likesStream() {
     return FirebaseFirestore.instance
-        .collection('posts')
+        .collection(AppStrings.posts)
         .doc(post.postId)
-        .collection('likes')
+        .collection(AppStrings.likes)
         .snapshots();
   }
 }

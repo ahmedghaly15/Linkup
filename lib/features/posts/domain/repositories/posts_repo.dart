@@ -6,13 +6,13 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/errors/failure.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
-import 'package:social_app/features/posts/domain/entities/like_post_params.dart';
+import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 
 abstract class PostsRepo {
   Future<Either<Failure, QuerySnapshot<Map<String, dynamic>>>> getPosts();
 
   Future<Either<Failure, DocumentReference<Map<String, dynamic>>>> createPost({
-    required PostModel post,
+    required CreatePostParams createPostParams,
   });
 
   Future<Either<Failure, void>> deletePost({required String postId});
@@ -23,9 +23,7 @@ abstract class PostsRepo {
     File? postImage,
   });
 
-  Future<Either<Failure, void>> likePost({
-    required LikePostParams likePostParams,
-  });
+  Future<Either<Failure, void>> likePost({required String postId});
 
   Future<Either<Failure, void>> unLikePost({required String postId});
 
