@@ -7,9 +7,7 @@ import 'package:social_app/features/linkup/domain/entities/change_index_params.d
 abstract class LinkupRepo {
   Future<Either<Failure, QuerySnapshot<Map<String, dynamic>>>> getAllUsers();
 
-  Future<Either<Failure, DocumentSnapshot<Map<String, dynamic>>>> getUserData({
-    String? uId,
-  });
+  Future<Either<Failure, DocumentSnapshot<Map<String, dynamic>>>> getUserData();
 
   void changeBottomNavIndex({required ChangeIndexParams changeIndexParams});
 

@@ -7,6 +7,8 @@ import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cub
 import 'package:social_app/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:social_app/features/auth/presentation/views/sign_in_view.dart';
 import 'package:social_app/features/auth/presentation/views/sign_up_view.dart';
+import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
+import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social_app/features/comments/presentation/views/comments_view.dart';
 import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
 import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
@@ -47,7 +49,13 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => const NewPostView());
 
       case Routes.commentsRoute:
-        return MaterialPageRoute(builder: (context) => CommentsView());
+        final args = routeSettings.arguments as CommentsViewParams;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<CommentsCubit>(),
+            child: CommentsView(params: args),
+          ),
+        );
 
       case Routes.linkupRoute:
         return MaterialPageRoute(

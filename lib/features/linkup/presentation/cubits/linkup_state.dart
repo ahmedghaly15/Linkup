@@ -79,3 +79,12 @@ class SearchListUpdateSuccess extends LinkupState {
   @override
   List<Object> get props => [list];
 }
+
+class OnChangeTextSuccess extends LinkupState {
+  final String text;
+
+  const OnChangeTextSuccess({required this.text});
+
+  @override
+  List<Object> get props => [text];
+}

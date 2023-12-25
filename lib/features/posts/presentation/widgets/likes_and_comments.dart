@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 
@@ -40,26 +43,48 @@ class LikesAndComments extends StatelessWidget {
               ),
               label: Text(
                 "Like",
-                style: AppTextStyles.textStyle13,
+                style: AppTextStyles.textStyle13.copyWith(color: Colors.grey),
               ),
             ),
             TextButton.icon(
               onPressed: () {
-                context.navigateTo(routeName: Routes.commentsRoute);
+                context.navigateTo(
+                  routeName: Routes.commentsRoute,
+                  arguments: CommentsViewParams(
+                    postId: post.postId,
+                    postUserId: post.uId,
+                  ),
+                );
               },
               icon: Icon(
                 Icons.comment,
                 size: 18.w,
                 color: Colors.grey,
               ),
-              label: Text(
-                "${post.comments} comments",
-                style: AppTextStyles.textStyle13,
-              ),
+              label: StreamBuilder(
+                  stream: _commentsStream(),
+                  builder: (context, snapshot) {
+                    int commentsCount = snapshot.data?.docs.length ?? 0;
+
+                    return Text(
+                      "$commentsCount comments",
+                      style: AppTextStyles.textStyle13.copyWith(
+                        color: Colors.grey,
+                      ),
+                    );
+                  }),
             ),
           ],
         );
       },
     );
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> _commentsStream() {
+    return FirebaseFirestore.instance
+        .collection(AppStrings.posts)
+        .doc(post.postId)
+        .collection(AppStrings.comments)
+        .snapshots();
   }
 }

@@ -79,10 +79,10 @@ class LinkupCubit extends Cubit<LinkupState> {
     });
   }
 
-  void getUserData({String? uId}) {
+  void getUserData() {
     emit(const GetUserDataLoading());
 
-    getUserDataUseCase(uId).then((value) {
+    getUserDataUseCase(const NoParams()).then((value) {
       value.fold(
         (failure) =>
             emit(GetUserDataError(error: failure.failureMsg.toString())),
@@ -104,5 +104,11 @@ class LinkupCubit extends Cubit<LinkupState> {
 
   void rebuildSearchList(List<UserModel> list) {
     emit(SearchListUpdateSuccess(list: list));
+  }
+
+  void onChangeText({required String value, required String text}) {
+    text = value;
+
+    emit(OnChangeTextSuccess(text: text));
   }
 }

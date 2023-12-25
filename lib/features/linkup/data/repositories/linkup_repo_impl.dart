@@ -13,11 +13,10 @@ class LinkupRepoImpl implements LinkupRepo {
   const LinkupRepoImpl({required this.linkupDataSource});
 
   @override
-  Future<Either<Failure, DocumentSnapshot<Map<String, dynamic>>>> getUserData({
-    String? uId,
-  }) {
+  Future<Either<Failure, DocumentSnapshot<Map<String, dynamic>>>>
+      getUserData() {
     return executeAndHandleErrors<DocumentSnapshot<Map<String, dynamic>>>(
-      function: () => linkupDataSource.getUserData(uId: uId),
+      function: () => linkupDataSource.getUserData(),
     );
   }
 

@@ -48,6 +48,9 @@ class SetupLocatorForCubits {
     getIt.registerFactory<CommentsCubit>(
       () => CommentsCubit(
         typeNewCommentUseCase: getIt.get<TypeNewCommentUseCase>(),
+        getCommentImageUseCase: getIt.get<GetCommentImageUseCase>(),
+        getCommentsUseCase: getIt.get<GetCommentsUseCase>(),
+        uploadCommentImageUseCase: getIt.get<UploadCommentImageUseCase>(),
       ),
     );
   }

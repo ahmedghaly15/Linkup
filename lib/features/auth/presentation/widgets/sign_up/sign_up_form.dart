@@ -244,7 +244,7 @@ class _SignUpFormState extends State<SignUpForm> {
         .then((value) {
       if (value) {
         Helper.uId = state.uId;
-        BlocProvider.of<LinkupCubit>(context).getUserData(uId: Helper.uId);
+        BlocProvider.of<LinkupCubit>(context).getUserData();
         CustomToast.showToast(
           text: 'Account created successfully',
           state: CustomToastState.success,

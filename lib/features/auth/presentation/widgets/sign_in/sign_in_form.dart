@@ -178,7 +178,7 @@ class _SignInFormState extends State<SignInForm> {
         .then((value) {
       if (value) {
         Helper.uId = state.uId;
-        BlocProvider.of<LinkupCubit>(context).getUserData(uId: Helper.uId);
+        BlocProvider.of<LinkupCubit>(context).getUserData();
         context.navigateAndReplacement(newRoute: Routes.linkupRoute);
       }
     });

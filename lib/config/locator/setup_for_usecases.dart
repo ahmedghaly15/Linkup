@@ -79,5 +79,17 @@ class SetupLocatorForUseCases {
     getIt.registerLazySingleton<TypeNewCommentUseCase>(
       () => TypeNewCommentUseCase(commentsRepo: getIt.get<CommentsRepo>()),
     );
+
+    getIt.registerLazySingleton<GetCommentImageUseCase>(
+      () => GetCommentImageUseCase(commentsRepo: getIt.get<CommentsRepo>()),
+    );
+
+    getIt.registerLazySingleton<GetCommentsUseCase>(
+      () => GetCommentsUseCase(commentsRepo: getIt.get<CommentsRepo>()),
+    );
+
+    getIt.registerLazySingleton<UploadCommentImageUseCase>(
+      () => UploadCommentImageUseCase(commentsRepo: getIt.get<CommentsRepo>()),
+    );
   }
 }

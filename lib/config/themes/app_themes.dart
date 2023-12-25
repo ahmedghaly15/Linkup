@@ -50,6 +50,7 @@ class AppTheme {
                 color: AppColors.primaryColor,
               ),
             ),
+            padding: MaterialStateProperty.all(EdgeInsets.zero),
           ),
         ),
       );

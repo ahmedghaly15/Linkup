@@ -5,13 +5,15 @@ import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 
 class GetBackArrow extends StatelessWidget {
-  const GetBackArrow({super.key});
+  const GetBackArrow({super.key, this.onPressed});
+
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemesCubit, ThemeData>(builder: (context, state) {
       return IconButton(
-        onPressed: () => context.getBack(),
+        onPressed: onPressed ?? () => context.getBack(),
         icon: Icon(
           Icons.arrow_back_ios_new,
           color: state.brightness == Brightness.light

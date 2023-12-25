@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/chat/presentation/views/chats_view.dart';
 import 'package:social_app/features/linkup/data/datasources/linkup_datasource.dart';
@@ -13,13 +14,11 @@ import 'package:social_app/service_locator.dart';
 
 class LinkupDataSourceImpl implements LinkupDataSource {
   @override
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserData({
-    String? uId,
-  }) async {
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserData() async {
     return await getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.users)
-        .doc(uId)
+        .doc(Helper.uId)
         .get();
   }
 

@@ -8,6 +8,7 @@ import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 
 class PostItemFooter extends StatelessWidget {
@@ -32,8 +33,17 @@ class PostItemFooter extends StatelessWidget {
             );
           },
         ),
+        SizedBox(width: 5.w),
         TextButton(
-          onPressed: () => context.navigateTo(routeName: Routes.commentsRoute),
+          onPressed: () {
+            context.navigateTo(
+              routeName: Routes.commentsRoute,
+              arguments: CommentsViewParams(
+                postId: post.postId,
+                postUserId: post.uId,
+              ),
+            );
+          },
           child: Text(
             "Write a comment...",
             style: AppTextStyles.textStyle15.copyWith(color: Colors.grey),
@@ -45,14 +55,9 @@ class PostItemFooter extends StatelessWidget {
           builder: (context, snapshot) {
             int likesCount = snapshot.data?.docs.length ?? 0;
 
-            return TextButton(
-              onPressed: () {
-                // Handle button press if needed
-              },
-              child: Text(
-                "$likesCount Likes",
-                style: AppTextStyles.textStyle15.copyWith(color: Colors.grey),
-              ),
+            return Text(
+              "$likesCount Likes",
+              style: AppTextStyles.textStyle15.copyWith(color: Colors.grey),
             );
           },
         )
