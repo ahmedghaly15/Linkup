@@ -4,11 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/models/message_model.dart';
-import 'package:social_app/features/feeds/data/models/post_model.dart';
+
 import 'package:social_app/core/models/user_model.dart';
+import 'package:social_app/features/posts/data/models/like_model.dart';
+import 'package:social_app/features/posts/data/models/post_model.dart';
 
 import '../../comments/data/models/comment_model.dart';
-import '/core/models/like_model.dart';
 
 abstract class AppRepo {
   // =============== Users Logic ===============
@@ -48,7 +49,7 @@ abstract class AppRepo {
   Stream<QuerySnapshot<Map<String, dynamic>>> getPosts();
 
   Future<void> likePost({
-    required LikesModel likesModel,
+    required LikeModel likesModel,
     required String postId,
   });
 

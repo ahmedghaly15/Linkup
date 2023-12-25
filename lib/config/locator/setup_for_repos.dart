@@ -23,5 +23,11 @@ class SetupLocatorForRepos {
     getIt.registerLazySingleton<PostsRepo>(
       () => PostsRepoImpl(postsDataSource: getIt.get<PostsDataSource>()),
     );
+
+    getIt.registerLazySingleton<CommentsRepo>(
+      () => CommentsRepoImpl(
+        commentsDataSource: getIt.get<CommentsDataSource>(),
+      ),
+    );
   }
 }

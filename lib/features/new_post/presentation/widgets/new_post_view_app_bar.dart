@@ -4,18 +4,18 @@ import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/get_back_arrow.dart';
-import 'package:social_app/features/feeds/domain/entities/create_post_params.dart';
-import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
+import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 
 class NewPostViewAppBar extends StatelessWidget {
-  final FeedsCubit cubit;
-  final TextEditingController textController;
-
   const NewPostViewAppBar({
     super.key,
     required this.cubit,
     required this.textController,
   });
+
+  final PostsCubit cubit;
+  final TextEditingController textController;
 
   @override
   Widget build(BuildContext context) {

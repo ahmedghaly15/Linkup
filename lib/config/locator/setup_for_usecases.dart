@@ -76,5 +76,8 @@ class SetupLocatorForUseCases {
       () => LikedPostsByMeUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
 
+    getIt.registerLazySingleton<TypeNewCommentUseCase>(
+      () => TypeNewCommentUseCase(commentsRepo: getIt.get<CommentsRepo>()),
+    );
   }
 }

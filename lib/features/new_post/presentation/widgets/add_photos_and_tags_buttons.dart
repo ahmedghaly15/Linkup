@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/widgets/custom_image_bottom_sheet.dart';
-import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 
 class AddPhotosAndTagsButtons extends StatelessWidget {
   const AddPhotosAndTagsButtons({
@@ -11,7 +11,7 @@ class AddPhotosAndTagsButtons extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final FeedsCubit cubit;
+  final PostsCubit cubit;
 
   @override
   Widget build(BuildContext context) {

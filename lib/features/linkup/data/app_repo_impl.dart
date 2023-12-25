@@ -6,11 +6,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/message_model.dart';
+import 'package:social_app/features/posts/data/models/like_model.dart';
+import 'package:social_app/features/posts/data/models/post_model.dart';
+import 'package:social_app/service_locator.dart';
 
 import '../domain/app_repo.dart';
 import '../../comments/data/models/comment_model.dart';
-import '/core/models/like_model.dart';
-import '../../feeds/data/models/post_model.dart';
 import '/core/models/user_model.dart';
 
 class AppRepoImpl extends AppRepo {
@@ -19,17 +20,22 @@ class AppRepoImpl extends AppRepo {
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserData(
     String? uId,
   ) async {
-    return await FirebaseFirestore.instance.collection('users').doc(uId).get();
+    return await getIt
+        .get<FirebaseFirestore>()
+        .collection('users')
+        .doc(uId)
+        .get();
   }
 
   @override
   Future<QuerySnapshot<Map<String, dynamic>>> getAllUsers() async {
-    return await FirebaseFirestore.instance.collection('users').get();
+    return await getIt.get<FirebaseFirestore>().collection('users').get();
   }
 
   @override
   Future<void> updateUser({required UserModel userModel}) async {
-    return await FirebaseFirestore.instance
+    return await getIt
+        .get<FirebaseFirestore>()
         .collection('users')
         .doc(Helper.currentUser!.uId)
         .update(userModel.toJson());
@@ -71,14 +77,19 @@ class AppRepoImpl extends AppRepo {
   Future<DocumentReference<Map<String, dynamic>>> createPost({
     required PostModel postModel,
   }) async {
-    return await FirebaseFirestore.instance
+    return await getIt
+        .get<FirebaseFirestore>()
         .collection('posts')
         .add(postModel.toJson());
   }
 
   @override
   Future<void> deletePost({required String postId}) async {
-    await FirebaseFirestore.instance.collection('posts').doc(postId).delete();
+    await getIt
+        .get<FirebaseFirestore>()
+        .collection('posts')
+        .doc(postId)
+        .delete();
   }
 
   @override
@@ -98,7 +109,8 @@ class AppRepoImpl extends AppRepo {
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> getPosts() {
-    return FirebaseFirestore.instance
+    return getIt
+        .get<FirebaseFirestore>()
         .collection('posts')
         .orderBy(
           'dateTime',
@@ -109,10 +121,11 @@ class AppRepoImpl extends AppRepo {
 
   @override
   Future<void> likePost({
-    required LikesModel likesModel,
+    required LikeModel likesModel,
     required String postId,
   }) async {
-    return await FirebaseFirestore.instance
+    return await getIt
+        .get<FirebaseFirestore>()
         .collection('posts')
         .doc(postId)
         .collection('likes')
@@ -124,7 +137,8 @@ class AppRepoImpl extends AppRepo {
   Future<DocumentSnapshot<Map<String, dynamic>>> likeByMe({
     required String postId,
   }) async {
-    return await FirebaseFirestore.instance
+    return await getIt
+        .get<FirebaseFirestore>()
         .collection('posts')
         .doc(postId)
         .get();
@@ -136,7 +150,8 @@ class AppRepoImpl extends AppRepo {
     required CommentModel commentModel,
     required String postId,
   }) async {
-    return await FirebaseFirestore.instance
+    return await getIt
+        .get<FirebaseFirestore>()
         .collection('posts')
         .doc(postId)
         .collection('comments')
@@ -162,7 +177,8 @@ class AppRepoImpl extends AppRepo {
   Stream<QuerySnapshot<Map<String, dynamic>>> getComments({
     required String postId,
   }) {
-    return FirebaseFirestore.instance
+    return getIt
+        .get<FirebaseFirestore>()
         .collection('posts')
         .doc(postId)
         .collection('comments')
@@ -183,7 +199,8 @@ class AppRepoImpl extends AppRepo {
   Stream<QuerySnapshot<Map<String, dynamic>>> getMessages({
     required String receiverId,
   }) {
-    return FirebaseFirestore.instance
+    return getIt
+        .get<FirebaseFirestore>()
         .collection('users')
         .doc(Helper.currentUser!.uId)
         .collection('chats')
@@ -201,7 +218,8 @@ class AppRepoImpl extends AppRepo {
     required String receiverId,
     required MessageModel messageModel,
   }) async {
-    return await FirebaseFirestore.instance
+    return await getIt
+        .get<FirebaseFirestore>()
         .collection('users')
         .doc(Helper.currentUser!.uId)
         .collection('chats')
@@ -215,7 +233,8 @@ class AppRepoImpl extends AppRepo {
     required String receiverId,
     required MessageModel messageModel,
   }) async {
-    return await FirebaseFirestore.instance
+    return await getIt
+        .get<FirebaseFirestore>()
         .collection('users')
         .doc(receiverId)
         .collection('chats')

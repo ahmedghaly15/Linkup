@@ -13,5 +13,9 @@ class SetupLocatorForDataSource {
     getIt.registerLazySingleton<LinkupDataSource>(() => LinkupDataSourceImpl());
 
     getIt.registerLazySingleton<PostsDataSource>(() => PostsDataSourceImpl());
+
+    getIt.registerLazySingleton<CommentsDataSource>(
+      () => CommentsDataSourceImpl(),
+    );
   }
 }

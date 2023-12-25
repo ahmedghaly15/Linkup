@@ -42,7 +42,12 @@ class SetupLocatorForCubits {
         likePostUseCase: getIt.get<LikePostUseCase>(),
         unLikePostUseCase: getIt.get<UnLikePostUseCase>(),
         likedPostsByMeUseCase: getIt.get<LikedPostsByMeUseCase>(),
-        
+      ),
+    );
+
+    getIt.registerFactory<CommentsCubit>(
+      () => CommentsCubit(
+        typeNewCommentUseCase: getIt.get<TypeNewCommentUseCase>(),
       ),
     );
   }

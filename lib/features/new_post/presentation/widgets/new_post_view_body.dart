@@ -6,11 +6,11 @@ import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
-import 'package:social_app/features/feeds/presentation/cubits/feeds_cubit.dart';
 import 'package:social_app/features/new_post/presentation/widgets/add_photos_and_tags_buttons.dart';
 import 'package:social_app/features/new_post/presentation/widgets/new_post_view_app_bar.dart';
 import 'package:social_app/features/new_post/presentation/widgets/post_image.dart';
 import 'package:social_app/features/new_post/presentation/widgets/user_name_and_image.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 
 class NewPostViewBody extends StatefulWidget {
   const NewPostViewBody({super.key});
@@ -30,10 +30,10 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FeedsCubit, FeedsState>(
+    return BlocConsumer<PostsCubit, PostsState>(
       listener: (context, state) => _controlFeedsState(state, context),
       builder: (context, state) {
-        final FeedsCubit cubit = BlocProvider.of<FeedsCubit>(context);
+        final PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
 
         return SafeArea(
           child: CustomScrollView(
@@ -99,7 +99,7 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
     );
   }
 
-  void _controlFeedsState(FeedsState state, BuildContext context) {
+  void _controlFeedsState(PostsState state, BuildContext context) {
     if (state is CreatePostSuccess || state is UploadPostImageSuccess) {
       _textController.clear();
     }

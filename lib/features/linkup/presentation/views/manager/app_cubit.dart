@@ -6,17 +6,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/features/comments/data/models/comment_model.dart';
-import 'package:social_app/core/models/like_model.dart';
 import 'package:social_app/core/models/message_model.dart';
-import 'package:social_app/features/feeds/data/models/post_model.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/chat/presentation/views/chats_view.dart';
-import 'package:social_app/features/feeds/presentation/views/feeds_view.dart';
+import 'package:social_app/features/posts/data/models/like_model.dart';
+import 'package:social_app/features/posts/data/models/post_model.dart';
+import 'package:social_app/features/posts/presentation/views/posts_view.dart';
 import 'package:social_app/features/profile/presentation/views/me_view.dart';
 import 'package:social_app/features/profile/presentation/views/me_view.dart';
 import 'package:social_app/features/users/presentation/views/users_view.dart';
 import 'package:social_app/features/users/presentation/views/users_view.dart';
+import 'package:social_app/service_locator.dart';
 
 import '../../../domain/app_repo.dart';
 import 'app_states.dart';
@@ -32,7 +33,7 @@ class AppCubit extends Cubit<AppStates> {
 
   //============ Bottom Nav Bar Screens ============
   List<Widget> bottomNavScreens = [
-    const FeedsView(),
+    const PostsView(),
     const ChatsView(),
     const UsersView(),
     const MeView(),
@@ -320,7 +321,8 @@ class AppCubit extends Cubit<AppStates> {
         posts.add(PostModel.fromJson(element.data()));
         var likes = await element.reference.collection('likes').get();
         var comments = await element.reference.collection('comments').get();
-        await FirebaseFirestore.instance
+        await getIt
+            .get<FirebaseFirestore>()
             .collection('posts')
             .doc(element.id)
             .update({
@@ -334,7 +336,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void likePost({required String postId}) {
-    LikesModel likesModel = LikesModel(
+    LikeModel likesModel = LikeModel(
       uId: Helper.currentUser!.uId,
       name: Helper.currentUser!.name,
       dateTime: DateTime.now().toString(),

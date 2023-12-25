@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:social_app/core/models/user_model.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/auth/data/datasources/sign_up/sign_up_datasource.dart';
 import 'package:social_app/features/auth/domain/entities/create_user_params.dart';
 import 'package:social_app/features/auth/domain/entities/sign_up_params.dart';
@@ -30,8 +31,9 @@ class SignUpDataSourceImpl implements SignUpDataSource {
       bio: 'Write your bio...',
       cover: 'https://notepd.s3.amazonaws.com/default-cover.png',
     );
-    await FirebaseFirestore.instance
-        .collection('users')
+    await getIt
+        .get<FirebaseFirestore>()
+        .collection(AppStrings.users)
         .doc(createUserParams.uId)
         .set(userModel.toJson());
   }
