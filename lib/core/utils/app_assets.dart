@@ -20,4 +20,8 @@ class AppAssets {
   /// Assets for imagesCamera
   /// assets/images/camera.png
   static const String imagesCamera = "assets/images/camera.png";
+
+  /// Assets for imagesNoPosts
+  /// assets/images/no_posts.jpg
+  static const String imagesNoPosts = "assets/images/no_posts.png";
 }
