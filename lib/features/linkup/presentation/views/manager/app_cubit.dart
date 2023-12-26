@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/features/comments/data/models/comment_model.dart';
-import 'package:social_app/core/models/message_model.dart';
+import 'package:social_app/features/chat/data/models/message_model.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/chat/presentation/views/chats_view.dart';

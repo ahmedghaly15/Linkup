@@ -9,10 +9,6 @@ class AppAssets {
   /// assets/app_icon_video.mp4
   static const String appIconVideo = "assets/app_icon_video.mp4";
 
-  /// Assets for fontsIcons
-  /// assets/fonts/icons.ttf
-  static const String fontsIcons = "assets/fonts/icons.ttf";
-
   /// Assets for imagesAddImage
   /// assets/images/add_image.png
   static const String imagesAddImage = "assets/images/add_image.png";
@@ -21,7 +17,17 @@ class AppAssets {
   /// assets/images/camera.png
   static const String imagesCamera = "assets/images/camera.png";
 
+  /// Assets for imagesChatDarkBackground
+  /// assets/images/chat_dark_background.jpg
+  static const String imagesChatDarkBackground =
+      "assets/images/chat_dark_background.jpg";
+
+  /// Assets for imagesChatLightBackground
+  /// assets/images/chat_light_background.jpg
+  static const String imagesChatLightBackground =
+      "assets/images/chat_light_background.jpg";
+
   /// Assets for imagesNoPosts
-  /// assets/images/no_posts.jpg
+  /// assets/images/no_posts.png
   static const String imagesNoPosts = "assets/images/no_posts.png";
 }

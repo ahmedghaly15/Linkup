@@ -95,5 +95,21 @@ class SetupLocatorForUseCases {
     getIt.registerLazySingleton<UploadCommentImageUseCase>(
       () => UploadCommentImageUseCase(commentsRepo: getIt.get<CommentsRepo>()),
     );
+
+    getIt.registerLazySingleton<GetMessageImageUseCase>(
+      () => GetMessageImageUseCase(chatRepo: getIt.get<ChatRepo>()),
+    );
+
+    getIt.registerLazySingleton<GetMessagesUseCase>(
+      () => GetMessagesUseCase(chatRepo: getIt.get<ChatRepo>()),
+    );
+
+    getIt.registerLazySingleton<SendMessageUseCase>(
+      () => SendMessageUseCase(chatRepo: getIt.get<ChatRepo>()),
+    );
+
+    getIt.registerLazySingleton<UploadMessageImageUseCase>(
+      () => UploadMessageImageUseCase(chatRepo: getIt.get<ChatRepo>()),
+    );
   }
 }

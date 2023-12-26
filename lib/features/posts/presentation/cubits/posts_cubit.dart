@@ -128,6 +128,7 @@ class PostsCubit extends Cubit<PostsState> {
         (failure) => emit(GetPostsError(error: failure.failureMsg.toString())),
         (result) async {
           _clearPosts();
+
           await _updatePosts(result);
 
           emit(GetPostsSuccess(posts: posts));

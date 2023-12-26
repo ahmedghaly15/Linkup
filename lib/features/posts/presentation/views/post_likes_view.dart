@@ -41,9 +41,9 @@ class PostLikesView extends StatelessWidget {
                             (context, index) {
                               return AnimationConfiguration.staggeredList(
                                 position: index,
-                                duration: const Duration(milliseconds: 675),
+                                duration: const Duration(milliseconds: 700),
                                 child: SlideAnimation(
-                                  horizontalOffset: 200.w,
+                                  horizontalOffset: -150.w,
                                   child: PersonWhoLiked(
                                     person: cubit.peopleLikePost[index],
                                   ),

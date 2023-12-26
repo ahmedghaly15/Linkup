@@ -7,5 +7,6 @@ class Routes {
   static const String newPostRoute = '/newPost';
   static const String editProfileRoute = '/editProfile';
   static const String commentsRoute = '/comments';
-  static const String postLikes = '/postLikes';
+  static const String postLikesRoute = '/postLikes';
+  static const String chatsRoute = '/chats';
 }

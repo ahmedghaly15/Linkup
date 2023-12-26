@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/models/message_model.dart';
+import 'package:social_app/features/chat/data/models/message_model.dart';
 import 'package:social_app/features/posts/data/models/like_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/service_locator.dart';

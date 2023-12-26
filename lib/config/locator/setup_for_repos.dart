@@ -29,5 +29,9 @@ class SetupLocatorForRepos {
         commentsDataSource: getIt.get<CommentsDataSource>(),
       ),
     );
+
+    getIt.registerLazySingleton<ChatRepo>(
+      () => ChatRepoImpl(chatDataSource: getIt.get<ChatDataSource>()),
+    );
   }
 }

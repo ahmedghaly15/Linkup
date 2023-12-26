@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/app_router.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/utils/app_strings.dart';
+import 'package:social_app/features/chat/presentation/cubits/chat_cubit.dart';
 import 'package:social_app/features/linkup/domain/app_repo.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
@@ -35,9 +36,10 @@ class LinkupApp extends StatelessWidget {
             create: (context) => getIt.get<LinkupCubit>()..getUserData(),
           ),
           BlocProvider(
+            create: (context) => getIt.get<ChatCubit>(),
+          ),
+          BlocProvider(
             create: (context) => AppCubit(getIt.get<AppRepo>()),
-            // ..getUserData()
-            // ..getPosts(),
           ),
         ],
         child: BlocBuilder<ThemesCubit, ThemeData>(

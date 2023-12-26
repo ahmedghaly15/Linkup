@@ -58,7 +58,7 @@ class PostItemFooter extends StatelessWidget {
             return TextButton(
               onPressed: () {
                 context.navigateTo(
-                  routeName: Routes.postLikes,
+                  routeName: Routes.postLikesRoute,
                   arguments: post.postId,
                 );
               },

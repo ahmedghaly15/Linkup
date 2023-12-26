@@ -17,5 +17,7 @@ class SetupLocatorForDataSource {
     getIt.registerLazySingleton<CommentsDataSource>(
       () => CommentsDataSourceImpl(),
     );
+
+    getIt.registerLazySingleton<ChatDataSource>(() => ChatDataSourceImpl());
   }
 }

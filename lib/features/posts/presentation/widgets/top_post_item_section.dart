@@ -49,29 +49,23 @@ class TopPostItemSection extends StatelessWidget {
             ],
           ),
         ),
-        IconButton(
-          onPressed: () {
-            post.uId == Helper.currentUser!.uId
-                ? BlocProvider.of<PostsCubit>(context)
-                    .deletePost(postId: post.postId!)
-                : null;
-          },
-          icon: BlocBuilder<ThemesCubit, ThemeData>(
-            builder: (context, state) {
-              return Icon(
-                post.uId == Helper.currentUser!.uId
-                    ? Icons.delete
-                    : Icons.more_horiz,
-                size: 25.w,
-                color: post.uId == Helper.currentUser!.uId
-                    ? Colors.red
-                    : (state.brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.black),
-              );
-            },
-          ),
-        ),
+        post.uId == Helper.currentUser!.uId
+            ? IconButton(
+                onPressed: () {
+                  BlocProvider.of<PostsCubit>(context)
+                      .deletePost(postId: post.postId!);
+                },
+                icon: BlocBuilder<ThemesCubit, ThemeData>(
+                  builder: (context, state) {
+                    return Icon(
+                      Icons.delete,
+                      size: 25.w,
+                      color: Colors.red,
+                    );
+                  },
+                ),
+              )
+            : const SizedBox(),
       ],
     );
   }

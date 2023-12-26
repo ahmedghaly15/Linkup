@@ -54,5 +54,14 @@ class SetupLocatorForCubits {
         uploadCommentImageUseCase: getIt.get<UploadCommentImageUseCase>(),
       ),
     );
+
+    getIt.registerFactory<ChatCubit>(
+      () => ChatCubit(
+        getMessagesUseCase: getIt.get<GetMessagesUseCase>(),
+        sendMessageUseCase: getIt.get<SendMessageUseCase>(),
+        getMessageImageUseCase: getIt.get<GetMessageImageUseCase>(),
+        uploadMessageImageUseCase: getIt.get<UploadMessageImageUseCase>(),
+      ),
+    );
   }
 }

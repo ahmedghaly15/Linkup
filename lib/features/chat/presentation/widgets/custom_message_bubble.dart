@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
-import '/core/models/message_model.dart';
+import '../../data/models/message_model.dart';
 import '/core/utils/size_config.dart';
 
 class CustomMessageBubble extends StatelessWidget {
