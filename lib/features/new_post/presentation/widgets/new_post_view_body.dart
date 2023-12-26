@@ -22,6 +22,8 @@ class NewPostViewBody extends StatefulWidget {
 class _NewPostViewBodyState extends State<NewPostViewBody> {
   final TextEditingController _textController = TextEditingController();
 
+  String postText = '';
+
   @override
   void dispose() {
     _textController.dispose();
@@ -40,7 +42,7 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
             slivers: [
               NewPostViewAppBar(
                 cubit: cubit,
-                textController: _textController,
+                postText: postText,
               ),
               SliverPadding(
                 padding: AppConstants.horizontalPadding,
@@ -71,6 +73,11 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           contentPadding: EdgeInsets.zero,
+                          onChanged: (String value) {
+                            setState(() {
+                              postText = value;
+                            });
+                          },
                         ),
                       ),
                       SizedBox(height: 15.h),
@@ -100,8 +107,11 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
   }
 
   void _controlFeedsState(PostsState state, BuildContext context) {
-    if (state is CreatePostSuccess || state is UploadPostImageSuccess) {
+    if (state is CreatePostSuccess) {
       _textController.clear();
+      setState(() {
+        postText = '';
+      });
     }
 
     if (state is CreatePostError) {

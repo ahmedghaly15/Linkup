@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
-import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
@@ -211,6 +210,5 @@ class _CommenterFieldState extends State<CommenterField> {
     });
     _commentController.clear();
     BlocProvider.of<CommentsCubit>(context).removeCommentImage();
-    AuthHelper.keyboardUnfocus(context);
   }
 }

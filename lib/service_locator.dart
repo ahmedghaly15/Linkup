@@ -58,6 +58,7 @@ import 'package:social_app/features/posts/domain/usecases/get_post_image.dart';
 import 'package:social_app/features/posts/domain/usecases/get_posts.dart';
 import 'package:social_app/features/posts/domain/usecases/like_post.dart';
 import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart';
+import 'package:social_app/features/posts/domain/usecases/people_like_the_post.dart';
 import 'package:social_app/features/posts/domain/usecases/unlike_post.dart';
 import 'package:social_app/features/posts/domain/usecases/upload_post_image.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
