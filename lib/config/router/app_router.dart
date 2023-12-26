@@ -12,6 +12,7 @@ import 'package:social_app/features/comments/presentation/cubit/comments_cubit.d
 import 'package:social_app/features/comments/presentation/views/comments_view.dart';
 import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
 import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
+import 'package:social_app/features/posts/presentation/views/post_likes_view.dart';
 import 'package:social_app/features/splash/presentation/views/splash_view.dart';
 import 'package:social_app/service_locator.dart';
 
@@ -47,6 +48,12 @@ class AppRouter {
 
       case Routes.newPostRoute:
         return MaterialPageRoute(builder: (context) => const NewPostView());
+
+      case Routes.postLikes:
+        final args = routeSettings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => PostLikesView(postId: args),
+        );
 
       case Routes.commentsRoute:
         final args = routeSettings.arguments as CommentsViewParams;

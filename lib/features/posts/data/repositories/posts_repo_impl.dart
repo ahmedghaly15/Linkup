@@ -75,4 +75,11 @@ class PostsRepoImpl implements PostsRepo {
       function: () => postsDataSource.likedPostsByMe(),
     );
   }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({
+    required String postId,
+  }) {
+    return postsDataSource.peopleLikeThePost(postId: postId);
+  }
 }

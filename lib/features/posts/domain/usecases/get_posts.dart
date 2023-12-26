@@ -15,6 +15,6 @@ class GetPostsUseCase
   Future<Either<Failure, QuerySnapshot<Map<String, dynamic>>>> call(
     NoParams params,
   ) async {
-    return await postsRepo.getPosts();
+    return postsRepo.getPosts();
   }
 }

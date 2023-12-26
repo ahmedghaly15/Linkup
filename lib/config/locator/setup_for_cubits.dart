@@ -42,6 +42,7 @@ class SetupLocatorForCubits {
         likePostUseCase: getIt.get<LikePostUseCase>(),
         unLikePostUseCase: getIt.get<UnLikePostUseCase>(),
         likedPostsByMeUseCase: getIt.get<LikedPostsByMeUseCase>(),
+        peopleLikeThePostUseCase: getIt.get<PeopleLikeThePostUseCase>(),
       ),
     );
 

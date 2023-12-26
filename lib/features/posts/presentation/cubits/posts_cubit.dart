@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/core/utils/app_strings.dart';
+import 'package:social_app/features/posts/data/models/like_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 import 'package:social_app/features/posts/domain/usecases/create_post.dart';
@@ -14,6 +15,7 @@ import 'package:social_app/features/posts/domain/usecases/get_post_image.dart';
 import 'package:social_app/features/posts/domain/usecases/get_posts.dart';
 import 'package:social_app/features/posts/domain/usecases/like_post.dart';
 import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart';
+import 'package:social_app/features/posts/domain/usecases/people_like_the_post.dart';
 import 'package:social_app/features/posts/domain/usecases/unlike_post.dart';
 import 'package:social_app/features/posts/domain/usecases/upload_post_image.dart';
 import 'package:social_app/service_locator.dart';
@@ -29,6 +31,7 @@ class PostsCubit extends Cubit<PostsState> {
   final LikePostUseCase likePostUseCase;
   final UnLikePostUseCase unLikePostUseCase;
   final LikedPostsByMeUseCase likedPostsByMeUseCase;
+  final PeopleLikeThePostUseCase peopleLikeThePostUseCase;
 
   PostsCubit({
     required this.getPostsUseCase,
@@ -39,6 +42,7 @@ class PostsCubit extends Cubit<PostsState> {
     required this.likePostUseCase,
     required this.unLikePostUseCase,
     required this.likedPostsByMeUseCase,
+    required this.peopleLikeThePostUseCase,
   }) : super(const PostsInitial());
 
   void createPost({required CreatePostParams createPostParams}) {
@@ -224,6 +228,22 @@ class PostsCubit extends Cubit<PostsState> {
           emit(const UnLikePostSuccess());
         },
       );
+    });
+  }
+
+  final List<LikeModel> peopleLikePost = <LikeModel>[];
+
+  void peopleLikeThePost({required String postId}) {
+    peopleLikeThePostUseCase(postId).listen((event) {
+      peopleLikePost.clear();
+
+      for (var element in event.docs) {
+        peopleLikePost.add(LikeModel.fromJson(element.data()));
+      }
+
+      emit(GetPeopleLikeThePostSuccess(peopleLikeThePost: peopleLikePost));
+    }).onError((error) {
+      emit(GetPeopleLikeThePostError(error: error.toString()));
     });
   }
 }

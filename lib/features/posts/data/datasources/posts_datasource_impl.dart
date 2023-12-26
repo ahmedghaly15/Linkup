@@ -120,4 +120,15 @@ class PostsDataSourceImpl implements PostsDataSource {
 
     return likedPosts;
   }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({
+    required String postId,
+  }) {
+    return FirebaseFirestore.instance
+        .collection(AppStrings.posts)
+        .doc(postId)
+        .collection(AppStrings.likes)
+        .snapshots();
+  }
 }

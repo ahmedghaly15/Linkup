@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
@@ -19,22 +20,26 @@ class PostsView extends StatelessWidget {
         final PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
 
         if (state is GetPostsSuccess) {
-          return state.posts.isNotEmpty
+          return cubit.posts.isNotEmpty
               ? SafeArea(
                   child: ListView.separated(
                     shrinkWrap: true,
                     padding: EdgeInsets.only(top: 10.h, bottom: 15.h),
                     physics: AppConstants.physics,
                     itemBuilder: (context, index) => PostItem(
-                      key: UniqueKey(),
-                      post: state.posts[index],
+                      post: cubit.posts[index],
                     ),
                     separatorBuilder: (context, index) =>
                         SizedBox(height: 24.h),
-                    itemCount: state.posts.length,
+                    itemCount: cubit.posts.length,
                   ),
                 )
-              : Container();
+              : Center(
+                  child: Image.asset(
+                    AppAssets.imagesNoPosts,
+                    fit: BoxFit.fill,
+                  ),
+                );
         } else if (state is GetPostsError) {
           return CustomErrorWidget(
             onPressed: () => cubit.getPosts(),

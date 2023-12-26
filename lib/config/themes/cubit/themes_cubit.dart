@@ -6,12 +6,12 @@ import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/service_locator.dart';
 
 class ThemesCubit extends Cubit<ThemeData> {
-  ThemesCubit() : super(AppTheme.lightTheme) {
+  ThemesCubit() : super(AppThemes.lightTheme) {
     _getThemeFromPrefs();
   }
 
   Future<void> _saveThemeToPrefs({required ThemeData theme}) async {
-    final themeIndex = theme == AppTheme.lightTheme ? 0 : 1;
+    final themeIndex = theme == AppThemes.lightTheme ? 0 : 1;
 
     await getIt.get<CacheHelper>().saveData(
           key: AppStrings.theme,
@@ -24,15 +24,15 @@ class ThemesCubit extends Cubit<ThemeData> {
         getIt.get<CacheHelper>().getIntData(key: AppStrings.theme) ?? 0;
 
     final savedTheme =
-        savedThemeIndex == 0 ? AppTheme.lightTheme : AppTheme.darkTheme;
+        savedThemeIndex == 0 ? AppThemes.lightTheme : AppThemes.darkTheme;
 
     emit(savedTheme);
   }
 
   void toggleTheme() {
     emit(state.brightness == Brightness.light
-        ? AppTheme.darkTheme
-        : AppTheme.lightTheme);
+        ? AppThemes.darkTheme
+        : AppThemes.lightTheme);
 
     _saveThemeToPrefs(theme: state);
   }

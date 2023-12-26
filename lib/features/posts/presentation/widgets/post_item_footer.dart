@@ -33,7 +33,7 @@ class PostItemFooter extends StatelessWidget {
             );
           },
         ),
-        SizedBox(width: 5.w),
+        SizedBox(width: 10.w),
         TextButton(
           onPressed: () {
             context.navigateTo(
@@ -55,9 +55,17 @@ class PostItemFooter extends StatelessWidget {
           builder: (context, snapshot) {
             int likesCount = snapshot.data?.docs.length ?? 0;
 
-            return Text(
-              "$likesCount Likes",
-              style: AppTextStyles.textStyle15.copyWith(color: Colors.grey),
+            return TextButton(
+              onPressed: () {
+                context.navigateTo(
+                  routeName: Routes.postLikes,
+                  arguments: post.postId,
+                );
+              },
+              child: Text(
+                "$likesCount Likes",
+                style: AppTextStyles.textStyle15.copyWith(color: Colors.grey),
+              ),
             );
           },
         )
