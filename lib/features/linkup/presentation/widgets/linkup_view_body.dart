@@ -13,14 +13,16 @@ class LinkupViewBody extends StatelessWidget {
 
         return WillPopScope(
           onWillPop: () {
-            if (cubit.currentIndex == 1 && cubit.isSearching) {
+            if (cubit.isSearching) {
               cubit.invertIsSearching();
               return Future.value(false);
             }
+
             if (cubit.currentIndex != 0) {
               cubit.changeBottomNavToHome(context);
               return Future.value(false);
             }
+
             return Future.value(true);
           },
           child: cubit.getBody()[cubit.currentIndex],

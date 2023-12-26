@@ -61,6 +61,7 @@ class GetAllUserSuccess extends LinkupState {
 
 class GetAllUserError extends LinkupState {
   final String error;
+
   const GetAllUserError({required this.error});
 
   @override
@@ -68,14 +69,10 @@ class GetAllUserError extends LinkupState {
 }
 
 class InvertIsSearchingSuccess extends LinkupState {
-  const InvertIsSearchingSuccess();
-}
+  final bool isSearching;
 
-class SearchListUpdateSuccess extends LinkupState {
-  final List<UserModel> list;
-
-  const SearchListUpdateSuccess({required this.list});
+  const InvertIsSearchingSuccess({required this.isSearching});
 
   @override
-  List<Object> get props => [list];
+  List<Object> get props => [isSearching];
 }

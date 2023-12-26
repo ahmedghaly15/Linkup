@@ -33,10 +33,8 @@ class LinkupRepoImpl implements LinkupRepo {
   }
 
   @override
-  void changeBottomNavToHome({required ChangeIndexParams changeIndexParams}) {
-    linkupDataSource.changeBottomNavToHome(
-      changeIndexParams: changeIndexParams,
-    );
+  void changeBottomNavToHome({required BuildContext context}) {
+    linkupDataSource.changeBottomNavToHome(context: context);
   }
 
   @override

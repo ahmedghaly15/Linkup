@@ -41,13 +41,7 @@ class CustomSearchField extends StatelessWidget {
         contentPadding: EdgeInsets.all(8.h),
       ),
       onChanged: (value) {
-        cubit.searchList.clear();
-        for (var user in cubit.users) {
-          if (user.name!.toLowerCase().contains(value.toLowerCase())) {
-            cubit.searchList.add(user);
-            cubit.rebuildSearchList(cubit.searchList);
-          }
-        }
+        cubit.search(value: value);
       },
     );
   }

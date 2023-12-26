@@ -46,20 +46,18 @@ class LinkupCubit extends Cubit<LinkupState> {
       index: index,
     ));
 
-    // if (currentIndex == 0) BlocProvider.of<FeedsCubit>(context).getPosts();
-
     if (currentIndex == 1 || currentIndex == 2) getAllUsers();
 
     emit(ChangeBottomNavIndex(index: index));
   }
 
   void changeBottomNavToHome(BuildContext context) {
-    changeNavToHomeUseCase(ChangeIndexParams(context: context));
+    changeNavToHomeUseCase(context);
 
     emit(const ChangeBottomNavToHome());
   }
 
-  List<UserModel> users = [];
+  List<UserModel> users = <UserModel>[];
 
   void getAllUsers() {
     emit(const GetAllUsersLoading());
@@ -69,6 +67,7 @@ class LinkupCubit extends Cubit<LinkupState> {
         (failure) =>
             emit(GetAllUserError(error: failure.failureMsg.toString())),
         (result) {
+          users.clear();
           for (var element in result.docs) {
             if (element.data()['uId'] != Helper.currentUser!.uId)
               users.add(UserModel.fromJson(element.data()));
@@ -94,15 +93,28 @@ class LinkupCubit extends Cubit<LinkupState> {
     });
   }
 
-  List<UserModel> searchList = [];
+  List<UserModel> searchList = <UserModel>[];
   bool isSearching = false;
 
   void invertIsSearching() {
     isSearching = !isSearching;
-    emit(const InvertIsSearchingSuccess());
+    emit(InvertIsSearchingSuccess(isSearching: isSearching));
+    emit(GetAllUserSuccess(users: users));
   }
 
-  void rebuildSearchList(List<UserModel> list) {
-    emit(SearchListUpdateSuccess(list: list));
+  void search({required String value}) {
+    if (value.isEmpty) {
+      isSearching = false;
+      emit(GetAllUserSuccess(users: users));
+      // return; => I can use return here, so when isSearching is false, the searching stops
+    }
+
+    isSearching = true;
+
+    searchList = users
+        .where((user) => user.name!.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+
+    emit(GetAllUserSuccess(users: searchList));
   }
 }

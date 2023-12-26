@@ -94,7 +94,9 @@ class ChatDataSourceImpl implements ChatDataSource {
   }
 
   @override
-  Future<TaskSnapshot> uploadMessageImage({File? messageImage}) async {
+  Future<TaskSnapshot> uploadMessageImage({
+    File? messageImage,
+  }) async {
     return await firebase_storage.FirebaseStorage.instance
         .ref()
         .child(

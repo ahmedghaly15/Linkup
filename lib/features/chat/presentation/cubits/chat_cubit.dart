@@ -103,4 +103,10 @@ class ChatCubit extends Cubit<ChatState> {
       );
     });
   }
+
+  void removeMessageImage() {
+    messageImage = null;
+
+    emit(const RemovedMessageImageSuccess());
+  }
 }

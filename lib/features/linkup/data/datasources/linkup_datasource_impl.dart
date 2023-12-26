@@ -39,8 +39,8 @@ class LinkupDataSourceImpl implements LinkupDataSource {
   }
 
   @override
-  void changeBottomNavToHome({required ChangeIndexParams changeIndexParams}) {
-    BlocProvider.of<LinkupCubit>(changeIndexParams.context!).currentIndex = 0;
+  void changeBottomNavToHome({required BuildContext context}) {
+    BlocProvider.of<LinkupCubit>(context).currentIndex = 0;
   }
 
   @override

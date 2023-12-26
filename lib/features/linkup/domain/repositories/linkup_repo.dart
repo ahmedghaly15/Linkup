@@ -11,7 +11,7 @@ abstract class LinkupRepo {
 
   void changeBottomNavIndex({required ChangeIndexParams changeIndexParams});
 
-  void changeBottomNavToHome({required ChangeIndexParams changeIndexParams});
+  void changeBottomNavToHome({required BuildContext context});
 
   List<Widget> getBody();
 

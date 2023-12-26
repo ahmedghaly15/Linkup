@@ -26,6 +26,15 @@ import 'package:social_app/features/auth/domain/usecases/sign_up/sign_up_usecase
 import 'package:social_app/features/auth/presentation/cubits/forgot_password/forgot_password_cubit.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
+import 'package:social_app/features/chat/data/datasources/chat_datasource.dart';
+import 'package:social_app/features/chat/data/datasources/chat_datasource_impl.dart';
+import 'package:social_app/features/chat/data/repositories/chat_repo_impl.dart';
+import 'package:social_app/features/chat/domain/repositories/chat_repo.dart';
+import 'package:social_app/features/chat/domain/usecases/get_message_image.dart';
+import 'package:social_app/features/chat/domain/usecases/get_messages.dart';
+import 'package:social_app/features/chat/domain/usecases/send_message.dart';
+import 'package:social_app/features/chat/domain/usecases/upload_message_image.dart';
+import 'package:social_app/features/chat/presentation/cubits/chat_cubit.dart';
 import 'package:social_app/features/comments/data/datasources/comments_datasource.dart';
 import 'package:social_app/features/comments/data/datasources/comments_datasource_impl.dart';
 import 'package:social_app/features/comments/data/repositories/comments_repo_impl.dart';
