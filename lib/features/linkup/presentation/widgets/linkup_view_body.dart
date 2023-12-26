@@ -12,9 +12,8 @@ class LinkupViewBody extends StatelessWidget {
         final LinkupCubit cubit = BlocProvider.of<LinkupCubit>(context);
 
         return WillPopScope(
-          child: cubit.getBody()[cubit.currentIndex],
           onWillPop: () {
-            if (cubit.isSearching) {
+            if (cubit.currentIndex == 1 && cubit.isSearching) {
               cubit.invertIsSearching();
               return Future.value(false);
             }
@@ -24,18 +23,9 @@ class LinkupViewBody extends StatelessWidget {
             }
             return Future.value(true);
           },
+          child: cubit.getBody()[cubit.currentIndex],
         );
       },
     );
-
-    // return ConditionalBuilder(
-    //   condition: Helper.currentUser != null,
-    //   builder: (context) => cubit.bottomNavScreens[cubit.currentIndex],
-    //   fallback: (context) => const Center(
-    //     child: CircularProgressIndicator(
-    //       color: AppColors.primaryColor,
-    //     ),
-    //   ),
-    // );
   }
 }

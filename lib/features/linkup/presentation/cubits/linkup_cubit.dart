@@ -105,12 +105,4 @@ class LinkupCubit extends Cubit<LinkupState> {
   void rebuildSearchList(List<UserModel> list) {
     emit(SearchListUpdateSuccess(list: list));
   }
-
-  String commentText = '';
-
-  void onChangeText({required String value}) {
-    commentText = value;
-
-    emit(OnChangeTextSuccess(text: commentText));
-  }
 }

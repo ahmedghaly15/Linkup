@@ -14,19 +14,11 @@ class LinkupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LinkupCubit, LinkupState>(
-      builder: (context, state) {
-        final LinkupCubit cubit = BlocProvider.of<LinkupCubit>(context);
-
-        return Scaffold(
-          // appBar: _buildAppBar(context, cubit),
-          body: const LinkupViewBody(),
-          bottomNavigationBar: CustomBottomNavigationBar(cubit: cubit),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: const NewPostFloatingButton(),
-        );
-      },
+    return const Scaffold(
+      body: LinkupViewBody(),
+      bottomNavigationBar: CustomBottomNavigationBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: NewPostFloatingButton(),
     );
   }
 
