@@ -62,10 +62,20 @@ class SetupLocatorForCubits {
       ),
     );
 
-    getIt.registerFactory<UserCubit>(() => UserCubit(
-          getAllUsersUseCase: getIt.get<GetAllUsersUseCase>(),
-          getUserDataUseCase: getIt.get<GetUserDataUseCase>(),
-          getAllUserPostsUseCase: getIt.get<GetUserPostsUseCase>(),
-        ));
+    getIt.registerFactory<UserCubit>(
+      () => UserCubit(
+        getAllUsersUseCase: getIt.get<GetAllUsersUseCase>(),
+        getUserDataUseCase: getIt.get<GetUserDataUseCase>(),
+        getAllUserPostsUseCase: getIt.get<GetUserPostsUseCase>(),
+      ),
+    );
+
+    getIt.registerFactory<EditProfileCubit>(
+      () => EditProfileCubit(
+        updateUserUseCase: getIt.get<UpdateUserUseCase>(),
+        getImageUseCase: getIt.get<GetImageUseCase>(),
+        uploadImageUseCase: getIt.get<UploadImageUseCase>(),
+      ),
+    );
   }
 }

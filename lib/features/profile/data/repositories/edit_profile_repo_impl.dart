@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/errors/failure.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
@@ -31,6 +35,20 @@ class EditProfileRepoImpl implements EditProfileRepo {
       function: () => editProfileDataSource.updateUser(
         userModel: userModel,
       ),
+    );
+  }
+
+  @override
+  Future<Either<Failure, XFile?>> getImage({required ImageSource source}) {
+    return executeAndHandleErrors(
+      function: () => editProfileDataSource.getImage(source: source),
+    );
+  }
+
+  @override
+  Future<Either<Failure, TaskSnapshot>> uploadImage({File? image}) {
+    return executeAndHandleErrors<TaskSnapshot>(
+      function: () => editProfileDataSource.uploadImage(image: image),
     );
   }
 }

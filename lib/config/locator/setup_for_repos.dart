@@ -37,5 +37,11 @@ class SetupLocatorForRepos {
     getIt.registerLazySingleton<UserRepo>(
       () => UserRepoImpl(userDataSource: getIt.get<UserDataSource>()),
     );
+
+    getIt.registerLazySingleton<EditProfileRepo>(
+      () => EditProfileRepoImpl(
+        editProfileDataSource: getIt.get<EditProfileDataSource>(),
+      ),
+    );
   }
 }

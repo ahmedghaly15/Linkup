@@ -14,5 +14,7 @@ class SetupLocatorForExternal {
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
+    getIt.registerLazySingleton<ImagePicker>(() => ImagePicker());
   }
 }

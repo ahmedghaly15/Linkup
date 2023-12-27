@@ -59,7 +59,7 @@ class PostsDataSourceImpl implements PostsDataSource {
 
   @override
   Future<XFile?> getPostImage({required ImageSource source}) async {
-    return await ImagePicker().pickImage(source: source);
+    return await getIt.get<ImagePicker>().pickImage(source: source);
   }
 
   @override

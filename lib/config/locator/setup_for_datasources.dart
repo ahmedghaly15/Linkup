@@ -21,5 +21,9 @@ class SetupLocatorForDataSource {
     getIt.registerLazySingleton<ChatDataSource>(() => ChatDataSourceImpl());
 
     getIt.registerLazySingleton<UserDataSource>(() => UserDataSourceImpl());
+
+    getIt.registerLazySingleton<EditProfileDataSource>(
+      () => EditProfileDataSourceImpl(),
+    );
   }
 }

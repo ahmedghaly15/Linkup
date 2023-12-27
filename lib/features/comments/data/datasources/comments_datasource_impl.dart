@@ -37,7 +37,7 @@ class CommentsDataSourceImpl implements CommentsDataSource {
 
   @override
   Future<XFile?> getCommentImage({required ImageSource source}) async {
-    return await ImagePicker().pickImage(source: source);
+    return await getIt.get<ImagePicker>().pickImage(source: source);
   }
 
   @override

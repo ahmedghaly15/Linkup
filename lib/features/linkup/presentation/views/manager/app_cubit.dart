@@ -126,7 +126,7 @@ class AppCubit extends Cubit<AppStates> {
 
   // =============== ProfileImage Logic ===============
   File? profileImage;
-  ImagePicker picker = ImagePicker();
+  // ImagePicker picker = getIt.get<ImagePicker>();
 
   Future<void> getProfileImage({required ImageSource source}) async {
     await appRepo.getProfileImage(source: source).then((value) {

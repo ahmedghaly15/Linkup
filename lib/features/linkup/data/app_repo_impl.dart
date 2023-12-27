@@ -44,7 +44,7 @@ class AppRepoImpl extends AppRepo {
   // =============== ProfileImage Logic ===============
   @override
   Future<XFile?> getProfileImage({required ImageSource source}) async {
-    return await ImagePicker().pickImage(source: source);
+    return await getIt.get<ImagePicker>().pickImage(source: source);
   }
 
   @override
@@ -60,7 +60,7 @@ class AppRepoImpl extends AppRepo {
   // =============== CoverImage Logic ===============
   @override
   Future<XFile?> getCoverImage({required ImageSource source}) async {
-    return await ImagePicker().pickImage(source: source);
+    return await getIt.get<ImagePicker>().pickImage(source: source);
   }
 
   @override
@@ -94,7 +94,7 @@ class AppRepoImpl extends AppRepo {
 
   @override
   Future<XFile?> getPostImage({required ImageSource source}) async {
-    return await ImagePicker().pickImage(source: source);
+    return await getIt.get<ImagePicker>().pickImage(source: source);
   }
 
   @override
@@ -160,7 +160,7 @@ class AppRepoImpl extends AppRepo {
 
   @override
   Future<XFile?> getCommentImage({required ImageSource source}) async {
-    return await ImagePicker().pickImage(source: source);
+    return await getIt.get<ImagePicker>().pickImage(source: source);
   }
 
   @override
@@ -192,7 +192,7 @@ class AppRepoImpl extends AppRepo {
   // =============== Chat & Messages Logic ===============
   @override
   Future<XFile?> getMessageImage({required ImageSource source}) async {
-    return await ImagePicker().pickImage(source: source);
+    return await getIt.get<ImagePicker>().pickImage(source: source);
   }
 
   @override
