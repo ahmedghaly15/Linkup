@@ -10,8 +10,8 @@ import 'package:social_app/features/posts/presentation/widgets/likes_and_comment
 import 'package:social_app/features/posts/presentation/widgets/post_text_and_image.dart';
 import 'package:social_app/features/posts/presentation/widgets/top_post_item_section.dart';
 
-class UserPost extends StatelessWidget {
-  const UserPost({
+class UserPostItem extends StatelessWidget {
+  const UserPostItem({
     Key? key,
     required this.post,
   }) : super(key: key);
