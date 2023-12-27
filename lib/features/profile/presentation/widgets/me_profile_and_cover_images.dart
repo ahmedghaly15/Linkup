@@ -1,44 +1,66 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/models/user_model.dart';
-import '../../../../core/utils/size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/router/routes.dart';
+import 'package:social_app/core/helpers/cache_helper.dart';
+import 'package:social_app/core/models/user_model.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_strings.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/user_cover_image.dart';
+import 'package:social_app/core/widgets/user_profile_image.dart';
+import 'package:social_app/service_locator.dart';
 
 class MeProfileAndCoverImages extends StatelessWidget {
   const MeProfileAndCoverImages({
     Key? key,
-    required this.userModel,
+    required this.me,
   }) : super(key: key);
 
-  final UserModel userModel;
+  final UserModel me;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: <Widget>[
-        Align(
-          alignment: AlignmentDirectional.topCenter,
-          child: Container(
-            height: SizeConfig.screenHeight! * 0.25,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(5),
-                topRight: Radius.circular(5),
+        UserCoverImage(cover: me.cover!),
+        UserProfileImage(image: me.image!),
+        Positioned(
+          top: 25.h,
+          right: 16.w,
+          child: PopupMenuButton(
+            icon: Container(
+              height: 30.h,
+              width: 30.h,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey,
               ),
-              image: DecorationImage(
-                image: NetworkImage(userModel.cover!),
-                fit: BoxFit.cover,
-              ),
+              child: const Icon(Icons.more_vert),
             ),
-          ),
-        ),
-        CircleAvatar(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          radius: 54,
-          child: CircleAvatar(
-            radius: 50,
-            backgroundImage: NetworkImage(userModel.image!),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 'signOut',
+                child: Text(
+                  'Sign Out',
+                  style: AppTextStyles.textStyle16SemiBold,
+                ),
+              ),
+            ],
+            onSelected: (value) async {
+              if (value == 'signOut') {
+                await getIt
+                    .get<CacheHelper>()
+                    .removeData(key: AppStrings.uId)
+                    .then((value) async {
+                  getIt.get<FirebaseAuth>().signOut().then((value) {
+                    context.navigateAndReplacement(
+                        newRoute: Routes.signInRoute);
+                  });
+                });
+              }
+            },
           ),
         ),
       ],

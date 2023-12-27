@@ -18,6 +18,7 @@ import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart
 import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
 import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
 import 'package:social_app/features/posts/presentation/views/post_likes_view.dart';
+import 'package:social_app/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:social_app/features/splash/presentation/views/splash_view.dart';
 import 'package:social_app/features/users/presentation/views/user_profile_view.dart';
 import 'package:social_app/service_locator.dart';
@@ -98,6 +99,9 @@ class AppRouter {
             child: const LinkupView(),
           ),
         );
+
+      case Routes.editProfileRoute:
+        return MaterialPageRoute(builder: (context) => const EditProfileView());
 
       default:
         return unFoundRoute();

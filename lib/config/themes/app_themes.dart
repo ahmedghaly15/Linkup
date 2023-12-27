@@ -40,6 +40,11 @@ class AppThemes {
             padding: MaterialStateProperty.all(EdgeInsets.zero),
           ),
         ),
+        popupMenuTheme: const PopupMenuThemeData(
+          color: Colors.white,
+          iconColor: Colors.white,
+          position: PopupMenuPosition.under,
+        ),
       );
 
   static ThemeData get darkTheme => ThemeData.dark().copyWith(
@@ -73,6 +78,11 @@ class AppThemes {
               ),
             ),
           ),
+        ),
+        popupMenuTheme: const PopupMenuThemeData(
+          color: AppColors.darkGreyClr,
+          iconColor: Colors.white,
+          position: PopupMenuPosition.under,
         ),
       );
 }
