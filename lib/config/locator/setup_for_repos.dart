@@ -33,5 +33,9 @@ class SetupLocatorForRepos {
     getIt.registerLazySingleton<ChatRepo>(
       () => ChatRepoImpl(chatDataSource: getIt.get<ChatDataSource>()),
     );
+
+    getIt.registerLazySingleton<UserRepo>(
+      () => UserRepoImpl(userDataSource: getIt.get<UserDataSource>()),
+    );
   }
 }

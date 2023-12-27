@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/utils/app_colors.dart';
-import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class CustomSearchField extends StatelessWidget {
-  const CustomSearchField({Key? key, required this.cubit}) : super(key: key);
+  const CustomSearchField({
+    Key? key,
+    required this.cubit,
+  }) : super(key: key);
 
-  final LinkupCubit cubit;
+  final UserCubit cubit;
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class LinkupViewBody extends StatelessWidget {
   const LinkupViewBody({Key? key}) : super(key: key);
@@ -9,24 +10,28 @@ class LinkupViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LinkupCubit, LinkupState>(
       builder: (context, state) {
-        final LinkupCubit cubit = BlocProvider.of<LinkupCubit>(context);
+        final LinkupCubit linkupCubit = BlocProvider.of<LinkupCubit>(context);
 
-        return WillPopScope(
-          onWillPop: () {
-            if (cubit.isSearching) {
-              cubit.invertIsSearching();
-              return Future.value(false);
-            }
+        return BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+          final UserCubit userCubit = BlocProvider.of<UserCubit>(context);
 
-            if (cubit.currentIndex != 0) {
-              cubit.changeBottomNavToHome(context);
-              return Future.value(false);
-            }
+          return WillPopScope(
+            onWillPop: () {
+              if (userCubit.isSearching) {
+                userCubit.invertIsSearching();
+                return Future.value(false);
+              }
 
-            return Future.value(true);
-          },
-          child: cubit.getBody()[cubit.currentIndex],
-        );
+              if (linkupCubit.currentIndex != 0) {
+                linkupCubit.changeBottomNavToHome(context);
+                return Future.value(false);
+              }
+
+              return Future.value(true);
+            },
+            child: linkupCubit.getBody()[linkupCubit.currentIndex],
+          );
+        });
       },
     );
   }

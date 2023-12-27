@@ -36,14 +36,6 @@ class SetupLocatorForUseCases {
       () => GetBottomNavItemsUseCase(linkupRepo: getIt.get<LinkupRepo>()),
     );
 
-    getIt.registerLazySingleton<GetUserDataUseCase>(
-      () => GetUserDataUseCase(linkupRepo: getIt.get<LinkupRepo>()),
-    );
-
-    getIt.registerLazySingleton<GetAllUsersUseCase>(
-      () => GetAllUsersUseCase(linkupRepo: getIt.get<LinkupRepo>()),
-    );
-
     getIt.registerLazySingleton<GetPostsUseCase>(
       () => GetPostsUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
@@ -80,6 +72,10 @@ class SetupLocatorForUseCases {
       () => PeopleLikeThePostUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
 
+    getIt.registerLazySingleton<GetUserPostsUseCase>(
+      () => GetUserPostsUseCase(postsRepo: getIt.get<PostsRepo>()),
+    );
+
     getIt.registerLazySingleton<TypeNewCommentUseCase>(
       () => TypeNewCommentUseCase(commentsRepo: getIt.get<CommentsRepo>()),
     );
@@ -110,6 +106,14 @@ class SetupLocatorForUseCases {
 
     getIt.registerLazySingleton<UploadMessageImageUseCase>(
       () => UploadMessageImageUseCase(chatRepo: getIt.get<ChatRepo>()),
+    );
+
+    getIt.registerLazySingleton<GetUserDataUseCase>(
+      () => GetUserDataUseCase(userRepo: getIt.get<UserRepo>()),
+    );
+
+    getIt.registerLazySingleton<GetAllUsersUseCase>(
+      () => GetAllUsersUseCase(userRepo: getIt.get<UserRepo>()),
     );
   }
 }

@@ -1,72 +1,70 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/size_config.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_navigator.dart';
-import '../../../../core/utils/app_text_styles.dart';
-import '/core/models/user_model.dart';
-import '/features/users/presentation/views/user_profile_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/router/routes.dart';
+import 'package:social_app/core/models/user_model.dart';
+import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
 
 class UserItem extends StatelessWidget {
-  const UserItem({Key? key, required this.userModel}) : super(key: key);
+  const UserItem({Key? key, required this.user}) : super(key: key);
 
-  final UserModel userModel;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // AppNavigator.navigateTo(
-        //   screen: UserProfileView(userModel: userModel),
-        // );
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        color: AppColors.primaryColor.withOpacity(0.6),
-        elevation: 10,
-        shadowColor: Colors.black,
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0.r),
+      ),
+      color: AppColors.primaryColor.withOpacity(0.6),
+      elevation: 10.h,
+      shadowColor: Colors.black,
+      child: MaterialButton(
+        onPressed: () {
+          context.navigateTo(
+            routeName: Routes.userProfileRoute,
+            arguments: user,
+          );
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            CircleAvatar(
-              radius: 45.5,
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(userModel.image!),
-                radius: 45.5,
-              ),
+            CachedNetworkImage(
+              imageUrl: user.image!,
+              imageBuilder: (_, image) {
+                return CircleAvatar(
+                  backgroundImage: image,
+                  radius: 55.r,
+                  backgroundColor: AppColors.primaryColor,
+                );
+              },
             ),
-            SizedBox(height: SizeConfig.screenHeight! * 0.03),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-              ),
+            SizedBox(height: 8.h),
+            Flexible(
               child: Text(
-                userModel.name!,
+                user.name!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.textStyle18.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                style: AppTextStyles.textStyle20Bold.copyWith(
                   color: Colors.white,
                 ),
               ),
             ),
-            SizedBox(height: SizeConfig.screenHeight! * 0.01),
+            SizedBox(height: 16.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Icon(
+                Icon(
                   Icons.touch_app,
                   color: Colors.white,
-                  size: 22,
+                  size: 22.w,
                 ),
-                const SizedBox(width: 5),
+                SizedBox(width: 5.w),
                 Text(
                   "Visit",
-                  style: AppTextStyles.textStyle18.copyWith(
-                    fontSize: 16,
+                  style: AppTextStyles.textStyle16.copyWith(
                     color: Colors.white,
                   ),
                 ),

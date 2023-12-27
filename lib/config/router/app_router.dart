@@ -14,10 +14,12 @@ import 'package:social_app/features/chat/presentation/views/chats_view.dart';
 import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
 import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social_app/features/comments/presentation/views/comments_view.dart';
+import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
 import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
 import 'package:social_app/features/posts/presentation/views/post_likes_view.dart';
 import 'package:social_app/features/splash/presentation/views/splash_view.dart';
+import 'package:social_app/features/users/presentation/views/user_profile_view.dart';
 import 'package:social_app/service_locator.dart';
 
 class AppRouter {
@@ -83,9 +85,18 @@ class AppRouter {
           ),
         );
 
+      case Routes.userProfileRoute:
+        final args = routeSettings.arguments as UserModel;
+        return MaterialPageRoute(
+          builder: (context) => UserProfileView(user: args),
+        );
+
       case Routes.linkupRoute:
         return MaterialPageRoute(
-          builder: (context) => const LinkupView(),
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<LinkupCubit>(),
+            child: const LinkupView(),
+          ),
         );
 
       default:

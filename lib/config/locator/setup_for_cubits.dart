@@ -27,8 +27,6 @@ class SetupLocatorForCubits {
         getBottomNavItemsUseCase: getIt.get<GetBottomNavItemsUseCase>(),
         changeBottomNavIndexUseCase: getIt.get<ChangeBottomNavIndexUseCase>(),
         changeNavToHomeUseCase: getIt.get<ChangeNavToHomeUseCase>(),
-        getAllUsersUseCase: getIt.get<GetAllUsersUseCase>(),
-        getUserDataUseCase: getIt.get<GetUserDataUseCase>(),
       ),
     );
 
@@ -43,6 +41,7 @@ class SetupLocatorForCubits {
         unLikePostUseCase: getIt.get<UnLikePostUseCase>(),
         likedPostsByMeUseCase: getIt.get<LikedPostsByMeUseCase>(),
         peopleLikeThePostUseCase: getIt.get<PeopleLikeThePostUseCase>(),
+        getUserPostsUseCase: getIt.get<GetUserPostsUseCase>(),
       ),
     );
 
@@ -63,5 +62,10 @@ class SetupLocatorForCubits {
         uploadMessageImageUseCase: getIt.get<UploadMessageImageUseCase>(),
       ),
     );
+
+    getIt.registerFactory<UserCubit>(() => UserCubit(
+          getAllUsersUseCase: getIt.get<GetAllUsersUseCase>(),
+          getUserDataUseCase: getIt.get<GetUserDataUseCase>(),
+        ));
   }
 }

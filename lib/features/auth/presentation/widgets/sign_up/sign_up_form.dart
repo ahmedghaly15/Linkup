@@ -15,7 +15,7 @@ import 'package:social_app/features/auth/domain/entities/sign_up_params.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
 import 'package:social_app/features/auth/presentation/widgets/custom_auth_loading.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
-import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import 'package:social_app/service_locator.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -244,7 +244,7 @@ class _SignUpFormState extends State<SignUpForm> {
         .then((value) {
       if (value) {
         Helper.uId = state.uId;
-        BlocProvider.of<LinkupCubit>(context).getUserData();
+        BlocProvider.of<UserCubit>(context).getUserData();
         CustomToast.showToast(
           text: 'Account created successfully',
           state: CustomToastState.success,

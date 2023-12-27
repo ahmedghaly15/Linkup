@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/features/chat/presentation/widgets/chats_sliver_app_bar.dart';
-import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import '/features/chat/presentation/widgets/chat_item.dart';
 
 class ChatsView extends StatelessWidget {
@@ -12,9 +12,9 @@ class ChatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LinkupCubit, LinkupState>(
+    return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
-        final LinkupCubit linkupCubit = BlocProvider.of<LinkupCubit>(context);
+        final UserCubit linkupCubit = BlocProvider.of<UserCubit>(context);
 
         return SafeArea(
           child: CustomScrollView(
