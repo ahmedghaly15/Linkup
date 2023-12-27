@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -71,6 +72,14 @@ class Helper {
 
   static bool isDark(ThemeData themeState) =>
       themeState.brightness == Brightness.dark;
+
+  static BoxShadow postShadow(ThemeData state) {
+    return BoxShadow(
+      offset: Offset(0, 1.73.h),
+      blurRadius: 5.h,
+      color: isDark(state) ? Colors.grey.shade700 : Colors.grey,
+    );
+  }
 
 /*
 void printFullText(String text) {

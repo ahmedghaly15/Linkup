@@ -32,11 +32,7 @@ class PostItem extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(16.r)),
           color: Helper.isDark(state) ? AppColors.darkGreyClr : Colors.white,
           boxShadow: <BoxShadow>[
-            BoxShadow(
-              offset: Offset(0, 1.73.h),
-              blurRadius: 10.h,
-              color: Helper.isDark(state) ? Colors.grey.shade700 : Colors.grey,
-            )
+            Helper.postShadow(state),
           ],
         ),
         child: Column(

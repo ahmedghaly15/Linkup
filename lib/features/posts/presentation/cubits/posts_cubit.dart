@@ -78,12 +78,6 @@ class PostsCubit extends Cubit<PostsState> {
 
   List<PostModel> posts = <PostModel>[];
 
-  void _clearPosts() {
-    posts.clear();
-
-    emit(ClearPostsList(posts: posts));
-  }
-
   Future<int> _numberOf({
     required QueryDocumentSnapshot<Map<String, dynamic>> element,
     required String collection,
@@ -127,7 +121,7 @@ class PostsCubit extends Cubit<PostsState> {
       value.fold(
         (failure) => emit(GetPostsError(error: failure.failureMsg.toString())),
         (result) async {
-          _clearPosts();
+          posts.clear();
 
           await _updatePosts(result);
 

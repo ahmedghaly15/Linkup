@@ -155,15 +155,6 @@ class GetLikedPostsByMeError extends PostsState {
   List<Object> get props => [error];
 }
 
-class ClearPostsList extends PostsState {
-  final List<PostModel> posts;
-
-  const ClearPostsList({required this.posts});
-
-  @override
-  List<Object> get props => [posts];
-}
-
 class GetPeopleLikeThePostSuccess extends PostsState {
   final List<LikeModel> peopleLikeThePost;
 

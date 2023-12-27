@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/app_text_styles.dart';
 
@@ -21,7 +22,7 @@ class UserData extends StatelessWidget {
             "$count",
             style: AppTextStyles.textStyle18,
           ),
-          const SizedBox(height: 5),
+          SizedBox(height: 5.h),
           Text(
             label,
             style: AppTextStyles.textStyle16,

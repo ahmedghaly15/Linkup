@@ -27,5 +27,7 @@ abstract class PostsDataSource {
 
   Future<List<PostModel>> likedPostsByMe();
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({required String postId,});
+  Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({
+    required String postId,
+  });
 }

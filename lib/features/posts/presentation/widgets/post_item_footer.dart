@@ -10,6 +10,7 @@ import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
+import 'package:social_app/service_locator.dart';
 
 class PostItemFooter extends StatelessWidget {
   const PostItemFooter({
@@ -74,7 +75,8 @@ class PostItemFooter extends StatelessWidget {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> _likesStream() {
-    return FirebaseFirestore.instance
+    return getIt
+        .get<FirebaseFirestore>()
         .collection(AppStrings.posts)
         .doc(post.postId)
         .collection(AppStrings.likes)

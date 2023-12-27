@@ -125,7 +125,8 @@ class PostsDataSourceImpl implements PostsDataSource {
   Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({
     required String postId,
   }) {
-    return FirebaseFirestore.instance
+    return getIt
+        .get<FirebaseFirestore>()
         .collection(AppStrings.posts)
         .doc(postId)
         .collection(AppStrings.likes)

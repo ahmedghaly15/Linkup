@@ -72,10 +72,6 @@ class SetupLocatorForUseCases {
       () => PeopleLikeThePostUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
 
-    getIt.registerLazySingleton<GetUserPostsUseCase>(
-      () => GetUserPostsUseCase(postsRepo: getIt.get<PostsRepo>()),
-    );
-
     getIt.registerLazySingleton<TypeNewCommentUseCase>(
       () => TypeNewCommentUseCase(commentsRepo: getIt.get<CommentsRepo>()),
     );
@@ -114,6 +110,10 @@ class SetupLocatorForUseCases {
 
     getIt.registerLazySingleton<GetAllUsersUseCase>(
       () => GetAllUsersUseCase(userRepo: getIt.get<UserRepo>()),
+    );
+
+    getIt.registerLazySingleton<GetUserPostsUseCase>(
+      () => GetUserPostsUseCase(userRepo: getIt.get<UserRepo>()),
     );
   }
 }
