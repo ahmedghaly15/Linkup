@@ -3,18 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
+import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/users/domain/usecases/get_all_users.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
+import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   final GetUserDataUseCase getUserDataUseCase;
   final GetAllUsersUseCase getAllUsersUseCase;
+  final GetUserPostsUseCase getAllUserPostsUseCase;
 
   UserCubit({
     required this.getUserDataUseCase,
     required this.getAllUsersUseCase,
+    required this.getAllUserPostsUseCase,
   }) : super(const UserInitial());
 
   List<UserModel> users = <UserModel>[];
@@ -27,11 +31,7 @@ class UserCubit extends Cubit<UserState> {
         (failure) =>
             emit(GetAllUserError(error: failure.failureMsg.toString())),
         (result) {
-          users.clear();
-          for (var element in result.docs) {
-            if (element.data()['uId'] != Helper.currentUser!.uId)
-              users.add(UserModel.fromJson(element.data()));
-          }
+          users = result;
           emit(GetAllUserSuccess(users: users));
         },
       );
@@ -76,5 +76,20 @@ class UserCubit extends Cubit<UserState> {
         .toList();
 
     emit(GetAllUserSuccess(users: searchList));
+  }
+
+  List<PostModel> userPosts = <PostModel>[];
+
+  void getUserPosts({required String uId}) {
+    getAllUserPostsUseCase(uId).then((value) {
+      value.fold(
+        (failure) =>
+            emit(GetUserPostsError(error: failure.failureMsg.toString())),
+        (posts) {
+          userPosts = posts;
+          emit(GetUserPostsSuccess(userPosts: userPosts));
+        },
+      );
+    });
   }
 }

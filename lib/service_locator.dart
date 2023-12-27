@@ -69,13 +69,13 @@ import 'package:social_app/features/posts/domain/usecases/create_post.dart';
 import 'package:social_app/features/posts/domain/usecases/delete_post.dart';
 import 'package:social_app/features/posts/domain/usecases/get_post_image.dart';
 import 'package:social_app/features/posts/domain/usecases/get_posts.dart';
-import 'package:social_app/features/posts/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/posts/domain/usecases/like_post.dart';
 import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart';
 import 'package:social_app/features/posts/domain/usecases/people_like_the_post.dart';
 import 'package:social_app/features/posts/domain/usecases/unlike_post.dart';
 import 'package:social_app/features/posts/domain/usecases/upload_post_image.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 part 'config/locator/setup_for_core.dart';

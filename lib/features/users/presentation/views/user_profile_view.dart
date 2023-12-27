@@ -9,13 +9,14 @@ import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/get_back_arrow.dart';
 import 'package:social_app/core/widgets/user_data.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
-import 'package:social_app/features/users/presentation/widgets/post.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/users/presentation/widgets/user_post.dart';
 
 import '/core/models/user_model.dart';
 import '../../../../core/helpers/helper.dart';
 import '/features/users/presentation/widgets/user_profile_view_body.dart';
 
-class UserProfileView extends StatelessWidget {
+class UserProfileView extends StatefulWidget {
   const UserProfileView({
     Key? key,
     required this.user,
@@ -24,14 +25,25 @@ class UserProfileView extends StatelessWidget {
   final UserModel user;
 
   @override
+  State<UserProfileView> createState() => _UserProfileViewState();
+}
+
+class _UserProfileViewState extends State<UserProfileView> {
+  @override
+  void initState() {
+    BlocProvider.of<UserCubit>(context).getUserPosts(uId: widget.user.uId!);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PostsCubit, PostsState>(
+    return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         final screenHeight = MediaQuery.of(context).size.height;
 
-        final PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
+        final UserCubit cubit = BlocProvider.of<UserCubit>(context);
 
-        cubit.getUserPosts(uId: user.uId!);
+        // cubit.getUserPosts(uId: user.uId!);
 
         return Scaffold(
           body: WillPopScope(
@@ -69,14 +81,14 @@ class UserProfileView extends StatelessWidget {
                                       topRight: Radius.circular(5.r),
                                     ),
                                     image: DecorationImage(
-                                      image: NetworkImage(user.cover!),
+                                      image: NetworkImage(widget.user.cover!),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
                               ),
                               CachedNetworkImage(
-                                imageUrl: user.image!,
+                                imageUrl: widget.user.image!,
                                 imageBuilder: (_, image) {
                                   return BlocBuilder<ThemesCubit, ThemeData>(
                                     builder: (context, state) {
@@ -99,12 +111,12 @@ class UserProfileView extends StatelessWidget {
                         ),
                         SizedBox(height: 5.h),
                         Text(
-                          user.name!,
+                          widget.user.name!,
                           style: AppTextStyles.textStyle23Bold,
                         ),
                         SizedBox(height: 8.h),
                         Text(
-                          user.bio!,
+                          widget.user.bio!,
                           style: AppTextStyles.textStyle15,
                         ),
                         SizedBox(height: 5.h),
@@ -118,7 +130,7 @@ class UserProfileView extends StatelessWidget {
                             ),
                             SizedBox(width: 5.w),
                             Text(
-                              user.phone!,
+                              widget.user.phone!,
                               style: AppTextStyles.textStyle15,
                             ),
                           ],
@@ -141,16 +153,23 @@ class UserProfileView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return Post(
-                          post: cubit.userPosts[index],
-                        );
-                      },
-                      childCount: cubit.userPosts.length,
-                    ),
-                  ),
+                  cubit.userPosts.isNotEmpty
+                      ? SliverPadding(
+                          padding: EdgeInsets.only(top: 16.h),
+                          sliver: SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              (context, index) {
+                                return UserPost(
+                                  post: cubit.userPosts[index],
+                                );
+                              },
+                              childCount: cubit.userPosts.length,
+                            ),
+                          ),
+                        )
+                      : const SliverToBoxAdapter(
+                          child: SizedBox(),
+                        ),
                 ],
               ),
             ),

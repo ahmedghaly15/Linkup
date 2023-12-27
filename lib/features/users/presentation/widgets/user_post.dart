@@ -7,12 +7,11 @@ import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/widgets/custom_divider.dart';
 import 'package:social_app/features/posts/presentation/widgets/likes_and_comments.dart';
-import 'package:social_app/features/posts/presentation/widgets/post_item_footer.dart';
 import 'package:social_app/features/posts/presentation/widgets/post_text_and_image.dart';
 import 'package:social_app/features/posts/presentation/widgets/top_post_item_section.dart';
 
-class Post extends StatelessWidget {
-  const Post({
+class UserPost extends StatelessWidget {
+  const UserPost({
     Key? key,
     required this.post,
   }) : super(key: key);
@@ -23,7 +22,11 @@ class Post extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemesCubit, ThemeData>(
       builder: (context, state) => Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.w),
+        margin: EdgeInsets.only(
+          left: 16.w,
+          right: 16.w,
+          bottom: 24.h,
+        ),
         padding: EdgeInsets.symmetric(
           horizontal: 8.0.w,
           vertical: 10.h,
@@ -32,11 +35,7 @@ class Post extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(16.r)),
           color: Helper.isDark(state) ? AppColors.darkGreyClr : Colors.white,
           boxShadow: <BoxShadow>[
-            BoxShadow(
-              offset: Offset(0, 1.73.h),
-              blurRadius: 10.h,
-              color: Helper.isDark(state) ? Colors.grey.shade700 : Colors.grey,
-            )
+            Helper.postShadow(state),
           ],
         ),
         child: Column(
@@ -53,11 +52,6 @@ class Post extends StatelessWidget {
             ),
             PostTextAndImage(post: post),
             LikesAndComments(post: post),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.w),
-              child: const CustomDivider(),
-            ),
-            // PostItemFooter(post: post),
           ],
         ),
       ),

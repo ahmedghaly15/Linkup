@@ -1,4 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:social_app/config/router/routes.dart';
+import 'package:social_app/core/helpers/cache_helper.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_strings.dart';
+import 'package:social_app/service_locator.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
 
@@ -34,11 +40,19 @@ class SignOutFloatingButton extends StatelessWidget {
     );
   }
 
-  void signOut(context) async {
+  void signOut(BuildContext context) async {
     // CacheHelper.removeData(key: 'uId').then((value) {
     //   if (value) {
     //     AppNavigator.navigateAndFinish(screen: const AuthView());
     //   }
     // });
+
+    await getIt
+        .get<CacheHelper>()
+        .removeData(key: AppStrings.uId)
+        .then((value) async {
+      await getIt.get<FirebaseAuth>().signOut();
+      context.navigateAndReplacement(newRoute: Routes.signInRoute);
+    });
   }
 }
