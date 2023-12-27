@@ -23,7 +23,7 @@ class PostLikesView extends StatelessWidget {
             CustomSliverAppBar(
               title: 'People who liked',
               backOnPressed: () {
-                BlocProvider.of<PostsCubit>(context).getPosts();
+                // BlocProvider.of<PostsCubit>(context).getPosts();
                 context.getBack();
               },
             ),

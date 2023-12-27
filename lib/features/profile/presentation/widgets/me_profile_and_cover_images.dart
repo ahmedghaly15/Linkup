@@ -25,7 +25,10 @@ class MeProfileAndCoverImages extends StatelessWidget {
       alignment: AlignmentDirectional.bottomCenter,
       children: <Widget>[
         UserCoverImage(cover: me.cover!),
-        UserProfileImage(image: me.image!),
+        Positioned(
+          bottom: 20.h,
+          child: UserProfileImage(image: me.image!),
+        ),
         Positioned(
           top: 25.h,
           right: 16.w,
