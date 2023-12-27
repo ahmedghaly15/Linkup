@@ -7,6 +7,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
+import 'package:social_app/core/widgets/get_image_icon_button.dart';
 import 'package:social_app/features/chat/domain/entities/send_message_params.dart';
 import 'package:social_app/features/chat/presentation/cubits/chat_cubit.dart';
 
@@ -46,34 +47,26 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                   ),
-                  color: themeState.brightness == Brightness.dark
+                  color: Helper.isDark(themeState)
                       ? AppColors.darkGreyClr
                       : AppColors.scaffoldBackgroundClr,
                   child: Row(
                     children: <Widget>[
-                      IconButton(
+                      GetImageIconButton(
                         onPressed: () {
-                          widget.cubit.getMessageImage(
+                          BlocProvider.of<ChatCubit>(context).getMessageImage(
                             source: ImageSource.camera,
                           );
                         },
-                        icon: Icon(
-                          Icons.camera_alt_rounded,
-                          color: AppColors.primaryColor,
-                          size: 25.w,
-                        ),
+                        icon: Icons.camera_alt_rounded,
                       ),
-                      IconButton(
+                      GetImageIconButton(
                         onPressed: () {
-                          widget.cubit.getMessageImage(
+                          BlocProvider.of<ChatCubit>(context).getMessageImage(
                             source: ImageSource.gallery,
                           );
                         },
-                        icon: Icon(
-                          Icons.image_rounded,
-                          color: AppColors.primaryColor,
-                          size: 25.w,
-                        ),
+                        icon: Icons.image_rounded,
                       ),
                       Expanded(
                         child: SingleChildScrollView(

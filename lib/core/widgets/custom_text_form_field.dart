@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 
@@ -109,9 +110,9 @@ class CustomTextFormField extends StatelessWidget {
           decoration: InputDecoration(
             filled: filled,
             fillColor: fillColor ??
-                (state.brightness == Brightness.light
-                    ? AppColors.scaffoldBackgroundClr
-                    : AppColors.darkGreyClr),
+                (Helper.isDark(state)
+                    ? AppColors.darkGreyClr
+                    : AppColors.scaffoldBackgroundClr),
             errorStyle: TextStyle(fontSize: 13.sp, color: Colors.red),
             hintText: hintText,
             hintStyle: hintStyle ?? _customTextFieldTextStyle(),

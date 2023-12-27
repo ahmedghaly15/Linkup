@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/features/comments/data/models/comment_model.dart';
 import 'package:social_app/features/comments/presentation/widgets/comment_item_content.dart';
@@ -38,7 +39,7 @@ class CommentItem extends StatelessWidget {
               return ChatBubble(
                 clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
                 margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 5.h),
-                backGroundColor: state.brightness == Brightness.dark
+                backGroundColor: Helper.isDark(state)
                     ? AppColors.darkGreyClr.withOpacity(0.9)
                     : const Color(0xffE7E7ED),
                 child: ConstrainedBox(

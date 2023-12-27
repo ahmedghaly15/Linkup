@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 
 class DateAndTime extends StatelessWidget {
@@ -24,9 +25,8 @@ class DateAndTime extends StatelessWidget {
             Text(
               date,
               style: AppTextStyles.textStyle13.copyWith(
-                color: themeState.brightness == Brightness.dark
-                    ? Colors.white54
-                    : Colors.black38,
+                color:
+                    Helper.isDark(themeState) ? Colors.white54 : Colors.black38,
               ),
             ),
             Padding(
@@ -35,9 +35,8 @@ class DateAndTime extends StatelessWidget {
                 width: 5.w,
                 height: 5.w,
                 decoration: BoxDecoration(
-                  color: themeState.brightness == Brightness.dark
-                      ? Colors.grey
-                      : Colors.black45,
+                  color:
+                      Helper.isDark(themeState) ? Colors.grey : Colors.black45,
                   shape: BoxShape.circle,
                 ),
               ),

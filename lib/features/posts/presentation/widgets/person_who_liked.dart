@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/features/posts/data/models/like_model.dart';
@@ -24,9 +25,7 @@ class PersonWhoLiked extends StatelessWidget {
           width: double.infinity,
           margin: EdgeInsets.only(bottom: 10.h),
           decoration: BoxDecoration(
-            color: state.brightness == Brightness.light
-                ? Colors.white
-                : AppColors.darkGreyClr,
+            color: Helper.isDark(state) ? AppColors.darkGreyClr : Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10.r)),
             border: Border.all(
               color: const Color(0xFFE3E3E4),

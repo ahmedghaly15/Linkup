@@ -9,7 +9,7 @@ import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/features/comments/domain/entities/type_new_comment_params.dart';
 import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
-import 'package:social_app/features/comments/presentation/widgets/get_comment_image_icon_button.dart';
+import 'package:social_app/core/widgets/get_image_icon_button.dart';
 
 class CommenterField extends StatefulWidget {
   const CommenterField({
@@ -45,17 +45,25 @@ class _CommenterFieldState extends State<CommenterField> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.r),
                 ),
-                color: state.brightness == Brightness.dark
+                color: Helper.isDark(state)
                     ? AppColors.darkGreyClr
                     : AppColors.scaffoldBackgroundClr,
                 child: Row(
                   children: <Widget>[
-                    const GetCommentImageIconButton(
-                      source: ImageSource.camera,
+                    GetImageIconButton(
+                      onPressed: () {
+                        BlocProvider.of<CommentsCubit>(context).getCommentImage(
+                          source: ImageSource.camera,
+                        );
+                      },
                       icon: Icons.camera_alt_rounded,
                     ),
-                    const GetCommentImageIconButton(
-                      source: ImageSource.gallery,
+                    GetImageIconButton(
+                      onPressed: () {
+                        BlocProvider.of<CommentsCubit>(context).getCommentImage(
+                          source: ImageSource.gallery,
+                        );
+                      },
                       icon: Icons.image_rounded,
                     ),
                     Expanded(

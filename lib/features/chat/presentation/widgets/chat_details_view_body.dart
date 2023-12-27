@@ -33,7 +33,7 @@ class ChatDetailsViewBody extends StatelessWidget {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
-                    themeState.brightness == Brightness.dark
+                    Helper.isDark(themeState)
                         ? AppAssets.imagesChatDarkBackground
                         : AppAssets.imagesChatLightBackground,
                   ),

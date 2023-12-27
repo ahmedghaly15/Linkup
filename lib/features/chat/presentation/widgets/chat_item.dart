@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
@@ -21,9 +22,7 @@ class ChatItem extends StatelessWidget {
     return BlocBuilder<ThemesCubit, ThemeData>(
       builder: (context, state) {
         return Card(
-          color: state.brightness == Brightness.dark
-              ? AppColors.darkGreyClr
-              : Colors.white,
+          color: Helper.isDark(state) ? AppColors.darkGreyClr : Colors.white,
           margin: EdgeInsets.symmetric(vertical: 4.h),
           elevation: 1.5.h,
           shape: RoundedRectangleBorder(

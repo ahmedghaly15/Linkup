@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/widgets/custom_divider.dart';
@@ -29,16 +30,12 @@ class PostItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(16.r)),
-          color: state.brightness == Brightness.dark
-              ? AppColors.darkGreyClr
-              : Colors.white,
+          color: Helper.isDark(state) ? AppColors.darkGreyClr : Colors.white,
           boxShadow: <BoxShadow>[
             BoxShadow(
               offset: Offset(0, 1.73.h),
               blurRadius: 10.h,
-              color: state.brightness == Brightness.dark
-                  ? Colors.grey.shade700
-                  : Colors.grey,
+              color: Helper.isDark(state) ? Colors.grey.shade700 : Colors.grey,
             )
           ],
         ),

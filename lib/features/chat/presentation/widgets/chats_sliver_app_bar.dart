@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/features/chat/presentation/widgets/custom_search_field.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
@@ -25,11 +26,11 @@ class ChatsSliverAppBar extends StatelessWidget {
                 onPressed: () =>
                     BlocProvider.of<ThemesCubit>(context).toggleTheme(),
                 icon: Icon(
-                  themeState.brightness == Brightness.dark
+                  Helper.isDark(themeState)
                       ? Icons.wb_sunny_outlined
                       : Icons.nightlight_round_outlined,
                   size: 28.w,
-                  color: themeState.brightness == Brightness.dark
+                  color: Helper.isDark(themeState)
                       ? Colors.white
                       : AppColors.darkGreyClr,
                 ),

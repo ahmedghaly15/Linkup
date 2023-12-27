@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
@@ -55,14 +54,10 @@ class TopPostItemSection extends StatelessWidget {
                   BlocProvider.of<PostsCubit>(context)
                       .deletePost(postId: post.postId!);
                 },
-                icon: BlocBuilder<ThemesCubit, ThemeData>(
-                  builder: (context, state) {
-                    return Icon(
-                      Icons.delete,
-                      size: 25.w,
-                      color: Colors.red,
-                    );
-                  },
+                icon: Icon(
+                  Icons.delete,
+                  size: 25.w,
+                  color: Colors.red,
                 ),
               )
             : const SizedBox(),

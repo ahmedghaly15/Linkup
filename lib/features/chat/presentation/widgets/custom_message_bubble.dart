@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/date_and_time.dart';
@@ -27,13 +28,12 @@ class CustomMessageBubble extends StatelessWidget {
             : ChatBubbleClipper9(type: BubbleType.receiverBubble),
         alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
         backGroundColor: isMe
-            ? (_checkThemeIsDark(themeState)
+            ? (Helper.isDark(themeState)
                 ? const Color(0xffbe29ec)
                 : const Color(0xffefbbff))
-            : (_checkThemeIsDark(themeState)
+            : (Helper.isDark(themeState)
                 ? AppColors.darkGreyClr
                 : const Color(0xffE7E7ED)),
-        // margin: EdgeInsets.symmetric(vertical: 2.h),
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.65,
@@ -52,14 +52,14 @@ class CustomMessageBubble extends StatelessWidget {
               if (message.messageImage!['image'] != null)
                 Container(
                   width: double.infinity,
-                  height: 150.h,
+                  height: 220.h,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(8.r),
                     ),
                     image: DecorationImage(
-                      fit: BoxFit.fill,
+                      fit: BoxFit.fitWidth,
                       image: NetworkImage(
                         message.messageImage!['image'],
                       ),
@@ -77,7 +77,4 @@ class CustomMessageBubble extends StatelessWidget {
       );
     });
   }
-
-  bool _checkThemeIsDark(ThemeData themeState) =>
-      themeState.brightness == Brightness.dark;
 }

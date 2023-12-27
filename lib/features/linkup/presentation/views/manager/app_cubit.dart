@@ -156,11 +156,11 @@ class AppCubit extends Cubit<AppStates> {
           bio: bio,
           image: value,
         );
-        Helper.buildSnackBar(
-          message: "Profile Image Updated Successfully",
-          state: SnackBarStates.success,
-          context: context,
-        );
+        // Helper.buildSnackBar(
+        //   message: "Profile Image Updated Successfully",
+        //   state: SnackBarStates.success,
+        //   context: context,
+        // );
       }).catchError((error) {
         emit(UploadProfileImageErrorState());
       });
@@ -199,11 +199,11 @@ class AppCubit extends Cubit<AppStates> {
           bio: bio,
           cover: value,
         );
-        Helper.buildSnackBar(
-          message: "Cover Image Updated Successfully",
-          state: SnackBarStates.success,
-          context: context,
-        );
+        // Helper.buildSnackBar(
+        //   message: "Cover Image Updated Successfully",
+        //   state: SnackBarStates.success,
+        //   context: context,
+        // );
         emit(UploadCoverImageSuccessState());
       }).catchError((error) {
         emit(UploadCoverImageErrorState());
@@ -255,11 +255,11 @@ class AppCubit extends Cubit<AppStates> {
     // Delet The Post Info From Firebase
     appRepo.deletePost(postId: postId).then((value) {
       emit(DeletePostSuccessState());
-      Helper.buildSnackBar(
-        message: "Post Deleted Successfully",
-        state: SnackBarStates.success,
-        context: context,
-      );
+      // Helper.buildSnackBar(
+      //   message: "Post Deleted Successfully",
+      //   state: SnackBarStates.success,
+      //   context: context,
+      // );
     }).catchError((error) {
       print(error.toString());
       emit(DeletePostErrorState(error.toString()));

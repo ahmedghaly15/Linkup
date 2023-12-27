@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 
 class ImageCircle extends StatelessWidget {
@@ -22,9 +23,9 @@ class ImageCircle extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             elevation: 16.h,
-            backgroundColor: state.brightness == Brightness.light
-                ? Colors.white
-                : AppColors.darkGreyClr,
+            backgroundColor: Helper.isDark(state)
+                ? AppColors.darkGreyClr
+                : AppColors.scaffoldBackgroundClr,
             shape: const CircleBorder(),
             fixedSize: Size(150.w, 130.h),
           ),
