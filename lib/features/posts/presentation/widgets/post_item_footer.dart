@@ -8,6 +8,7 @@ import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/service_locator.dart';
@@ -25,6 +26,7 @@ class PostItemFooter extends StatelessWidget {
     return Row(
       children: <Widget>[
         CachedNetworkImage(
+          errorWidget: (context, error, _) => const CachedImageErrorIcon(),
           imageUrl: Helper.currentUser!.image!,
           imageBuilder: (_, image) {
             return CircleAvatar(

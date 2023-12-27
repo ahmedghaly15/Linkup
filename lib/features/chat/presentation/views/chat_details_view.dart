@@ -1,10 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/core/widgets/get_back_arrow.dart';
 import 'package:social_app/features/chat/presentation/cubits/chat_cubit.dart';
 import 'package:social_app/features/chat/presentation/widgets/chat_details_view_body.dart';
@@ -24,31 +25,30 @@ class ChatDetailsView extends StatelessWidget {
         BlocProvider.of<ChatCubit>(context).getMessages(receiverId: user.uId!);
 
         return Scaffold(
-          appBar: _chatDetailsAppBar(context),
+          appBar: _chatDetailsAppBar(),
           body: ChatDetailsViewBody(user: user),
         );
       },
     );
   }
 
-  AppBar _chatDetailsAppBar(BuildContext context) {
+  AppBar _chatDetailsAppBar() {
     return AppBar(
       elevation: 1.h,
       title: Row(
         children: <Widget>[
           Hero(
             tag: user.uId!,
-            child: InkWell(
-              onTap: () {
-                context.navigateTo(
-                  routeName: Routes.userProfileRoute,
-                  arguments: user,
+            child: CachedNetworkImage(
+              imageUrl: user.image!,
+              errorWidget: (context, error, _) => const CachedImageErrorIcon(),
+              imageBuilder: (_, image) {
+                return CircleAvatar(
+                  backgroundImage: image,
+                  radius: 20.r,
+                  backgroundColor: AppColors.primaryColor,
                 );
               },
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(user.image!),
-                radius: 20.0.r,
-              ),
             ),
           ),
           SizedBox(width: 8.w),

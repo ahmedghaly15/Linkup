@@ -9,6 +9,7 @@ import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/core/widgets/get_back_arrow.dart';
 import 'package:social_app/core/widgets/user_data.dart';
 import 'package:social_app/core/widgets/user_posts.dart';
@@ -54,22 +55,26 @@ class UserProfileViewBody extends StatelessWidget {
                         Align(
                           alignment: AlignmentDirectional.topCenter,
                           child: Container(
-                            height: screenHeight * 0.25,
-                            width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(5.r),
                                 topRight: Radius.circular(5.r),
                               ),
-                              image: DecorationImage(
-                                image: NetworkImage(user.cover!),
-                                fit: BoxFit.cover,
-                              ),
+                            ),
+                            child: CachedNetworkImage(
+                              height: screenHeight * 0.25,
+                              width: double.infinity,
+                              errorWidget: (context, error, _) =>
+                                  const CachedImageErrorIcon(),
+                              imageUrl: user.cover!,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         CachedNetworkImage(
                           imageUrl: user.image!,
+                          errorWidget: (context, error, _) =>
+                              const CachedImageErrorIcon(),
                           imageBuilder: (_, image) {
                             return BlocBuilder<ThemesCubit, ThemeData>(
                               builder: (context, state) {

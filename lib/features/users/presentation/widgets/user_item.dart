@@ -6,6 +6,7 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 
 class UserItem extends StatelessWidget {
   const UserItem({Key? key, required this.user}) : super(key: key);
@@ -40,6 +41,7 @@ class UserItem extends StatelessWidget {
                   backgroundColor: AppColors.primaryColor,
                 );
               },
+              errorWidget: (context, error, _) => const CachedImageErrorIcon(),
             ),
             SizedBox(height: 8.h),
             Flexible(

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/features/comments/data/models/comment_model.dart';
 import 'package:social_app/features/comments/presentation/widgets/comment_item_content.dart';
 
@@ -24,6 +25,7 @@ class CommentItem extends StatelessWidget {
       textBaseline: TextBaseline.alphabetic,
       children: <Widget>[
         CachedNetworkImage(
+          errorWidget: (context, error, _) => const CachedImageErrorIcon(),
           imageUrl: comment.image!,
           imageBuilder: (_, image) {
             return CircleAvatar(

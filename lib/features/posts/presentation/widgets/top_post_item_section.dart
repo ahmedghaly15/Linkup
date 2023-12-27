@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 
@@ -21,6 +22,7 @@ class TopPostItemSection extends StatelessWidget {
     return Row(
       children: <Widget>[
         CachedNetworkImage(
+          errorWidget: (context, error, _) => const CachedImageErrorIcon(),
           imageUrl: post.image!,
           imageBuilder: (_, image) {
             return CircleAvatar(
