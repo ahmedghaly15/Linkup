@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 
 class ChatItem extends StatelessWidget {
@@ -30,9 +32,10 @@ class ChatItem extends StatelessWidget {
           child: MaterialButton(
             padding: EdgeInsets.zero,
             onPressed: () {
-              //   AppNavigator.navigateTo(
-              //   screen: ChatDetailsView(userModel: model),
-              // );
+              context.navigateTo(
+                routeName: Routes.chatDetailsRoute,
+                arguments: user,
+              );
             },
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 8.0.h),
@@ -41,7 +44,7 @@ class ChatItem extends StatelessWidget {
                   tag: user.uId!,
                   child: CircleAvatar(
                     backgroundImage: NetworkImage(user.image!),
-                    radius: 25.r,
+                    radius: 30.r,
                     backgroundColor: AppColors.primaryColor,
                   ),
                 ),

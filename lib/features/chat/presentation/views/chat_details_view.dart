@@ -1,91 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_states.dart';
-
-import '../../../../core/utils/app_text_styles.dart';
-import '../../../../core/models/user_model.dart';
-import '../../../users/presentation/views/user_profile_view.dart';
-import '../../../../core/utils/app_navigator.dart';
-import '../../../../core/helpers/helper.dart';
-import '/features/chat/presentation/widgets/chat_details_view_body.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/core/models/user_model.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/get_back_arrow.dart';
+import 'package:social_app/features/chat/presentation/cubits/chat_cubit.dart';
+import 'package:social_app/features/chat/presentation/widgets/chat_details_view_body.dart';
 
 class ChatDetailsView extends StatelessWidget {
-  ChatDetailsView({Key? key, required this.userModel}) : super(key: key);
+  const ChatDetailsView({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
-  final UserModel userModel;
-
-  final TextEditingController messageController = TextEditingController();
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        AppCubit.getObject(context).getMessages(
-          receiverId: userModel.uId!,
-        );
+        BlocProvider.of<ChatCubit>(context).getMessages(receiverId: user.uId!);
 
-        return BlocBuilder<AppCubit, AppStates>(
-          builder: (context, state) {
-            AppCubit cubit = AppCubit.getObject(context);
-
-            return Scaffold(
-              backgroundColor: context.theme.colorScheme.background,
-              appBar: buildAppBar(context),
-              body: ChatDetailsViewBody(
-                cubit: cubit,
-                userModel: userModel,
-                messageController: messageController,
-              ),
-            );
-          },
+        return Scaffold(
+          appBar: _chatDetailsAppBar(),
+          body: ChatDetailsViewBody(user: user),
         );
       },
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
+  AppBar _chatDetailsAppBar() {
     return AppBar(
-      backgroundColor: context.theme.colorScheme.background,
-      titleSpacing: 0.0,
-      elevation: 1,
-      title: InkWell(
-        onTap: () {
-          //   AppNavigator.navigateTo(
-          //   screen: UserProfileView(userModel: userModel),
-          // );
-        },
-        child: Row(
-          children: <Widget>[
-            Hero(
-              tag: userModel.uId!,
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(userModel.image!),
-                radius: 20.0,
-              ),
+      elevation: 1.h,
+      title: Row(
+        children: <Widget>[
+          Hero(
+            tag: user.uId!,
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(user.image!),
+              radius: 20.0.r,
             ),
-            const SizedBox(width: 8),
-            Text(
-              userModel.name!,
-              style: AppTextStyles.textStyle18.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Get.isDarkMode ? Colors.white : Colors.black,
-              ),
+          ),
+          SizedBox(width: 8.w),
+          Expanded(
+            child: Text(
+              user.name!,
+              style: AppTextStyles.textStyle18Bold,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-      leading: IconButton(
-        onPressed: () {
-          // AppNavigator.getBack();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios,
-          color: Get.isDarkMode ? Colors.white : Colors.black,
-        ),
-      ),
-      systemOverlayStyle: Helper.setSystemOverlayStyle(),
+      leading: const GetBackArrow(),
     );
   }
 }

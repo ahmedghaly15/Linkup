@@ -29,6 +29,7 @@ class AppThemes {
           backgroundColor: AppColors.scaffoldBackgroundClr,
           elevation: 20,
         ),
+        cardColor: AppColors.scaffoldBackgroundClr,
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
             textStyle: MaterialStateProperty.all(
@@ -63,6 +64,7 @@ class AppThemes {
           centerTitle: true,
           backgroundColor: AppColors.darkGreyClr,
         ),
+        cardColor: AppColors.darkHeaderClr,
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
             textStyle: MaterialStateProperty.all(

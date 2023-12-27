@@ -1,88 +1,94 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
-
-import '../../../../core/helpers/helper.dart';
-import '../../../../core/utils/app_text_styles.dart';
-import '/core/models/user_model.dart';
-import '/features/chat/presentation/widgets/custom_massenger_field.dart';
-import '/features/chat/presentation/widgets/custom_message_bubble.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/core/models/user_model.dart';
+import 'package:social_app/core/utils/app_assets.dart';
+import 'package:social_app/core/utils/app_constants.dart';
+import 'package:social_app/features/chat/presentation/cubits/chat_cubit.dart';
+import 'package:social_app/features/chat/presentation/widgets/custom_message_bubble.dart';
+import 'package:social_app/features/chat/presentation/widgets/custom_messenger_field.dart';
 
 class ChatDetailsViewBody extends StatelessWidget {
   const ChatDetailsViewBody({
     Key? key,
-    required this.cubit,
-    required this.userModel,
-    required this.messageController,
+    required this.user,
   }) : super(key: key);
 
-  final AppCubit cubit;
-  final UserModel userModel;
-  final TextEditingController messageController;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
-    return cubit.messages.isNotEmpty
-        ? Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 12,
-              horizontal: 8,
-            ),
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: ListView.builder(
-                    reverse: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: cubit.messages.length,
-                    itemBuilder: (context, index) {
-                      var message = cubit.messages[index];
-                      return CustomMessageBubble(
-                        messageModel: message,
-                        isMe: Helper.currentUser!.uId == message.senderId
-                            ? true
-                            : false,
-                      );
-                      // return buildReceiverMessage();
-                    },
+    return BlocBuilder<ChatCubit, ChatState>(
+      builder: (context, state) {
+        final ChatCubit cubit = BlocProvider.of<ChatCubit>(context);
+
+        return BlocBuilder<ThemesCubit, ThemeData>(
+          builder: (context, themeState) {
+            return Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    themeState.brightness == Brightness.dark
+                        ? AppAssets.imagesChatDarkBackground
+                        : AppAssets.imagesChatLightBackground,
                   ),
                 ),
-                CustomMassengerField(
-                  cubit: cubit,
-                  userModel: userModel,
-                  messageController: messageController,
-                  messageText: messageController.text,
-                ),
-              ],
-            ),
-          )
-        : Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 12,
-              horizontal: 8,
-            ),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      "Say Hello \u{1F44B}",
-                      style: AppTextStyles.textStyle50Bold.copyWith(
-                        fontSize: 30,
-                        color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+              child: cubit.messages.isNotEmpty
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: ListView.builder(
+                              reverse: true,
+                              physics: AppConstants.physics,
+                              padding: EdgeInsets.zero,
+                              itemCount: cubit.messages.length,
+                              itemBuilder: (context, index) {
+                                return CustomMessageBubble(
+                                  message: cubit.messages[index],
+                                  isMe: Helper.currentUser!.uId ==
+                                          cubit.messages[index].senderId
+                                      ? true
+                                      : false,
+                                );
+                              },
+                            ),
+                          ),
+                          CustomMessengerField(
+                            cubit: cubit,
+                            user: user,
+                          ),
+                        ],
+                      ),
+                    )
+                  : Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 12.h,
+                        horizontal: 8.w,
+                      ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Container(),
+                          ),
+                          CustomMessengerField(
+                            cubit: cubit,
+                            user: user,
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ),
-                CustomMassengerField(
-                  cubit: cubit,
-                  userModel: userModel,
-                  messageController: messageController,
-                  messageText: messageController.text,
-                ),
-              ],
-            ),
-          );
+            );
+          },
+        );
+      },
+    );
   }
 }

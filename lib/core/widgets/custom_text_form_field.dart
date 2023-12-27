@@ -43,6 +43,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines = 1,
     this.enableSuggestions = true,
     this.hasPrefixIcon = true,
+    this.filled = true,
   });
 
   final TextEditingController? controller;
@@ -80,6 +81,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final bool enableSuggestions;
   final bool hasPrefixIcon;
+  final bool filled;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +107,7 @@ class CustomTextFormField extends StatelessWidget {
           maxLines: maxLines,
           cursorColor: AppColors.primaryColor,
           decoration: InputDecoration(
-            filled: true,
+            filled: filled,
             fillColor: fillColor ??
                 (state.brightness == Brightness.light
                     ? AppColors.scaffoldBackgroundClr

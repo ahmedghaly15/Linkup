@@ -6,6 +6,7 @@ import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/features/comments/domain/entities/type_new_comment_params.dart';
 import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social_app/features/comments/presentation/widgets/get_comment_image_icon_button.dart';
@@ -41,12 +42,12 @@ class _CommenterFieldState extends State<CommenterField> {
           child: BlocBuilder<ThemesCubit, ThemeData>(
             builder: (context, state) {
               return Card(
-                color: state.brightness == Brightness.dark
-                    ? AppColors.darkGreyClr.withOpacity(0)
-                    : Colors.grey[200],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.r),
                 ),
+                color: state.brightness == Brightness.dark
+                    ? AppColors.darkGreyClr
+                    : AppColors.scaffoldBackgroundClr,
                 child: Row(
                   children: <Widget>[
                     const GetCommentImageIconButton(
@@ -66,33 +67,27 @@ class _CommenterFieldState extends State<CommenterField> {
 
                           return Column(
                             children: <Widget>[
-                              BlocBuilder<ThemesCubit, ThemeData>(
-                                builder: (context, themeState) {
-                                  return TextFormField(
-                                    controller: _commentController,
-                                    enableSuggestions: true,
-                                    textCapitalization:
-                                        TextCapitalization.sentences,
-                                    maxLines: null,
-                                    cursorColor:
-                                        themeState.brightness == Brightness.dark
-                                            ? Colors.white60
-                                            : Colors.black,
-                                    style: AppTextStyles.textStyle16,
-                                    decoration: InputDecoration(
-                                      hintText: 'Write a comment...',
-                                      suffixIconColor: AppColors.primaryColor,
-                                      contentPadding: EdgeInsets.only(
-                                          left: 5.w, right: 16.w),
-                                      border: InputBorder.none,
-                                    ),
-                                    keyboardType: TextInputType.multiline,
-                                    onChanged: (String value) {
-                                      setState(() {
-                                        commentText = value;
-                                      });
-                                    },
-                                  );
+                              CustomTextFormField(
+                                hasPrefixIcon: false,
+                                controller: _commentController,
+                                enableSuggestions: true,
+                                textCapitalization:
+                                    TextCapitalization.sentences,
+                                maxLines: null,
+                                hintText: 'Write a comment...',
+                                contentPadding: EdgeInsets.only(
+                                  left: 5.w,
+                                  right: 16.w,
+                                ),
+                                border: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                filled: false,
+                                keyboardType: TextInputType.multiline,
+                                onChanged: (String value) {
+                                  setState(() {
+                                    commentText = value;
+                                  });
                                 },
                               ),
                               if (cubit.commentImage != null) ...[

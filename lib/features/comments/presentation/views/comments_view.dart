@@ -19,12 +19,12 @@ class CommentsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(bottom: 60.h),
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: <Widget>[
+          SafeArea(
+            child: Container(
+              margin: EdgeInsets.only(bottom: 75.h),
               child: CustomScrollView(
                 slivers: [
                   CustomSliverAppBar(
@@ -36,33 +36,34 @@ class CommentsView extends StatelessWidget {
                     },
                   ),
                   BlocBuilder<CommentsCubit, CommentsState>(
-                      builder: (context, state) {
-                    final cubit = BlocProvider.of<CommentsCubit>(context);
-                    return cubit.comments.isNotEmpty
-                        ? SliverPadding(
-                            padding: EdgeInsets.only(left: 10.w),
-                            sliver: SliverList(
-                              delegate: SliverChildBuilderDelegate(
-                                (context, index) {
-                                  return CommentItem(
-                                    comment: cubit.comments[index],
-                                  );
-                                },
-                                childCount: cubit.comments.length,
+                    builder: (context, state) {
+                      final cubit = BlocProvider.of<CommentsCubit>(context);
+                      return cubit.comments.isNotEmpty
+                          ? SliverPadding(
+                              padding: EdgeInsets.only(left: 10.w),
+                              sliver: SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                  (context, index) {
+                                    return CommentItem(
+                                      comment: cubit.comments[index],
+                                    );
+                                  },
+                                  childCount: cubit.comments.length,
+                                ),
                               ),
-                            ),
-                          )
-                        : SliverFillRemaining(child: Container());
-                  }),
+                            )
+                          : SliverFillRemaining(child: Container());
+                    },
+                  ),
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: CommenterField(postId: params.postId!),
-            ),
-          ],
-        ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 8.w, bottom: 15.h),
+            child: CommenterField(postId: params.postId!),
+          ),
+        ],
       ),
     );
   }

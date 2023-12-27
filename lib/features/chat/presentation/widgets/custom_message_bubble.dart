@@ -1,113 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
-import 'package:get/get.dart';
-
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_text_styles.dart';
-import '../../data/models/message_model.dart';
-import '/core/utils/size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/date_and_time.dart';
+import 'package:social_app/features/chat/data/models/message_model.dart';
 
 class CustomMessageBubble extends StatelessWidget {
   const CustomMessageBubble({
     Key? key,
-    required this.messageModel,
+    required this.message,
     required this.isMe,
   }) : super(key: key);
 
-  final MessageModel messageModel;
+  final MessageModel message;
   final bool isMe;
 
   @override
   Widget build(BuildContext context) {
-    return ChatBubble(
-      clipper: isMe
-          ? ChatBubbleClipper4(type: BubbleType.sendBubble)
-          : ChatBubbleClipper4(type: BubbleType.receiverBubble),
-      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-      backGroundColor: isMe
-          ? AppColors.primaryColor.withOpacity(0.55)
-          : (Get.isDarkMode
-              ? AppColors.darkGreyClr.withOpacity(0.9)
-              : const Color(0xffE7E7ED)),
-      margin: const EdgeInsets.symmetric(
-        horizontal: 0,
-        vertical: 5,
-      ),
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.65,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 8.0,
-            vertical: 10,
+    return BlocBuilder<ThemesCubit, ThemeData>(builder: (context, themeState) {
+      return ChatBubble(
+        clipper: isMe
+            ? ChatBubbleClipper9(type: BubbleType.sendBubble)
+            : ChatBubbleClipper9(type: BubbleType.receiverBubble),
+        alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+        backGroundColor: isMe
+            ? (_checkThemeIsDark(themeState)
+                ? const Color(0xffbe29ec)
+                : const Color(0xffefbbff))
+            : (_checkThemeIsDark(themeState)
+                ? AppColors.darkGreyClr
+                : const Color(0xffE7E7ED)),
+        // margin: EdgeInsets.symmetric(vertical: 2.h),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width * 0.65,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              if (messageModel.messageText != null)
+              if (message.messageText != null) ...[
                 Text(
-                  messageModel.messageText!,
-                  style: AppTextStyles.textStyle16.copyWith(
-                    fontSize: 15.5,
-                    fontWeight: FontWeight.w600,
-                    height: 1.5,
-                    letterSpacing: 0.8,
-                  ),
+                  message.messageText!,
+                  style: AppTextStyles.textStyle16SemiBold,
                   maxLines: null,
                 ),
-              if (messageModel.messageText != null)
-                SizedBox(
-                  height: SizeConfig.screenHeight! * 0.008,
-                ),
-              if (messageModel.messageImage!['image'] != null)
+                SizedBox(height: 8.h),
+              ],
+              if (message.messageImage!['image'] != null)
                 Container(
                   width: double.infinity,
-                  height: 150,
+                  height: 150.h,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8.r),
+                    ),
                     image: DecorationImage(
+                      fit: BoxFit.fill,
                       image: NetworkImage(
-                        messageModel.messageImage!['image'],
+                        message.messageImage!['image'],
                       ),
                     ),
                   ),
                 ),
-              SizedBox(
-                height: SizeConfig.screenHeight! * 0.005,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    "${messageModel.date}",
-                    style: AppTextStyles.textStyle13.copyWith(
-                      color: Get.isDarkMode ? Colors.white54 : Colors.black38,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Container(
-                      width: 5,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        color: Get.isDarkMode ? Colors.grey : Colors.black45,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "${messageModel.time}",
-                    style: AppTextStyles.textStyle13.copyWith(
-                      color: Get.isDarkMode ? Colors.white54 : Colors.black38,
-                    ),
-                  ),
-                ],
+              SizedBox(height: 8.h),
+              DateAndTime(
+                date: message.date!,
+                time: message.time!,
               ),
             ],
           ),
         ),
-      ),
-    );
+      );
+    });
   }
+
+  bool _checkThemeIsDark(ThemeData themeState) =>
+      themeState.brightness == Brightness.dark;
 }

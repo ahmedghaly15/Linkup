@@ -13,8 +13,8 @@ class SendMessageParams extends Equatable {
     required this.receiverName,
     required this.date,
     required this.time,
-    required this.text,
-    required this.messageImage,
+    this.text,
+    this.messageImage,
   });
 
   @override

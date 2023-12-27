@@ -9,4 +9,5 @@ class Routes {
   static const String commentsRoute = '/comments';
   static const String postLikesRoute = '/postLikes';
   static const String chatsRoute = '/chats';
+  static const String chatDetailsRoute = '/chatDetails';
 }

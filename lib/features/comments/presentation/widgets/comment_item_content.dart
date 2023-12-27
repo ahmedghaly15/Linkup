@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/date_and_time.dart';
 import 'package:social_app/features/comments/data/models/comment_model.dart';
 
 class CommentItemContent extends StatelessWidget {
@@ -51,42 +50,10 @@ class CommentItemContent extends StatelessWidget {
             ),
           ),
         SizedBox(height: 15.h),
-        BlocBuilder<ThemesCubit, ThemeData>(builder: (context, state) {
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                "${comment.date}",
-                style: AppTextStyles.textStyle13.copyWith(
-                  color: state.brightness == Brightness.dark
-                      ? Colors.white54
-                      : Colors.black38,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: Container(
-                  width: 5.w,
-                  height: 5.w,
-                  decoration: BoxDecoration(
-                    color: state.brightness == Brightness.dark
-                        ? Colors.grey
-                        : Colors.black45,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-              Text(
-                "${comment.time}",
-                style: AppTextStyles.textStyle13.copyWith(
-                  color: state.brightness == Brightness.dark
-                      ? Colors.white54
-                      : Colors.black38,
-                ),
-              ),
-            ],
-          );
-        }),
+        DateAndTime(
+          date: comment.date!,
+          time: comment.time!,
+        ),
       ],
     );
   }
