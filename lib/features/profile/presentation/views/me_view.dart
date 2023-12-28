@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_constants.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/user_information.dart';
 import 'package:social_app/core/widgets/user_posts.dart';
 import 'package:social_app/features/profile/presentation/widgets/me_profile_and_cover_images.dart';
@@ -25,7 +27,8 @@ class _MeViewState extends State<MeView> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return BlocBuilder<UserCubit, UserState>(
+    return BlocConsumer<UserCubit, UserState>(
+      listener: (context, state) => _handleUserState(state, context),
       builder: (context, state) {
         return NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -50,5 +53,11 @@ class _MeViewState extends State<MeView> {
         );
       },
     );
+  }
+
+  void _handleUserState(UserState state, BuildContext context) {
+    if (state is UserSignOutSuccess) {
+      context.navigateAndReplacement(newRoute: Routes.signInRoute);
+    }
   }
 }

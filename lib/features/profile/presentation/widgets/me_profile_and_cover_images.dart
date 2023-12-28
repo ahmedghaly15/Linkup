@@ -1,15 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
-import 'package:social_app/core/helpers/cache_helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
-import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/user_cover_image.dart';
 import 'package:social_app/core/widgets/user_profile_image.dart';
-import 'package:social_app/service_locator.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class MeProfileAndCoverImages extends StatelessWidget {
   const MeProfileAndCoverImages({
@@ -64,15 +62,7 @@ class MeProfileAndCoverImages extends StatelessWidget {
               }
 
               if (value == 'signOut') {
-                await getIt
-                    .get<CacheHelper>()
-                    .removeData(key: AppStrings.uId)
-                    .then((value) async {
-                  getIt.get<FirebaseAuth>().signOut().then((value) {
-                    context.navigateAndReplacement(
-                        newRoute: Routes.signInRoute);
-                  });
-                });
+                BlocProvider.of<UserCubit>(context).signOut();
               }
             },
           ),

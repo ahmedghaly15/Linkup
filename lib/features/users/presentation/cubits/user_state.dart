@@ -85,3 +85,16 @@ class GetUserPostsError extends UserState {
   @override
   List<Object> get props => [error];
 }
+
+class UserSignOutSuccess extends UserState {
+  const UserSignOutSuccess();
+}
+
+class UserSignOutError extends UserState {
+  final String error;
+
+  const UserSignOutError({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}

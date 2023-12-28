@@ -10,4 +10,6 @@ abstract class UserRepo {
   Future<Either<Failure, DocumentSnapshot<Map<String, dynamic>>>> getUserData();
 
   Future<Either<Failure, List<PostModel>>> getUserPosts({required String uId});
+
+  Future<Either<Failure, void>> signOut();
 }

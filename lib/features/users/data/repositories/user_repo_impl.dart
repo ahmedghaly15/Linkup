@@ -84,4 +84,11 @@ class UserRepoImpl implements UserRepo {
       return const Left(FirebaseFailure(failureMsg: AppStrings.noInternet));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> signOut() {
+    return executeAndHandleErrors<void>(
+      function: () => userDataSource.signOut(),
+    );
+  }
 }

@@ -74,10 +74,7 @@ class PostsDataSourceImpl implements PostsDataSource {
   @override
   Future<void> likePost({required String postId}) async {
     final LikeModel likeModel = LikeModel(
-      uId: Helper.currentUser!.uId,
-      name: Helper.currentUser!.name,
-      email: Helper.currentUser!.email,
-      profileImage: Helper.currentUser!.image,
+      user: Helper.currentUser,
       dateTime: DateTime.now().toString(),
     );
 

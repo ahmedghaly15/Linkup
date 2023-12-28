@@ -1,40 +1,31 @@
 import 'package:equatable/equatable.dart';
+import 'package:social_app/core/models/user_model.dart';
 
 class LikeModel extends Equatable {
-  final String? uId;
-  final String? name;
-  final String? profileImage;
-  final String? email;
+  final UserModel? user;
   final String? dateTime;
 
   const LikeModel({
-    this.uId,
-    this.name,
-    this.email,
-    this.profileImage,
+    this.user,
     this.dateTime,
   });
 
   factory LikeModel.fromJson(Map<String, dynamic> json) {
     return LikeModel(
-      uId: json['uId'] as String?,
-      name: json['name'] as String?,
+      user: json['user'] == null
+          ? null
+          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
       dateTime: json['dateTime'] as String?,
-      email: json['email'] as String?,
-      profileImage: json['profileImage'] as String?,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'uId': uId,
-      'name': name,
+      'user': user?.toJson(),
       'dateTime': dateTime,
-      'email': email,
-      'profileImage': profileImage,
     };
   }
 
   @override
-  List<Object?> get props => [uId, name, dateTime, profileImage, email];
+  List<Object?> get props => [user, dateTime];
 }

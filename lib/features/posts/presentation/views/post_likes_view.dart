@@ -45,7 +45,7 @@ class PostLikesView extends StatelessWidget {
                                 child: SlideAnimation(
                                   horizontalOffset: -150.w,
                                   child: PersonWhoLiked(
-                                    person: cubit.peopleLikePost[index],
+                                    like: cubit.peopleLikePost[index],
                                   ),
                                 ),
                               );

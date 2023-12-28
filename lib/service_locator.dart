@@ -45,11 +45,9 @@ import 'package:social_app/features/comments/domain/usecases/get_comments.dart';
 import 'package:social_app/features/comments/domain/usecases/type_new_comment.dart';
 import 'package:social_app/features/comments/domain/usecases/upload_comment_image.dart';
 import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
-import 'package:social_app/features/linkup/data/app_repo_impl.dart';
 import 'package:social_app/features/linkup/data/datasources/linkup_datasource.dart';
 import 'package:social_app/features/linkup/data/datasources/linkup_datasource_impl.dart';
 import 'package:social_app/features/linkup/data/repositories/linkup_repo_impl.dart';
-import 'package:social_app/features/linkup/domain/app_repo.dart';
 import 'package:social_app/features/linkup/domain/repositories/linkup_repo.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_bottom_nav_index.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_nav_to_home.dart';
@@ -85,6 +83,7 @@ import 'package:social_app/features/users/domain/repositories/user_repo.dart';
 import 'package:social_app/features/users/domain/usecases/get_all_users.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
+import 'package:social_app/features/users/domain/usecases/sign_out.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 part 'config/locator/setup_for_core.dart';
@@ -109,7 +108,5 @@ class ServiceLocator {
     SetupLocatorForUseCases().setup();
 
     SetupLocatorForCubits().setup();
-
-    getIt.registerLazySingleton<AppRepo>(() => AppRepoImpl());
   }
 }

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:social_app/core/helpers/cache_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/users/data/datasources/user_datasource.dart';
@@ -31,5 +33,17 @@ class UserDataSourceImpl implements UserDataSource {
           descending: true,
         )
         .get();
+  }
+
+  @override
+  Future<void> signOut() async {
+    await getIt
+        .get<CacheHelper>()
+        .removeData(key: AppStrings.uId)
+        .then((value) {
+      if (value) {
+        getIt.get<FirebaseAuth>().signOut();
+      }
+    });
   }
 }

@@ -6,4 +6,6 @@ abstract class UserDataSource {
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserData();
 
   Future<QuerySnapshot<Map<String, dynamic>>> getUserPosts();
+
+  Future<void> signOut();
 }

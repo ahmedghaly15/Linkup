@@ -57,8 +57,6 @@ class SignUpCubit extends Cubit<SignUpState> {
             phone: params.phone,
             uId: credential.user!.uid,
           );
-
-          // TODO: getUserData in listener of the BlocConsumer like in Roome
         },
       );
     });

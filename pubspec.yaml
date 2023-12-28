@@ -22,14 +22,12 @@ dependencies:
   flutter_chat_bubble: ^2.0.2
   # To add staggered animations to your ListView, GridView
   flutter_staggered_animations: ^1.1.1
-  get: ^4.6.5
   # Purify dart code
   dartz: ^0.10.1
   # Implement value based equality
   equatable: ^2.0.5
   # Simple direct Service Locator that allows to access the concrete implementation from everywhere
   get_it: ^7.6.0
-  get_storage: ^2.0.3
   # A Flutter package to use fonts from fonts.google.com.
   google_fonts: ^4.0.3
   # A Flutter package to use fonts from fonts.google.com.

@@ -7,6 +7,7 @@ import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/users/domain/usecases/get_all_users.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
+import 'package:social_app/features/users/domain/usecases/sign_out.dart';
 
 part 'user_state.dart';
 
@@ -14,11 +15,13 @@ class UserCubit extends Cubit<UserState> {
   final GetUserDataUseCase getUserDataUseCase;
   final GetAllUsersUseCase getAllUsersUseCase;
   final GetUserPostsUseCase getAllUserPostsUseCase;
+  final SignOutUseCase signOutUseCase;
 
   UserCubit({
     required this.getUserDataUseCase,
     required this.getAllUsersUseCase,
     required this.getAllUserPostsUseCase,
+    required this.signOutUseCase,
   }) : super(const UserInitial());
 
   List<UserModel> users = <UserModel>[];
@@ -89,6 +92,17 @@ class UserCubit extends Cubit<UserState> {
           userPosts = posts;
           emit(GetUserPostsSuccess(userPosts: userPosts));
         },
+      );
+    });
+  }
+
+  void signOut() {
+    signOutUseCase(const NoParams()).then((value) {
+      value.fold(
+        (failure) => emit(
+          UserSignOutError(error: failure.failureMsg.toString()),
+        ),
+        (success) => emit(const UserSignOutSuccess()),
       );
     });
   }

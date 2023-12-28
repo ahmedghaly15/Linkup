@@ -7,13 +7,8 @@ import 'package:social_app/service_locator.dart';
 
 import 'package:social_app/linkup_app.dart';
 
-// TODO: split comments from feeds feature & make it a feature
-/*
-TODO:  save posts in cache and build a method in posts cubit that check on the internet 
-      and if the there's internet execute getPosts(), else execute the method that return the saved posts
- */
-
 // TODO: use create post method when you upload the profile image or cover image to share a new post like in facebook
+// TODO: Add functionality to tags TextButton in NewPostView
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +23,3 @@ Future<void> main() async {
 
   runApp(const LinkupApp());
 }
-
-// TODO: Add functionality to tags TextButton in NewPostView
-

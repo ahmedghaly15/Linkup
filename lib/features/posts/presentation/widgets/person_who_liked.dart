@@ -2,9 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/features/posts/data/models/like_model.dart';
@@ -12,10 +14,10 @@ import 'package:social_app/features/posts/data/models/like_model.dart';
 class PersonWhoLiked extends StatelessWidget {
   const PersonWhoLiked({
     super.key,
-    required this.person,
+    required this.like,
   });
 
-  final LikeModel person;
+  final LikeModel like;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,10 @@ class PersonWhoLiked extends StatelessWidget {
           child: MaterialButton(
             padding: EdgeInsets.zero,
             onPressed: () {
-              //TODO: navigate to this user profile
+              context.navigateTo(
+                routeName: Routes.userProfileRoute,
+                arguments: like.user!,
+              );
             },
             child: Padding(
               padding: EdgeInsets.all(10.h),
@@ -45,7 +50,7 @@ class PersonWhoLiked extends StatelessWidget {
                   CachedNetworkImage(
                     errorWidget: (context, error, _) =>
                         const CachedImageErrorIcon(),
-                    imageUrl: person.profileImage!,
+                    imageUrl: like.user!.image!,
                     imageBuilder: (_, image) {
                       return CircleAvatar(
                         backgroundImage: image,
@@ -60,13 +65,13 @@ class PersonWhoLiked extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          person.name!,
+                          like.user!.name!,
                           style: AppTextStyles.textStyle18Bold,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          person.email!,
+                          like.user!.email!,
                           style: AppTextStyles.textStyle15.copyWith(
                             color: Colors.grey,
                           ),
