@@ -38,7 +38,7 @@ class UserCubit extends Cubit<UserState> {
     });
   }
 
-  void getUserData() {
+  Future<void> getUserData() async {
     emit(const GetUserDataLoading());
 
     getUserDataUseCase(const NoParams()).then((value) {
@@ -80,7 +80,7 @@ class UserCubit extends Cubit<UserState> {
 
   List<PostModel> userPosts = <PostModel>[];
 
-  void getUserPosts({required String uId}) {
+  Future<void> getUserPosts({required String uId}) async {
     getAllUserPostsUseCase(uId).then((value) {
       value.fold(
         (failure) =>

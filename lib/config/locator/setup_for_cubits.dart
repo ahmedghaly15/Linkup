@@ -75,6 +75,7 @@ class SetupLocatorForCubits {
         updateUserUseCase: getIt.get<UpdateUserUseCase>(),
         getImageUseCase: getIt.get<GetImageUseCase>(),
         uploadImageUseCase: getIt.get<UploadImageUseCase>(),
+        getPostsUseCase: getIt.get<GetPostsUseCase>(),
       ),
     );
   }

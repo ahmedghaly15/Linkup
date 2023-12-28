@@ -44,6 +44,13 @@ class MeProfileAndCoverImages extends StatelessWidget {
             ),
             itemBuilder: (context) => [
               PopupMenuItem(
+                value: 'editProfile',
+                child: Text(
+                  'Edit Profile',
+                  style: AppTextStyles.textStyle16SemiBold,
+                ),
+              ),
+              PopupMenuItem(
                 value: 'signOut',
                 child: Text(
                   'Sign Out',
@@ -52,6 +59,10 @@ class MeProfileAndCoverImages extends StatelessWidget {
               ),
             ],
             onSelected: (value) async {
+              if (value == 'editProfile') {
+                context.navigateTo(routeName: Routes.editProfileRoute);
+              }
+
               if (value == 'signOut') {
                 await getIt
                     .get<CacheHelper>()

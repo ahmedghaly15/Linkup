@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '/core/widgets/custom_button.dart';
-import '/core/utils/size_config.dart';
+import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/core/widgets/main_button.dart';
 
 class ConfirmEditingButton extends StatelessWidget {
   const ConfirmEditingButton({
@@ -15,16 +14,17 @@ class ConfirmEditingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomButton(
-      buttonText: buttonText,
-      onPressed: onPressed,
-      width: SizeConfig.screenWidth! * 0.5,
-      height: SizeConfig.screenHeight! * 0.048,
-      textStyle: const TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.bold,
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return MainButton(
+      width: screenWidth * 0.5,
+      height: 40,
+      text: buttonText,
+      textStyle: AppTextStyles.textStyle16SemiBold.copyWith(
         color: Colors.white,
       ),
+      onPressed: onPressed,
+      borderRadius: 32,
     );
   }
 }

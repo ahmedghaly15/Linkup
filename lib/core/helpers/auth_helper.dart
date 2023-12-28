@@ -31,11 +31,12 @@ class AuthHelper {
     return null;
   }
 
-  static String? validatingNameField({
+  static String? validatingField({
     String? value,
+    required String fieldName,
   }) {
     if (value!.isEmpty) {
-      return "Username can't be blank";
+      return "$fieldName can't be blank";
     }
     return null;
   }

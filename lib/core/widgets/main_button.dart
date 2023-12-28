@@ -6,14 +6,16 @@ import 'package:social_app/core/utils/app_text_styles.dart';
 class MainButton extends StatelessWidget {
   const MainButton({
     Key? key,
+    required this.onPressed,
     this.text,
     this.borderRadius,
     this.textStyle,
     this.backgroundColor,
     this.textColor,
-    required this.onPressed,
     this.boxShadow,
     this.child,
+    this.width = double.infinity,
+    this.height = 50,
   }) : super(key: key);
 
   final String? text;
@@ -24,12 +26,14 @@ class MainButton extends StatelessWidget {
   final void Function() onPressed;
   final List<BoxShadow>? boxShadow;
   final Widget? child;
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: 50.0.h,
+      width: width,
+      height: height.h,
       decoration: BoxDecoration(
         color: backgroundColor ?? AppColors.primaryColor,
         borderRadius:

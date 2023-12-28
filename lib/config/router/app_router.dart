@@ -18,6 +18,7 @@ import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart
 import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
 import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
 import 'package:social_app/features/posts/presentation/views/post_likes_view.dart';
+import 'package:social_app/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:social_app/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:social_app/features/splash/presentation/views/splash_view.dart';
 import 'package:social_app/features/users/presentation/views/user_profile_view.dart';
@@ -101,7 +102,12 @@ class AppRouter {
         );
 
       case Routes.editProfileRoute:
-        return MaterialPageRoute(builder: (context) => const EditProfileView());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<EditProfileCubit>(),
+            child: const EditProfileView(),
+          ),
+        );
 
       default:
         return unFoundRoute();

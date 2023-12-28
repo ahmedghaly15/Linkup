@@ -39,6 +39,8 @@ class LinkupCubit extends Cubit<LinkupState> {
       index: index,
     ));
 
+    // if (currentIndex == 0) BlocProvider.of<PostsCubit>(context).getPosts();
+
     if (currentIndex == 1 || currentIndex == 2)
       BlocProvider.of<UserCubit>(context).getAllUsers();
 

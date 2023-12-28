@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class LinkupViewBody extends StatelessWidget {
@@ -23,6 +24,9 @@ class LinkupViewBody extends StatelessWidget {
               }
 
               if (linkupCubit.currentIndex != 0) {
+                if (linkupCubit.currentIndex == 3) {
+                  BlocProvider.of<PostsCubit>(context).getPosts();
+                }
                 linkupCubit.changeBottomNavToHome(context);
                 return Future.value(false);
               }

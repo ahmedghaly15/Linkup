@@ -46,8 +46,8 @@ class ImagePickedError extends EditProfileState {
   List<Object> get props => [error];
 }
 
-class UploadImageLoading extends EditProfileState {
-  const UploadImageLoading();
+class UploadProfileImageLoading extends EditProfileState {
+  const UploadProfileImageLoading();
 }
 
 class UploadImageSuccess extends EditProfileState {
@@ -66,4 +66,8 @@ class UploadImageError extends EditProfileState {
 
   @override
   List<Object> get props => [error];
+}
+
+class UploadCoverImageLoading extends EditProfileState {
+  const UploadCoverImageLoading();
 }

@@ -1,83 +1,61 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_cubit.dart';
-import 'package:social_app/features/linkup/presentation/views/manager/app_states.dart';
-
-import '../../../../core/models/user_model.dart';
-import '../../../../core/helpers/helper.dart';
-
-import '../widgets/edit_profile_view_body.dart';
-import '/core/widgets/custom_text_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/core/utils/app_constants.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/widgets/custom_sliver_app_bar.dart';
+import 'package:social_app/features/profile/presentation/widgets/edit_cover_image.dart';
+import 'package:social_app/features/profile/presentation/widgets/edit_profile_form.dart';
+import 'package:social_app/features/profile/presentation/widgets/edit_profile_image.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppStates>(
-      builder: (context, state) {
-        UserModel userModel = Helper.currentUser!;
-        final TextEditingController nameController = TextEditingController();
-        final TextEditingController bioController = TextEditingController();
-        final TextEditingController phoneController = TextEditingController();
-        final GlobalKey<FormState> formKey = GlobalKey();
-        nameController.text = userModel.name!;
-        bioController.text = userModel.bio!;
-        phoneController.text = userModel.phone!;
-        AppCubit cubit = AppCubit.getObject(context);
-        File? profileImage = cubit.profileImage;
-        File? coverImage = cubit.coverImage;
+    final screenHeight = MediaQuery.of(context).size.height;
 
-        return Scaffold(
-          backgroundColor: context.theme.colorScheme.background,
-          appBar: buildAppBar(
-            context,
-            cubit,
-            nameController,
-            phoneController,
-            bioController,
-          ),
-          body: EditProfileViewBody(
-            coverImage: coverImage,
-            userModel: userModel,
-            cubit: cubit,
-            profileImage: profileImage,
-            nameController: nameController,
-            phoneController: phoneController,
-            bioController: bioController,
-            formKey: formKey,
-            state: state,
-          ),
-        );
-      },
-    );
-  }
-
-  AppBar buildAppBar(
-      BuildContext context,
-      AppCubit cubit,
-      TextEditingController nameController,
-      TextEditingController phoneController,
-      TextEditingController bioController) {
-    return Helper.appBarBuilder(
-      context: context,
-      title: "Edit Profile",
-      actions: <Widget>[
-        CustomTextButton(
-          onPressed: () {
-            cubit.updateUser(
-              name: nameController.text,
-              phone: phoneController.text,
-              bio: bioController.text,
-            );
-          },
-          title: "UPDATE",
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          physics: AppConstants.physics,
+          slivers: [
+            CustomSliverAppBar(
+              title: 'Edit Profile',
+              backOnPressed: () {
+                BlocProvider.of<UserCubit>(context)
+                    .getUserPosts(uId: Helper.currentUser!.uId!)
+                    .then((value) {
+                  context.getBack();
+                });
+              },
+            ),
+            SliverToBoxAdapter(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: screenHeight * 0.3,
+                    child: const Stack(
+                      alignment: AlignmentDirectional.bottomCenter,
+                      children: <Widget>[
+                        Align(
+                          alignment: AlignmentDirectional.topCenter,
+                          child: EditCoverImage(),
+                        ),
+                        EditProfileImage(),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  const EditProfileForm(),
+                ],
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 5),
-      ],
+      ),
     );
   }
 }

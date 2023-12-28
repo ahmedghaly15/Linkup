@@ -31,6 +31,8 @@ class EditProfileRepoImpl implements EditProfileRepo {
       isEmailVerified: false,
     );
 
+    Helper.currentUser = userModel;
+
     return executeAndHandleErrors<void>(
       function: () => editProfileDataSource.updateUser(
         userModel: userModel,

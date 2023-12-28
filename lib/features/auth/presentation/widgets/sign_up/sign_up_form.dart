@@ -110,8 +110,10 @@ class _SignUpFormState extends State<SignUpForm> {
                 prefixIcon: Icons.person_2,
                 keyboardType: TextInputType.name,
                 textCapitalization: TextCapitalization.words,
-                validating: (String? val) =>
-                    AuthHelper.validatingNameField(value: val),
+                validating: (String? val) => AuthHelper.validatingField(
+                  value: val,
+                  fieldName: 'Username',
+                ),
                 autofillHints: const <String>[AutofillHints.name],
                 onEditingComplete: () => AuthHelper.requestFocus(
                   context,
