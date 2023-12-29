@@ -131,5 +131,11 @@ class SetupLocatorForUseCases {
     getIt.registerLazySingleton<UploadImageUseCase>(
       () => UploadImageUseCase(editProfileRepo: getIt.get<EditProfileRepo>()),
     );
+
+    getIt.registerLazySingleton<UpdateUserPostsUseCase>(
+      () => UpdateUserPostsUseCase(
+        editProfileRepo: getIt.get<EditProfileRepo>(),
+      ),
+    );
   }
 }

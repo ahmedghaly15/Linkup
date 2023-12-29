@@ -13,6 +13,8 @@ class ThemesCubit extends Cubit<ThemeData> {
   Future<void> _saveThemeToPrefs({required Brightness brightness}) async {
     final themeIndex = brightness == Brightness.light ? 0 : 1;
 
+    debugPrint('THEME INDEX: $themeIndex');
+
     await getIt.get<CacheHelper>().saveData(
           key: AppStrings.theme,
           value: themeIndex,
@@ -34,7 +36,7 @@ class ThemesCubit extends Cubit<ThemeData> {
         ? AppThemes.darkTheme
         : AppThemes.lightTheme);
 
-    print('STATE: ${state.brightness.toString()}');
+    debugPrint('STATE: ${state.brightness.toString()}');
 
     _saveThemeToPrefs(brightness: state.brightness);
   }
