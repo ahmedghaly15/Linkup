@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 import 'package:social_app/core/widgets/get_back_arrow.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class NewPostViewAppBar extends StatelessWidget {
   const NewPostViewAppBar({
@@ -21,7 +24,15 @@ class NewPostViewAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      leading: const GetBackArrow(),
+      leading: GetBackArrow(
+        onPressed: () {
+          BlocProvider.of<UserCubit>(context)
+              .getUserPosts(uId: Helper.uId!)
+              .then((value) {
+            context.getBack();
+          });
+        },
+      ),
       title: Text('CreatePost', style: AppTextStyles.textStyle23Bold),
       centerTitle: false,
       actions: <Widget>[

@@ -19,7 +19,8 @@ class ChatsView extends StatelessWidget {
           const ChatsSliverAppBar(),
           BlocBuilder<UserCubit, UserState>(
             builder: (context, state) {
-              final UserCubit linkupCubit = BlocProvider.of<UserCubit>(context);
+              final UserCubit cubit = BlocProvider.of<UserCubit>(context);
+
               if (state is GetAllUsersLoading) {
                 return const SliverFillRemaining(
                   hasScrollBody: false,
@@ -27,9 +28,15 @@ class ChatsView extends StatelessWidget {
                     child: BodyLoadingIndicator(),
                   ),
                 );
-              }
-              if (state is GetAllUserSuccess) {
-                return state.users.isNotEmpty
+              } else if (state is GetAllUserError) {
+                return SliverFillRemaining(
+                  child: CustomErrorWidget(
+                    onPressed: () => cubit.getAllUsers(),
+                    error: state.error,
+                  ),
+                );
+              } else {
+                return cubit.users.isNotEmpty
                     ? SliverPadding(
                         padding: EdgeInsets.only(
                           bottom: 35.h,
@@ -40,27 +47,18 @@ class ChatsView extends StatelessWidget {
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
                               return ChatItem(
-                                user: linkupCubit.isSearching
-                                    ? linkupCubit.searchList[index]
-                                    : state.users[index],
+                                user: cubit.isSearching
+                                    ? cubit.searchList[index]
+                                    : cubit.users[index],
                               );
                             },
-                            childCount: linkupCubit.isSearching
-                                ? linkupCubit.searchList.length
-                                : state.users.length,
+                            childCount: cubit.isSearching
+                                ? cubit.searchList.length
+                                : cubit.users.length,
                           ),
                         ),
                       )
                     : const EmptyChatsView();
-              } else if (state is GetAllUserError) {
-                return SliverFillRemaining(
-                  child: CustomErrorWidget(
-                    onPressed: () => linkupCubit.getAllUsers(),
-                    error: state.error,
-                  ),
-                );
-              } else {
-                return const EmptyChatsView();
               }
             },
           )

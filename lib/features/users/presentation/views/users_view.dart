@@ -23,7 +23,14 @@ class UsersView extends StatelessWidget {
           return const Center(
             child: BodyLoadingIndicator(),
           );
-        } else if (state is GetAllUserSuccess) {
+        } else if (state is GetAllUserError) {
+          return SliverFillRemaining(
+            child: CustomErrorWidget(
+              onPressed: () => cubit.getAllUsers(),
+              error: state.error,
+            ),
+          );
+        } else {
           return cubit.users.isNotEmpty
               ? SafeArea(
                   child: GridView.builder(
@@ -64,15 +71,6 @@ class UsersView extends StatelessWidget {
                   ),
                 )
               : const EmptyUsersView();
-        } else if (state is GetAllUserError) {
-          return SliverFillRemaining(
-            child: CustomErrorWidget(
-              onPressed: () => cubit.getAllUsers(),
-              error: state.error,
-            ),
-          );
-        } else {
-          return const EmptyUsersView();
         }
       },
     );

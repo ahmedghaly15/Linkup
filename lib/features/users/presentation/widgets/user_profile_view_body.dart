@@ -22,44 +22,38 @@ class UserProfileViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    return WillPopScope(
-      onWillPop: () {
-        BlocProvider.of<PostsCubit>(context).getPosts();
-        return Future.value(true);
-      },
-      child: SafeArea(
-        child: CustomScrollView(
-          physics: AppConstants.physics,
-          slivers: [
-            SliverAppBar(
-              leading: GetBackArrow(
-                onPressed: () {
-                  BlocProvider.of<PostsCubit>(context).getPosts();
-                  context.getBack();
-                },
-              ),
+    return SafeArea(
+      child: CustomScrollView(
+        physics: AppConstants.physics,
+        slivers: [
+          SliverAppBar(
+            leading: GetBackArrow(
+              onPressed: () {
+                BlocProvider.of<PostsCubit>(context).getPosts();
+                context.getBack();
+              },
             ),
-            SliverToBoxAdapter(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: screenHeight * 0.3,
-                    child: Stack(
-                      alignment: AlignmentDirectional.bottomCenter,
-                      children: <Widget>[
-                        UserCoverImage(cover: user.cover!),
-                        UserProfileImage(image: user.image!),
-                      ],
-                    ),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: screenHeight * 0.3,
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomCenter,
+                    children: <Widget>[
+                      UserCoverImage(cover: user.cover!),
+                      UserProfileImage(image: user.image!),
+                    ],
                   ),
-                  SizedBox(height: 5.h),
-                  UserInformation(user: user),
-                ],
-              ),
+                ),
+                SizedBox(height: 5.h),
+                UserInformation(user: user),
+              ],
             ),
-            UserPosts(uId: user.uId!),
-          ],
-        ),
+          ),
+          UserPosts(uId: user.uId!),
+        ],
       ),
     );
   }

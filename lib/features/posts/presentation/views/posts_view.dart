@@ -19,17 +19,15 @@ class PostsView extends StatelessWidget {
 
         if (state is GetPostsLoading) {
           return const BodyLoadingIndicator();
-        } else if (state is GetPostsSuccess) {
-          return cubit.posts.isNotEmpty
-              ? Posts(posts: cubit.posts)
-              : const EmptyPostView();
         } else if (state is GetPostsError) {
           return CustomErrorWidget(
             onPressed: () => cubit.getPosts(),
             error: state.error,
           );
         } else {
-          return const EmptyPostView();
+          return cubit.posts.isNotEmpty
+              ? Posts(posts: cubit.posts)
+              : const EmptyPostView();
         }
       },
     );
