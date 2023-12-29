@@ -5,22 +5,84 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/errors/failure.dart';
+import 'package:social_app/core/errors/firebase_failure.dart';
+import 'package:social_app/core/internet/internet_checker.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/functions/execute_and_handle_errors.dart';
 import 'package:social_app/features/posts/data/datasources/posts_datasource.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 import 'package:social_app/features/posts/domain/repositories/posts_repo.dart';
+import 'package:social_app/service_locator.dart';
 
 class PostsRepoImpl implements PostsRepo {
   final PostsDataSource postsDataSource;
 
   const PostsRepoImpl({required this.postsDataSource});
 
+  Future<int> _numberOf({
+    required QueryDocumentSnapshot<Map<String, dynamic>> element,
+    required String collection,
+  }) async {
+    final QuerySnapshot<Map<String, dynamic>> number =
+        await element.reference.collection(collection).get();
+
+    return number.docs.length;
+  }
+
+  Future<List<PostModel>> _updatePosts({
+    required QuerySnapshot<Map<String, dynamic>> result,
+  }) async {
+    final List<PostModel> posts = <PostModel>[];
+
+    posts.clear();
+
+    for (var element in result.docs) {
+      posts.add(PostModel.fromJson(element.data()));
+
+      final int likes = await _numberOf(
+        element: element,
+        collection: 'likes',
+      );
+
+      final int comments = await _numberOf(
+        element: element,
+        collection: 'comments',
+      );
+
+      await getIt
+          .get<FirebaseFirestore>()
+          .collection(AppStrings.posts)
+          .doc(element.id)
+          .update({
+        'likes': likes,
+        'comments': comments,
+        'postId': element.id,
+      });
+    }
+
+    return posts;
+  }
+
   @override
-  Future<Either<Failure, QuerySnapshot<Map<String, dynamic>>>> getPosts() {
-    return executeAndHandleErrors<QuerySnapshot<Map<String, dynamic>>>(
-      function: () => postsDataSource.getPosts(),
-    );
+  Future<Either<Failure, List<PostModel>>> getPosts() async {
+    if (await getIt.get<InternetChecker>().isConnected) {
+      try {
+        final result = await postsDataSource.getPosts();
+
+        final posts = await _updatePosts(result: result);
+
+        return Right(posts);
+      } catch (failure) {
+        if (failure is FirebaseException) {
+          return Left(FirebaseFailure.fromFirebaseException(failure.code));
+        }
+
+        return Left(FirebaseFailure(failureMsg: failure.toString()));
+      }
+    } else {
+      return const Left(FirebaseFailure(failureMsg: AppStrings.noInternet));
+    }
   }
 
   @override

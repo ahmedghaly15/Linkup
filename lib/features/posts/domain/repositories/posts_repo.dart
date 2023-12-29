@@ -9,7 +9,7 @@ import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 
 abstract class PostsRepo {
-  Future<Either<Failure, QuerySnapshot<Map<String, dynamic>>>> getPosts();
+  Future<Either<Failure, List<PostModel>>> getPosts();
 
   Future<Either<Failure, DocumentReference<Map<String, dynamic>>>> createPost({
     required CreatePostParams createPostParams,

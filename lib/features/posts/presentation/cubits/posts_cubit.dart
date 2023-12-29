@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/entities/no_params.dart';
-import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/posts/data/models/like_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
@@ -18,7 +16,6 @@ import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart
 import 'package:social_app/features/posts/domain/usecases/people_like_the_post.dart';
 import 'package:social_app/features/posts/domain/usecases/unlike_post.dart';
 import 'package:social_app/features/posts/domain/usecases/upload_post_image.dart';
-import 'package:social_app/service_locator.dart';
 
 part 'posts_state.dart';
 
@@ -54,8 +51,8 @@ class PostsCubit extends Cubit<PostsState> {
             emit(CreatePostError(error: failure.failureMsg.toString())),
         (success) {
           postImage = null;
-          getPosts();
           emit(const CreatePostSuccess());
+          getPosts();
         },
       );
     });
@@ -78,53 +75,14 @@ class PostsCubit extends Cubit<PostsState> {
 
   List<PostModel> posts = <PostModel>[];
 
-  Future<int> _numberOf({
-    required QueryDocumentSnapshot<Map<String, dynamic>> element,
-    required String collection,
-  }) async {
-    final QuerySnapshot<Map<String, dynamic>> number =
-        await element.reference.collection(collection).get();
-
-    return number.docs.length;
-  }
-
-  Future<void> _updatePosts(QuerySnapshot<Map<String, dynamic>> result) async {
-    for (var element in result.docs) {
-      posts.add(PostModel.fromJson(element.data()));
-
-      final int likes = await _numberOf(
-        element: element,
-        collection: 'likes',
-      );
-
-      final int comments = await _numberOf(
-        element: element,
-        collection: 'comments',
-      );
-
-      await getIt
-          .get<FirebaseFirestore>()
-          .collection(AppStrings.posts)
-          .doc(element.id)
-          .update({
-        'likes': likes,
-        'comments': comments,
-        'postId': element.id,
-      });
-    }
-  }
-
-  Future<void> getPosts() async {
+  void getPosts() {
     emit(const GetPostsLoading());
 
     getPostsUseCase(const NoParams()).then((value) {
       value.fold(
         (failure) => emit(GetPostsError(error: failure.failureMsg.toString())),
-        (result) async {
-          posts.clear();
-
-          await _updatePosts(result);
-
+        (result) {
+          posts = result;
           emit(GetPostsSuccess(posts: posts));
         },
       );
@@ -189,7 +147,7 @@ class PostsCubit extends Cubit<PostsState> {
               emit(LikePostError(error: failure.failureMsg.toString())),
           (success) async {
             await getLikedPostsByMe();
-            await getPosts();
+            getPosts();
             emit(const LikePostSuccess());
           },
         );
@@ -219,7 +177,7 @@ class PostsCubit extends Cubit<PostsState> {
             emit(UnLikePostError(error: failure.failureMsg.toString())),
         (success) async {
           await getLikedPostsByMe();
-          await getPosts();
+          getPosts();
           emit(const UnLikePostSuccess());
         },
       );
