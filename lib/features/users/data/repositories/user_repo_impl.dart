@@ -19,7 +19,7 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, DocumentSnapshot<Map<String, dynamic>>>>
-      getUserData() {
+      getUserData() async {
     return executeAndHandleErrors<DocumentSnapshot<Map<String, dynamic>>>(
       function: () => userDataSource.getUserData(),
     );

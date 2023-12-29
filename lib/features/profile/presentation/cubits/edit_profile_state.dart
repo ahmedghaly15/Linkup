@@ -28,6 +28,19 @@ class UpdateUserError extends EditProfileState {
   List<Object?> get props => [error];
 }
 
+class UpdateUserPostsSuccess extends EditProfileState {
+  const UpdateUserPostsSuccess();
+}
+
+class UpdateUserPostsError extends EditProfileState {
+  final String error;
+
+  const UpdateUserPostsError({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}
+
 class ImagePickedSuccess extends EditProfileState {
   final File image;
 

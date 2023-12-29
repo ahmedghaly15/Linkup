@@ -7,6 +7,7 @@ import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/users/presentation/widgets/empty_user_view.dart';
 import 'package:social_app/features/users/presentation/widgets/user_item.dart';
 
 class UsersView extends StatelessWidget {
@@ -22,14 +23,7 @@ class UsersView extends StatelessWidget {
           return const Center(
             child: BodyLoadingIndicator(),
           );
-        } else if (state is GetAllUserError) {
-          return SliverFillRemaining(
-            child: CustomErrorWidget(
-              onPressed: () => cubit.getAllUsers(),
-              error: state.error,
-            ),
-          );
-        } else {
+        } else if (state is GetAllUserSuccess) {
           return cubit.users.isNotEmpty
               ? SafeArea(
                   child: GridView.builder(
@@ -69,7 +63,16 @@ class UsersView extends StatelessWidget {
                     ),
                   ),
                 )
-              : const SizedBox();
+              : const EmptyUsersView();
+        } else if (state is GetAllUserError) {
+          return SliverFillRemaining(
+            child: CustomErrorWidget(
+              onPressed: () => cubit.getAllUsers(),
+              error: state.error,
+            ),
+          );
+        } else {
+          return const EmptyUsersView();
         }
       },
     );

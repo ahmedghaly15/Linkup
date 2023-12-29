@@ -74,6 +74,7 @@ import 'package:social_app/features/profile/data/repositories/edit_profile_repo_
 import 'package:social_app/features/profile/domain/repositories/edit_profile_repo.dart';
 import 'package:social_app/features/profile/domain/usecases/get_image.dart';
 import 'package:social_app/features/profile/domain/usecases/update_user.dart';
+import 'package:social_app/features/profile/domain/usecases/update_user_posts.dart';
 import 'package:social_app/features/profile/domain/usecases/upload_image.dart';
 import 'package:social_app/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:social_app/features/users/data/datasources/user_datasource.dart';

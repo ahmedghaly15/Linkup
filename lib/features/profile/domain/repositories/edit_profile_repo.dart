@@ -14,4 +14,6 @@ abstract class EditProfileRepo {
   Future<Either<Failure, XFile?>> getImage({required ImageSource source});
 
   Future<Either<Failure, TaskSnapshot>> uploadImage({File? image});
+
+  Future<Either<Failure, void>> updateUserPosts();
 }

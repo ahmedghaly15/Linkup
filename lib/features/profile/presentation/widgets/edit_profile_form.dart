@@ -160,12 +160,11 @@ class _EditProfileFormState extends State<EditProfileForm> {
       EditProfileState state, BuildContext context) async {
     if (state is UpdateUserSuccess) {
       BlocProvider.of<UserCubit>(context).getUserData().then((value) {
-        BlocProvider.of<PostsCubit>(context).getPosts().then((value) {
-          CustomToast.showToast(
-            text: 'User updated successfully',
-            state: CustomToastState.success,
-          );
-        });
+        BlocProvider.of<PostsCubit>(context).getPosts();
+        CustomToast.showToast(
+          text: 'User updated successfully',
+          state: CustomToastState.success,
+        );
       });
     }
 

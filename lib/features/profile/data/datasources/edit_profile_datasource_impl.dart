@@ -34,4 +34,16 @@ class EditProfileDataSourceImpl implements EditProfileDataSource {
         )
         .putFile(image);
   }
+
+  @override
+  Future<QuerySnapshot<Map<String, dynamic>>> getPosts() async {
+    return await getIt
+        .get<FirebaseFirestore>()
+        .collection(AppStrings.posts)
+        .orderBy(
+          'dateTime',
+          descending: true,
+        )
+        .get();
+  }
 }
