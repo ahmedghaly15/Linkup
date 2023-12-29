@@ -17,36 +17,36 @@ class CustomErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const Spacer(),
-        Icon(
-          Icons.refresh,
-          color: AppColors.primaryColor,
-          size: 150.h,
-        ),
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 12.h),
-          child: Text(
-            error == AppStrings.noInternet ? '$error. Tap to try' : error,
-            style: AppTextStyles.textStyle18Bold,
-            textAlign: TextAlign.center,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          const Spacer(),
+          Icon(
+            Icons.refresh,
+            color: AppColors.primaryColor,
+            size: 150.h,
           ),
-        ),
-        if (error == AppStrings.noInternet)
-          Text(
-            'Connect to the internet and try again.',
-            style: AppTextStyles.textStyle13,
-            textAlign: TextAlign.center,
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 12.h),
+            child: Text(
+              error == AppStrings.noInternet ? '$error. Tap to try' : error,
+              style: AppTextStyles.textStyle18Bold,
+              textAlign: TextAlign.center,
+            ),
           ),
-        const Spacer(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: TryAgainButton(onPressed: onPressed),
-        ),
-        const Spacer(),
-      ],
+          if (error == AppStrings.noInternet)
+            Text(
+              'Connect to the internet and try again.',
+              style: AppTextStyles.textStyle13,
+              textAlign: TextAlign.center,
+            ),
+          const Spacer(),
+          TryAgainButton(onPressed: onPressed),
+          const Spacer(),
+        ],
+      ),
     );
   }
 }

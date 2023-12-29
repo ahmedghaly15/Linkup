@@ -17,6 +17,10 @@ class AppAssets {
   /// assets/images/camera.png
   static const String imagesCamera = "assets/images/camera.png";
 
+  /// Assets for imagesChat
+  /// assets/images/chat.png
+  static const String imagesChat = "assets/images/chat.png";
+
   /// Assets for imagesChatDarkBackground
   /// assets/images/chat_dark_background.jpg
   static const String imagesChatDarkBackground =
@@ -30,4 +34,8 @@ class AppAssets {
   /// Assets for imagesNoPosts
   /// assets/images/no_posts.png
   static const String imagesNoPosts = "assets/images/no_posts.png";
+
+  /// Assets for imagesNoUsers
+  /// assets/images/no_users.png
+  static const String imagesNoUsers = "assets/images/no_users.png";
 }

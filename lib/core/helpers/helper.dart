@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/core/models/user_model.dart';
 
-enum SnackBarStates { success, error, warning }
-
 class Helper {
   static UserModel? currentUser;
 

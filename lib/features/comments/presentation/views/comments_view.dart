@@ -18,6 +18,8 @@ class CommentsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('POST ID: ${params.postId}');
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.bottomCenter,

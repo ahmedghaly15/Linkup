@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/features/chat/presentation/widgets/chats_sliver_app_bar.dart';
+import 'package:social_app/features/chat/presentation/widgets/empty_chats_view.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import '/features/chat/presentation/widgets/chat_item.dart';
 
@@ -12,16 +13,23 @@ class ChatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserCubit, UserState>(
-      builder: (context, state) {
-        final UserCubit linkupCubit = BlocProvider.of<UserCubit>(context);
-
-        return SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              const ChatsSliverAppBar(),
-              if (state is GetAllUserSuccess)
-                state.users.isNotEmpty
+    return SafeArea(
+      child: CustomScrollView(
+        slivers: [
+          const ChatsSliverAppBar(),
+          BlocBuilder<UserCubit, UserState>(
+            builder: (context, state) {
+              final UserCubit linkupCubit = BlocProvider.of<UserCubit>(context);
+              if (state is GetAllUsersLoading) {
+                return const SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Center(
+                    child: BodyLoadingIndicator(),
+                  ),
+                );
+              }
+              if (state is GetAllUserSuccess) {
+                return state.users.isNotEmpty
                     ? SliverPadding(
                         padding: EdgeInsets.only(
                           bottom: 35.h,
@@ -43,25 +51,21 @@ class ChatsView extends StatelessWidget {
                           ),
                         ),
                       )
-                    : SliverFillRemaining(child: Container()),
-              if (state is GetAllUserError)
-                SliverFillRemaining(
+                    : const EmptyChatsView();
+              } else if (state is GetAllUserError) {
+                return SliverFillRemaining(
                   child: CustomErrorWidget(
                     onPressed: () => linkupCubit.getAllUsers(),
                     error: state.error,
                   ),
-                ),
-              if (state is GetAllUsersLoading)
-                const SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Center(
-                    child: BodyLoadingIndicator(),
-                  ),
-                ),
-            ],
-          ),
-        );
-      },
+                );
+              } else {
+                return const EmptyChatsView();
+              }
+            },
+          )
+        ],
+      ),
     );
   }
 }
