@@ -62,8 +62,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
     - assets/
+    - assets/images/
 
 flutter_assets:
   assets_path: assets/
