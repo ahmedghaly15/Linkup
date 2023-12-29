@@ -32,9 +32,6 @@ class LinkupApp extends StatelessWidget {
           ),
         ],
         child: BlocBuilder<ThemesCubit, ThemeData>(
-          buildWhen: (previousState, nextState) {
-            return previousState != nextState;
-          },
           builder: (context, themeState) {
             return MaterialApp(
               title: AppStrings.appTitle,

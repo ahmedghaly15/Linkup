@@ -4,7 +4,7 @@ import 'package:social_app/core/utils/app_colors.dart';
 import 'package:social_app/core/utils/app_text_styles.dart';
 
 class AppThemes {
-  static ThemeData get lightTheme => ThemeData.light().copyWith(
+  static ThemeData get lightTheme => ThemeData(
         brightness: Brightness.light,
         textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
         bottomAppBarTheme: const BottomAppBarTheme(
@@ -47,7 +47,7 @@ class AppThemes {
         ),
       );
 
-  static ThemeData get darkTheme => ThemeData.dark().copyWith(
+  static ThemeData get darkTheme => ThemeData(
         brightness: Brightness.dark,
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(

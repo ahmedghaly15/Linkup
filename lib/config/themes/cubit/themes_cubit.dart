@@ -10,8 +10,8 @@ class ThemesCubit extends Cubit<ThemeData> {
     _getThemeFromPrefs();
   }
 
-  Future<void> _saveThemeToPrefs({required ThemeData theme}) async {
-    final themeIndex = theme == AppThemes.lightTheme ? 0 : 1;
+  Future<void> _saveThemeToPrefs({required Brightness brightness}) async {
+    final themeIndex = brightness == Brightness.light ? 0 : 1;
 
     await getIt.get<CacheHelper>().saveData(
           key: AppStrings.theme,
@@ -34,6 +34,8 @@ class ThemesCubit extends Cubit<ThemeData> {
         ? AppThemes.darkTheme
         : AppThemes.lightTheme);
 
-    _saveThemeToPrefs(theme: state);
+    print('STATE: ${state.brightness.toString()}');
+
+    _saveThemeToPrefs(brightness: state.brightness);
   }
 }

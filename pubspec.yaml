@@ -40,8 +40,6 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   # A collection of loading indicators animated with flutter
   loading_indicator: ^3.1.1
-  # A declarative router for Flutter
-  go_router: ^13.0.0
   # Updating app's launcher icon
   flutter_launcher_icons: ^0.13.1
   # Flutter plugin for displaying inline video

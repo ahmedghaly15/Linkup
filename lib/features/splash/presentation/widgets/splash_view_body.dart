@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/features/splash/presentation/widgets/faded_widget.dart';
 import 'package:video_player/video_player.dart';
@@ -40,14 +41,18 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         _controller.value.isInitialized
             ? AspectRatio(
                 aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller),
+                child: Center(
+                  child: FadedWidget(
+                    child: VideoPlayer(_controller),
+                  ),
+                ),
               )
             : const CircularProgressIndicator(),
-        const FadedWidget(
+        FadedWidget(
           child: Text(
             'Linkup',
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 30.sp,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),

@@ -9,7 +9,7 @@ class SetupLocatorForCore {
     );
 
     getIt.registerLazySingleton<CacheHelper>(
-      () => CacheHelper(getIt<SharedPreferences>()),
+      () => CacheHelper(getIt.get<SharedPreferences>()),
     );
   }
 }

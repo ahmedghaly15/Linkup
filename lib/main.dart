@@ -17,9 +17,9 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await ServiceLocator().setup();
-
   Bloc.observer = MyBlocObserver();
+
+  await ServiceLocator().setup();
 
   runApp(const LinkupApp());
 }
