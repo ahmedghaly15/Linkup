@@ -16,9 +16,9 @@ https://github.com/ahmedghaly15/Linkup/assets/108659381/b2adf3a1-8f49-4acf-8a5e-
 
 ## Download APK
 
-You can download the latest version of the Linkup-App APK using the following link:
+You can download the latest version of the Linkup APK using the following link:
 
-[Download Linkup-App APK](https://www.mediafire.com/file/avr5a0xj9mo9jiq/Linkup.apk/file)
+[Download Linkup APK](https://www.mediafire.com/file/avr5a0xj9mo9jiq/Linkup.apk/file)
 
 ## Features
 
