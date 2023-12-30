@@ -12,11 +12,7 @@ This is a Flutter project aimed at enhancing social connectivity. The app facili
 
 ## Preview
 
-<div style="display: flex" > 
-  <img style="display: inline-block" src="https://github.com/ahmedghaly15/Social-App/assets/108659381/3cec1455-b2ec-4179-aaf5-4e6f69e1302f" width= "300" height = "600"/>
-</div>
-
-https://github.com/ahmedghaly15/Linkup/assets/108659381/876fb791-825e-484d-96c3-f1a5ad1ded11
+https://github.com/ahmedghaly15/Linkup/assets/108659381/b2adf3a1-8f49-4acf-8a5e-214161b95a0c
 
 ## Download APK
 
