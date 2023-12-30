@@ -1,14 +1,11 @@
-# Linkup-App
+# Linkup
 
-This is a new Flutter project. This app is designed to help users connect and interact with friends, family, and other people in a social environment. With its intuitive user interface, users can easily engage with others. The app also features a variety of social interacting tools including create profiles, share photos, and engage in real-time conversations with others.
+This is a Flutter project aimed at enhancing social connectivity. The app facilitates user interactions with friends, family, and others in a social environment. With its user-friendly interface, users can easily engage with others. The app includes various social interaction tools such as creating profiles, sharing photos, and engaging in real-time conversations with others.
 
 ## Contents
 
 - [Preview](#preview)
-- [App Structure](#app-structure)
 - [Features](#features)
-- [Main File](#main-file)
-- [Getting Started](#getting-started)
 
 ## Preview
 
@@ -16,131 +13,24 @@ This is a new Flutter project. This app is designed to help users connect and in
   <img style="display: inline-block" src="https://github.com/ahmedghaly15/Social-App/assets/108659381/3cec1455-b2ec-4179-aaf5-4e6f69e1302f" width= "300" height = "600"/>
 </div>
 
-https://github.com/ahmedghaly15/Social-App/assets/108659381/1735c2fa-275c-4da4-bf27-bf491e6ef829
-
-## App Structure
-
-```
-
-lib
-├── core
-│   ├── global
-│   ├── models
-│   ├── services
-│   ├── utils
-│   └── widgets
-│
-├── features
-│   ├── auth
-│   ├── chat
-│   ├── feeds
-│   ├── new_post
-│   ├── profile
-│   └── users
-│
-├── layout
-│   ├── data
-│   ├── domain
-│   └── presentation
-│
-└── main.dart
-
-```
+[Link to Preview Image](https://github.com/ahmedghaly15/Social-App/assets/108659381/1735c2fa-275c-4da4-bf27-bf491e6ef829)
 
 ## Features
 
-- `Create new post`: the app makes it easy and intuitive to create new posts, with the ability to add text, images, and videos to your posts, user can easily share his thoughts and experiences with his friends.
-- `Firebase authentication`: The app uses Firebase Authentication to provide secure user authentication and authorization.
-- `Cloud firestore1`: The app uses Firebase Cloud Firestore to store users profile images, images they send to each other in chats, and the images shared in feeds.
-- `Dark theme`: The app supports a dark theme, which provides a comfortable viewing experience in low-light environments.
-- `Real-time messaging`: The app utilizes Firebase Realtime Database to enable real-time messaging, allowing users to communicate with each other instantly.
-- `Search`: allows users to find specific conversations or messages within a chat by entering relevant keywords or phrases.
-- `Profile customization`: Users have the ability to change their names, bio, profile image, and cover image, allowing them to personalize their account and make it more recognizable to other users.
+- `Create new post`: The app provides an intuitive interface to create new posts, allowing users to add text, images, and videos to share their thoughts and experiences with friends.
+- `Firebase authentication`: Utilizes Firebase Authentication for secure user authentication and authorization.
+- `Cloud Firestore`: Uses Firebase Cloud Firestore to store user profile images, chat images, and feed images.
+- `Dark theme`: Supports a dark theme for a comfortable viewing experience in low-light environments.
+- `Real-time messaging`: Employs Firebase Realtime Database to enable real-time messaging, allowing instant communication between users.
+- `Search`: Allows users to find specific conversations.
+- `Profile customization`: Users can personalize their accounts by changing names, bio, profile image, and cover image.
+- `Clean architecture`: The app is built on a clean and modular architecture, enhancing code organization and maintainability.
+- `Like and comment on posts`: Users can now express their appreciation for posts by liking them and engaging in discussions through comments.
 
-## Main File
+## Upcoming Updates
 
-```dart
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+We are committed to continuously improving the Linkup-App to provide an even better social experience for our users. Stay tuned for upcoming updates that will bring exciting new features and enhancements.
 
-  await GetStorage.init();
+### How to Contribute
 
-  ServiceLocator().setupServiceLocators();
-
-  Bloc.observer = MyBlocObserver();
-
-  await CacheHelper.initSharedPref();
-
-  Helper.uId = CacheHelper.getStringData(key: 'uId');
-
-  Widget startingScreen;
-
-  if (Helper.uId != null) {
-    startingScreen = const LayoutView();
-  } else {
-    startingScreen = const AuthView();
-  }
-
-  runApp(
-    LinkUpApp(
-      startingScreen,
-      Helper.uId,
-    ),
-  );
-}
-
-
-class LinkUpApp extends StatelessWidget {
-  final Widget? startingScreen;
-  final String? uId;
-  const LinkUpApp(
-    this.startingScreen,
-    this.uId, {
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => AppCubit(serviceLocator.get<AppRepo>())
-            ..getUserData(uId)
-            ..getPosts(),
-        ),
-        BlocProvider(create: (context) => ThemeService()),
-      ],
-      child: BlocBuilder<ThemeService, bool>(
-        buildWhen: (previousState, currentState) =>
-            previousState != currentState,
-        builder: (context, isDark) {
-          return GetMaterialApp(
-            title: AppTexts.appTitle,
-            debugShowCheckedModeBanner: false,
-            theme: isDark ? AppTheme.darkTheme() : AppTheme.lightTheme(),
-            home: startingScreen,
-          );
-        },
-      ),
-    );
-  }
-}
-
-```
-
-## Getting Started
-
-This project represents a social app designed to help user communicate with everyone.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I welcome contributions from the community! If you have ideas for new features, encounter bugs, or want to contribute to the development of the Linkup, feel free to open an issue or submit a pull request on my [GitHub repository](https://github.com/ahmedghaly15/Linkup). Your feedback is invaluable, and together, we can make the app even better.
