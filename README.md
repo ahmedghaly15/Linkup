@@ -12,7 +12,8 @@ This is a Flutter project aimed at enhancing social connectivity. The app facili
 
 ## Preview
 
-https://github.com/ahmedghaly15/Linkup/assets/108659381/b2adf3a1-8f49-4acf-8a5e-214161b95a0c
+https://github.com/ahmedghaly15/Linkup/assets/108659381/e0c5cc97-303f-4004-9480-064046c3dd24
+
 
 ## Download APK
 
