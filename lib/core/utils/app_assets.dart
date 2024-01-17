@@ -1,13 +1,13 @@
 class AppAssets {
   AppAssets._();
 
-  /// Assets for AppIcon
-  /// assets/app_icon.png
-  static const String appIcon = "assets/app_icon.png";
-
   /// Assets for AppIconVideo
   /// assets/app_icon_video.mp4
   static const String appIconVideo = "assets/app_icon_video.mp4";
+
+  /// Assets for AppLogo
+  /// assets/app_logo.png
+  static const String appLogo = "assets/app_logo.png";
 
   /// Assets for imagesAddImage
   /// assets/images/add_image.png
@@ -39,7 +39,15 @@ class AppAssets {
   /// assets/images/no_users.png
   static const String imagesNoUsers = "assets/images/no_users.png";
 
-  /// Assets for imagesOnboarding
-  /// assets/images/onboarding.png
-  static const String imagesOnboarding = "assets/images/onboarding.png";
+  /// Assets for imagesOnboarding1
+  /// assets/images/onboarding1.png
+  static const String imagesOnboarding1 = "assets/images/onboarding1.png";
+
+  /// Assets for imagesOnboarding2
+  /// assets/images/onboarding2.png
+  static const String imagesOnboarding2 = "assets/images/onboarding2.png";
+
+  /// Assets for imagesOnboarding3
+  /// assets/images/onboarding3.png
+  static const String imagesOnboarding3 = "assets/images/onboarding3.png";
 }

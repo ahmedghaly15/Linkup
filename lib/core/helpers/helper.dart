@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/models/user_model.dart';
 
 class Helper {
@@ -25,6 +26,13 @@ class Helper {
       color: isDark(state) ? Colors.grey.shade700 : Colors.grey,
     );
   }
+
+  static BoxShadow buttonShadow() => BoxShadow(
+        offset: Offset(0, 10.h),
+        blurRadius: 20.h,
+        spreadRadius: 0,
+        color: AppColors.primaryColor.withOpacity(0.5),
+      );
 
 /*
 void printFullText(String text) {

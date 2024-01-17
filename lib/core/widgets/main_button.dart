@@ -46,7 +46,7 @@ class MainButton extends StatelessWidget {
             Text(
               text!,
               style: textStyle ??
-                  AppTextStyles.textStyle23Bold.copyWith(
+                  AppTextStyles.textStyle20Bold.copyWith(
                     color: textColor ?? Colors.white,
                   ),
             ),

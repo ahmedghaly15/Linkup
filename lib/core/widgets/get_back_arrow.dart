@@ -15,7 +15,7 @@ class GetBackArrow extends StatelessWidget {
     return BlocBuilder<ThemesCubit, ThemeData>(
       builder: (context, state) {
         return IconButton(
-          onPressed: onPressed ?? () => context.getBack(),
+          onPressed: onPressed ?? () => context.back(),
           icon: Icon(
             Icons.arrow_back_ios_new,
             color: Helper.isDark(state) ? Colors.white : Colors.black,

@@ -5,7 +5,7 @@ extension AppNavigator on BuildContext {
     Navigator.pushNamed(this, routeName, arguments: arguments);
   }
 
-  void navigateAndReplacement({required String newRoute, Object? arguments}) {
+  void navigateAndReplace({required String newRoute, Object? arguments}) {
     Navigator.pushReplacementNamed(this, newRoute, arguments: arguments);
   }
 
@@ -21,7 +21,7 @@ extension AppNavigator on BuildContext {
     );
   }
 
-  void getBack() {
+  void back() {
     Navigator.pop(this);
   }
 }

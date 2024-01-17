@@ -41,7 +41,7 @@ class CustomImageBottomSheet extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: BottomSheet(
         enableDrag: true,
-        onClosing: () => context.getBack(),
+        onClosing: () => context.back(),
         builder: (context) {
           return Padding(
             padding: EdgeInsets.only(bottom: 25.h, top: 20.h),
