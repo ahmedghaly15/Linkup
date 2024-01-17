@@ -27,19 +27,19 @@ class OnboardingDataSourceImpl implements OnboardingDataSource {
           image: AppAssets.imagesOnboarding1,
           heading: 'Welcome to Linkup! Connect with Others',
           subHeading:
-              "Welcome to a world of friendship and possibilities!\nStart building relationships, sharing experiences, and discovering the power of connection.",
+              "Welcome to a world of friendship and possibilities. Start sharing experiences",
         ),
         OnboardingModel(
           image: AppAssets.imagesOnboarding2,
           heading: 'Best Social App to Make New Friends',
           subHeading:
-              "Expand your social circle and embark on a journey of connection. Discover new faces, share experiences, and build lasting friendships with Linkup.",
+              "Expand your social circle and embark on a journey of connection.",
         ),
         OnboardingModel(
           image: AppAssets.imagesOnboarding3,
           heading: 'Enjoy Your Life Every Time, Every Where',
           subHeading:
-              "Seize the moments and savor life's joys, wherever you are. With Linkup, you can create, share, and relish every experience. your journey to happiness starts now!",
+              "Seize the moments and savor life's joys, wherever you are. Your journey to happiness starts now!",
         ),
       ];
 

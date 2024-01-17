@@ -25,5 +25,9 @@ class SetupLocatorForDataSource {
     getIt.registerLazySingleton<EditProfileDataSource>(
       () => EditProfileDataSourceImpl(),
     );
+
+    getIt.registerLazySingleton<OnboardingDataSource>(
+      () => OnboardingDataSourceImpl(),
+    );
   }
 }

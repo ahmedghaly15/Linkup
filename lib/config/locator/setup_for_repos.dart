@@ -43,5 +43,11 @@ class SetupLocatorForRepos {
         editProfileDataSource: getIt.get<EditProfileDataSource>(),
       ),
     );
+
+    getIt.registerLazySingleton<OnboardingRepo>(
+      () => OnboardingRepoImpl(
+        onboardingDataSource: getIt.get<OnboardingDataSource>(),
+      ),
+    );
   }
 }

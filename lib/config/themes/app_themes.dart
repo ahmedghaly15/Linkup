@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 
 class AppThemes {
   static ThemeData get lightTheme => ThemeData(
         brightness: Brightness.light,
-        textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
+        fontFamily: AppStrings.fontFamily,
         bottomAppBarTheme: const BottomAppBarTheme(
           color: AppColors.scaffoldBackgroundClr,
         ),
@@ -49,7 +49,7 @@ class AppThemes {
 
   static ThemeData get darkTheme => ThemeData(
         brightness: Brightness.dark,
-        textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
+        fontFamily: AppStrings.fontFamily,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,

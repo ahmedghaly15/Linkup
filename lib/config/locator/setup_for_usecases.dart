@@ -137,5 +137,21 @@ class SetupLocatorForUseCases {
         editProfileRepo: getIt.get<EditProfileRepo>(),
       ),
     );
+
+    getIt.registerLazySingleton<GetOnboardingPagesUseCase>(
+      () => GetOnboardingPagesUseCase(
+        onboardingRepo: getIt.get<OnboardingRepo>(),
+      ),
+    );
+
+    getIt.registerLazySingleton<NavigateBetweenPagesUseCase>(
+      () => NavigateBetweenPagesUseCase(
+        onBoardingRepo: getIt.get<OnboardingRepo>(),
+      ),
+    );
+
+    getIt.registerLazySingleton<SkipToSignInUseCase>(
+      () => SkipToSignInUseCase(onboardingRepo: getIt.get<OnboardingRepo>()),
+    );
   }
 }

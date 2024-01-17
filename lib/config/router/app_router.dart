@@ -17,6 +17,8 @@ import 'package:social_app/features/comments/presentation/views/comments_view.da
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
 import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
+import 'package:social_app/features/onboarding/presentation/cubit/onboarding_cubit.dart';
+import 'package:social_app/features/onboarding/presentation/view/onboarding_view.dart';
 import 'package:social_app/features/posts/presentation/views/post_likes_view.dart';
 import 'package:social_app/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:social_app/features/profile/presentation/views/edit_profile_view.dart';
@@ -29,6 +31,29 @@ class AppRouter {
     switch (routeSettings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(builder: (context) => const SplashView());
+
+      case Routes.onboardingRoute:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+            create: (context) => getIt.get<OnboardingCubit>(),
+            child: const OnboardingView(),
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOut;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            var offsetAnimation = animation.drive(tween);
+
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+        );
 
       case Routes.signInRoute:
         return MaterialPageRoute(

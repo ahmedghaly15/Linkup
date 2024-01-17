@@ -79,5 +79,13 @@ class SetupLocatorForCubits {
         updateUserPostsUseCase: getIt.get<UpdateUserPostsUseCase>(),
       ),
     );
+
+    getIt.registerFactory<OnboardingCubit>(
+      () => OnboardingCubit(
+        getOnboardingPagesUseCase: getIt.get<GetOnboardingPagesUseCase>(),
+        navigateBetweenPagesUseCase: getIt.get<NavigateBetweenPagesUseCase>(),
+        skipToSignInUseCase: getIt.get<SkipToSignInUseCase>(),
+      ),
+    );
   }
 }

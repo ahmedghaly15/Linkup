@@ -11,14 +11,14 @@ import 'package:social_app/features/onboarding/domain/usecases/skip_to_sign_in.d
 part 'onboarding_state.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
-  final SkipToSignInUseCase navigateToSignInUseCase;
+  final SkipToSignInUseCase skipToSignInUseCase;
   final GetOnboardingPagesUseCase getOnboardingPagesUseCase;
   final NavigateBetweenPagesUseCase navigateBetweenPagesUseCase;
 
   OnboardingCubit({
     required this.getOnboardingPagesUseCase,
     required this.navigateBetweenPagesUseCase,
-    required this.navigateToSignInUseCase,
+    required this.skipToSignInUseCase,
   }) : super(const OnboardingInitial());
 
   bool isLastBoarding = false;
@@ -50,8 +50,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     emit(const NavigateBetweenPages());
   }
 
-  void navigateToSignIn({required BuildContext context}) {
-    navigateToSignInUseCase(context);
+  void skipToSignIn({required BuildContext context}) {
+    skipToSignInUseCase(context);
 
     emit(const SkipToSignIn());
   }
