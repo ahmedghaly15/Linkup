@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 
 class UserItem extends StatelessWidget {
-  const UserItem({Key? key, required this.user}) : super(key: key);
+  const UserItem({super.key, required this.user});
 
   final UserModel user;
 

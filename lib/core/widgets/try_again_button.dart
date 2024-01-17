@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 
 class TryAgainButton extends StatelessWidget {

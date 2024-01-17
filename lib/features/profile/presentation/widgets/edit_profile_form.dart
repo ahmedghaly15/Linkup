@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/main_button.dart';
@@ -15,9 +15,7 @@ import 'package:social_app/features/profile/presentation/widgets/confirm_editing
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class EditProfileForm extends StatefulWidget {
-  const EditProfileForm({
-    Key? key,
-  }) : super(key: key);
+  const EditProfileForm({super.key});
 
   @override
   State<EditProfileForm> createState() => _EditProfileFormState();

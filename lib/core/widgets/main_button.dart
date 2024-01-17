@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/utils/app_colors.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 
 class MainButton extends StatelessWidget {
   const MainButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     this.text,
     this.borderRadius,
@@ -16,7 +16,7 @@ class MainButton extends StatelessWidget {
     this.child,
     this.width = double.infinity,
     this.height = 50,
-  }) : super(key: key);
+  });
 
   final String? text;
   final double? borderRadius;

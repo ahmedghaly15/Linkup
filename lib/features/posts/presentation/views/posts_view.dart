@@ -8,7 +8,7 @@ import 'package:social_app/features/posts/presentation/widgets/empty_post_view.d
 import 'package:social_app/features/posts/presentation/widgets/posts.dart';
 
 class PostsView extends StatelessWidget {
-  const PostsView({Key? key}) : super(key: key);
+  const PostsView({super.key});
 
   @override
   Widget build(BuildContext context) {

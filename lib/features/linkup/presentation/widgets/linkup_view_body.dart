@@ -5,7 +5,7 @@ import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class LinkupViewBody extends StatelessWidget {
-  const LinkupViewBody({Key? key}) : super(key: key);
+  const LinkupViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {

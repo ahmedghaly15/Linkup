@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 
 class ConfirmEditingButton extends StatelessWidget {
   const ConfirmEditingButton({
-    Key? key,
+    super.key,
     required this.buttonText,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   final String buttonText;
   final void Function() onPressed;

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/date_and_time.dart';
 import 'package:social_app/features/comments/data/models/comment_model.dart';
 
 class CommentItemContent extends StatelessWidget {
   const CommentItemContent({
-    Key? key,
+    super.key,
     required this.comment,
-  }) : super(key: key);
+  });
 
   final CommentModel comment;
 

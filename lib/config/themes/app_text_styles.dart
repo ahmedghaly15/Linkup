@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 
 class AppTextStyles {
   static TextStyle textStyle50Bold = TextStyle(

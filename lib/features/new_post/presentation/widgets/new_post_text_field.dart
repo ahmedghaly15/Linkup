@@ -4,9 +4,9 @@ import 'package:social_app/core/widgets/custom_text_form_field.dart';
 
 class NewPostTextField extends StatelessWidget {
   const NewPostTextField({
-    Key? key,
+    super.key,
     required this.textController,
-  }) : super(key: key);
+  });
 
   final TextEditingController textController;
 

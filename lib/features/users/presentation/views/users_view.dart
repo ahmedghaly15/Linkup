@@ -11,7 +11,7 @@ import 'package:social_app/features/users/presentation/widgets/empty_user_view.d
 import 'package:social_app/features/users/presentation/widgets/user_item.dart';
 
 class UsersView extends StatelessWidget {
-  const UsersView({Key? key}) : super(key: key);
+  const UsersView({super.key});
 
   @override
   Widget build(BuildContext context) {

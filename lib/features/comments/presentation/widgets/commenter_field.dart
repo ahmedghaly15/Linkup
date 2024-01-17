@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/utils/app_colors.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/features/comments/domain/entities/type_new_comment_params.dart';
 import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
@@ -13,9 +13,9 @@ import 'package:social_app/core/widgets/get_image_icon_button.dart';
 
 class CommenterField extends StatefulWidget {
   const CommenterField({
-    Key? key,
+    super.key,
     required this.postId,
-  }) : super(key: key);
+  });
 
   final String postId;
 

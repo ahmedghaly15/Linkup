@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/utils/app_strings.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/try_again_button.dart';
 
 class CustomErrorWidget extends StatelessWidget {

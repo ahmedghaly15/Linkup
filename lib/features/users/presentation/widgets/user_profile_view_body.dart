@@ -13,9 +13,9 @@ import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 
 class UserProfileViewBody extends StatelessWidget {
   const UserProfileViewBody({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   final UserModel user;
 

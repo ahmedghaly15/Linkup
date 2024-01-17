@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/get_image_icon_button.dart';
 import 'package:social_app/features/chat/domain/entities/send_message_params.dart';
@@ -13,10 +13,10 @@ import 'package:social_app/features/chat/presentation/cubits/chat_cubit.dart';
 
 class CustomMessengerField extends StatefulWidget {
   const CustomMessengerField({
-    Key? key,
+    super.key,
     required this.cubit,
     required this.user,
-  }) : super(key: key);
+  });
 
   final ChatCubit cubit;
   final UserModel user;

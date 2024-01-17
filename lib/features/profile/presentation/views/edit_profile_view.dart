@@ -11,7 +11,7 @@ import 'package:social_app/features/profile/presentation/widgets/edit_profile_im
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class EditProfileView extends StatelessWidget {
-  const EditProfileView({Key? key}) : super(key: key);
+  const EditProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {

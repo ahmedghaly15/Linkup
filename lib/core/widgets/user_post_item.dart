@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/widgets/post_information.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/widgets/custom_divider.dart';
@@ -12,9 +12,9 @@ import 'package:social_app/features/posts/presentation/widgets/post_text_and_ima
 
 class UserPostItem extends StatelessWidget {
   const UserPostItem({
-    Key? key,
+    super.key,
     required this.post,
-  }) : super(key: key);
+  });
 
   final PostModel post;
 

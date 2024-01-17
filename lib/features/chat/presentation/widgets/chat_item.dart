@@ -5,15 +5,15 @@ import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 
 class ChatItem extends StatelessWidget {
   const ChatItem({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   final UserModel user;
 

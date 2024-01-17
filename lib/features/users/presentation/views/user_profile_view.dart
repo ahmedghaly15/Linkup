@@ -6,9 +6,9 @@ import 'package:social_app/features/users/presentation/widgets/user_profile_view
 
 class UserProfileView extends StatefulWidget {
   const UserProfileView({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   final UserModel user;
 

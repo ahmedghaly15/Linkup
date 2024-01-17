@@ -38,4 +38,8 @@ class AppAssets {
   /// Assets for imagesNoUsers
   /// assets/images/no_users.png
   static const String imagesNoUsers = "assets/images/no_users.png";
+
+  /// Assets for imagesOnboarding
+  /// assets/images/onboarding.png
+  static const String imagesOnboarding = "assets/images/onboarding.png";
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/image_circle.dart';
 
 class ShowCustomImageBottomSheet {
@@ -25,11 +25,11 @@ class ShowCustomImageBottomSheet {
 
 class CustomImageBottomSheet extends StatelessWidget {
   const CustomImageBottomSheet({
-    Key? key,
+    super.key,
     this.onPressedGallery,
     this.onPressedCamera,
     required this.type,
-  }) : super(key: key);
+  });
 
   final void Function()? onPressedGallery;
   final void Function()? onPressedCamera;

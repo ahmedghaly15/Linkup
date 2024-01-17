@@ -10,7 +10,7 @@ import 'package:social_app/features/profile/presentation/widgets/me_profile_and_
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class MeView extends StatefulWidget {
-  const MeView({Key? key}) : super(key: key);
+  const MeView({super.key});
 
   @override
   State<MeView> createState() => _MeViewState();

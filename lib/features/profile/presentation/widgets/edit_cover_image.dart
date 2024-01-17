@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/widgets/custom_image_bottom_sheet.dart';
 import 'package:social_app/features/profile/presentation/cubits/edit_profile_cubit.dart';
 
 class EditCoverImage extends StatelessWidget {
-  const EditCoverImage({Key? key}) : super(key: key);
+  const EditCoverImage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../utils/app_text_styles.dart';
+import '../../config/themes/app_text_styles.dart';
 
 class UserData extends StatelessWidget {
   const UserData({
-    Key? key,
+    super.key,
     required this.count,
     required this.label,
-  }) : super(key: key);
+  });
 
   final int count;
   final String label;

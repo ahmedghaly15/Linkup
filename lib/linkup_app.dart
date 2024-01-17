@@ -9,7 +9,7 @@ import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import 'package:social_app/service_locator.dart';
 
 class LinkupApp extends StatelessWidget {
-  const LinkupApp({Key? key}) : super(key: key);
+  const LinkupApp({super.key});
 
   @override
   Widget build(BuildContext context) {

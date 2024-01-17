@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
@@ -13,9 +13,9 @@ import 'package:social_app/service_locator.dart';
 
 class LikesAndComments extends StatelessWidget {
   const LikesAndComments({
-    Key? key,
+    super.key,
     required this.post,
-  }) : super(key: key);
+  });
 
   final PostModel post;
 

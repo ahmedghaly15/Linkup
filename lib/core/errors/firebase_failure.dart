@@ -2,7 +2,7 @@ import 'package:social_app/core/errors/failure.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 
 class FirebaseFailure extends Failure {
-  const FirebaseFailure({String? failureMsg}) : super(failureMsg: failureMsg);
+  const FirebaseFailure({super.failureMsg});
 
   factory FirebaseFailure.fromFirebaseException(String code) {
     switch (code) {

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/core/utils/app_colors.dart';
-import 'package:social_app/core/utils/app_text_styles.dart';
+import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/core/widgets/get_back_arrow.dart';
 import 'package:social_app/features/chat/presentation/cubits/chat_cubit.dart';
@@ -12,9 +12,9 @@ import 'package:social_app/features/chat/presentation/widgets/chat_details_view_
 
 class ChatDetailsView extends StatelessWidget {
   const ChatDetailsView({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   final UserModel user;
 

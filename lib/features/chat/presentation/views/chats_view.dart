@@ -9,7 +9,7 @@ import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import '/features/chat/presentation/widgets/chat_item.dart';
 
 class ChatsView extends StatelessWidget {
-  const ChatsView({Key? key}) : super(key: key);
+  const ChatsView({super.key});
 
   @override
   Widget build(BuildContext context) {

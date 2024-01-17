@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class CustomSearchField extends StatelessWidget {
   const CustomSearchField({
-    Key? key,
+    super.key,
     required this.cubit,
-  }) : super(key: key);
+  });
 
   final UserCubit cubit;
 

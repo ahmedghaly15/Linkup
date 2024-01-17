@@ -10,9 +10,9 @@ import 'package:social_app/features/comments/presentation/widgets/commenter_fiel
 
 class CommentsView extends StatelessWidget {
   const CommentsView({
-    Key? key,
+    super.key,
     required this.params,
-  }) : super(key: key);
+  });
 
   final CommentsViewParams params;
 

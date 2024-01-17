@@ -12,9 +12,9 @@ import 'package:social_app/features/chat/presentation/widgets/custom_messenger_f
 
 class ChatDetailsViewBody extends StatelessWidget {
   const ChatDetailsViewBody({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   final UserModel user;
 

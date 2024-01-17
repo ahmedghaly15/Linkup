@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/utils/app_colors.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 
 class PostImage extends StatelessWidget {
   const PostImage({
-    Key? key,
+    super.key,
     required this.cubit,
-  }) : super(key: key);
+  });
 
   final PostsCubit cubit;
 
