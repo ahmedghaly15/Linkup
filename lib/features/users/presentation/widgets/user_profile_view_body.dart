@@ -30,7 +30,7 @@ class UserProfileViewBody extends StatelessWidget {
             leading: GetBackArrow(
               onPressed: () {
                 BlocProvider.of<PostsCubit>(context).getPosts();
-                context.getBack();
+                context.back();
               },
             ),
           ),

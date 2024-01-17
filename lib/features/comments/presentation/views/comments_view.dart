@@ -34,7 +34,7 @@ class CommentsView extends StatelessWidget {
                     backOnPressed: () {
                       BlocProvider.of<CommentsCubit>(context).clearComments();
 
-                      context.getBack();
+                      context.back();
                     },
                   ),
                   BlocBuilder<CommentsCubit, CommentsState>(

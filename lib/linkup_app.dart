@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/app_router.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/utils/app_strings.dart';
+import 'package:social_app/features/onboarding/presentation/view/onboarding_view.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import 'package:social_app/service_locator.dart';
@@ -14,7 +15,7 @@ class LinkupApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(423, 887),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       child: MultiBlocProvider(
@@ -37,7 +38,8 @@ class LinkupApp extends StatelessWidget {
               title: AppStrings.appTitle,
               debugShowCheckedModeBanner: false,
               theme: themeState,
-              onGenerateRoute: AppRouter.onGenerateRoute,
+              home: const OnboardingView(),
+              // onGenerateRoute: AppRouter.onGenerateRoute,
             );
           },
         ),

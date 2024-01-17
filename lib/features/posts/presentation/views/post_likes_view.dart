@@ -24,7 +24,7 @@ class PostLikesView extends StatelessWidget {
               title: 'People who liked',
               backOnPressed: () {
                 // BlocProvider.of<PostsCubit>(context).getPosts();
-                context.getBack();
+                context.back();
               },
             ),
             BlocBuilder<PostsCubit, PostsState>(

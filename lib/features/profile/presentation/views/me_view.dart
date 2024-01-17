@@ -57,7 +57,7 @@ class _MeViewState extends State<MeView> {
 
   void _handleUserState(UserState state, BuildContext context) {
     if (state is UserSignOutSuccess) {
-      context.navigateAndReplacement(newRoute: Routes.signInRoute);
+      context.navigateAndReplace(newRoute: Routes.signInRoute);
     }
   }
 }

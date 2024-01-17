@@ -54,6 +54,14 @@ import 'package:social_app/features/linkup/domain/usecases/change_nav_to_home.da
 import 'package:social_app/features/linkup/domain/usecases/get_body.dart';
 import 'package:social_app/features/linkup/domain/usecases/get_bottom_nav_items.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
+import 'package:social_app/features/onboarding/data/datasources/onboarding_datasource.dart';
+import 'package:social_app/features/onboarding/data/datasources/onboarding_datasource_impl.dart';
+import 'package:social_app/features/onboarding/data/repositories/onboarding_repo_impl.dart';
+import 'package:social_app/features/onboarding/domain/repositories/onboarding_repo.dart';
+import 'package:social_app/features/onboarding/domain/usecases/get_onboarding_pages.dart';
+import 'package:social_app/features/onboarding/domain/usecases/navigate_between_pages.dart';
+import 'package:social_app/features/onboarding/domain/usecases/skip_to_sign_in.dart';
+import 'package:social_app/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:social_app/features/posts/data/datasources/posts_datasource.dart';
 import 'package:social_app/features/posts/data/datasources/posts_datasource_impl.dart';
 import 'package:social_app/features/posts/data/repositories/posts_repo_impl.dart';

@@ -28,7 +28,7 @@ class EditProfileView extends StatelessWidget {
                 BlocProvider.of<UserCubit>(context)
                     .getUserPosts(uId: Helper.currentUser!.uId!)
                     .then((value) {
-                  context.getBack();
+                  context.back();
                 });
               },
             ),

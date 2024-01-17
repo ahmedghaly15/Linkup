@@ -40,9 +40,9 @@ class _SplashViewState extends State<SplashView> {
     Helper.uId = getIt.get<CacheHelper>().getStringData(key: AppStrings.uId);
 
     if (Helper.uId != null) {
-      context.navigateAndReplacement(newRoute: Routes.linkupRoute);
+      context.navigateAndReplace(newRoute: Routes.linkupRoute);
     } else {
-      context.navigateAndReplacement(newRoute: Routes.signInRoute);
+      context.navigateAndReplace(newRoute: Routes.signInRoute);
     }
   }
 

@@ -231,7 +231,7 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   void _handleSignUpError(BuildContext context, SignUpError state) {
-    context.getBack();
+    context.back();
     CustomToast.showToast(
       text: state.error,
       state: CustomToastState.error,
@@ -239,7 +239,7 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   void _handleSignUpSuccess(BuildContext context, SignUpSuccess state) {
-    context.getBack();
+    context.back();
 
     getIt
         .get<CacheHelper>()
@@ -253,7 +253,7 @@ class _SignUpFormState extends State<SignUpForm> {
             text: 'Account created successfully',
             state: CustomToastState.success,
           );
-          context.navigateAndReplacement(newRoute: Routes.linkupRoute);
+          context.navigateAndReplace(newRoute: Routes.linkupRoute);
         });
       }
     });

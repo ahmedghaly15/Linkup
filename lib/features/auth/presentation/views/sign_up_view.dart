@@ -45,7 +45,7 @@ class SignUpView extends StatelessWidget {
                     HaveAccountOrNotText(
                       question: 'Already have an account?',
                       buttonText: 'Sign in',
-                      onTap: () => context.getBack(),
+                      onTap: () => context.back(),
                     ),
                   ],
                 ),

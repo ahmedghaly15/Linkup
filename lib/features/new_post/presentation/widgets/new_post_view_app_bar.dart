@@ -29,7 +29,7 @@ class NewPostViewAppBar extends StatelessWidget {
           BlocProvider.of<UserCubit>(context)
               .getUserPosts(uId: Helper.uId!)
               .then((value) {
-            context.getBack();
+            context.back();
           });
         },
       ),

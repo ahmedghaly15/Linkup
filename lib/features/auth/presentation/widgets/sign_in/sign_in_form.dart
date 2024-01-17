@@ -161,7 +161,7 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   void _handleSignInError(BuildContext context, SignInError state) {
-    context.getBack();
+    context.back();
     CustomToast.showToast(
       text: state.error,
       state: CustomToastState.error,
@@ -169,7 +169,7 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   void _handleSignInSuccess(BuildContext context, SignInSuccess state) {
-    context.getBack();
+    context.back();
     getIt
         .get<CacheHelper>()
         .saveData(
@@ -181,7 +181,7 @@ class _SignInFormState extends State<SignInForm> {
         Helper.uId = state.uId;
         BlocProvider.of<UserCubit>(context).getUserData().then((value) {
           BlocProvider.of<PostsCubit>(context).getPosts();
-          context.navigateAndReplacement(newRoute: Routes.linkupRoute);
+          context.navigateAndReplace(newRoute: Routes.linkupRoute);
         });
       }
     });
