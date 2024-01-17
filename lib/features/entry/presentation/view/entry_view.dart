@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:social_app/config/router/routes.dart';
@@ -7,43 +5,33 @@ import 'package:social_app/core/helpers/cache_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
-import 'package:social_app/features/splash/presentation/widgets/splash_view_body.dart';
 import 'package:social_app/service_locator.dart';
 
-class SplashView extends StatefulWidget {
-  const SplashView({super.key});
+class EntryView extends StatefulWidget {
+  const EntryView({super.key});
 
   @override
-  State<SplashView> createState() => _SplashViewState();
+  State<EntryView> createState() => _EntryViewState();
 }
 
-class _SplashViewState extends State<SplashView> {
-  late Timer _timer;
-
-  @override
-  void initState() {
-    _startDelay();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  void _startDelay() {
-    _timer = Timer(const Duration(seconds: 5), () => _goToNext());
-  }
-
+class _EntryViewState extends State<EntryView> {
   void _goToNext() {
     Helper.uId =
         getIt.get<CacheHelper>().getStringData(key: AppStrings.cachedUserId);
 
-    if (Helper.uId != null) {
-      context.navigateAndReplace(newRoute: Routes.linkupRoute);
+    bool? onBoarding =
+        getIt.get<CacheHelper>().getBoolData(key: AppStrings.cachedOnboarding);
+
+    if (onBoarding != null) {
+      if (Helper.uId != null) {
+        context.navigateAndReplace(
+          newRoute: Routes.linkupRoute,
+        );
+      } else {
+        context.navigateAndReplace(newRoute: Routes.signInRoute);
+      }
     } else {
-      context.navigateAndReplace(newRoute: Routes.signInRoute);
+      context.navigateAndReplace(newRoute: Routes.onboardingRoute);
     }
   }
 
@@ -66,6 +54,15 @@ class _SplashViewState extends State<SplashView> {
   }
 
   @override
+  void initState() {
+    // To ensure that navigation calls are performed after the widget tree has been built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _goToNext();
+    });
+    super.initState();
+  }
+
+  @override
   void didChangeDependencies() {
     _setSystemUIOverlayStyle();
     super.didChangeDependencies();
@@ -74,8 +71,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.black,
-      body: SplashViewBody(),
+      body: SizedBox(),
     );
   }
 }

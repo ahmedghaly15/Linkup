@@ -1,7 +1,7 @@
 class AppStrings {
   static const String appTitle = "Social-App";
 
-  static const String uId = 'uId';
+  static const String cachedUserId = 'uId';
   static const String cachedOnboarding = 'onboarding';
   static const String noInternet = 'No Internet Connection';
   static const String opps =

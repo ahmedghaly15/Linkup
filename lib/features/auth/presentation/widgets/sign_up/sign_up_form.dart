@@ -243,7 +243,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
     getIt
         .get<CacheHelper>()
-        .saveData(key: AppStrings.uId, value: state.uId)
+        .saveData(key: AppStrings.cachedUserId, value: state.uId)
         .then((value) {
       if (value) {
         Helper.uId = state.uId;

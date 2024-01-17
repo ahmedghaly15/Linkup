@@ -14,6 +14,7 @@ import 'package:social_app/features/chat/presentation/views/chats_view.dart';
 import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
 import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social_app/features/comments/presentation/views/comments_view.dart';
+import 'package:social_app/features/entry/presentation/view/entry_view.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
 import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
@@ -22,7 +23,6 @@ import 'package:social_app/features/onboarding/presentation/view/onboarding_view
 import 'package:social_app/features/posts/presentation/views/post_likes_view.dart';
 import 'package:social_app/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:social_app/features/profile/presentation/views/edit_profile_view.dart';
-import 'package:social_app/features/splash/presentation/views/splash_view.dart';
 import 'package:social_app/features/users/presentation/views/user_profile_view.dart';
 import 'package:social_app/service_locator.dart';
 
@@ -30,7 +30,7 @@ class AppRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.initialRoute:
-        return MaterialPageRoute(builder: (context) => const SplashView());
+        return MaterialPageRoute(builder: (context) => const EntryView());
 
       case Routes.onboardingRoute:
         return PageRouteBuilder(

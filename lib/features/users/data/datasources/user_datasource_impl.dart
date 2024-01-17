@@ -39,7 +39,7 @@ class UserDataSourceImpl implements UserDataSource {
   Future<void> signOut() async {
     await getIt
         .get<CacheHelper>()
-        .removeData(key: AppStrings.uId)
+        .removeData(key: AppStrings.cachedUserId)
         .then((value) {
       if (value) {
         getIt.get<FirebaseAuth>().signOut();

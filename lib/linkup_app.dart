@@ -38,8 +38,8 @@ class LinkupApp extends StatelessWidget {
               title: AppStrings.appTitle,
               debugShowCheckedModeBanner: false,
               theme: themeState,
-              home: const OnboardingView(),
-              // onGenerateRoute: AppRouter.onGenerateRoute,
+              // home: const OnboardingView(),
+              onGenerateRoute: AppRouter.onGenerateRoute,
             );
           },
         ),

@@ -173,7 +173,7 @@ class _SignInFormState extends State<SignInForm> {
     getIt
         .get<CacheHelper>()
         .saveData(
-          key: AppStrings.uId,
+          key: AppStrings.cachedUserId,
           value: state.uId,
         )
         .then((value) {
