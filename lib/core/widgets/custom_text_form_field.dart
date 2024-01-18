@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
-import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 
@@ -11,8 +10,8 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     this.controller,
     this.keyboardType,
-    this.prefix,
-    this.suffix,
+    this.prefixIcon,
+    this.suffixIcon,
     this.obscureText = false,
     this.label,
     this.hintText,
@@ -40,7 +39,6 @@ class CustomTextFormField extends StatelessWidget {
     this.hintStyle,
     this.autofocus = false,
     this.disabledBorder,
-    this.prefixIcon,
     this.maxLines = 1,
     this.enableSuggestions = true,
     this.hasPrefixIcon = true,
@@ -49,8 +47,8 @@ class CustomTextFormField extends StatelessWidget {
 
   final TextEditingController? controller;
   final TextInputType? keyboardType;
-  final Widget? prefix;
-  final Widget? suffix;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final bool obscureText;
   final bool isEmail;
   final bool? enabled;
@@ -78,7 +76,6 @@ class CustomTextFormField extends StatelessWidget {
   final Color? fillColor;
   final TextStyle? hintStyle;
   final bool autofocus;
-  final IconData? prefixIcon;
   final int? maxLines;
   final bool enableSuggestions;
   final bool hasPrefixIcon;
@@ -108,30 +105,28 @@ class CustomTextFormField extends StatelessWidget {
           maxLines: maxLines,
           cursorColor: AppColors.primaryColor,
           decoration: InputDecoration(
+            fillColor: fillColor ?? AppColors.lightWhiteBlue,
             filled: filled,
-            fillColor: fillColor ??
-                (Helper.isDark(state)
-                    ? AppColors.darkPrimaryColor
-                    : AppColors.scaffoldBackgroundClr),
             errorStyle: TextStyle(fontSize: 13.sp, color: Colors.red),
             hintText: hintText,
-            hintStyle: hintStyle ?? _customTextFieldTextStyle(),
+            hintStyle: hintStyle ??
+                _customTextFieldTextStyle()
+                    .copyWith(color: AppColors.darkGrey.withOpacity(0.4)),
             errorMaxLines: null,
-            prefix: prefix,
-            prefixIcon:
-                hasPrefixIcon ? Icon(prefixIcon, color: Colors.grey) : null,
-            suffixIcon: suffix,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
             labelText: label,
             labelStyle: Theme.of(context).textTheme.titleSmall,
             contentPadding: contentPadding ??
                 EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 8.h,
+                  horizontal: 20.w,
+                  vertical: 17.h,
                 ),
             enabledBorder: enabledBorder ?? _buildUnderlineInputBorder(),
             focusedBorder: focusedBorder ??
                 _buildUnderlineInputBorder(
                   borderColor: AppColors.primaryColor,
+                  width: 2.5,
                 ),
             errorBorder: errorBorder ?? _buildUnderlineInputBorder(),
             focusedErrorBorder:
@@ -150,12 +145,13 @@ class CustomTextFormField extends StatelessWidget {
     return AppTextStyles.textStyle18;
   }
 
-  OutlineInputBorder _buildUnderlineInputBorder({Color? borderColor}) {
+  OutlineInputBorder _buildUnderlineInputBorder(
+      {Color? borderColor, double? width}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16.r),
+      borderRadius: BorderRadius.all(Radius.circular(20.r)),
       borderSide: BorderSide(
-        color: borderColor ?? Colors.grey,
-        width: 2,
+        color: borderColor ?? AppColors.darkGrey.withOpacity(0.2),
+        width: width ?? 1.w,
       ),
     );
   }

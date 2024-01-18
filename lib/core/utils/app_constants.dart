@@ -9,4 +9,8 @@ class AppConstants {
 
   static Duration get onboardingScrollingDuration =>
       const Duration(milliseconds: 650);
+
+  static double get expandedHeight => 100.h;
+
+  static double get appBarElevation => 0;
 }

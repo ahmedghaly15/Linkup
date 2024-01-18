@@ -3,11 +3,11 @@ class AppAssets {
 
   /// Assets for AppIcon
   /// assets/app_icon.png
-  static const String appIcon = "assets/app_icon.png";
+  static const String AppIcon = "assets/app_icon.png";
 
   /// Assets for AppLogo
   /// assets/app_logo.jpg
-  static const String appLogo = "assets/app_logo.jpg";
+  static const String AppLogo = "assets/app_logo.jpg";
 
   /// Assets for fontsInterInterBlack
   /// assets/fonts/Inter/Inter-Black.ttf
@@ -46,9 +46,42 @@ class AppAssets {
   /// assets/icons/arrow_left.png
   static const String iconsArrowLeft = "assets/icons/arrow_left.png";
 
+  /// Assets for iconsEmail
+  /// assets/icons/email.png
+  static const String iconsEmail = "assets/icons/email.png";
+
+  /// Assets for iconsInfo
+  /// assets/icons/info.png
+  static const String iconsInfo = "assets/icons/info.png";
+
+  /// Assets for iconsInvisible
+  /// assets/icons/invisible.png
+  static const String iconsInvisible = "assets/icons/invisible.png";
+
+  /// Assets for iconsLock
+  /// assets/icons/lock.png
+  static const String iconsLock = "assets/icons/lock.png";
+
+  /// Assets for iconsPerson
+  /// assets/icons/person.png
+  static const String iconsPerson = "assets/icons/person.png";
+
+  /// Assets for iconsPhone
+  /// assets/icons/phone.png
+  static const String iconsPhone = "assets/icons/phone.png";
+
+  /// Assets for iconsVisible
+  /// assets/icons/visible.png
+  static const String iconsVisible = "assets/icons/visible.png";
+
   /// Assets for imagesAddImage
   /// assets/images/add_image.png
   static const String imagesAddImage = "assets/images/add_image.png";
+
+  /// Assets for imagesBackgroundImage
+  /// assets/images/background_image.png
+  static const String imagesBackgroundImage =
+      "assets/images/background_image.png";
 
   /// Assets for imagesCamera
   /// assets/images/camera.png
@@ -68,10 +101,10 @@ class AppAssets {
   static const String imagesChatLightBackground =
       "assets/images/chat_light_background.jpg";
 
-  /// Assets for imagesChatRoomBackground
-  /// assets/images/chat_room_background.png
-  static const String imagesChatRoomBackground =
-      "assets/images/chat_room_background.png";
+  /// Assets for imagesContentBackgroundImage
+  /// assets/images/content_background_image.png
+  static const String imagesContentBackgroundImage =
+      "assets/images/content_background_image.png";
 
   /// Assets for imagesDarkSplash
   /// assets/images/dark_splash.png

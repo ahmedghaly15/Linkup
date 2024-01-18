@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
+import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/main_button.dart';
@@ -84,7 +85,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 if (cubit.profileImage != null || cubit.coverImage != null)
                   const TextFormFieldSeparator(),
                 CustomTextFormField(
-                  prefixIcon: Icons.person,
+                  prefixIcon: Image.asset(AppAssets.iconsPerson),
                   controller: _nameController,
                   textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
@@ -99,7 +100,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   keyboardType: TextInputType.text,
                   controller: _bioController,
                   hintText: 'Bio',
-                  prefixIcon: Icons.info,
+                  prefixIcon: Image.asset(AppAssets.iconsInfo),
                   validating: (String? val) => AuthHelper.validatingField(
                     fieldName: 'Bio',
                     value: val,
@@ -109,7 +110,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 CustomTextFormField(
                   controller: _phoneController,
                   hintText: 'Phone Number',
-                  prefixIcon: Icons.phone,
+                  prefixIcon: Image.asset(AppAssets.iconsPhone),
                   keyboardType: TextInputType.phone,
                   validating: (String? val) => AuthHelper.validatingField(
                     fieldName: 'Phone number',

@@ -5,7 +5,7 @@ import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/cache_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
@@ -79,7 +79,7 @@ class _SignInFormState extends State<SignInForm> {
                 hintText: 'Email',
                 controller: _emailController,
                 focusNode: _emailFocusNode,
-                prefixIcon: Icons.email,
+                prefixIcon: Image.asset(AppAssets.iconsEmail),
                 autofillHints: const <String>[AutofillHints.email],
                 keyboardType: TextInputType.emailAddress,
                 validating: (String? val) =>
@@ -94,18 +94,15 @@ class _SignInFormState extends State<SignInForm> {
                 hintText: 'Password',
                 controller: _passwordController,
                 focusNode: _passwordFocusNode,
-                prefixIcon: Icons.lock,
+                prefixIcon: Image.asset(AppAssets.iconsLock),
                 keyboardType: TextInputType.visiblePassword,
                 autofillHints: const <String>[AutofillHints.password],
                 obscureText: cubit.signInPassVisibility,
-                suffix: IconButton(
+                suffixIcon: IconButton(
                   onPressed: () => cubit.switchPassVisibility(),
-                  icon: Icon(
-                    cubit.signInPassVisibility
-                        ? Icons.visibility_rounded
-                        : Icons.visibility_off_rounded,
-                    color: AppColors.primaryColor,
-                  ),
+                  icon: cubit.signInPassVisibility
+                      ? Image.asset(AppAssets.iconsVisible)
+                      : Image.asset(AppAssets.iconsInvisible),
                 ),
                 validating: (String? val) =>
                     AuthHelper.validatingPasswordField(value: val),

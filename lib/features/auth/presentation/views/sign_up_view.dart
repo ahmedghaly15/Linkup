@@ -4,7 +4,6 @@ import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/features/auth/presentation/widgets/auth_view_sub_title.dart';
 import 'package:social_app/features/auth/presentation/widgets/auth_view_title.dart';
-import 'package:social_app/features/auth/presentation/widgets/custom_auth_sliver_app_bar.dart';
 import 'package:social_app/features/auth/presentation/widgets/have_account_or_not_text.dart';
 import 'package:social_app/features/auth/presentation/widgets/sign_up/sign_up_form.dart';
 
@@ -17,7 +16,6 @@ class SignUpView extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const CustomAuthSliverAppBar(hasLeading: true),
             SliverPadding(
               padding: AppConstants.horizontalPadding,
               sliver: SliverToBoxAdapter(

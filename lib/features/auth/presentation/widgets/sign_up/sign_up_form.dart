@@ -6,6 +6,7 @@ import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/cache_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
@@ -90,25 +91,10 @@ class _SignUpFormState extends State<SignUpForm> {
           child: Column(
             children: <Widget>[
               CustomTextFormField(
-                hintText: 'Email',
-                controller: _emailController,
-                focusNode: _emailFocusNode,
-                prefixIcon: Icons.email,
-                keyboardType: TextInputType.emailAddress,
-                autofillHints: const <String>[AutofillHints.email],
-                validating: (String? val) =>
-                    AuthHelper.validatingEmailField(value: val),
-                onEditingComplete: () => AuthHelper.requestFocus(
-                  context,
-                  _usernameFocusNode,
-                ),
-              ),
-              const TextFormFieldSeparator(),
-              CustomTextFormField(
                 hintText: 'Username',
                 controller: _usernameController,
                 focusNode: _usernameFocusNode,
-                prefixIcon: Icons.person_2,
+                prefixIcon: Image.asset(AppAssets.iconsPerson),
                 keyboardType: TextInputType.name,
                 textCapitalization: TextCapitalization.words,
                 validating: (String? val) => AuthHelper.validatingField(
@@ -123,14 +109,29 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               const TextFormFieldSeparator(),
               CustomTextFormField(
+                hintText: 'Email',
+                controller: _emailController,
+                focusNode: _emailFocusNode,
+                prefixIcon: Image.asset(AppAssets.iconsEmail),
+                keyboardType: TextInputType.emailAddress,
+                autofillHints: const <String>[AutofillHints.email],
+                validating: (String? val) =>
+                    AuthHelper.validatingEmailField(value: val),
+                onEditingComplete: () => AuthHelper.requestFocus(
+                  context,
+                  _usernameFocusNode,
+                ),
+              ),
+              const TextFormFieldSeparator(),
+              CustomTextFormField(
                 hintText: 'Password',
                 controller: _passwordController,
                 focusNode: _passwordFocusNode,
-                prefixIcon: Icons.lock,
+                prefixIcon: Image.asset(AppAssets.iconsLock),
                 keyboardType: TextInputType.visiblePassword,
                 autofillHints: const <String>[AutofillHints.password],
                 obscureText: cubit.signUpPassVisibility,
-                suffix: IconButton(
+                suffixIcon: IconButton(
                   onPressed: () => cubit.switchSignUpPassVisibility(),
                   icon: Icon(
                     cubit.signUpPassVisibility
@@ -151,11 +152,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 hintText: 'Confirm Password',
                 controller: _confirmPassController,
                 focusNode: _confirmPassFocusNode,
-                prefixIcon: Icons.lock,
+                prefixIcon: Image.asset(AppAssets.iconsLock),
                 keyboardType: TextInputType.visiblePassword,
                 autofillHints: const <String>[AutofillHints.password],
                 obscureText: cubit.confirmPassVisibility,
-                suffix: IconButton(
+                suffixIcon: IconButton(
                   onPressed: () => cubit.switchConfirmPassVisibility(),
                   icon: Icon(
                     cubit.confirmPassVisibility
@@ -179,7 +180,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 hintText: 'Phone Number',
                 controller: _phoneController,
                 focusNode: _phoneFocusNode,
-                prefixIcon: Icons.phone,
+                prefixIcon: Image.asset(AppAssets.iconsPhone),
                 keyboardType: TextInputType.phone,
                 autofillHints: const <String>[AutofillHints.telephoneNumber],
                 validating: (String? val) =>
