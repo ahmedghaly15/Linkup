@@ -32,60 +32,60 @@ class PageViewItem extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 16.w,
-        vertical: 32.h,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Text(
-                  pageInfo.heading,
-                  style: AppTextStyles.textStyle28Bold.copyWith(
-                    color: Colors.white,
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    pageInfo.heading,
+                    style: AppTextStyles.textStyle28Bold.copyWith(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(width: 5.w),
-              if (BlocProvider.of<OnboardingCubit>(context).isNotFirstBoarding)
-                CustomGetBackButton(
-                  onPressed: () =>
-                      BlocProvider.of<OnboardingCubit>(context).previousPage(
-                    pageController: pageController,
-                  ),
-                )
-            ],
-          ),
-          SizedBox(height: 4.h),
-          Text(
-            pageInfo.subHeading,
-            style: AppTextStyles.textStyle18.copyWith(
-              color: Colors.white,
+                SizedBox(width: 5.w),
+                if (BlocProvider.of<OnboardingCubit>(context)
+                    .isNotFirstBoarding)
+                  CustomGetBackButton(
+                    onPressed: () =>
+                        BlocProvider.of<OnboardingCubit>(context).previousPage(
+                      pageController: pageController,
+                    ),
+                  )
+              ],
             ),
-          ),
-          const Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              SmoothPageIndicator(
-                controller: pageController,
-                count: BlocProvider.of<OnboardingCubit>(context)
-                    .getOnboardingPages()
-                    .length,
-                effect: ColorTransitionEffect(
-                  dotColor: Colors.grey,
-                  activeDotColor: AppColors.primaryColor,
-                  dotHeight: size.height * 0.008,
-                  dotWidth: size.width * 0.02,
-                  spacing: size.width * 0.015,
-                ),
+            SizedBox(height: 4.h),
+            Text(
+              pageInfo.subHeading,
+              style: AppTextStyles.textStyle18.copyWith(
+                color: Colors.white,
               ),
-            ],
-          ),
-        ],
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SmoothPageIndicator(
+                  controller: pageController,
+                  count: BlocProvider.of<OnboardingCubit>(context)
+                      .getOnboardingPages()
+                      .length,
+                  effect: ColorTransitionEffect(
+                    dotColor: Colors.grey,
+                    activeDotColor: AppColors.primaryColor,
+                    dotHeight: size.height * 0.008,
+                    dotWidth: size.width * 0.02,
+                    spacing: size.width * 0.015,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

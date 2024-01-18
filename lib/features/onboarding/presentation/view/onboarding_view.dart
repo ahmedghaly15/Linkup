@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/features/onboarding/presentation/widgets/onboarding_view_body.dart';
 
 class OnboardingView extends StatelessWidget {
@@ -6,8 +7,11 @@ class OnboardingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: OnboardingViewBody(),
+    return Scaffold(
+      body: Container(
+        decoration: Helper.backgroundImageDecoration(),
+        child: const OnboardingViewBody(),
+      ),
     );
   }
 }
