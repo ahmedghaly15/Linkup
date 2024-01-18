@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/cache_helper.dart';
 import 'package:social_app/core/utils/app_assets.dart';
+import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/onboarding/data/datasources/onboarding_datasource.dart';
@@ -13,12 +14,23 @@ import 'package:social_app/service_locator.dart';
 class OnboardingDataSourceImpl implements OnboardingDataSource {
   @override
   void navigateBetweenPages({required NavigateBetweenPagesParams params}) {
-    if (params.isLastBoarding) skipToSignIn(context: params.context);
+    if (params.isLastBoarding) _navigateToSignIn(params.context);
 
     params.pageController.nextPage(
-      duration: const Duration(seconds: 1),
+      duration: AppConstants.onboardingScrollingDuration,
       curve: Curves.fastEaseInToSlowEaseOut,
     );
+  }
+
+  void _navigateToSignIn(BuildContext context) {
+    getIt
+        .get<CacheHelper>()
+        .saveData(key: AppStrings.cachedOnboarding, value: true)
+        .then((value) {
+      if (value) {
+        context.navigateAndReplace(newRoute: Routes.signInRoute);
+      }
+    });
   }
 
   @override
@@ -44,14 +56,10 @@ class OnboardingDataSourceImpl implements OnboardingDataSource {
       ];
 
   @override
-  void skipToSignIn({required BuildContext context}) {
-    getIt
-        .get<CacheHelper>()
-        .saveData(key: AppStrings.cachedOnboarding, value: true)
-        .then((value) {
-      if (value) {
-        context.navigateAndReplace(newRoute: Routes.signInRoute);
-      }
-    });
+  void previousPage({required PageController pageController}) {
+    pageController.previousPage(
+      duration: AppConstants.onboardingScrollingDuration,
+      curve: Curves.fastEaseInToSlowEaseOut,
+    );
   }
 }

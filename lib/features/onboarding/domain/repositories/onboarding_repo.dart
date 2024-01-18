@@ -9,5 +9,5 @@ abstract class OnboardingRepo {
     required NavigateBetweenPagesParams params,
   });
 
-  void skipToSignIn({required BuildContext context});
+  void previousPage({required PageController pageController});
 }

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:social_app/core/usecases/regular_usecase.dart';
 import 'package:social_app/features/onboarding/domain/repositories/onboarding_repo.dart';
 
-class SkipToSignInUseCase implements RegularUseCases<void, BuildContext> {
+class PreviousPageUseCase implements RegularUseCases<void, PageController> {
   final OnboardingRepo onboardingRepo;
 
-  const SkipToSignInUseCase({required this.onboardingRepo});
+  const PreviousPageUseCase({required this.onboardingRepo});
 
   @override
-  void call(BuildContext params) {
-    onboardingRepo.skipToSignIn(context: params);
+  void call(PageController params) {
+    onboardingRepo.previousPage(pageController: params);
   }
 }

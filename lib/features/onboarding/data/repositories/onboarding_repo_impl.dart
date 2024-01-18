@@ -19,7 +19,7 @@ class OnboardingRepoImpl implements OnboardingRepo {
       onboardingDataSource.onboardingPages();
 
   @override
-  void skipToSignIn({required BuildContext context}) {
-    onboardingDataSource.skipToSignIn(context: context);
+  void previousPage({required PageController pageController}) {
+    onboardingDataSource.previousPage(pageController: pageController);
   }
 }
