@@ -60,7 +60,7 @@ import 'package:social_app/features/onboarding/data/repositories/onboarding_repo
 import 'package:social_app/features/onboarding/domain/repositories/onboarding_repo.dart';
 import 'package:social_app/features/onboarding/domain/usecases/get_onboarding_pages.dart';
 import 'package:social_app/features/onboarding/domain/usecases/navigate_between_pages.dart';
-import 'package:social_app/features/onboarding/domain/usecases/skip_to_sign_in.dart';
+import 'package:social_app/features/onboarding/domain/usecases/previous_page_usecase.dart';
 import 'package:social_app/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:social_app/features/posts/data/datasources/posts_datasource.dart';
 import 'package:social_app/features/posts/data/datasources/posts_datasource_impl.dart';

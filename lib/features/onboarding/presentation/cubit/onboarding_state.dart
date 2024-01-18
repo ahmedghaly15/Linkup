@@ -13,17 +13,23 @@ class OnboardingInitial extends OnboardingState {
 
 class ChangePageViewIndex extends OnboardingState {
   final int index;
+  final bool isLastBoarding;
+  final bool isFirstBoarding;
 
-  const ChangePageViewIndex({required this.index});
+  const ChangePageViewIndex({
+    required this.index,
+    required this.isLastBoarding,
+    required this.isFirstBoarding,
+  });
 
   @override
-  List<Object> get props => [index];
+  List<Object> get props => [index, isFirstBoarding, isLastBoarding];
 }
 
 class NavigateBetweenPages extends OnboardingState {
   const NavigateBetweenPages();
 }
 
-class SkipToSignIn extends OnboardingState {
-  const SkipToSignIn();
+class MoveToPreviousPage extends OnboardingState {
+  const MoveToPreviousPage();
 }

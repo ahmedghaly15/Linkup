@@ -50,7 +50,13 @@ class PageViewItem extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 5.w),
-              const CustomGetBackButton(),
+              if (BlocProvider.of<OnboardingCubit>(context).isNotFirstBoarding)
+                CustomGetBackButton(
+                  onPressed: () =>
+                      BlocProvider.of<OnboardingCubit>(context).previousPage(
+                    pageController: pageController,
+                  ),
+                )
             ],
           ),
           SizedBox(height: 4.h),

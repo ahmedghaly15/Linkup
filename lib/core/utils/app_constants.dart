@@ -6,4 +6,7 @@ class AppConstants {
       EdgeInsets.symmetric(horizontal: 16.w);
 
   static ScrollPhysics? get physics => const BouncingScrollPhysics();
+
+  static Duration get onboardingScrollingDuration =>
+      const Duration(milliseconds: 650);
 }

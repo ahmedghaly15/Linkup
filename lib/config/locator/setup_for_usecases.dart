@@ -150,8 +150,8 @@ class SetupLocatorForUseCases {
       ),
     );
 
-    getIt.registerLazySingleton<SkipToSignInUseCase>(
-      () => SkipToSignInUseCase(onboardingRepo: getIt.get<OnboardingRepo>()),
+    getIt.registerLazySingleton<PreviousPageUseCase>(
+      () => PreviousPageUseCase(onboardingRepo: getIt.get<OnboardingRepo>()),
     );
   }
 }

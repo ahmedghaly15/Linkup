@@ -84,7 +84,7 @@ class SetupLocatorForCubits {
       () => OnboardingCubit(
         getOnboardingPagesUseCase: getIt.get<GetOnboardingPagesUseCase>(),
         navigateBetweenPagesUseCase: getIt.get<NavigateBetweenPagesUseCase>(),
-        skipToSignInUseCase: getIt.get<SkipToSignInUseCase>(),
+        previousPageUseCase: getIt.get<PreviousPageUseCase>(),
       ),
     );
   }

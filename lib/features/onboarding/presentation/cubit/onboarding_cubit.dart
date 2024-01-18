@@ -6,33 +6,53 @@ import 'package:social_app/features/onboarding/domain/entities/navigate_between_
 import 'package:social_app/features/onboarding/domain/entities/onboarding_entity.dart';
 import 'package:social_app/features/onboarding/domain/usecases/get_onboarding_pages.dart';
 import 'package:social_app/features/onboarding/domain/usecases/navigate_between_pages.dart';
-import 'package:social_app/features/onboarding/domain/usecases/skip_to_sign_in.dart';
+import 'package:social_app/features/onboarding/domain/usecases/previous_page_usecase.dart';
 
 part 'onboarding_state.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
-  final SkipToSignInUseCase skipToSignInUseCase;
+  final PreviousPageUseCase previousPageUseCase;
   final GetOnboardingPagesUseCase getOnboardingPagesUseCase;
   final NavigateBetweenPagesUseCase navigateBetweenPagesUseCase;
 
   OnboardingCubit({
     required this.getOnboardingPagesUseCase,
     required this.navigateBetweenPagesUseCase,
-    required this.skipToSignInUseCase,
+    required this.previousPageUseCase,
   }) : super(const OnboardingInitial());
 
   bool isLastBoarding = false;
+  bool isNotFirstBoarding = false;
 
   List<OnboardingEntity> getOnboardingPages() =>
       getOnboardingPagesUseCase(const NoParams());
 
   void onChangePageIndex(int index) {
+    _checkFirstBoarding(index);
+
+    _checkLastBoarding(index);
+
+    emit(ChangePageViewIndex(
+      index: index,
+      isFirstBoarding: isNotFirstBoarding,
+      isLastBoarding: isLastBoarding,
+    ));
+  }
+
+  void _checkLastBoarding(int index) {
     if (index == getOnboardingPages().length - 1) {
       isLastBoarding = true;
     } else {
       isLastBoarding = false;
     }
-    emit(ChangePageViewIndex(index: index));
+  }
+
+  void _checkFirstBoarding(int index) {
+    if (index != 0) {
+      isNotFirstBoarding = true;
+    } else {
+      isNotFirstBoarding = false;
+    }
   }
 
   void navigateBetweenPages({
@@ -50,9 +70,9 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     emit(const NavigateBetweenPages());
   }
 
-  void skipToSignIn({required BuildContext context}) {
-    skipToSignInUseCase(context);
+  void previousPage({required PageController pageController}) {
+    previousPageUseCase(pageController);
 
-    emit(const SkipToSignIn());
+    emit(const MoveToPreviousPage());
   }
 }

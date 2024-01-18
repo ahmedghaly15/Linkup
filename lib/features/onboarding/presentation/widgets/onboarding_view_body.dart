@@ -15,7 +15,13 @@ class OnboardingViewBody extends StatefulWidget {
 }
 
 class _OnboardingViewBodyState extends State<OnboardingViewBody> {
-  PageController pageController = PageController(initialPage: 0);
+  late PageController pageController;
+
+  @override
+  void initState() {
+    pageController = PageController(initialPage: 0);
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -60,14 +66,10 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
                         top: 16.h,
                       ),
                       child: MainButton(
-                        onPressed: () {
-                          cubit.isLastBoarding
-                              ? cubit.skipToSignIn(context: context)
-                              : cubit.navigateBetweenPages(
-                                  context: context,
-                                  pageController: pageController,
-                                );
-                        },
+                        onPressed: () => cubit.navigateBetweenPages(
+                          context: context,
+                          pageController: pageController,
+                        ),
                         boxShadow: <BoxShadow>[Helper.buttonShadow()],
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
