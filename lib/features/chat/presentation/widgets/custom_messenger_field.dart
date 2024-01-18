@@ -48,7 +48,7 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
                     borderRadius: BorderRadius.circular(18),
                   ),
                   color: Helper.isDark(themeState)
-                      ? AppColors.darkGreyClr
+                      ? AppColors.darkPrimaryColor
                       : AppColors.scaffoldBackgroundClr,
                   child: Row(
                     children: <Widget>[

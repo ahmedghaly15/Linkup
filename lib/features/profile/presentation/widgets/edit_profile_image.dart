@@ -45,7 +45,7 @@ class EditProfileImage extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Helper.isDark(themeState)
-                      ? AppColors.darkGreyClr
+                      ? AppColors.darkPrimaryColor
                       : AppColors.scaffoldBackgroundClr,
                   boxShadow: <BoxShadow>[
                     Helper.postShadow(themeState),

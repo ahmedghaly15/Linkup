@@ -33,7 +33,8 @@ class UserPostItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(16.r)),
-          color: Helper.isDark(state) ? AppColors.darkGreyClr : Colors.white,
+          color:
+              Helper.isDark(state) ? AppColors.darkPrimaryColor : Colors.white,
           boxShadow: <BoxShadow>[
             Helper.postShadow(state),
           ],

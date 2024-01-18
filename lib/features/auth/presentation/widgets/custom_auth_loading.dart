@@ -29,7 +29,7 @@ class LoadingWidget extends StatelessWidget {
             padding: EdgeInsets.all(8.h),
             decoration: BoxDecoration(
               color: Helper.isDark(state)
-                  ? AppColors.darkGreyClr
+                  ? AppColors.darkPrimaryColor
                   : AppColors.scaffoldBackgroundClr,
               borderRadius: BorderRadius.all(Radius.circular(16.r)),
             ),

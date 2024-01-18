@@ -46,7 +46,7 @@ class _CommenterFieldState extends State<CommenterField> {
                   borderRadius: BorderRadius.circular(18.r),
                 ),
                 color: Helper.isDark(state)
-                    ? AppColors.darkGreyClr
+                    ? AppColors.darkPrimaryColor
                     : AppColors.scaffoldBackgroundClr,
                 child: Row(
                   children: <Widget>[

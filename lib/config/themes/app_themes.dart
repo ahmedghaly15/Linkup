@@ -55,11 +55,11 @@ class AppThemes {
           showSelectedLabels: false,
           showUnselectedLabels: false,
           selectedItemColor: AppColors.primaryColor,
-          backgroundColor: AppColors.darkGreyClr,
+          backgroundColor: AppColors.darkPrimaryColor,
           elevation: 20,
         ),
         primaryColor: AppColors.primaryColor,
-        scaffoldBackgroundColor: AppColors.darkGreyClr,
+        scaffoldBackgroundColor: AppColors.darkPrimaryColor,
         appBarTheme: const AppBarTheme(
           iconTheme: IconThemeData(
             color: AppColors.primaryColor,
@@ -67,7 +67,7 @@ class AppThemes {
           ),
           elevation: 0,
           centerTitle: true,
-          backgroundColor: AppColors.darkGreyClr,
+          backgroundColor: AppColors.darkPrimaryColor,
         ),
         cardColor: AppColors.darkHeaderClr,
         textButtonTheme: TextButtonThemeData(
@@ -80,7 +80,7 @@ class AppThemes {
           ),
         ),
         popupMenuTheme: const PopupMenuThemeData(
-          color: AppColors.darkGreyClr,
+          color: AppColors.darkPrimaryColor,
           iconColor: Colors.white,
           position: PopupMenuPosition.under,
         ),

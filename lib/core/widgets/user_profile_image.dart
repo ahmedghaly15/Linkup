@@ -26,7 +26,7 @@ class UserProfileImage extends StatelessWidget {
             return CircleAvatar(
               radius: 60.r,
               backgroundColor: Helper.isDark(state)
-                  ? AppColors.darkGreyClr
+                  ? AppColors.darkPrimaryColor
                   : AppColors.scaffoldBackgroundClr,
               child: CircleAvatar(
                 backgroundImage: image,

@@ -111,7 +111,7 @@ class CustomTextFormField extends StatelessWidget {
             filled: filled,
             fillColor: fillColor ??
                 (Helper.isDark(state)
-                    ? AppColors.darkGreyClr
+                    ? AppColors.darkPrimaryColor
                     : AppColors.scaffoldBackgroundClr),
             errorStyle: TextStyle(fontSize: 13.sp, color: Colors.red),
             hintText: hintText,

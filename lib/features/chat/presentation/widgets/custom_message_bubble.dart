@@ -32,7 +32,7 @@ class CustomMessageBubble extends StatelessWidget {
                 ? const Color(0xffbe29ec)
                 : const Color(0xffefbbff))
             : (Helper.isDark(themeState)
-                ? AppColors.darkGreyClr
+                ? AppColors.darkPrimaryColor
                 : const Color(0xffE7E7ED)),
         child: ConstrainedBox(
           constraints: BoxConstraints(

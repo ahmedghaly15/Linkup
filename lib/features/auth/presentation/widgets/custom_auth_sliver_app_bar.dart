@@ -30,8 +30,9 @@ class CustomAuthSliverAppBar extends StatelessWidget {
                     ? Icons.wb_sunny_outlined
                     : Icons.nightlight_round_outlined,
                 size: 28.w,
-                color:
-                    Helper.isDark(state) ? Colors.white : AppColors.darkGreyClr,
+                color: Helper.isDark(state)
+                    ? Colors.white
+                    : AppColors.darkPrimaryColor,
               ),
             );
           },

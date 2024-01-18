@@ -42,7 +42,7 @@ class CommentItem extends StatelessWidget {
                 clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
                 margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 5.h),
                 backGroundColor: Helper.isDark(state)
-                    ? AppColors.darkGreyClr.withOpacity(0.9)
+                    ? AppColors.darkPrimaryColor.withOpacity(0.9)
                     : const Color(0xffE7E7ED),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(

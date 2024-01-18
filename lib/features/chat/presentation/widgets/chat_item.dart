@@ -22,7 +22,8 @@ class ChatItem extends StatelessWidget {
     return BlocBuilder<ThemesCubit, ThemeData>(
       builder: (context, state) {
         return Card(
-          color: Helper.isDark(state) ? AppColors.darkGreyClr : Colors.white,
+          color:
+              Helper.isDark(state) ? AppColors.darkPrimaryColor : Colors.white,
           margin: EdgeInsets.symmetric(vertical: 4.h),
           elevation: 1.5.h,
           shape: RoundedRectangleBorder(

@@ -1,13 +1,13 @@
 class AppAssets {
   AppAssets._();
 
-  /// Assets for AppIconVideo
-  /// assets/app_icon_video.mp4
-  static const String appIconVideo = "assets/app_icon_video.mp4";
+  /// Assets for AppIcon
+  /// assets/app_icon.png
+  static const String appIcon = "assets/app_icon.png";
 
   /// Assets for AppLogo
-  /// assets/app_logo.png
-  static const String appLogo = "assets/app_logo.png";
+  /// assets/app_logo.jpg
+  static const String appLogo = "assets/app_logo.jpg";
 
   /// Assets for imagesAddImage
   /// assets/images/add_image.png
@@ -31,6 +31,20 @@ class AppAssets {
   static const String imagesChatLightBackground =
       "assets/images/chat_light_background.jpg";
 
+  /// Assets for imagesChatRoomBackground
+  /// assets/images/chat_room_background.png
+  static const String imagesChatRoomBackground =
+      "assets/images/chat_room_background.png";
+
+  /// Assets for imagesDarkSplash
+  /// assets/images/dark_splash.png
+  static const String imagesDarkSplash = "assets/images/dark_splash.png";
+
+  /// Assets for imagesDarkSplashAndroid12
+  /// assets/images/dark_splash_android_12.png
+  static const String imagesDarkSplashAndroid12 =
+      "assets/images/dark_splash_android_12.png";
+
   /// Assets for imagesNoPosts
   /// assets/images/no_posts.png
   static const String imagesNoPosts = "assets/images/no_posts.png";
@@ -50,4 +64,13 @@ class AppAssets {
   /// Assets for imagesOnboarding3
   /// assets/images/onboarding3.png
   static const String imagesOnboarding3 = "assets/images/onboarding3.png";
+
+  /// Assets for imagesSplash
+  /// assets/images/splash.png
+  static const String imagesSplash = "assets/images/splash.png";
+
+  /// Assets for imagesSplashAndroid12
+  /// assets/images/splash_android_12.png
+  static const String imagesSplashAndroid12 =
+      "assets/images/splash_android_12.png";
 }

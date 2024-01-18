@@ -32,7 +32,7 @@ class ChatsSliverAppBar extends StatelessWidget {
                   size: 28.w,
                   color: Helper.isDark(themeState)
                       ? Colors.white
-                      : AppColors.darkGreyClr,
+                      : AppColors.darkPrimaryColor,
                 ),
               );
             },

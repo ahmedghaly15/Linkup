@@ -24,7 +24,7 @@ class ImageCircle extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             elevation: 16.h,
             backgroundColor: Helper.isDark(state)
-                ? AppColors.darkGreyClr
+                ? AppColors.darkPrimaryColor
                 : AppColors.scaffoldBackgroundClr,
             shape: const CircleBorder(),
             fixedSize: Size(150.w, 130.h),
