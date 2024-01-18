@@ -9,6 +9,43 @@ class AppAssets {
   /// assets/app_logo.jpg
   static const String appLogo = "assets/app_logo.jpg";
 
+  /// Assets for fontsInterInterBlack
+  /// assets/fonts/Inter/Inter-Black.ttf
+  static const String fontsInterInterBlack =
+      "assets/fonts/Inter/Inter-Black.ttf";
+
+  /// Assets for fontsInterInterBold
+  /// assets/fonts/Inter/Inter-Bold.ttf
+  static const String fontsInterInterBold = "assets/fonts/Inter/Inter-Bold.ttf";
+
+  /// Assets for fontsInterInterExtraBold
+  /// assets/fonts/Inter/Inter-ExtraBold.ttf
+  static const String fontsInterInterExtraBold =
+      "assets/fonts/Inter/Inter-ExtraBold.ttf";
+
+  /// Assets for fontsInterInterMedium
+  /// assets/fonts/Inter/Inter-Medium.ttf
+  static const String fontsInterInterMedium =
+      "assets/fonts/Inter/Inter-Medium.ttf";
+
+  /// Assets for fontsInterInterRegular
+  /// assets/fonts/Inter/Inter-Regular.ttf
+  static const String fontsInterInterRegular =
+      "assets/fonts/Inter/Inter-Regular.ttf";
+
+  /// Assets for fontsInterInterSemiBold
+  /// assets/fonts/Inter/Inter-SemiBold.ttf
+  static const String fontsInterInterSemiBold =
+      "assets/fonts/Inter/Inter-SemiBold.ttf";
+
+  /// Assets for fontsInterOFL
+  /// assets/fonts/Inter/OFL.txt
+  static const String fontsInterOFL = "assets/fonts/Inter/OFL.txt";
+
+  /// Assets for iconsArrowLeft
+  /// assets/icons/arrow_left.png
+  static const String iconsArrowLeft = "assets/icons/arrow_left.png";
+
   /// Assets for imagesAddImage
   /// assets/images/add_image.png
   static const String imagesAddImage = "assets/images/add_image.png";

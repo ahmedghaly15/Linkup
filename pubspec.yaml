@@ -83,6 +83,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/icons/
 
 flutter_assets:
   assets_path: assets/

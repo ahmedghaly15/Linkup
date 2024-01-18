@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
+import 'package:social_app/core/widgets/custom_get_back_button.dart';
 import 'package:social_app/features/onboarding/domain/entities/onboarding_entity.dart';
 import 'package:social_app/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 
@@ -21,66 +22,65 @@ class PageViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Stack(
-      children: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(40.r),
-          ),
-          child: Image.asset(
-            pageInfo.image,
-            fit: BoxFit.cover,
-            width: double.infinity,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(40.r),
         ),
-        Positioned(
-          right: 0,
-          left: 0,
-          top: 50.h,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
+        image: DecorationImage(
+          image: AssetImage(pageInfo.image),
+          fit: BoxFit.cover,
+        ),
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.w,
+        vertical: 32.h,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(
                   pageInfo.heading,
                   style: AppTextStyles.textStyle28Bold.copyWith(
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 4.h),
-                Text(
-                  pageInfo.subHeading,
-                  style: AppTextStyles.textStyle18.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          right: 0,
-          left: 0,
-          bottom: 30.h,
-          child: Padding(
-            padding: EdgeInsets.only(left: 16.w),
-            child: SmoothPageIndicator(
-              controller: pageController,
-              count: BlocProvider.of<OnboardingCubit>(context)
-                  .getOnboardingPages()
-                  .length,
-              effect: ColorTransitionEffect(
-                dotColor: Colors.grey,
-                activeDotColor: AppColors.primaryColor,
-                dotHeight: size.height * 0.008,
-                dotWidth: size.width * 0.02,
-                spacing: size.width * 0.015,
               ),
+              SizedBox(width: 5.w),
+              const CustomGetBackButton(),
+            ],
+          ),
+          SizedBox(height: 4.h),
+          Text(
+            pageInfo.subHeading,
+            style: AppTextStyles.textStyle18.copyWith(
+              color: Colors.white,
             ),
           ),
-        ),
-      ],
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              SmoothPageIndicator(
+                controller: pageController,
+                count: BlocProvider.of<OnboardingCubit>(context)
+                    .getOnboardingPages()
+                    .length,
+                effect: ColorTransitionEffect(
+                  dotColor: Colors.grey,
+                  activeDotColor: AppColors.primaryColor,
+                  dotHeight: size.height * 0.008,
+                  dotWidth: size.width * 0.02,
+                  spacing: size.width * 0.015,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -18,7 +18,7 @@ class LinkupApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MultiBlocProvider(
+      builder: (context, child) => MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => getIt.get<ThemesCubit>(),
