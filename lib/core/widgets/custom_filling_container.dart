@@ -27,11 +27,12 @@ class CustomFillingContainer extends StatelessWidget {
           left: 10.w,
           right: 10.w,
           bottom: 25.h,
+          top: 10.h,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(60.0.r),
-            topRight: Radius.circular(60.0.r),
+            topLeft: Radius.circular(50.0.r),
+            topRight: Radius.circular(50.0.r),
           ),
           image: const DecorationImage(
             image: AssetImage(

@@ -23,6 +23,7 @@ class CustomContentContainer extends StatelessWidget {
         left: 16.w,
         right: 16.w,
         bottom: 8.h,
+        top: 20.h,
       ),
       decoration: BoxDecoration(
         color: AppColors.lightWhiteBlue,

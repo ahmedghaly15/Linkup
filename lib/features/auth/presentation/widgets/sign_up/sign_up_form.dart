@@ -5,7 +5,6 @@ import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/cache_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
@@ -133,12 +132,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 obscureText: cubit.signUpPassVisibility,
                 suffixIcon: IconButton(
                   onPressed: () => cubit.switchSignUpPassVisibility(),
-                  icon: Icon(
-                    cubit.signUpPassVisibility
-                        ? Icons.visibility_rounded
-                        : Icons.visibility_off_rounded,
-                    color: AppColors.primaryColor,
-                  ),
+                  icon: cubit.signUpPassVisibility
+                      ? Image.asset(AppAssets.iconsVisible)
+                      : Image.asset(AppAssets.iconsInvisible),
                 ),
                 validating: (String? val) =>
                     AuthHelper.validatingPasswordField(value: val),
@@ -158,12 +154,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 obscureText: cubit.confirmPassVisibility,
                 suffixIcon: IconButton(
                   onPressed: () => cubit.switchConfirmPassVisibility(),
-                  icon: Icon(
-                    cubit.confirmPassVisibility
-                        ? Icons.visibility_rounded
-                        : Icons.visibility_off_rounded,
-                    color: AppColors.primaryColor,
-                  ),
+                  icon: cubit.confirmPassVisibility
+                      ? Image.asset(AppAssets.iconsVisible)
+                      : Image.asset(AppAssets.iconsInvisible),
                 ),
                 validating: (String? val) =>
                     AuthHelper.validateConfirmPassField(

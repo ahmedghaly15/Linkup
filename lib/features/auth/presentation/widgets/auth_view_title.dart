@@ -13,7 +13,7 @@ class AuthViewTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 30.h, bottom: 10.h),
+      margin: EdgeInsets.only(bottom: 10.h),
       child: Text(
         title,
         style: AppTextStyles.textStyle50Bold,

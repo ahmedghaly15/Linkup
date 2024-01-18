@@ -58,6 +58,7 @@ class AppThemes {
           style: ButtonStyle(
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             padding: MaterialStateProperty.all(EdgeInsets.zero),
+            minimumSize: const MaterialStatePropertyAll(Size.zero),
           ),
         ),
       );
