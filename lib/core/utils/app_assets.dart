@@ -46,9 +46,17 @@ class AppAssets {
   /// assets/icons/arrow_left.png
   static const String iconsArrowLeft = "assets/icons/arrow_left.png";
 
+  /// Assets for iconsChat
+  /// assets/icons/chat.png
+  static const String iconsChat = "assets/icons/chat.png";
+
   /// Assets for iconsEmail
   /// assets/icons/email.png
   static const String iconsEmail = "assets/icons/email.png";
+
+  /// Assets for iconsHome
+  /// assets/icons/home.png
+  static const String iconsHome = "assets/icons/home.png";
 
   /// Assets for iconsInfo
   /// assets/icons/info.png
@@ -62,6 +70,10 @@ class AppAssets {
   /// assets/icons/lock.png
   static const String iconsLock = "assets/icons/lock.png";
 
+  /// Assets for iconsNotification
+  /// assets/icons/notification.png
+  static const String iconsNotification = "assets/icons/notification.png";
+
   /// Assets for iconsPerson
   /// assets/icons/person.png
   static const String iconsPerson = "assets/icons/person.png";
@@ -69,6 +81,14 @@ class AppAssets {
   /// Assets for iconsPhone
   /// assets/icons/phone.png
   static const String iconsPhone = "assets/icons/phone.png";
+
+  /// Assets for iconsPlus
+  /// assets/icons/plus.png
+  static const String iconsPlus = "assets/icons/plus.png";
+
+  /// Assets for iconsUser
+  /// assets/icons/user.png
+  static const String iconsUser = "assets/icons/user.png";
 
   /// Assets for iconsVisible
   /// assets/icons/visible.png

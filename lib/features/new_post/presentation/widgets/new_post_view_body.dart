@@ -65,6 +65,7 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
                           hasPrefixIcon: false,
                           controller: _textController,
                           enableSuggestions: true,
+                          filled: false,
                           textCapitalization: TextCapitalization.sentences,
                           keyboardType: TextInputType.multiline,
                           hintText:
