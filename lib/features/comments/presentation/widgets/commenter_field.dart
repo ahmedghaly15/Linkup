@@ -78,7 +78,7 @@ class _CommenterFieldState extends State<CommenterField> {
                             enableSuggestions: true,
                             textCapitalization: TextCapitalization.sentences,
                             maxLines: null,
-                            hintText: 'Write a comment...',
+                            hintText: '',
                             contentPadding: EdgeInsets.only(
                               left: 5.w,
                               right: 16.w,

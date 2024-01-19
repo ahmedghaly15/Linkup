@@ -50,6 +50,10 @@ class AppAssets {
   /// assets/icons/chat.png
   static const String iconsChat = "assets/icons/chat.png";
 
+  /// Assets for iconsClose
+  /// assets/icons/close.png
+  static const String iconsClose = "assets/icons/close.png";
+
   /// Assets for iconsComment
   /// assets/icons/comment.png
   static const String iconsComment = "assets/icons/comment.png";
@@ -97,6 +101,10 @@ class AppAssets {
   /// Assets for iconsRedLike
   /// assets/icons/red_like.png
   static const String iconsRedLike = "assets/icons/red_like.png";
+
+  /// Assets for iconsSend
+  /// assets/icons/Send.png
+  static const String iconsSend = "assets/icons/Send.png";
 
   /// Assets for iconsUser
   /// assets/icons/user.png

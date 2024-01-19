@@ -8,11 +8,13 @@ class CustomCircleIconButton extends StatelessWidget {
     required this.onPressed,
     required this.icon,
     this.hasShadow = false,
+    this.backgroundColor = AppColors.lightWhiteBlue,
   });
 
   final VoidCallback onPressed;
   final Widget icon;
   final bool hasShadow;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class CustomCircleIconButton extends StatelessWidget {
       height: 44.h,
       width: 44.h,
       decoration: BoxDecoration(
-        color: AppColors.lightWhiteBlue,
+        color: backgroundColor,
         shape: BoxShape.circle,
         boxShadow: hasShadow
             ? <BoxShadow>[

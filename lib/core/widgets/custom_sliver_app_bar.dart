@@ -9,22 +9,21 @@ class CustomSliverAppBar extends StatelessWidget {
     super.key,
     required this.title,
     this.backOnPressed,
-    this.hasLeading = true,
+    this.leading,
   });
 
   final String title;
-  final bool hasLeading;
+  final Widget? leading;
   final VoidCallback? backOnPressed;
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      leading: hasLeading
-          ? CustomGetBackButton(
-              hasShadow: true,
-              onPressed: backOnPressed,
-            )
-          : const SizedBox(),
+      leading: leading ??
+          CustomGetBackButton(
+            hasShadow: true,
+            onPressed: backOnPressed,
+          ),
       backgroundColor: Helper.isDark(context)
           ? AppColors.darkPrimaryColor
           : AppColors.lightWhiteBlue,

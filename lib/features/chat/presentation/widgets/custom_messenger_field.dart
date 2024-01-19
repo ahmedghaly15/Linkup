@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/core/utils/app_assets.dart';
+import 'package:social_app/core/widgets/custom_circle_icon_button.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/get_image_icon_button.dart';
 import 'package:social_app/features/chat/domain/entities/send_message_params.dart';
@@ -35,18 +37,18 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 15.h),
-      child: Row(
-        children: <Widget>[
-          Flexible(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-              ),
-              color: Helper.isDark(context)
-                  ? AppColors.darkPrimaryColor
-                  : AppColors.scaffoldBackgroundClr,
+    return Row(
+      children: <Widget>[
+        Flexible(
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18),
+            ),
+            color: Helper.isDark(context)
+                ? AppColors.darkPrimaryColor
+                : AppColors.scaffoldBackgroundClr,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Row(
                 children: <Widget>[
                   GetImageIconButton(
@@ -75,7 +77,7 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
                             textCapitalization: TextCapitalization.sentences,
                             maxLines: null,
                             keyboardType: TextInputType.multiline,
-                            hintText: 'Type a message...',
+                            hintText: '',
                             hasPrefixIcon: false,
                             border: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -145,18 +147,21 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
               ),
             ),
           ),
-          IconButton(
-            onPressed: (_messageController.text.trim().isEmpty &&
+        ),
+        CustomCircleIconButton(
+          onPressed: () {
+            (_messageController.text.trim().isEmpty &&
                     widget.cubit.messageImage == null)
                 ? null
-                : () => _sendMessage(context),
-            icon: const Icon(Icons.send_outlined),
-            disabledColor: Colors.grey,
-            iconSize: 30.w,
-            color: AppColors.primaryColor,
-          ),
-        ],
-      ),
+                : () => _sendMessage(context);
+          },
+          icon: Image.asset(AppAssets.iconsSend),
+          backgroundColor: (_messageController.text.trim().isEmpty &&
+                  widget.cubit.messageImage == null)
+              ? Colors.grey
+              : AppColors.primaryColor,
+        ),
+      ],
     );
   }
 

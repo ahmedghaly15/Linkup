@@ -9,11 +9,13 @@ class CustomContentContainer extends StatelessWidget {
     required this.child,
     this.height,
     this.width = double.infinity,
+    this.horizontalPadding = 16,
   });
 
   final Widget child;
   final double? height;
   final double width;
+  final double horizontalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,8 @@ class CustomContentContainer extends StatelessWidget {
       height: height,
       width: width,
       padding: EdgeInsets.only(
-        left: 16.w,
-        right: 16.w,
+        left: horizontalPadding.w,
+        right: horizontalPadding.w,
         bottom: 8.h,
         top: 20.h,
       ),

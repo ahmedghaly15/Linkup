@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
@@ -19,7 +20,10 @@ class ChatsSliverAppBar extends StatelessWidget {
         return SliverAppBar(
           title: cubit.isSearching
               ? CustomSearchField(cubit: cubit)
-              : const SizedBox(),
+              : Text(
+                  "Chats",
+                  style: AppTextStyles.textStyle20Bold,
+                ),
           leading: IconButton(
             onPressed: () =>
                 BlocProvider.of<ThemesCubit>(context).toggleTheme(),
@@ -38,7 +42,10 @@ class ChatsSliverAppBar extends StatelessWidget {
               onPressed: () => cubit.invertIsSearching(),
               icon: Icon(
                 cubit.isSearching ? Icons.cancel : Icons.search_rounded,
-                color: AppColors.primaryColor,
+                size: 28.w,
+                color: Helper.isDark(context)
+                    ? Colors.white
+                    : AppColors.darkPrimaryColor,
               ),
             ),
           ],

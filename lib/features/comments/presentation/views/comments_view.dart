@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
-import 'package:social_app/core/widgets/custom_sliver_app_bar.dart';
+import 'package:social_app/core/widgets/custom_get_back_button.dart';
 import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
 import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social_app/features/comments/presentation/widgets/comment_item.dart';
@@ -29,16 +29,21 @@ class CommentsView extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(bottom: 75.h),
+                margin: EdgeInsets.only(bottom: 60.h),
                 child: CustomScrollView(
                   slivers: [
-                    CustomSliverAppBar(
-                      title: 'Comments',
-                      backOnPressed: () {
-                        BlocProvider.of<CommentsCubit>(context).clearComments();
-
-                        context.back();
-                      },
+                    SliverToBoxAdapter(
+                      child: Row(
+                        children: <Widget>[
+                          const CustomGetBackButton(hasShadow: true),
+                          const Spacer(),
+                          Text(
+                            'Comments',
+                            style: AppTextStyles.textStyle20Bold,
+                          ),
+                          const Spacer(flex: 2),
+                        ],
+                      ),
                     ),
                     BlocBuilder<CommentsCubit, CommentsState>(
                       builder: (context, state) {

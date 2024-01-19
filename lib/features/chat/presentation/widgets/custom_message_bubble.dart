@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/date_and_time.dart';
@@ -21,16 +20,16 @@ class CustomMessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChatBubble(
       clipper: isMe
-          ? ChatBubbleClipper9(type: BubbleType.sendBubble)
-          : ChatBubbleClipper9(type: BubbleType.receiverBubble),
+          ? ChatBubbleClipper3(type: BubbleType.sendBubble)
+          : ChatBubbleClipper3(type: BubbleType.receiverBubble),
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-      backGroundColor: isMe
-          ? (Helper.isDark(context)
-              ? const Color(0xffbe29ec)
-              : const Color(0xffefbbff))
-          : (Helper.isDark(context)
-              ? AppColors.darkPrimaryColor
-              : const Color(0xffE7E7ED)),
+      backGroundColor: isMe ? AppColors.primaryColor : Colors.white,
+      // ? (Helper.isDark(context)
+      //     ? const Color(0xffbe29ec)
+      //     : const Color(0xffefbbff))
+      // : (Helper.isDark(context)
+      //     ? AppColors.darkPrimaryColor
+      //     : const Color(0xffE7E7ED)),
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.65,
@@ -41,12 +40,14 @@ class CustomMessageBubble extends StatelessWidget {
             if (message.messageText != null) ...[
               Text(
                 message.messageText!,
-                style: AppTextStyles.textStyle16SemiBold,
+                style: AppTextStyles.textStyle16SemiBold.copyWith(
+                  color: isMe ? Colors.white : Colors.black,
+                ),
                 maxLines: null,
               ),
-              SizedBox(height: 8.h),
             ],
-            if (message.messageImage!['image'] != null)
+            if (message.messageImage!['image'] != null) ...[
+              SizedBox(height: 8.h),
               Container(
                 width: double.infinity,
                 height: 220.h,
@@ -63,7 +64,8 @@ class CustomMessageBubble extends StatelessWidget {
                   ),
                 ),
               ),
-            SizedBox(height: 8.h),
+            ],
+            SizedBox(height: 6.h),
             DateAndTime(
               date: message.date!,
               time: message.time!,
