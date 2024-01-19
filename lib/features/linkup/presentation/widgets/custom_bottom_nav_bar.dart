@@ -60,10 +60,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   IconButton(
                     style: ButtonStyle(
                       padding: MaterialStatePropertyAll(
-                        EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                          vertical: 8.h,
-                        ),
+                        EdgeInsets.symmetric(horizontal: 16.w),
                       ),
                     ),
                     onPressed: () => cubit.changeBottomNavIndex(index, context),

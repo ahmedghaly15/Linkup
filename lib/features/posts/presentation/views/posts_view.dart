@@ -32,8 +32,8 @@ class PostsView extends StatelessWidget {
                   BlocProvider.of<GetPostsCubit>(context);
 
               if (state is GetPostsSuccess) {
-                return cubit.posts.isNotEmpty
-                    ? Posts(posts: cubit.posts)
+                return state.posts.isNotEmpty
+                    ? Posts(posts: state.posts)
                     : const SliverToBoxAdapter(child: EmptyPostView());
               } else if (state is GetPostsError) {
                 return SliverToBoxAdapter(

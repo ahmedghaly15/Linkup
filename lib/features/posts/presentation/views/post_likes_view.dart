@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:social_app/core/utils/app_constants.dart';
-import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
 import 'package:social_app/core/widgets/custom_sliver_app_bar.dart';
@@ -24,13 +23,7 @@ class PostLikesView extends StatelessWidget {
             child: CustomScrollView(
               physics: AppConstants.physics,
               slivers: [
-                const CustomSliverAppBar(
-                  title: 'People who liked',
-                  // backOnPressed: () {
-                  //   // BlocProvider.of<PostsCubit>(context).getPosts();
-                  //   context.back();
-                  // },
-                ),
+                const CustomSliverAppBar(title: 'People who liked'),
                 BlocBuilder<PostsCubit, PostsState>(
                   builder: (context, state) {
                     final PostsCubit cubit =

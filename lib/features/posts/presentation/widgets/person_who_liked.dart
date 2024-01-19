@@ -30,12 +30,10 @@ class PersonWhoLiked extends StatelessWidget {
       ),
       child: MaterialButton(
         padding: EdgeInsets.zero,
-        onPressed: () {
-          context.navigateTo(
-            routeName: Routes.userProfileRoute,
-            arguments: like.user!,
-          );
-        },
+        onPressed: () => context.navigateTo(
+          routeName: Routes.userProfileRoute,
+          arguments: like.user!,
+        ),
         child: Padding(
           padding: EdgeInsets.all(10.h),
           child: Row(

@@ -37,6 +37,22 @@ class _CommenterFieldState extends State<CommenterField> {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
+        GetImageIconButton(
+          onPressed: () {
+            BlocProvider.of<CommentsCubit>(context).getCommentImage(
+              source: ImageSource.camera,
+            );
+          },
+          icon: Icons.camera_alt_rounded,
+        ),
+        GetImageIconButton(
+          onPressed: () {
+            BlocProvider.of<CommentsCubit>(context).getCommentImage(
+              source: ImageSource.gallery,
+            );
+          },
+          icon: Icons.image_rounded,
+        ),
         Expanded(
           child: Card(
             shape: RoundedRectangleBorder(
@@ -47,22 +63,6 @@ class _CommenterFieldState extends State<CommenterField> {
                 : AppColors.scaffoldBackgroundClr,
             child: Row(
               children: <Widget>[
-                GetImageIconButton(
-                  onPressed: () {
-                    BlocProvider.of<CommentsCubit>(context).getCommentImage(
-                      source: ImageSource.camera,
-                    );
-                  },
-                  icon: Icons.camera_alt_rounded,
-                ),
-                GetImageIconButton(
-                  onPressed: () {
-                    BlocProvider.of<CommentsCubit>(context).getCommentImage(
-                      source: ImageSource.gallery,
-                    );
-                  },
-                  icon: Icons.image_rounded,
-                ),
                 Expanded(
                   child: SingleChildScrollView(
                     child: BlocBuilder<CommentsCubit, CommentsState>(
