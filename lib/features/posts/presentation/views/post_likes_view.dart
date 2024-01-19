@@ -5,7 +5,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/custom_sliver_app_bar.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
 import 'package:social_app/features/posts/presentation/widgets/person_who_liked.dart';
 
 class PostLikesView extends StatelessWidget {

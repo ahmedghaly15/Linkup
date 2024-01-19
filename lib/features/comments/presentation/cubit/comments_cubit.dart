@@ -10,7 +10,7 @@ import 'package:social_app/features/comments/domain/usecases/get_comment_image.d
 import 'package:social_app/features/comments/domain/usecases/get_comments.dart';
 import 'package:social_app/features/comments/domain/usecases/type_new_comment.dart';
 import 'package:social_app/features/comments/domain/usecases/upload_comment_image.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 
 part 'comments_state.dart';
 
@@ -38,7 +38,7 @@ class CommentsCubit extends Cubit<CommentsState> {
         (failure) =>
             emit(TypeNewCommentError(error: failure.failureMsg.toString())),
         (success) {
-          BlocProvider.of<PostsCubit>(context).getPosts();
+          BlocProvider.of<GetPostsCubit>(context).getPosts();
           emit(const TypeNewCommentSuccess());
         },
       );

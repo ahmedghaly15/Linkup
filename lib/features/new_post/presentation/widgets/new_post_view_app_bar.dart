@@ -8,7 +8,7 @@ import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/get_back_arrow.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class NewPostViewAppBar extends StatelessWidget {
@@ -73,6 +73,7 @@ class NewPostViewAppBar extends StatelessWidget {
           time: DateFormat.jm().format(DateTime.now()),
           text: postText,
         ),
+        context: context,
       );
     } else if (cubit.postImage != null) {
       AuthHelper.keyboardUnfocus(context);
@@ -82,6 +83,7 @@ class NewPostViewAppBar extends StatelessWidget {
           time: DateFormat.jm().format(DateTime.now()),
           text: postText,
         ),
+        context: context,
       );
     }
   }

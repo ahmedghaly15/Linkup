@@ -9,7 +9,7 @@ import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
 import 'package:social_app/service_locator.dart';
 
 class LikesAndComments extends StatelessWidget {
@@ -39,8 +39,14 @@ class LikesAndComments extends StatelessWidget {
               child: TextButton.icon(
                 onPressed: () {
                   cubit.likedPosts.contains(post)
-                      ? cubit.unLikePost(postId: post.postId!)
-                      : cubit.likePost(postId: post.postId!);
+                      ? cubit.unLikePost(
+                          postId: post.postId!,
+                          context: context,
+                        )
+                      : cubit.likePost(
+                          postId: post.postId!,
+                          context: context,
+                        );
                 },
                 icon: cubit.likedPosts.contains(post)
                     ? Image.asset(AppAssets.iconsRedLike)

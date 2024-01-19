@@ -10,7 +10,7 @@ import 'package:social_app/features/new_post/presentation/widgets/add_photos_and
 import 'package:social_app/features/new_post/presentation/widgets/new_post_view_app_bar.dart';
 import 'package:social_app/features/new_post/presentation/widgets/post_image.dart';
 import 'package:social_app/features/new_post/presentation/widgets/user_name_and_image.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
 
 class NewPostViewBody extends StatefulWidget {
   const NewPostViewBody({super.key});

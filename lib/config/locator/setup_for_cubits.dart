@@ -32,7 +32,6 @@ class SetupLocatorForCubits {
 
     getIt.registerFactory<PostsCubit>(
       () => PostsCubit(
-        getPostsUseCase: getIt.get<GetPostsUseCase>(),
         createPostUseCase: getIt.get<CreatePostUseCase>(),
         deletePostUseCase: getIt.get<DeletePostUseCase>(),
         getPostImageUseCase: getIt.get<GetPostImageUseCase>(),
@@ -42,6 +41,10 @@ class SetupLocatorForCubits {
         likedPostsByMeUseCase: getIt.get<LikedPostsByMeUseCase>(),
         peopleLikeThePostUseCase: getIt.get<PeopleLikeThePostUseCase>(),
       ),
+    );
+
+    getIt.registerFactory<GetPostsCubit>(
+      () => GetPostsCubit(getPostsUseCase: getIt.get<GetPostsUseCase>()),
     );
 
     getIt.registerFactory<CommentsCubit>(

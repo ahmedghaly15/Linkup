@@ -9,7 +9,7 @@ import 'package:social_app/core/widgets/user_cover_image.dart';
 import 'package:social_app/core/widgets/user_information.dart';
 import 'package:social_app/core/widgets/user_posts.dart';
 import 'package:social_app/core/widgets/user_profile_image.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 
 class UserProfileViewBody extends StatelessWidget {
   const UserProfileViewBody({
@@ -29,8 +29,11 @@ class UserProfileViewBody extends StatelessWidget {
           SliverAppBar(
             leading: GetBackArrow(
               onPressed: () {
-                BlocProvider.of<PostsCubit>(context).getPosts();
-                context.back();
+                BlocProvider.of<GetPostsCubit>(context)
+                    .getPosts()
+                    .then((value) {
+                  context.back();
+                });
               },
             ),
           ),

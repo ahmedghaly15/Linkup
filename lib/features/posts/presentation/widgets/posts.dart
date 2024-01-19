@@ -13,18 +13,15 @@ class Posts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: EdgeInsets.only(bottom: 24.h),
-      sliver: SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
-            return Container(
-              margin: EdgeInsets.only(bottom: 20.h),
-              child: PostItem(post: posts[index]),
-            );
-          },
-          childCount: posts.length,
-        ),
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return Container(
+            margin: EdgeInsets.symmetric(vertical: 12.h),
+            child: PostItem(post: posts[index]),
+          );
+        },
+        childCount: posts.length,
       ),
     );
   }

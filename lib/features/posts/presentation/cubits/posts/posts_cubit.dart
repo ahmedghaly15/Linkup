@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/entities/no_params.dart';
@@ -10,17 +11,16 @@ import 'package:social_app/features/posts/domain/entities/create_post_params.dar
 import 'package:social_app/features/posts/domain/usecases/create_post.dart';
 import 'package:social_app/features/posts/domain/usecases/delete_post.dart';
 import 'package:social_app/features/posts/domain/usecases/get_post_image.dart';
-import 'package:social_app/features/posts/domain/usecases/get_posts.dart';
 import 'package:social_app/features/posts/domain/usecases/like_post.dart';
 import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart';
 import 'package:social_app/features/posts/domain/usecases/people_like_the_post.dart';
 import 'package:social_app/features/posts/domain/usecases/unlike_post.dart';
 import 'package:social_app/features/posts/domain/usecases/upload_post_image.dart';
+import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 
 part 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
-  final GetPostsUseCase getPostsUseCase;
   final CreatePostUseCase createPostUseCase;
   final DeletePostUseCase deletePostUseCase;
   final GetPostImageUseCase getPostImageUseCase;
@@ -31,7 +31,6 @@ class PostsCubit extends Cubit<PostsState> {
   final PeopleLikeThePostUseCase peopleLikeThePostUseCase;
 
   PostsCubit({
-    required this.getPostsUseCase,
     required this.createPostUseCase,
     required this.deletePostUseCase,
     required this.getPostImageUseCase,
@@ -42,7 +41,10 @@ class PostsCubit extends Cubit<PostsState> {
     required this.peopleLikeThePostUseCase,
   }) : super(const PostsInitial());
 
-  void createPost({required CreatePostParams createPostParams}) {
+  void createPost({
+    required CreatePostParams createPostParams,
+    required BuildContext context,
+  }) {
     emit(const CreatePostLoading());
 
     createPostUseCase(createPostParams).then((value) {
@@ -52,13 +54,16 @@ class PostsCubit extends Cubit<PostsState> {
         (success) {
           postImage = null;
           emit(const CreatePostSuccess());
-          getPosts();
+          BlocProvider.of<GetPostsCubit>(context).getPosts();
         },
       );
     });
   }
 
-  void deletePost({required String postId}) {
+  void deletePost({
+    required String postId,
+    required BuildContext context,
+  }) {
     emit(const DeletePostLoading());
 
     deletePostUseCase(postId).then((value) {
@@ -66,24 +71,8 @@ class PostsCubit extends Cubit<PostsState> {
         (failure) =>
             emit(DeletePostError(error: failure.failureMsg.toString())),
         (success) {
-          getPosts();
           emit(const DeletePostSuccess());
-        },
-      );
-    });
-  }
-
-  List<PostModel> posts = <PostModel>[];
-
-  void getPosts() {
-    emit(const GetPostsLoading());
-
-    getPostsUseCase(const NoParams()).then((value) {
-      value.fold(
-        (failure) => emit(GetPostsError(error: failure.failureMsg.toString())),
-        (result) {
-          posts = result;
-          emit(GetPostsSuccess(posts: posts));
+          BlocProvider.of<GetPostsCubit>(context).getPostsWithoutLoading();
         },
       );
     });
@@ -107,7 +96,10 @@ class PostsCubit extends Cubit<PostsState> {
     });
   }
 
-  void uploadPostImage({required CreatePostParams createPostParams}) {
+  void uploadPostImage({
+    required CreatePostParams createPostParams,
+    required BuildContext context,
+  }) {
     emit(const UploadPostImageLoading());
 
     uploadPostImageUseCase(postImage).then((value) {
@@ -123,6 +115,7 @@ class PostsCubit extends Cubit<PostsState> {
                 text: createPostParams.text,
                 postImage: value,
               ),
+              context: context,
             );
             postImage = null;
             emit(UploadPostImageSuccess(imageUrl: value));
@@ -139,16 +132,20 @@ class PostsCubit extends Cubit<PostsState> {
     emit(const PostImageRemoved());
   }
 
-  void likePost({required String postId}) {
+  void likePost({
+    required String postId,
+    required BuildContext context,
+  }) {
     likePostUseCase(postId).then(
       (value) {
         value.fold(
           (failure) =>
               emit(LikePostError(error: failure.failureMsg.toString())),
-          (success) async {
-            await getLikedPostsByMe();
-            getPosts();
+          (success) {
             emit(const LikePostSuccess());
+            getLikedPostsByMe().then((value) {
+              BlocProvider.of<GetPostsCubit>(context).getPostsWithoutLoading();
+            });
           },
         );
       },
@@ -170,15 +167,19 @@ class PostsCubit extends Cubit<PostsState> {
     });
   }
 
-  void unLikePost({required String postId}) {
+  void unLikePost({
+    required String postId,
+    required BuildContext context,
+  }) {
     unLikePostUseCase(postId).then((value) {
       value.fold(
         (failure) =>
             emit(UnLikePostError(error: failure.failureMsg.toString())),
-        (success) async {
-          await getLikedPostsByMe();
-          getPosts();
+        (success) {
           emit(const UnLikePostSuccess());
+          getLikedPostsByMe().then((value) {
+            BlocProvider.of<GetPostsCubit>(context).getPostsWithoutLoading();
+          });
         },
       );
     });

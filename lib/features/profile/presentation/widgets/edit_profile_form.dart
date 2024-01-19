@@ -9,7 +9,7 @@ import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 import 'package:social_app/features/profile/domain/entities/update_user_params.dart';
 import 'package:social_app/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:social_app/features/profile/presentation/widgets/confirm_editing_buttons.dart';
@@ -159,7 +159,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
       EditProfileState state, BuildContext context) async {
     if (state is UpdateUserSuccess) {
       BlocProvider.of<UserCubit>(context).getUserData().then((value) {
-        BlocProvider.of<PostsCubit>(context).getPosts();
+        BlocProvider.of<GetPostsCubit>(context).getPosts();
         CustomToast.showToast(
           text: 'User updated successfully',
           state: CustomToastState.success,

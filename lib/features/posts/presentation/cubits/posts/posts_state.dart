@@ -11,28 +11,6 @@ class PostsInitial extends PostsState {
   const PostsInitial();
 }
 
-class GetPostsLoading extends PostsState {
-  const GetPostsLoading();
-}
-
-class GetPostsSuccess extends PostsState {
-  final List<PostModel> posts;
-
-  const GetPostsSuccess({required this.posts});
-
-  @override
-  List<Object> get props => [posts];
-}
-
-class GetPostsError extends PostsState {
-  final String error;
-
-  const GetPostsError({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
-
 class CreatePostLoading extends PostsState {
   const CreatePostLoading();
 }

@@ -15,7 +15,7 @@ import 'package:social_app/features/auth/domain/entities/sign_up_params.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
 import 'package:social_app/features/auth/presentation/widgets/custom_auth_loading.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import 'package:social_app/service_locator.dart';
 
@@ -242,12 +242,13 @@ class _SignUpFormState extends State<SignUpForm> {
       if (value) {
         Helper.uId = state.uId;
         BlocProvider.of<UserCubit>(context).getUserData().then((value) {
-          BlocProvider.of<PostsCubit>(context).getPosts();
-          CustomToast.showToast(
-            text: 'Account created successfully',
-            state: CustomToastState.success,
-          );
-          context.navigateAndReplace(newRoute: Routes.linkupRoute);
+          BlocProvider.of<GetPostsCubit>(context).getPosts().then((value) {
+            CustomToast.showToast(
+              text: 'Account created successfully',
+              state: CustomToastState.success,
+            );
+            context.navigateAndReplace(newRoute: Routes.linkupRoute);
+          });
         });
       }
     });

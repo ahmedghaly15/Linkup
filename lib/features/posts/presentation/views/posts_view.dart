@@ -5,8 +5,7 @@ import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
-import 'package:social_app/core/widgets/custom_toast.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 import 'package:social_app/features/posts/presentation/widgets/empty_post_view.dart';
 import 'package:social_app/features/posts/presentation/widgets/posts.dart';
 
@@ -27,15 +26,15 @@ class PostsView extends StatelessWidget {
             ),
             centerTitle: true,
           ),
-          BlocConsumer<PostsCubit, PostsState>(
-            listener: (context, state) => _controlFeedsState(state),
+          BlocBuilder<GetPostsCubit, GetPostsState>(
             builder: (context, state) {
-              final PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
+              final GetPostsCubit cubit =
+                  BlocProvider.of<GetPostsCubit>(context);
 
-              if (state is GetPostsLoading) {
-                return const SliverToBoxAdapter(
-                  child: BodyLoadingIndicator(),
-                );
+              if (state is GetPostsSuccess) {
+                return cubit.posts.isNotEmpty
+                    ? Posts(posts: cubit.posts)
+                    : const SliverToBoxAdapter(child: EmptyPostView());
               } else if (state is GetPostsError) {
                 return SliverToBoxAdapter(
                   child: CustomErrorWidget(
@@ -44,23 +43,14 @@ class PostsView extends StatelessWidget {
                   ),
                 );
               } else {
-                return cubit.posts.isNotEmpty
-                    ? Posts(posts: cubit.posts)
-                    : const EmptyPostView();
+                return const SliverToBoxAdapter(
+                  child: BodyLoadingIndicator(),
+                );
               }
             },
           )
         ],
       ),
     );
-  }
-
-  void _controlFeedsState(PostsState state) {
-    if (state is DeletePostSuccess) {
-      CustomToast.showToast(
-        text: 'Post deleted successfully',
-        state: CustomToastState.success,
-      );
-    }
   }
 }

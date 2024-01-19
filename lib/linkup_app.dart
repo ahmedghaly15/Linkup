@@ -5,7 +5,8 @@ import 'package:social_app/config/router/app_router.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/onboarding/presentation/view/onboarding_view.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import 'package:social_app/service_locator.dart';
 
@@ -27,9 +28,10 @@ class LinkupApp extends StatelessWidget {
             create: (context) => getIt.get<UserCubit>()..getUserData(),
           ),
           BlocProvider(
-            create: (context) => getIt.get<PostsCubit>()
-              ..getPosts()
-              ..getLikedPostsByMe(),
+            create: (context) => getIt.get<GetPostsCubit>()..getPosts(),
+          ),
+          BlocProvider(
+            create: (context) => getIt.get<PostsCubit>()..getLikedPostsByMe(),
           ),
         ],
         child: BlocBuilder<ThemesCubit, ThemeData>(
