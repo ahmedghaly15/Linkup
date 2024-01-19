@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
@@ -39,118 +38,113 @@ class _CommenterFieldState extends State<CommenterField> {
     return Row(
       children: <Widget>[
         Expanded(
-          child: BlocBuilder<ThemesCubit, ThemeData>(
-            builder: (context, state) {
-              return Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.r),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.r),
+            ),
+            color: Helper.isDark(context)
+                ? AppColors.darkPrimaryColor
+                : AppColors.scaffoldBackgroundClr,
+            child: Row(
+              children: <Widget>[
+                GetImageIconButton(
+                  onPressed: () {
+                    BlocProvider.of<CommentsCubit>(context).getCommentImage(
+                      source: ImageSource.camera,
+                    );
+                  },
+                  icon: Icons.camera_alt_rounded,
                 ),
-                color: Helper.isDark(state)
-                    ? AppColors.darkPrimaryColor
-                    : AppColors.scaffoldBackgroundClr,
-                child: Row(
-                  children: <Widget>[
-                    GetImageIconButton(
-                      onPressed: () {
-                        BlocProvider.of<CommentsCubit>(context).getCommentImage(
-                          source: ImageSource.camera,
-                        );
-                      },
-                      icon: Icons.camera_alt_rounded,
-                    ),
-                    GetImageIconButton(
-                      onPressed: () {
-                        BlocProvider.of<CommentsCubit>(context).getCommentImage(
-                          source: ImageSource.gallery,
-                        );
-                      },
-                      icon: Icons.image_rounded,
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: BlocBuilder<CommentsCubit, CommentsState>(
-                            builder: (context, state) {
-                          final CommentsCubit cubit =
-                              BlocProvider.of<CommentsCubit>(context);
+                GetImageIconButton(
+                  onPressed: () {
+                    BlocProvider.of<CommentsCubit>(context).getCommentImage(
+                      source: ImageSource.gallery,
+                    );
+                  },
+                  icon: Icons.image_rounded,
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: BlocBuilder<CommentsCubit, CommentsState>(
+                        builder: (context, state) {
+                      final CommentsCubit cubit =
+                          BlocProvider.of<CommentsCubit>(context);
 
-                          return Column(
-                            children: <Widget>[
-                              CustomTextFormField(
-                                hasPrefixIcon: false,
-                                controller: _commentController,
-                                enableSuggestions: true,
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                maxLines: null,
-                                hintText: 'Write a comment...',
-                                contentPadding: EdgeInsets.only(
-                                  left: 5.w,
-                                  right: 16.w,
+                      return Column(
+                        children: <Widget>[
+                          CustomTextFormField(
+                            hasPrefixIcon: false,
+                            controller: _commentController,
+                            enableSuggestions: true,
+                            textCapitalization: TextCapitalization.sentences,
+                            maxLines: null,
+                            hintText: 'Write a comment...',
+                            contentPadding: EdgeInsets.only(
+                              left: 5.w,
+                              right: 16.w,
+                            ),
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            filled: false,
+                            keyboardType: TextInputType.multiline,
+                            onChanged: (String value) {
+                              setState(() {
+                                commentText = value;
+                              });
+                            },
+                          ),
+                          if (cubit.commentImage != null) ...[
+                            SizedBox(height: 8.h),
+                            Stack(
+                              alignment: AlignmentDirectional.topEnd,
+                              children: <Widget>[
+                                Container(
+                                  height: 120.h,
+                                  margin: EdgeInsets.only(
+                                    right: 8.w,
+                                    bottom: 8.h,
+                                  ),
+                                  width: double.infinity,
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8.r),
+                                    ),
+                                    image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: FileImage(cubit.commentImage!),
+                                    ),
+                                  ),
                                 ),
-                                border: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                filled: false,
-                                keyboardType: TextInputType.multiline,
-                                onChanged: (String value) {
-                                  setState(() {
-                                    commentText = value;
-                                  });
-                                },
-                              ),
-                              if (cubit.commentImage != null) ...[
-                                SizedBox(height: 8.h),
-                                Stack(
-                                  alignment: AlignmentDirectional.topEnd,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 120.h,
-                                      margin: EdgeInsets.only(
-                                        right: 8.w,
-                                        bottom: 8.h,
-                                      ),
-                                      width: double.infinity,
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(8.r),
-                                        ),
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: FileImage(cubit.commentImage!),
-                                        ),
+                                Positioned(
+                                  top: 10.h,
+                                  right: 16.w,
+                                  child: CircleAvatar(
+                                    radius: 15.r,
+                                    backgroundColor: Colors.white,
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      onPressed: () =>
+                                          cubit.removeCommentImage(),
+                                      icon: Icon(
+                                        Icons.close,
+                                        color: AppColors.primaryColor,
+                                        size: 20.w,
                                       ),
                                     ),
-                                    Positioned(
-                                      top: 10.h,
-                                      right: 16.w,
-                                      child: CircleAvatar(
-                                        radius: 15.r,
-                                        backgroundColor: Colors.white,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          onPressed: () =>
-                                              cubit.removeCommentImage(),
-                                          icon: Icon(
-                                            Icons.close,
-                                            color: AppColors.primaryColor,
-                                            size: 20.w,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ],
-                            ],
-                          );
-                        }),
-                      ),
-                    ),
-                  ],
+                            ),
+                          ],
+                        ],
+                      );
+                    }),
+                  ),
                 ),
-              );
-            },
+              ],
+            ),
           ),
         ),
         TextButton(

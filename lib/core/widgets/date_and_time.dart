@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 
@@ -17,41 +15,33 @@ class DateAndTime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemesCubit, ThemeData>(
-      builder: (context, themeState) {
-        return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              date,
-              style: AppTextStyles.textStyle13.copyWith(
-                color:
-                    Helper.isDark(themeState) ? Colors.white54 : Colors.black38,
-              ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text(
+          date,
+          style: AppTextStyles.textStyle13.copyWith(
+            color: Helper.isDark(context) ? Colors.white54 : Colors.black38,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
+          child: Container(
+            width: 5.w,
+            height: 5.w,
+            decoration: BoxDecoration(
+              color: Helper.isDark(context) ? Colors.grey : Colors.black45,
+              shape: BoxShape.circle,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.w),
-              child: Container(
-                width: 5.w,
-                height: 5.w,
-                decoration: BoxDecoration(
-                  color:
-                      Helper.isDark(themeState) ? Colors.grey : Colors.black45,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-            Text(
-              time,
-              style: AppTextStyles.textStyle13.copyWith(
-                color: themeState.brightness == Brightness.dark
-                    ? Colors.white54
-                    : Colors.black38,
-              ),
-            ),
-          ],
-        );
-      },
+          ),
+        ),
+        Text(
+          time,
+          style: AppTextStyles.textStyle13.copyWith(
+            color: Helper.isDark(context) ? Colors.white54 : Colors.black38,
+          ),
+        ),
+      ],
     );
   }
 }

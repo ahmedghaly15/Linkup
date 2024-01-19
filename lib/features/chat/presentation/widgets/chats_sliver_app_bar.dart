@@ -20,22 +20,18 @@ class ChatsSliverAppBar extends StatelessWidget {
           title: cubit.isSearching
               ? CustomSearchField(cubit: cubit)
               : const SizedBox(),
-          leading: BlocBuilder<ThemesCubit, ThemeData>(
-            builder: (context, themeState) {
-              return IconButton(
-                onPressed: () =>
-                    BlocProvider.of<ThemesCubit>(context).toggleTheme(),
-                icon: Icon(
-                  Helper.isDark(themeState)
-                      ? Icons.wb_sunny_outlined
-                      : Icons.nightlight_round_outlined,
-                  size: 28.w,
-                  color: Helper.isDark(themeState)
-                      ? Colors.white
-                      : AppColors.darkPrimaryColor,
-                ),
-              );
-            },
+          leading: IconButton(
+            onPressed: () =>
+                BlocProvider.of<ThemesCubit>(context).toggleTheme(),
+            icon: Icon(
+              Helper.isDark(context)
+                  ? Icons.wb_sunny_outlined
+                  : Icons.nightlight_round_outlined,
+              size: 28.w,
+              color: Helper.isDark(context)
+                  ? Colors.white
+                  : AppColors.darkPrimaryColor,
+            ),
           ),
           actions: <Widget>[
             IconButton(

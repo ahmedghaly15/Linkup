@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/config/themes/app_colors.dart';
@@ -41,114 +40,109 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
       child: Row(
         children: <Widget>[
           Flexible(
-            child: BlocBuilder<ThemesCubit, ThemeData>(
-              builder: (context, themeState) {
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
+              color: Helper.isDark(context)
+                  ? AppColors.darkPrimaryColor
+                  : AppColors.scaffoldBackgroundClr,
+              child: Row(
+                children: <Widget>[
+                  GetImageIconButton(
+                    onPressed: () {
+                      BlocProvider.of<ChatCubit>(context).getMessageImage(
+                        source: ImageSource.camera,
+                      );
+                    },
+                    icon: Icons.camera_alt_rounded,
                   ),
-                  color: Helper.isDark(themeState)
-                      ? AppColors.darkPrimaryColor
-                      : AppColors.scaffoldBackgroundClr,
-                  child: Row(
-                    children: <Widget>[
-                      GetImageIconButton(
-                        onPressed: () {
-                          BlocProvider.of<ChatCubit>(context).getMessageImage(
-                            source: ImageSource.camera,
-                          );
-                        },
-                        icon: Icons.camera_alt_rounded,
-                      ),
-                      GetImageIconButton(
-                        onPressed: () {
-                          BlocProvider.of<ChatCubit>(context).getMessageImage(
-                            source: ImageSource.gallery,
-                          );
-                        },
-                        icon: Icons.image_rounded,
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: <Widget>[
-                              CustomTextFormField(
-                                controller: _messageController,
-                                enableSuggestions: true,
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                maxLines: null,
-                                keyboardType: TextInputType.multiline,
-                                hintText: 'Type a message...',
-                                hasPrefixIcon: false,
-                                border: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                filled: false,
-                                contentPadding: EdgeInsets.only(
-                                  left: 5.w,
-                                  right: 16.w,
+                  GetImageIconButton(
+                    onPressed: () {
+                      BlocProvider.of<ChatCubit>(context).getMessageImage(
+                        source: ImageSource.gallery,
+                      );
+                    },
+                    icon: Icons.image_rounded,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          CustomTextFormField(
+                            controller: _messageController,
+                            enableSuggestions: true,
+                            textCapitalization: TextCapitalization.sentences,
+                            maxLines: null,
+                            keyboardType: TextInputType.multiline,
+                            hintText: 'Type a message...',
+                            hasPrefixIcon: false,
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            filled: false,
+                            contentPadding: EdgeInsets.only(
+                              left: 5.w,
+                              right: 16.w,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                _messageController.text = value;
+                              });
+                            },
+                          ),
+                          if (widget.cubit.messageImage != null) ...[
+                            SizedBox(height: 4.h),
+                            Stack(
+                              alignment: AlignmentDirectional.topEnd,
+                              children: <Widget>[
+                                Container(
+                                  height: 120.h,
+                                  margin: EdgeInsets.only(
+                                    right: 8.w,
+                                    bottom: 8.h,
+                                  ),
+                                  width: double.infinity,
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8.r),
+                                    ),
+                                    image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: FileImage(
+                                        widget.cubit.messageImage!,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _messageController.text = value;
-                                  });
-                                },
-                              ),
-                              if (widget.cubit.messageImage != null) ...[
-                                SizedBox(height: 4.h),
-                                Stack(
-                                  alignment: AlignmentDirectional.topEnd,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 120.h,
-                                      margin: EdgeInsets.only(
-                                        right: 8.w,
-                                        bottom: 8.h,
-                                      ),
-                                      width: double.infinity,
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(8.r),
-                                        ),
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: FileImage(
-                                            widget.cubit.messageImage!,
-                                          ),
-                                        ),
+                                Positioned(
+                                  top: 10.h,
+                                  right: 16.w,
+                                  child: CircleAvatar(
+                                    radius: 15.r,
+                                    backgroundColor: Colors.white,
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      onPressed: () =>
+                                          widget.cubit.removeMessageImage(),
+                                      icon: Icon(
+                                        Icons.close,
+                                        color: AppColors.primaryColor,
+                                        size: 20.w,
                                       ),
                                     ),
-                                    Positioned(
-                                      top: 10.h,
-                                      right: 16.w,
-                                      child: CircleAvatar(
-                                        radius: 15.r,
-                                        backgroundColor: Colors.white,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          onPressed: () =>
-                                              widget.cubit.removeMessageImage(),
-                                          icon: Icon(
-                                            Icons.close,
-                                            color: AppColors.primaryColor,
-                                            size: 20.w,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ],
-                            ],
-                          ),
-                        ),
+                            ),
+                          ],
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                );
-              },
+                ],
+              ),
             ),
           ),
           IconButton(

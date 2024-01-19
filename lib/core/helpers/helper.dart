@@ -17,14 +17,14 @@ class Helper {
     return date;
   }
 
-  static bool isDark(ThemeData themeState) =>
-      themeState.brightness == Brightness.dark;
+  static bool isDark(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark;
 
-  static BoxShadow postShadow(ThemeData state) {
+  static BoxShadow postShadow(BuildContext context) {
     return BoxShadow(
       offset: Offset(0, 1.73.h),
       blurRadius: 5.h,
-      color: isDark(state) ? Colors.grey.shade700 : Colors.grey,
+      color: isDark(context) ? Colors.grey.shade700 : Colors.grey,
     );
   }
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/widgets/custom_image_bottom_sheet.dart';
@@ -34,49 +33,42 @@ class EditProfileImage extends StatelessWidget {
           },
         ),
         Positioned(
-          // // top: 16.h,
           bottom: 8.h,
           right: 8.w,
-          child: BlocBuilder<ThemesCubit, ThemeData>(
-            builder: (context, themeState) {
-              return Container(
-                height: 32.h,
-                width: 32.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Helper.isDark(themeState)
-                      ? AppColors.darkPrimaryColor
-                      : AppColors.scaffoldBackgroundClr,
-                  boxShadow: <BoxShadow>[
-                    Helper.postShadow(themeState),
-                  ],
-                ),
-                child: MaterialButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () => ShowCustomImageBottomSheet.show(
-                    context: context,
-                    onPressedGallery: () {
-                      BlocProvider.of<EditProfileCubit>(context)
-                          .getProfileImage(
-                        source: ImageSource.gallery,
-                      );
-                    },
-                    onPressedCamera: () {
-                      BlocProvider.of<EditProfileCubit>(context)
-                          .getProfileImage(
-                        source: ImageSource.camera,
-                      );
-                    },
-                    type: 'Profile',
-                  ),
-                  child: Icon(
-                    Icons.camera_alt,
-                    color: AppColors.primaryColor,
-                    size: 20.w,
-                  ),
-                ),
-              );
-            },
+          child: Container(
+            height: 32.h,
+            width: 32.h,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Helper.isDark(context)
+                  ? AppColors.darkPrimaryColor
+                  : AppColors.scaffoldBackgroundClr,
+              boxShadow: <BoxShadow>[
+                Helper.postShadow(context),
+              ],
+            ),
+            child: MaterialButton(
+              padding: EdgeInsets.zero,
+              onPressed: () => ShowCustomImageBottomSheet.show(
+                context: context,
+                onPressedGallery: () {
+                  BlocProvider.of<EditProfileCubit>(context).getProfileImage(
+                    source: ImageSource.gallery,
+                  );
+                },
+                onPressedCamera: () {
+                  BlocProvider.of<EditProfileCubit>(context).getProfileImage(
+                    source: ImageSource.camera,
+                  );
+                },
+                type: 'Profile',
+              ),
+              child: Icon(
+                Icons.camera_alt,
+                color: AppColors.primaryColor,
+                size: 20.w,
+              ),
+            ),
           ),
         ),
       ],
