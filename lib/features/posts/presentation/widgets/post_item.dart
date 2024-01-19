@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
-import 'package:social_app/features/posts/presentation/widgets/custom_divider.dart';
 import 'package:social_app/features/posts/presentation/widgets/likes_and_comments.dart';
-import 'package:social_app/features/posts/presentation/widgets/post_item_footer.dart';
 import 'package:social_app/features/posts/presentation/widgets/post_text_and_image.dart';
 import 'package:social_app/features/posts/presentation/widgets/top_post_item_section.dart';
 
@@ -20,38 +18,31 @@ class PostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w),
-      padding: EdgeInsets.symmetric(
-        horizontal: 8.0.w,
-        vertical: 10.h,
+      margin: EdgeInsets.symmetric(horizontal: 10.w),
+      padding: EdgeInsets.only(
+        left: 10.w,
+        right: 10.w,
+        top: 10.h,
+        bottom: 2.h,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(16.r)),
-        color:
-            Helper.isDark(context) ? AppColors.darkPrimaryColor : Colors.white,
-        boxShadow: <BoxShadow>[
-          Helper.postShadow(context),
-        ],
+        borderRadius: BorderRadius.all(Radius.circular(40.r)),
+        color: Helper.isDark(context)
+            ? AppColors.darkPrimaryColor
+            : AppColors.lightWhiteBlue,
+        boxShadow: Helper.isDark(context)
+            ? <BoxShadow>[
+                Helper.postShadow(context),
+              ]
+            : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TopPostItemSection(post: post),
-          Padding(
-            padding: EdgeInsetsDirectional.only(
-              start: 5.w,
-              end: 5.w,
-              top: 15.h,
-            ),
-            child: const CustomDivider(),
-          ),
           PostTextAndImage(post: post),
+          SizedBox(height: 8.h),
           LikesAndComments(post: post),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.w),
-            child: const CustomDivider(),
-          ),
-          PostItemFooter(post: post),
         ],
       ),
     );

@@ -25,7 +25,7 @@ class PostInformation extends StatelessWidget {
           imageBuilder: (_, image) {
             return CircleAvatar(
               backgroundImage: image,
-              radius: 25.r,
+              radius: 20.r,
               backgroundColor: AppColors.primaryColor,
             );
           },
@@ -37,13 +37,15 @@ class PostInformation extends StatelessWidget {
             children: <Widget>[
               Text(
                 post.name!,
-                style: AppTextStyles.textStyle16SemiBold,
+                style: AppTextStyles.textStyle17Bold,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
                 "${post.date} at ${post.time}",
-                style: AppTextStyles.textStyle13,
+                style: AppTextStyles.textStyle13.copyWith(
+                  color: AppColors.lightGrey,
+                ),
               ),
             ],
           ),

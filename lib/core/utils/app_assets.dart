@@ -50,6 +50,10 @@ class AppAssets {
   /// assets/icons/chat.png
   static const String iconsChat = "assets/icons/chat.png";
 
+  /// Assets for iconsComment
+  /// assets/icons/comment.png
+  static const String iconsComment = "assets/icons/comment.png";
+
   /// Assets for iconsEmail
   /// assets/icons/email.png
   static const String iconsEmail = "assets/icons/email.png";
@@ -65,6 +69,10 @@ class AppAssets {
   /// Assets for iconsInvisible
   /// assets/icons/invisible.png
   static const String iconsInvisible = "assets/icons/invisible.png";
+
+  /// Assets for iconsLike
+  /// assets/icons/like.png
+  static const String iconsLike = "assets/icons/like.png";
 
   /// Assets for iconsLock
   /// assets/icons/lock.png
@@ -85,6 +93,10 @@ class AppAssets {
   /// Assets for iconsPlus
   /// assets/icons/plus.png
   static const String iconsPlus = "assets/icons/plus.png";
+
+  /// Assets for iconsRedLike
+  /// assets/icons/red_like.png
+  static const String iconsRedLike = "assets/icons/red_like.png";
 
   /// Assets for iconsUser
   /// assets/icons/user.png

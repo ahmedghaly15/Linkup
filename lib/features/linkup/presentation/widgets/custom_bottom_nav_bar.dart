@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 
@@ -43,7 +44,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ];
 
         return BottomAppBar(
-          color: AppColors.primaryColor,
+          color: Helper.isDark(context)
+              ? AppColors.darkPrimaryColor
+              : AppColors.primaryColor,
           shape: const CircularNotchedRectangle(),
           notchMargin: 8.h,
           child: Row(
