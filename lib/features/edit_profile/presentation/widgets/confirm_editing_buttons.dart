@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
-import 'package:social_app/features/profile/domain/entities/update_user_params.dart';
-import 'package:social_app/features/profile/presentation/cubits/edit_profile_cubit.dart';
-import 'package:social_app/features/profile/presentation/widgets/confirm_editing_button.dart';
+import 'package:social_app/features/edit_profile/domain/entities/update_user_params.dart';
+import 'package:social_app/features/edit_profile/presentation/cubits/edit_profile_cubit.dart';
+import 'package:social_app/features/edit_profile/presentation/widgets/confirm_editing_button.dart';
 
 class ConfirmEditingButtons extends StatelessWidget {
   const ConfirmEditingButtons({

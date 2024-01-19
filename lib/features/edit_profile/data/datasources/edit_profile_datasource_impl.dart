@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_strings.dart';
-import 'package:social_app/features/profile/data/datasources/edit_profile_datasource.dart';
+import 'package:social_app/features/edit_profile/data/datasources/edit_profile_datasource.dart';
 import 'package:social_app/service_locator.dart';
 
 class EditProfileDataSourceImpl implements EditProfileDataSource {

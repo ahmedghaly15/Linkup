@@ -12,9 +12,9 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/functions/execute_and_handle_errors.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
-import 'package:social_app/features/profile/data/datasources/edit_profile_datasource.dart';
-import 'package:social_app/features/profile/domain/entities/update_user_params.dart';
-import 'package:social_app/features/profile/domain/repositories/edit_profile_repo.dart';
+import 'package:social_app/features/edit_profile/data/datasources/edit_profile_datasource.dart';
+import 'package:social_app/features/edit_profile/domain/entities/update_user_params.dart';
+import 'package:social_app/features/edit_profile/domain/repositories/edit_profile_repo.dart';
 import 'package:social_app/service_locator.dart';
 
 class EditProfileRepoImpl implements EditProfileRepo {

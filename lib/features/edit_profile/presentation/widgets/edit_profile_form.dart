@@ -9,10 +9,10 @@ import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
+import 'package:social_app/features/edit_profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
-import 'package:social_app/features/profile/domain/entities/update_user_params.dart';
-import 'package:social_app/features/profile/presentation/cubits/edit_profile_cubit.dart';
-import 'package:social_app/features/profile/presentation/widgets/confirm_editing_buttons.dart';
+import 'package:social_app/features/edit_profile/domain/entities/update_user_params.dart';
+import 'package:social_app/features/edit_profile/presentation/widgets/confirm_editing_buttons.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class EditProfileForm extends StatefulWidget {

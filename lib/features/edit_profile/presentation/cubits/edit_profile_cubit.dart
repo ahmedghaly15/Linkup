@@ -4,11 +4,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/entities/no_params.dart';
-import 'package:social_app/features/profile/domain/entities/update_user_params.dart';
-import 'package:social_app/features/profile/domain/usecases/get_image.dart';
-import 'package:social_app/features/profile/domain/usecases/update_user.dart';
-import 'package:social_app/features/profile/domain/usecases/update_user_posts.dart';
-import 'package:social_app/features/profile/domain/usecases/upload_image.dart';
+import 'package:social_app/features/edit_profile/domain/entities/update_user_params.dart';
+import 'package:social_app/features/edit_profile/domain/usecases/get_image.dart';
+import 'package:social_app/features/edit_profile/domain/usecases/update_user.dart';
+import 'package:social_app/features/edit_profile/domain/usecases/update_user_posts.dart';
+import 'package:social_app/features/edit_profile/domain/usecases/upload_image.dart';
 
 part 'edit_profile_state.dart';
 

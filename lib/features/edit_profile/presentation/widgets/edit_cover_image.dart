@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/widgets/custom_image_bottom_sheet.dart';
-import 'package:social_app/features/profile/presentation/cubits/edit_profile_cubit.dart';
+import 'package:social_app/features/edit_profile/presentation/cubits/edit_profile_cubit.dart';
 
 class EditCoverImage extends StatelessWidget {
   const EditCoverImage({super.key});

@@ -5,9 +5,9 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/custom_sliver_app_bar.dart';
-import 'package:social_app/features/profile/presentation/widgets/edit_cover_image.dart';
-import 'package:social_app/features/profile/presentation/widgets/edit_profile_form.dart';
-import 'package:social_app/features/profile/presentation/widgets/edit_profile_image.dart';
+import 'package:social_app/features/edit_profile/presentation/widgets/edit_cover_image.dart';
+import 'package:social_app/features/edit_profile/presentation/widgets/edit_profile_form.dart';
+import 'package:social_app/features/edit_profile/presentation/widgets/edit_profile_image.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class EditProfileView extends StatelessWidget {
