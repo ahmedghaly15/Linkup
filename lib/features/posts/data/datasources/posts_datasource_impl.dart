@@ -30,9 +30,7 @@ class PostsDataSourceImpl implements PostsDataSource {
     required CreatePostParams createPostParams,
   }) async {
     final PostModel post = PostModel(
-      name: Helper.currentUser!.name,
-      image: Helper.currentUser!.image,
-      uId: Helper.currentUser!.uId,
+      user: Helper.currentUser,
       date: createPostParams.date,
       time: createPostParams.time,
       text: createPostParams.text,

@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:social_app/core/models/user_model.dart';
 
 class PostModel extends Equatable {
-  final String? name;
-  final String? uId;
+  final UserModel? user;
   final String? postId;
-  final String? image;
   final String? time;
   final String? date;
   final Timestamp? dateTime;
@@ -15,9 +14,7 @@ class PostModel extends Equatable {
   final int? comments;
 
   const PostModel({
-    this.name,
-    this.uId,
-    this.image,
+    this.user,
     this.date,
     this.time,
     this.dateTime,
@@ -30,14 +27,12 @@ class PostModel extends Equatable {
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(
-      name: json['name'] as String?,
-      uId: json['uId'] as String?,
-      image: json['image'] as String?,
+      user: UserModel.fromJson(json['user'] ?? {}),
+      text: json['text'] as String?,
       date: json['date'] as String?,
       time: json['time'] as String?,
       dateTime: json['dateTime'] as Timestamp?,
       postImage: json['postImage'] as String?,
-      text: json['text'] as String?,
       comments: json['comments'] as int?,
       likes: json['likes'] as int?,
       postId: json['postId'] as String?,
@@ -46,10 +41,8 @@ class PostModel extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'uId': uId,
+      'user': user?.toJson(),
       'text': text,
-      'image': image,
       'date': date,
       'time': time,
       'dateTime': dateTime,
@@ -62,10 +55,8 @@ class PostModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        name,
-        uId,
+        user,
         text,
-        image,
         date,
         time,
         dateTime,

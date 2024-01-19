@@ -72,7 +72,7 @@ class LikesAndComments extends StatelessWidget {
                   routeName: Routes.commentsRoute,
                   arguments: CommentsViewParams(
                     postId: post.postId,
-                    postUserId: post.uId,
+                    postUserId: post.user!.uId,
                   ),
                 );
               },

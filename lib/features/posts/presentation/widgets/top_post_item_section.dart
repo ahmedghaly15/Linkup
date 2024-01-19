@@ -22,7 +22,7 @@ class TopPostItemSection extends StatelessWidget {
     return Row(
       children: <Widget>[
         Flexible(child: PostInformation(post: post)),
-        post.uId == Helper.currentUser!.uId
+        post.user!.uId == Helper.currentUser!.uId
             ? BlocConsumer<PostsCubit, PostsState>(
                 listener: (context, state) => _controlFeedsState(state),
                 builder: (context, state) {

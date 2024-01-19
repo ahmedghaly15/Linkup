@@ -68,7 +68,7 @@ class UserRepoImpl implements UserRepo {
         }
 
         for (var post in allPosts) {
-          if (post.uId == uId) {
+          if (post.user!.uId == uId) {
             userPosts.add(post);
           }
         }

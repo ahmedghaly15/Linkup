@@ -70,7 +70,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
         for (var element in result.docs) {
           final post = PostModel.fromJson(element.data());
 
-          if (post.uId == Helper.currentUser!.uId) {
+          if (post.user!.uId == Helper.currentUser!.uId) {
             return Right(await getIt
                 .get<FirebaseFirestore>()
                 .collection(AppStrings.posts)
