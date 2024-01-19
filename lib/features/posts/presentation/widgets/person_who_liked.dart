@@ -24,13 +24,9 @@ class PersonWhoLiked extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.only(bottom: 10.h),
       decoration: BoxDecoration(
-        color:
-            Helper.isDark(context) ? AppColors.darkPrimaryColor : Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10.r)),
-        border: Border.all(
-          color: const Color(0xFFE3E3E4),
-          width: 1,
-        ),
+        color: Helper.isDark(context)
+            ? AppColors.darkPrimaryColor
+            : AppColors.lightWhiteBlue,
       ),
       child: MaterialButton(
         padding: EdgeInsets.zero,

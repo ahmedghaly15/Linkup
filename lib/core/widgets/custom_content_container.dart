@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/core/helpers/helper.dart';
 
 class CustomContentContainer extends StatelessWidget {
   const CustomContentContainer({
@@ -26,7 +27,9 @@ class CustomContentContainer extends StatelessWidget {
         top: 20.h,
       ),
       decoration: BoxDecoration(
-        color: AppColors.lightWhiteBlue,
+        color: Helper.isDark(context)
+            ? AppColors.darkPrimaryColor
+            : AppColors.lightWhiteBlue,
         borderRadius: BorderRadius.all(Radius.circular(45.r)),
       ),
       child: child,

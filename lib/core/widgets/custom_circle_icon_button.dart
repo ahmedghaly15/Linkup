@@ -25,8 +25,8 @@ class CustomCircleIconButton extends StatelessWidget {
         boxShadow: hasShadow
             ? <BoxShadow>[
                 BoxShadow(
-                  offset: Offset(0, 10.h),
-                  blurRadius: 20.r,
+                  offset: Offset(0, 6.h),
+                  blurRadius: 12.r,
                   spreadRadius: 0,
                   color: Colors.black.withOpacity(0.25),
                 ),

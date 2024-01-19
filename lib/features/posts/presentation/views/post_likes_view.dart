@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/widgets/custom_content_container.dart';
+import 'package:social_app/core/widgets/custom_filling_container.dart';
 import 'package:social_app/core/widgets/custom_sliver_app_bar.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
 import 'package:social_app/features/posts/presentation/widgets/person_who_liked.dart';
@@ -16,48 +18,53 @@ class PostLikesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          physics: AppConstants.physics,
-          slivers: [
-            CustomSliverAppBar(
-              title: 'People who liked',
-              backOnPressed: () {
-                // BlocProvider.of<PostsCubit>(context).getPosts();
-                context.back();
-              },
-            ),
-            BlocBuilder<PostsCubit, PostsState>(
-              builder: (context, state) {
-                final PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
+      body: CustomFillingContainer(
+        child: CustomContentContainer(
+          child: SafeArea(
+            child: CustomScrollView(
+              physics: AppConstants.physics,
+              slivers: [
+                const CustomSliverAppBar(
+                  title: 'People who liked',
+                  // backOnPressed: () {
+                  //   // BlocProvider.of<PostsCubit>(context).getPosts();
+                  //   context.back();
+                  // },
+                ),
+                BlocBuilder<PostsCubit, PostsState>(
+                  builder: (context, state) {
+                    final PostsCubit cubit =
+                        BlocProvider.of<PostsCubit>(context);
 
-                cubit.peopleLikeThePost(postId: postId);
+                    cubit.peopleLikeThePost(postId: postId);
 
-                return cubit.peopleLikePost.isNotEmpty
-                    ? SliverPadding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        sliver: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              return AnimationConfiguration.staggeredList(
-                                position: index,
-                                duration: const Duration(milliseconds: 700),
-                                child: SlideAnimation(
-                                  horizontalOffset: -150.w,
-                                  child: PersonWhoLiked(
-                                    like: cubit.peopleLikePost[index],
-                                  ),
-                                ),
-                              );
-                            },
-                            childCount: cubit.peopleLikePost.length,
-                          ),
-                        ),
-                      )
-                    : SliverFillRemaining(child: Container());
-              },
+                    return cubit.peopleLikePost.isNotEmpty
+                        ? SliverPadding(
+                            padding: EdgeInsets.symmetric(vertical: 16.w),
+                            sliver: SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                (context, index) {
+                                  return AnimationConfiguration.staggeredList(
+                                    position: index,
+                                    duration: const Duration(milliseconds: 700),
+                                    child: SlideAnimation(
+                                      horizontalOffset: -150.w,
+                                      child: PersonWhoLiked(
+                                        like: cubit.peopleLikePost[index],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                childCount: cubit.peopleLikePost.length,
+                              ),
+                            ),
+                          )
+                        : const SliverFillRemaining(child: SizedBox());
+                  },
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
