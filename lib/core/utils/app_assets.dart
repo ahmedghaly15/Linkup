@@ -175,6 +175,11 @@ class AppAssets {
   /// assets/images/onboarding3.png
   static const String imagesOnboarding3 = "assets/images/onboarding3.png";
 
+  /// Assets for imagesProfileBackground
+  /// assets/images/profile_background.png
+  static const String imagesProfileBackground =
+      "assets/images/profile_background.png";
+
   /// Assets for imagesSplash
   /// assets/images/splash.png
   static const String imagesSplash = "assets/images/splash.png";

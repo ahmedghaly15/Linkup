@@ -8,6 +8,7 @@ class AppColors {
   static const Color darkPrimaryColor = Color(0xFF121212);
   static const Color darkHeaderClr = Color(0xFF424242);
   static const Color lightWhiteBlue = Color(0xffE6EEFA);
+  static const Color iconsColor = Color(0xff130F26);
   static const List<Color> loadingColors = <Color>[
     primaryColor,
     Color(0xff4B6C9F),

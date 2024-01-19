@@ -13,4 +13,6 @@ class AppConstants {
   static double get expandedHeight => 100.h;
 
   static double get appBarElevation => 0;
+
+  static double get contentContainerRadius => 45;
 }

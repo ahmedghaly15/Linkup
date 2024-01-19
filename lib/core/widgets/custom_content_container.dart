@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/core/utils/app_constants.dart';
 
 class CustomContentContainer extends StatelessWidget {
   const CustomContentContainer({
@@ -10,12 +11,14 @@ class CustomContentContainer extends StatelessWidget {
     this.height,
     this.width = double.infinity,
     this.horizontalPadding = 16,
+    this.borderRadius,
   });
 
   final Widget child;
   final double? height;
   final double width;
   final double horizontalPadding;
+  final BorderRadiusGeometry? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,10 @@ class CustomContentContainer extends StatelessWidget {
         color: Helper.isDark(context)
             ? AppColors.darkPrimaryColor
             : AppColors.lightWhiteBlue,
-        borderRadius: BorderRadius.all(Radius.circular(45.r)),
+        borderRadius: borderRadius ??
+            BorderRadius.all(
+              Radius.circular(AppConstants.contentContainerRadius.r),
+            ),
       ),
       child: child,
     );

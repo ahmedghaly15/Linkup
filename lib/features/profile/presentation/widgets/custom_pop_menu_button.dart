@@ -2,43 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
-import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
-import 'package:social_app/core/widgets/user_cover_image.dart';
-import 'package:social_app/core/widgets/user_profile_image.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
-class MeProfileAndCoverImages extends StatelessWidget {
-  const MeProfileAndCoverImages({
-    super.key,
-    required this.me,
-  });
-
-  final UserModel me;
+class CustomPopMenuButton extends StatelessWidget {
+  const CustomPopMenuButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.bottomCenter,
-      children: <Widget>[
-        UserCoverImage(cover: me.cover!),
-        Positioned(
-          bottom: 20.h,
-          child: UserProfileImage(image: me.image!),
-        ),
-        Positioned(
-          top: 25.h,
-          right: 16.w,
-          child: PopupMenuButton(
+    return BlocConsumer<UserCubit, UserState>(
+        listener: (context, state) => _handleSignOutState(state, context),
+        builder: (context, state) {
+          return PopupMenuButton(
             icon: Container(
-              height: 30.h,
-              width: 30.h,
+              height: 44.h,
+              width: 44.h,
               decoration: const BoxDecoration(
+                color: AppColors.lightWhiteBlue,
                 shape: BoxShape.circle,
-                color: Colors.grey,
               ),
-              child: const Icon(Icons.more_vert),
+              child: const Icon(
+                Icons.more_vert,
+                color: AppColors.iconsColor,
+              ),
             ),
             itemBuilder: (context) => [
               PopupMenuItem(
@@ -65,9 +53,13 @@ class MeProfileAndCoverImages extends StatelessWidget {
                 BlocProvider.of<UserCubit>(context).signOut();
               }
             },
-          ),
-        ),
-      ],
-    );
+          );
+        });
+  }
+
+  void _handleSignOutState(UserState state, BuildContext context) {
+    if (state is UserSignOutSuccess) {
+      context.navigateAndReplace(newRoute: Routes.signInRoute);
+    }
   }
 }

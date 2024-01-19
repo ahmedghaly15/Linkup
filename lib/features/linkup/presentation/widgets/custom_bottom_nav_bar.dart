@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,26 +14,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
     return BlocBuilder<LinkupCubit, LinkupState>(
       builder: (context, state) {
         final LinkupCubit cubit = BlocProvider.of<LinkupCubit>(context);
-
-        double changePositionedOfLine() {
-          switch (BlocProvider.of<LinkupCubit>(context).currentIndex) {
-            case 0:
-              return 15.w;
-
-            case 1:
-              return 115.w;
-
-            case 2:
-              return 215.w;
-
-            case 3:
-              return 312.w;
-
-            default:
-              return 0;
-          }
-        }
-
         List<String> icons = const <String>[
           AppAssets.iconsHome,
           AppAssets.iconsChat,

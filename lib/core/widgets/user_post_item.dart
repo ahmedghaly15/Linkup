@@ -18,35 +18,28 @@ class UserPostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        left: 16.w,
-        right: 16.w,
-        bottom: 24.h,
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 8.0.w,
-        vertical: 10.h,
+      margin: EdgeInsets.symmetric(horizontal: 10.w),
+      padding: EdgeInsets.only(
+        left: 10.w,
+        right: 10.w,
+        top: 10.h,
+        bottom: 2.h,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(16.r)),
-        color:
-            Helper.isDark(context) ? AppColors.darkPrimaryColor : Colors.white,
-        boxShadow: <BoxShadow>[
-          Helper.postShadow(context),
-        ],
+        borderRadius: BorderRadius.all(Radius.circular(40.r)),
+        color: Helper.isDark(context)
+            ? AppColors.darkPrimaryColor
+            : AppColors.lightWhiteBlue,
+        boxShadow: Helper.isDark(context)
+            ? <BoxShadow>[
+                Helper.postShadow(context),
+              ]
+            : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           PostInformation(post: post),
-          // Padding(
-          //   padding: EdgeInsetsDirectional.only(
-          //     start: 5.w,
-          //     end: 5.w,
-          //     top: 15.h,
-          //   ),
-          //   // child: const CustomDivider(),
-          // ),
           PostTextAndImage(post: post),
           LikesAndComments(post: post),
         ],

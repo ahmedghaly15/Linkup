@@ -5,7 +5,7 @@ import 'package:social_app/features/linkup/data/datasources/linkup_datasource.da
 import 'package:social_app/features/linkup/domain/entities/change_index_params.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/posts/presentation/views/posts_view.dart';
-import 'package:social_app/features/profile/presentation/views/me_view.dart';
+import 'package:social_app/features/profile/presentation/views/profile_view.dart';
 import 'package:social_app/features/users/presentation/views/users_view.dart';
 
 class LinkupDataSourceImpl implements LinkupDataSource {
@@ -28,7 +28,7 @@ class LinkupDataSourceImpl implements LinkupDataSource {
       PostsView(),
       ChatsView(),
       UsersView(),
-      MeView(),
+      ProfileView(),
     ];
   }
 
