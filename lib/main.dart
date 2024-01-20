@@ -5,8 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/bloc_observer.dart';
 import 'package:social_app/firebase_options.dart';
 import 'package:social_app/service_locator.dart';
-
 import 'package:social_app/linkup_app.dart';
+
+// TODO: seems that peopleLikeThePost method need Future instead of Stream
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

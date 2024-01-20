@@ -97,6 +97,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 ),
                 const TextFormFieldSeparator(),
                 CustomTextFormField(
+                  maxLines: null,
                   keyboardType: TextInputType.text,
                   controller: _bioController,
                   hintText: 'Bio',
@@ -140,7 +141,15 @@ class _EditProfileFormState extends State<EditProfileForm> {
   }
 
   void _update(BuildContext context) {
-    if (_formKey.currentState!.validate()) {
+    if (_checkInfoChanged()) {
+      CustomToast.showToast(
+        text: 'Nothing changed to update',
+        state: CustomToastState.warning,
+      );
+    }
+
+    if (_formKey.currentState!.validate() && _checkInfoChanged() == false) {
+      AuthHelper.keyboardUnfocus(context);
       BlocProvider.of<EditProfileCubit>(context).updateUser(
         params: UpdateUserParams(
           name: _nameController.text.trim(),
@@ -155,8 +164,16 @@ class _EditProfileFormState extends State<EditProfileForm> {
     }
   }
 
+  bool _checkInfoChanged() {
+    return Helper.currentUser!.name == _nameController.text.trim() &&
+        Helper.currentUser!.phone == _phoneController.text &&
+        Helper.currentUser!.bio == _bioController.text.trim();
+  }
+
   void _controlEditProfileState(
-      EditProfileState state, BuildContext context) async {
+    EditProfileState state,
+    BuildContext context,
+  ) async {
     if (state is UpdateUserSuccess) {
       BlocProvider.of<UserCubit>(context).getUserData().then((value) {
         BlocProvider.of<GetPostsCubit>(context).getPosts();
@@ -165,13 +182,6 @@ class _EditProfileFormState extends State<EditProfileForm> {
           state: CustomToastState.success,
         );
       });
-    }
-
-    if (state is UploadImageSuccess) {
-      CustomToast.showToast(
-        text: 'Image Updated Successfully',
-        state: CustomToastState.success,
-      );
     }
 
     if (state is UploadImageError) {

@@ -20,8 +20,9 @@ class ConfirmEditingButton extends StatelessWidget {
       width: screenWidth * 0.5,
       height: 40,
       text: buttonText,
-      textStyle: AppTextStyles.textStyle16SemiBold.copyWith(
+      textStyle: AppTextStyles.textStyle13.copyWith(
         color: Colors.white,
+        fontWeight: FontWeight.w500,
       ),
       onPressed: onPressed,
       borderRadius: 32,

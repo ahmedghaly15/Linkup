@@ -33,14 +33,16 @@ class PersonWhoLiked extends StatelessWidget {
       child: MaterialButton(
         padding: EdgeInsets.zero,
         onPressed: () {
-          BlocProvider.of<UserCubit>(context)
-              .getUserPosts(uId: like.user!.uId!)
-              .then((value) {
-            context.navigateTo(
-              routeName: Routes.userProfileRoute,
-              arguments: like.user,
-            );
-          });
+          if (like.user!.uId! != Helper.currentUser!.uId) {
+            BlocProvider.of<UserCubit>(context)
+                .getUserPosts(uId: like.user!.uId!)
+                .then((value) {
+              context.navigateTo(
+                routeName: Routes.userProfileRoute,
+                arguments: like.user,
+              );
+            });
+          }
         },
         child: Padding(
           padding: EdgeInsets.all(10.h),
