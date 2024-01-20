@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_constants.dart';
@@ -9,7 +8,6 @@ import 'package:social_app/core/widgets/user_cover_image.dart';
 import 'package:social_app/core/widgets/user_information.dart';
 import 'package:social_app/core/widgets/user_posts.dart';
 import 'package:social_app/core/widgets/user_profile_image.dart';
-import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 
 class UserProfileViewBody extends StatelessWidget {
   const UserProfileViewBody({
@@ -29,11 +27,7 @@ class UserProfileViewBody extends StatelessWidget {
           SliverAppBar(
             leading: GetBackArrow(
               onPressed: () {
-                BlocProvider.of<GetPostsCubit>(context)
-                    .getPosts()
-                    .then((value) {
-                  context.back();
-                });
+                context.back();
               },
             ),
           ),

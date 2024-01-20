@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/helper.dart';
@@ -8,6 +9,7 @@ import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/features/posts/data/models/like_model.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class PersonWhoLiked extends StatelessWidget {
   const PersonWhoLiked({
@@ -30,10 +32,16 @@ class PersonWhoLiked extends StatelessWidget {
       ),
       child: MaterialButton(
         padding: EdgeInsets.zero,
-        onPressed: () => context.navigateTo(
-          routeName: Routes.userProfileRoute,
-          arguments: like.user!,
-        ),
+        onPressed: () {
+          BlocProvider.of<UserCubit>(context)
+              .getUserPosts(uId: like.user!.uId!)
+              .then((value) {
+            context.navigateTo(
+              routeName: Routes.userProfileRoute,
+              arguments: like.user,
+            );
+          });
+        },
         child: Padding(
           padding: EdgeInsets.all(10.h),
           child: Row(

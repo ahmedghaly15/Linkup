@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/app_colors.dart';
@@ -8,6 +9,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class PostInformation extends StatelessWidget {
   const PostInformation({
@@ -29,10 +31,14 @@ class PostInformation extends StatelessWidget {
             return InkWell(
               onTap: () {
                 if (post.user!.uId != Helper.uId) {
-                  context.navigateTo(
-                    routeName: Routes.userProfileRoute,
-                    arguments: post.user,
-                  );
+                  BlocProvider.of<UserCubit>(context)
+                      .getUserPosts(uId: post.user!.uId!)
+                      .then((value) {
+                    context.navigateTo(
+                      routeName: Routes.userProfileRoute,
+                      arguments: post.user,
+                    );
+                  });
                 }
               },
               child: CircleAvatar(

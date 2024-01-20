@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/models/user_model.dart';
@@ -7,6 +8,7 @@ import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class UserItem extends StatelessWidget {
   const UserItem({super.key, required this.user});
@@ -24,10 +26,14 @@ class UserItem extends StatelessWidget {
       shadowColor: Colors.black,
       child: MaterialButton(
         onPressed: () {
-          context.navigateTo(
-            routeName: Routes.userProfileRoute,
-            arguments: user,
-          );
+          BlocProvider.of<UserCubit>(context)
+              .getUserPosts(uId: user.uId!)
+              .then((value) {
+            context.navigateTo(
+              routeName: Routes.userProfileRoute,
+              arguments: user,
+            );
+          });
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -55,6 +55,7 @@ class ProfileViewBody extends StatelessWidget {
                         const CurrentUserInfo(),
                         SizedBox(height: 16.h),
                         Container(
+                          height: MediaQuery.of(context).size.height,
                           padding: EdgeInsets.symmetric(vertical: 16.h),
                           width: double.infinity,
                           decoration: BoxDecoration(

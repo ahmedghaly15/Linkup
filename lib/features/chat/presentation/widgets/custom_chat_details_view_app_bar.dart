@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/app_colors.dart';
@@ -9,6 +10,7 @@ import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/core/widgets/custom_circle_icon_button.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class CustomChatDetailsViewAppBar extends StatelessWidget {
   const CustomChatDetailsViewAppBar({
@@ -24,10 +26,16 @@ class CustomChatDetailsViewAppBar extends StatelessWidget {
       child: Row(
         children: <Widget>[
           InkWell(
-            onTap: () => context.navigateTo(
-              routeName: Routes.userProfileRoute,
-              arguments: user,
-            ),
+            onTap: () {
+              BlocProvider.of<UserCubit>(context)
+                  .getUserPosts(uId: user.uId!)
+                  .then((value) {
+                context.navigateTo(
+                  routeName: Routes.userProfileRoute,
+                  arguments: user,
+                );
+              });
+            },
             child: Hero(
               tag: user.uId!,
               child: CachedNetworkImage(
