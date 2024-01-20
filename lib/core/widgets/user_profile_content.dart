@@ -7,8 +7,8 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
-import 'package:social_app/features/profile/presentation/widgets/current_user_info.dart';
-import 'package:social_app/features/profile/presentation/widgets/current_user_posts.dart';
+import 'package:social_app/core/widgets/user_info.dart';
+import 'package:social_app/core/widgets/user_posts.dart';
 
 class UserProfileContent extends StatelessWidget {
   const UserProfileContent({
@@ -34,7 +34,7 @@ class UserProfileContent extends StatelessWidget {
             ),
             child: Column(
               children: <Widget>[
-                CurrentUserInfo(user: user),
+                UserInfo(user: user),
                 SizedBox(height: 16.h),
                 Container(
                   height: MediaQuery.of(context).size.height,
@@ -56,7 +56,7 @@ class UserProfileContent extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: CurrentUserPosts(
+                  child: UserPosts(
                     uId: user.uId!,
                   ),
                 ),

@@ -21,9 +21,7 @@ class UserPosts extends StatelessWidget {
         final UserCubit cubit = BlocProvider.of<UserCubit>(context);
 
         if (state is GetUserPostsLoading) {
-          return const SliverToBoxAdapter(
-            child: BodyLoadingIndicator(),
-          );
+          return const BodyLoadingIndicator();
         } else if (state is GetUserPostsError) {
           return CustomErrorWidget(
             onPressed: () => cubit.getUserPosts(uId: uId),
@@ -31,22 +29,17 @@ class UserPosts extends StatelessWidget {
           );
         } else {
           return cubit.userPosts.isNotEmpty
-              ? SliverPadding(
-                  padding: EdgeInsets.only(top: 16.h),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return UserPostItem(
-                          post: cubit.userPosts[index],
-                        );
-                      },
-                      childCount: cubit.userPosts.length,
-                    ),
+              ? ListView.separated(
+                  padding: EdgeInsets.zero,
+                  itemCount: cubit.userPosts.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => UserPostItem(
+                    post: cubit.userPosts[index],
                   ),
+                  separatorBuilder: (context, state) => SizedBox(height: 24.h),
                 )
-              : const SliverToBoxAdapter(
-                  child: SizedBox(),
-                );
+              : const SizedBox();
         }
       },
     );

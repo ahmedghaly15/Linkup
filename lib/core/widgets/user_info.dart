@@ -9,8 +9,8 @@ import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 
-class CurrentUserInfo extends StatelessWidget {
-  const CurrentUserInfo({super.key, required this.user});
+class UserInfo extends StatelessWidget {
+  const UserInfo({super.key, required this.user});
 
   final UserModel user;
 

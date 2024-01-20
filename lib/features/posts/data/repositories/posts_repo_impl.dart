@@ -5,8 +5,6 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/errors/failure.dart';
-import 'package:social_app/core/errors/firebase_failure.dart';
-import 'package:social_app/core/internet/internet_checker.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/functions/execute_and_handle_errors.dart';
 import 'package:social_app/features/posts/data/datasources/posts_datasource.dart';
@@ -65,24 +63,16 @@ class PostsRepoImpl implements PostsRepo {
   }
 
   @override
-  Future<Either<Failure, List<PostModel>>> getPosts() async {
-    if (await getIt.get<InternetChecker>().isConnected) {
-      try {
+  Future<Either<Failure, List<PostModel>>> getPosts() {
+    return executeAndHandleErrors<List<PostModel>>(
+      function: () async {
         final result = await postsDataSource.getPosts();
 
         final posts = await _updatePosts(result: result);
 
-        return Right(posts);
-      } catch (failure) {
-        if (failure is FirebaseException) {
-          return Left(FirebaseFailure.fromFirebaseException(failure.code));
-        }
-
-        return Left(FirebaseFailure(failureMsg: failure.toString()));
-      }
-    } else {
-      return const Left(FirebaseFailure(failureMsg: AppStrings.noInternet));
-    }
+        return posts;
+      },
+    );
   }
 
   @override
