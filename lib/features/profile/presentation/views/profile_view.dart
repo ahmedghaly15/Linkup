@@ -29,7 +29,7 @@ class _ProfileViewState extends State<ProfileView> {
           image: AssetImage(
             AppAssets.imagesProfileBackground,
           ),
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         ),
       ),
       child: const ProfileViewBody(),

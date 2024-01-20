@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/helpers/helper.dart';
@@ -7,6 +8,7 @@ import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_get_back_button.dart';
+import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/profile/presentation/widgets/current_user_info.dart';
 import 'package:social_app/features/profile/presentation/widgets/current_user_posts.dart';
 import 'package:social_app/features/profile/presentation/widgets/custom_pop_menu_button.dart';
@@ -21,12 +23,17 @@ class ProfileViewBody extends StatelessWidget {
         slivers: [
           SliverPadding(
             padding: EdgeInsets.only(top: 10.h, left: 10.w),
-            sliver: const SliverToBoxAdapter(
+            sliver: SliverToBoxAdapter(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  CustomGetBackButton(),
-                  CustomPopMenuButton(),
+                  CustomGetBackButton(
+                    onPressed: () {
+                      BlocProvider.of<LinkupCubit>(context)
+                          .changeBottomNavToHome(context);
+                    },
+                  ),
+                  const CustomPopMenuButton(),
                 ],
               ),
             ),

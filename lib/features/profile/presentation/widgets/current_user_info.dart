@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/helpers/helper.dart';
+import 'package:social_app/core/utils/app_assets.dart';
 
 class CurrentUserInfo extends StatelessWidget {
   const CurrentUserInfo({super.key});
@@ -56,12 +57,40 @@ class CurrentUserInfo extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 4.h),
-          Text(
-            Helper.currentUser!.email!,
-            style: AppTextStyles.textStyle13.copyWith(
-              color: AppColors.lightGrey,
-            ),
-            textAlign: TextAlign.center,
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Row(
+                  children: <Widget>[
+                    Image.asset(AppAssets.iconsEmail),
+                    SizedBox(width: 8.w),
+                    Text(
+                      Helper.currentUser!.email!,
+                      style: AppTextStyles.textStyle13.copyWith(
+                        color: AppColors.lightGrey,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Row(
+                children: <Widget>[
+                  Image.asset(AppAssets.iconsPhone),
+                  SizedBox(width: 8.w),
+                  Text(
+                    Helper.currentUser!.phone!,
+                    style: AppTextStyles.textStyle13.copyWith(
+                      color: AppColors.lightGrey,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ],
           ),
           SizedBox(height: 10.h),
           Text(

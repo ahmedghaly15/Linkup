@@ -8,7 +8,7 @@ class AppStrings {
       'Opps, something is wrong.\nPlease try again later';
 
   static const String theme = 'theme';
-  static const String fontFamily = 'Inter';
+  static const String fontFamily = 'Poppins';
   static const String posts = 'posts';
   static const String likes = 'likes';
   static const String users = 'users';

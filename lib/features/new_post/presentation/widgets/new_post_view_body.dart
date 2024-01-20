@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
-import 'package:social_app/core/utils/app_constants.dart';
+import 'package:social_app/core/widgets/custom_content_container.dart';
+import 'package:social_app/core/widgets/custom_filling_container.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/features/new_post/presentation/widgets/add_photos_and_tags_buttons.dart';
@@ -37,59 +38,60 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
       builder: (context, state) {
         final PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
 
-        return SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              NewPostViewAppBar(
-                cubit: cubit,
-                postText: postText,
-              ),
-              SliverPadding(
-                padding: AppConstants.horizontalPadding,
-                sliver: SliverToBoxAdapter(
-                  child: Column(
-                    children: <Widget>[
-                      if (state is CreatePostLoading ||
-                          state is UploadPostImageLoading) ...[
-                        const LinearProgressIndicator(
-                          color: AppColors.primaryColor,
-                        ),
-                        SizedBox(height: 15.h),
-                      ],
-                      const UserNameAndImage(),
-                      SizedBox(height: 10.h),
-                      Container(
-                        margin: EdgeInsets.only(left: 10.w),
-                        child: CustomTextFormField(
-                          maxLines: null,
-                          hasPrefixIcon: false,
-                          controller: _textController,
-                          enableSuggestions: true,
-                          filled: false,
-                          textCapitalization: TextCapitalization.sentences,
-                          keyboardType: TextInputType.multiline,
-                          hintText:
-                              "What's in your mind, ${Helper.currentUser!.name!.split(' ')[0]}",
-                          border: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.zero,
-                          onChanged: (String value) {
-                            setState(() {
-                              postText = value;
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 15.h),
-                      if (cubit.postImage != null) PostImage(cubit: cubit),
-                    ],
+        return CustomFillingContainer(
+          child: CustomContentContainer(
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: NewPostViewAppBar(
+                    cubit: cubit,
+                    postText: postText,
                   ),
                 ),
-              ),
-              SliverPadding(
-                padding: AppConstants.horizontalPadding,
-                sliver: SliverFillRemaining(
+                SliverPadding(
+                  padding: EdgeInsets.only(top: 32.h),
+                  sliver: SliverToBoxAdapter(
+                    child: Column(
+                      children: <Widget>[
+                        if (state is CreatePostLoading ||
+                            state is UploadPostImageLoading) ...[
+                          const LinearProgressIndicator(
+                            color: AppColors.primaryColor,
+                          ),
+                          SizedBox(height: 15.h),
+                        ],
+                        const UserNameAndImage(),
+                        SizedBox(height: 10.h),
+                        Container(
+                          margin: EdgeInsets.only(left: 10.w),
+                          child: CustomTextFormField(
+                            maxLines: null,
+                            hasPrefixIcon: false,
+                            controller: _textController,
+                            enableSuggestions: true,
+                            filled: false,
+                            textCapitalization: TextCapitalization.sentences,
+                            keyboardType: TextInputType.multiline,
+                            hintText:
+                                "What's in your mind, ${Helper.currentUser!.name!.split(' ')[0]}",
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            contentPadding: EdgeInsets.zero,
+                            onChanged: (String value) {
+                              setState(() {
+                                postText = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 15.h),
+                        if (cubit.postImage != null) PostImage(cubit: cubit),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverFillRemaining(
                   hasScrollBody: false,
                   child: Column(
                     children: <Widget>[
@@ -99,8 +101,8 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
