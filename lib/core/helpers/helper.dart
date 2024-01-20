@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 
@@ -28,11 +27,11 @@ class Helper {
     );
   }
 
-  static BoxShadow buttonShadow() => BoxShadow(
+  static BoxShadow buttonShadow(Color color) => BoxShadow(
         offset: Offset(0, 10.h),
         blurRadius: 20.h,
         spreadRadius: 0,
-        color: AppColors.primaryColor.withOpacity(0.5),
+        color: color,
       );
 
   static BoxDecoration backgroundImageDecoration() {

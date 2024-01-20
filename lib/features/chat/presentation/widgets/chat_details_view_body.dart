@@ -29,44 +29,40 @@ class ChatDetailsViewBody extends StatelessWidget {
             children: <Widget>[
               Container(
                 padding: EdgeInsets.only(bottom: 60.h),
-                child: CustomScrollView(
-                  physics: AppConstants.physics,
-                  slivers: [
+                child: Column(
+                  children: <Widget>[
                     CustomChatDetailsViewAppBar(user: user),
-                    SliverPadding(
+                    Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 20.w,
                         vertical: 20.h,
                       ),
-                      sliver: SliverToBoxAdapter(
-                        child: Divider(
-                          color: Colors.black.withOpacity(0.15),
-                        ),
+                      child: Divider(
+                        color: Colors.black.withOpacity(0.15),
                       ),
                     ),
-                    cubit.messages.isNotEmpty
-                        ? SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) {
-                                final reversedIndex =
-                                    cubit.messages.length - 1 - index;
-
-                                return Container(
-                                  margin: EdgeInsets.only(bottom: 16.h),
-                                  child: CustomMessageBubble(
-                                    message: cubit.messages[reversedIndex],
-                                    isMe: Helper.currentUser!.uId ==
-                                            cubit.messages[reversedIndex]
-                                                .senderId
-                                        ? true
-                                        : false,
-                                  ),
+                    Expanded(
+                      child: cubit.messages.isNotEmpty
+                          ? ListView.separated(
+                              reverse: true,
+                              physics: AppConstants.physics,
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              itemCount: cubit.messages.length,
+                              itemBuilder: (context, index) {
+                                return CustomMessageBubble(
+                                  message: cubit.messages[index],
+                                  isMe: Helper.currentUser!.uId ==
+                                          cubit.messages[index].senderId
+                                      ? true
+                                      : false,
                                 );
                               },
-                              childCount: cubit.messages.length,
-                            ),
-                          )
-                        : const SliverFillRemaining(child: SizedBox()),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: 8.h),
+                            )
+                          : const SizedBox(),
+                    ),
                   ],
                 ),
               ),

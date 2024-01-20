@@ -149,12 +149,10 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
           ),
         ),
         CustomCircleIconButton(
-          onPressed: () {
-            (_messageController.text.trim().isEmpty &&
-                    widget.cubit.messageImage == null)
-                ? null
-                : () => _sendMessage(context);
-          },
+          onPressed: (_messageController.text.trim().isEmpty &&
+                  widget.cubit.messageImage == null)
+              ? null
+              : () => _sendMessage(context),
           icon: Image.asset(AppAssets.iconsSend),
           backgroundColor: (_messageController.text.trim().isEmpty &&
                   widget.cubit.messageImage == null)

@@ -22,66 +22,63 @@ class CustomChatDetailsViewAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Row(
-        children: <Widget>[
-          InkWell(
-            onTap: () {
-              BlocProvider.of<UserCubit>(context)
-                  .getUserPosts(uId: user.uId!)
-                  .then((value) {
-                context.navigateTo(
-                  routeName: Routes.userProfileRoute,
-                  arguments: user,
+    return Row(
+      children: <Widget>[
+        InkWell(
+          onTap: () {
+            BlocProvider.of<UserCubit>(context)
+                .getUserPosts(uId: user.uId!)
+                .then((value) {
+              context.navigateTo(
+                routeName: Routes.userProfileRoute,
+                arguments: user,
+              );
+            });
+          },
+          child: Hero(
+            tag: user.uId!,
+            child: CachedNetworkImage(
+              imageUrl: user.image!,
+              errorWidget: (context, error, _) => const CachedImageErrorIcon(),
+              imageBuilder: (_, image) {
+                return CircleAvatar(
+                  backgroundImage: image,
+                  radius: 22.r,
+                  backgroundColor: AppColors.primaryColor,
                 );
-              });
-            },
-            child: Hero(
-              tag: user.uId!,
-              child: CachedNetworkImage(
-                imageUrl: user.image!,
-                errorWidget: (context, error, _) =>
-                    const CachedImageErrorIcon(),
-                imageBuilder: (_, image) {
-                  return CircleAvatar(
-                    backgroundImage: image,
-                    radius: 22.r,
-                    backgroundColor: AppColors.primaryColor,
-                  );
-                },
+              },
+            ),
+          ),
+        ),
+        SizedBox(width: 10.w),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                user.name!,
+                style: AppTextStyles.textStyle18Bold,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
-          ),
-          SizedBox(width: 10.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  user.name!,
-                  style: AppTextStyles.textStyle18Bold,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+              Text(
+                user.email!,
+                style: AppTextStyles.textStyle13.copyWith(
+                  color: AppColors.lightGrey,
                 ),
-                Text(
-                  user.email!,
-                  style: AppTextStyles.textStyle13.copyWith(
-                    color: AppColors.lightGrey,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
           ),
-          SizedBox(width: 16.w),
-          CustomCircleIconButton(
-            onPressed: () => context.back(),
-            icon: Image.asset(AppAssets.iconsClose),
-            backgroundColor: AppColors.primaryColor,
-          ),
-        ],
-      ),
+        ),
+        SizedBox(width: 16.w),
+        CustomCircleIconButton(
+          onPressed: () => context.back(),
+          icon: Image.asset(AppAssets.iconsClose),
+          backgroundColor: AppColors.primaryColor,
+        ),
+      ],
     );
   }
 }

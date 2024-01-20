@@ -11,7 +11,7 @@ class CustomCircleIconButton extends StatelessWidget {
     this.backgroundColor = AppColors.lightWhiteBlue,
   });
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget icon;
   final bool hasShadow;
   final Color backgroundColor;

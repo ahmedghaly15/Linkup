@@ -78,6 +78,10 @@ class AppAssets {
   /// assets/icons/lock.png
   static const String iconsLock = "assets/icons/lock.png";
 
+  /// Assets for iconsMessage
+  /// assets/icons/Message.png
+  static const String iconsMessage = "assets/icons/Message.png";
+
   /// Assets for iconsNotification
   /// assets/icons/notification.png
   static const String iconsNotification = "assets/icons/notification.png";
