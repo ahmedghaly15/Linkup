@@ -17,8 +17,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
         List<String> icons = const <String>[
           AppAssets.iconsHome,
           AppAssets.iconsChat,
+          AppAssets.iconsUsers,
           AppAssets.iconsUser,
-          AppAssets.iconsNotification,
         ];
 
         return BottomAppBar(

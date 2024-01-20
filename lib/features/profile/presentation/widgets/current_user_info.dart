@@ -13,7 +13,6 @@ class CurrentUserInfo extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 33.w),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,37 +57,20 @@ class CurrentUserInfo extends StatelessWidget {
           ),
           SizedBox(height: 4.h),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Expanded(
-                child: Row(
-                  children: <Widget>[
-                    Image.asset(AppAssets.iconsEmail),
-                    SizedBox(width: 8.w),
-                    Text(
-                      Helper.currentUser!.email!,
-                      style: AppTextStyles.textStyle13.copyWith(
-                        color: AppColors.lightGrey,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
+              Image.asset(AppAssets.iconsEmail),
               SizedBox(width: 8.w),
-              Row(
-                children: <Widget>[
-                  Image.asset(AppAssets.iconsPhone),
-                  SizedBox(width: 8.w),
-                  Text(
-                    Helper.currentUser!.phone!,
-                    style: AppTextStyles.textStyle13.copyWith(
-                      color: AppColors.lightGrey,
-                    ),
-                    textAlign: TextAlign.center,
+              Flexible(
+                child: Text(
+                  Helper.currentUser!.email!,
+                  style: AppTextStyles.textStyle13.copyWith(
+                    color: AppColors.lightGrey,
                   ),
-                ],
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ],
           ),
@@ -99,7 +81,6 @@ class CurrentUserInfo extends StatelessWidget {
               color: AppColors.lightGrey,
             ),
             maxLines: null,
-            textAlign: TextAlign.center,
           ),
         ],
       ),

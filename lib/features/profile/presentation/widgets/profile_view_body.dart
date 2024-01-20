@@ -19,11 +19,11 @@ class ProfileViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: EdgeInsets.only(top: 10.h, left: 10.w),
-            sliver: SliverToBoxAdapter(
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: 10.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -37,30 +37,24 @@ class ProfileViewBody extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 77.h),
-          ),
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Stack(
+            SizedBox(height: 77.h),
+            Stack(
               clipBehavior: Clip.none,
               alignment: Alignment.center,
               children: <Widget>[
-                CustomContentContainer(
-                  horizontalPadding: 0,
-                  height: 650.h,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(
-                      AppConstants.contentContainerRadius.r,
+                SingleChildScrollView(
+                  child: CustomContentContainer(
+                    horizontalPadding: 0,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(
+                        AppConstants.contentContainerRadius.r,
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      const CurrentUserInfo(),
-                      SizedBox(height: 16.h),
-                      Expanded(
-                        child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        const CurrentUserInfo(),
+                        SizedBox(height: 16.h),
+                        Container(
                           padding: EdgeInsets.symmetric(vertical: 16.h),
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -83,8 +77,8 @@ class ProfileViewBody extends StatelessWidget {
                             uId: Helper.currentUser!.uId!,
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Positioned(
@@ -107,8 +101,8 @@ class ProfileViewBody extends StatelessWidget {
                 )
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

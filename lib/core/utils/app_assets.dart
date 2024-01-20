@@ -9,38 +9,34 @@ class AppAssets {
   /// assets/app_logo.jpg
   static const String AppLogo = "assets/app_logo.jpg";
 
-  /// Assets for fontsInterInterBlack
-  /// assets/fonts/Inter/Inter-Black.ttf
-  static const String fontsInterInterBlack =
-      "assets/fonts/Inter/Inter-Black.ttf";
+  /// Assets for fontsPoppinsOFL
+  /// assets/fonts/Poppins/OFL.txt
+  static const String fontsPoppinsOFL = "assets/fonts/Poppins/OFL.txt";
 
-  /// Assets for fontsInterInterBold
-  /// assets/fonts/Inter/Inter-Bold.ttf
-  static const String fontsInterInterBold = "assets/fonts/Inter/Inter-Bold.ttf";
+  /// Assets for fontsPoppinsPoppinsBold
+  /// assets/fonts/Poppins/Poppins-Bold.ttf
+  static const String fontsPoppinsPoppinsBold =
+      "assets/fonts/Poppins/Poppins-Bold.ttf";
 
-  /// Assets for fontsInterInterExtraBold
-  /// assets/fonts/Inter/Inter-ExtraBold.ttf
-  static const String fontsInterInterExtraBold =
-      "assets/fonts/Inter/Inter-ExtraBold.ttf";
+  /// Assets for fontsPoppinsPoppinsExtraBold
+  /// assets/fonts/Poppins/Poppins-ExtraBold.ttf
+  static const String fontsPoppinsPoppinsExtraBold =
+      "assets/fonts/Poppins/Poppins-ExtraBold.ttf";
 
-  /// Assets for fontsInterInterMedium
-  /// assets/fonts/Inter/Inter-Medium.ttf
-  static const String fontsInterInterMedium =
-      "assets/fonts/Inter/Inter-Medium.ttf";
+  /// Assets for fontsPoppinsPoppinsMedium
+  /// assets/fonts/Poppins/Poppins-Medium.ttf
+  static const String fontsPoppinsPoppinsMedium =
+      "assets/fonts/Poppins/Poppins-Medium.ttf";
 
-  /// Assets for fontsInterInterRegular
-  /// assets/fonts/Inter/Inter-Regular.ttf
-  static const String fontsInterInterRegular =
-      "assets/fonts/Inter/Inter-Regular.ttf";
+  /// Assets for fontsPoppinsPoppinsRegular
+  /// assets/fonts/Poppins/Poppins-Regular.ttf
+  static const String fontsPoppinsPoppinsRegular =
+      "assets/fonts/Poppins/Poppins-Regular.ttf";
 
-  /// Assets for fontsInterInterSemiBold
-  /// assets/fonts/Inter/Inter-SemiBold.ttf
-  static const String fontsInterInterSemiBold =
-      "assets/fonts/Inter/Inter-SemiBold.ttf";
-
-  /// Assets for fontsInterOFL
-  /// assets/fonts/Inter/OFL.txt
-  static const String fontsInterOFL = "assets/fonts/Inter/OFL.txt";
+  /// Assets for fontsPoppinsPoppinsSemiBold
+  /// assets/fonts/Poppins/Poppins-SemiBold.ttf
+  static const String fontsPoppinsPoppinsSemiBold =
+      "assets/fonts/Poppins/Poppins-SemiBold.ttf";
 
   /// Assets for iconsArrowLeft
   /// assets/icons/arrow_left.png
@@ -109,6 +105,10 @@ class AppAssets {
   /// Assets for iconsUser
   /// assets/icons/user.png
   static const String iconsUser = "assets/icons/user.png";
+
+  /// Assets for iconsUsers
+  /// assets/icons/users.png
+  static const String iconsUsers = "assets/icons/users.png";
 
   /// Assets for iconsVisible
   /// assets/icons/visible.png
