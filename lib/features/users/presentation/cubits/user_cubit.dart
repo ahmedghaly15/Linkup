@@ -4,10 +4,13 @@ import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
+import 'package:social_app/features/users/domain/usecases/follow.dart';
 import 'package:social_app/features/users/domain/usecases/get_all_users.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
+import 'package:social_app/features/users/domain/usecases/unfollow.dart';
+import 'package:social_app/features/users/domain/usecases/user_is_followed.dart';
 
 part 'user_state.dart';
 
@@ -15,12 +18,18 @@ class UserCubit extends Cubit<UserState> {
   final GetUserDataUseCase getUserDataUseCase;
   final GetAllUsersUseCase getAllUsersUseCase;
   final GetUserPostsUseCase getAllUserPostsUseCase;
+  final FollowUseCase followUseCase;
+  final UnfollowUseCase unfollowUseCase;
+  final UserIsFollowedUseCase userIsFollowedUseCase;
   final SignOutUseCase signOutUseCase;
 
   UserCubit({
     required this.getUserDataUseCase,
     required this.getAllUsersUseCase,
     required this.getAllUserPostsUseCase,
+    required this.followUseCase,
+    required this.unfollowUseCase,
+    required this.userIsFollowedUseCase,
     required this.signOutUseCase,
   }) : super(const UserInitial());
 
@@ -94,6 +103,28 @@ class UserCubit extends Cubit<UserState> {
         },
       );
     });
+  }
+
+  void follow({required UserModel user}) {
+    followUseCase(user).then((value) {
+      value.fold(
+        (failure) => emit(FollowError(error: failure.failureMsg.toString())),
+        (success) => emit(const FollowSuccess()),
+      );
+    });
+  }
+
+  void unfollow({required UserModel user}) {
+    unfollowUseCase(user).then((value) {
+      value.fold(
+        (failure) => emit(UnfollowError(error: failure.failureMsg.toString())),
+        (success) => emit(const UnfollowSuccess()),
+      );
+    });
+  }
+
+  Stream<bool> userIsFollowed({required UserModel user}) {
+    return userIsFollowedUseCase(user);
   }
 
   void signOut() {

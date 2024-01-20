@@ -98,3 +98,29 @@ class UserSignOutError extends UserState {
   @override
   List<Object> get props => [error];
 }
+
+class FollowSuccess extends UserState {
+  const FollowSuccess();
+}
+
+class FollowError extends UserState {
+  final String error;
+
+  const FollowError({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}
+
+class UnfollowSuccess extends UserState {
+  const UnfollowSuccess();
+}
+
+class UnfollowError extends UserState {
+  final String error;
+
+  const UnfollowError({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}

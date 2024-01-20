@@ -8,7 +8,7 @@ import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/user_info.dart';
-import 'package:social_app/core/widgets/user_posts.dart';
+import 'package:social_app/features/users/presentation/widgets/user_posts.dart';
 
 class UserProfileContent extends StatelessWidget {
   const UserProfileContent({

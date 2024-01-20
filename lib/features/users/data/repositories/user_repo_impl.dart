@@ -15,7 +15,7 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, DocumentSnapshot<Map<String, dynamic>>>>
-      getUserData() async {
+      getUserData() {
     return executeAndHandleErrors<DocumentSnapshot<Map<String, dynamic>>>(
       function: () => userDataSource.getUserData(),
     );
@@ -72,5 +72,24 @@ class UserRepoImpl implements UserRepo {
     return executeAndHandleErrors<void>(
       function: () => userDataSource.signOut(),
     );
+  }
+
+  @override
+  Future<Either<Failure, void>> follow({required UserModel user}) {
+    return executeAndHandleErrors<void>(
+      function: () => userDataSource.follow(user: user),
+    );
+  }
+
+  @override
+  Future<Either<Failure, void>> unfollow({required UserModel user}) {
+    return executeAndHandleErrors<void>(
+      function: () => userDataSource.unfollow(user: user),
+    );
+  }
+
+  @override
+  Stream<bool> userIsFollowed({required UserModel user}) {
+    return userDataSource.userIsFollowed(user: user);
   }
 }

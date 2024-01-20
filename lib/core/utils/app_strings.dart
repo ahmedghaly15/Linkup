@@ -10,6 +10,8 @@ class AppStrings {
   static const String theme = 'theme';
   static const String fontFamily = 'Poppins';
   static const String posts = 'posts';
+  static const String followers = 'followers';
+  static const String following = 'following';
   static const String likes = 'likes';
   static const String users = 'users';
   static const String comments = 'comments';

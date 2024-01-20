@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
-import 'package:social_app/core/widgets/user_post_item.dart';
+import 'package:social_app/features/users/presentation/widgets/user_post_item.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class UserPosts extends StatelessWidget {

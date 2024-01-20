@@ -11,5 +11,11 @@ abstract class UserRepo {
 
   Future<Either<Failure, List<PostModel>>> getUserPosts({required String uId});
 
+  Future<Either<Failure, void>> follow({required UserModel user});
+
+  Future<Either<Failure, void>> unfollow({required UserModel user});
+
+  Stream<bool> userIsFollowed({required UserModel user});
+
   Future<Either<Failure, void>> signOut();
 }

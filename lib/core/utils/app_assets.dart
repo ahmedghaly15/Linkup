@@ -98,6 +98,10 @@ class AppAssets {
   /// assets/icons/plus.png
   static const String iconsPlus = "assets/icons/plus.png";
 
+  /// Assets for iconsProfileEmail
+  /// assets/icons/profile_email.png
+  static const String iconsProfileEmail = "assets/icons/profile_email.png";
+
   /// Assets for iconsRedLike
   /// assets/icons/red_like.png
   static const String iconsRedLike = "assets/icons/red_like.png";

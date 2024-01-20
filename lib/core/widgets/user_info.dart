@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_assets.dart';
-import 'package:social_app/core/utils/app_navigator.dart';
-import 'package:social_app/core/widgets/main_button.dart';
+import 'package:social_app/features/users/presentation/widgets/followers_and_following.dart';
+import 'package:social_app/features/users/presentation/widgets/following_and_message_buttons.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo({super.key, required this.user});
@@ -20,41 +19,7 @@ class UserInfo extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 33.w),
       child: Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Text(
-                    '1K',
-                    style: AppTextStyles.textStyle15.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5.h),
-                  Text(
-                    'Followers',
-                    style: AppTextStyles.textStyle13,
-                  ),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  Text(
-                    '1K',
-                    style: AppTextStyles.textStyle15.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5.h),
-                  Text(
-                    'Followers',
-                    style: AppTextStyles.textStyle13,
-                  ),
-                ],
-              ),
-            ],
-          ),
+          FollowersAndFollowing(user: user),
           SizedBox(height: 10.h),
           Text(
             user.name!,
@@ -65,7 +30,7 @@ class UserInfo extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset(AppAssets.iconsEmail),
+              Image.asset(AppAssets.iconsProfileEmail),
               SizedBox(width: 8.w),
               Flexible(
                 child: Text(
@@ -87,53 +52,11 @@ class UserInfo extends StatelessWidget {
               color: AppColors.lightGrey,
             ),
             maxLines: null,
+            textAlign: TextAlign.center,
           ),
           if (user.uId! != Helper.currentUser!.uId) ...[
             SizedBox(height: 10.h),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: MainButton(
-                    text: 'Follow',
-                    onPressed: () {},
-                    borderRadius: 32,
-                    boxShadow: <BoxShadow>[
-                      Helper.buttonShadow(
-                        AppColors.primaryColor.withOpacity(0.5),
-                      ),
-                    ],
-                    textStyle: AppTextStyles.textStyle13.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 20.w),
-                Expanded(
-                  child: MainButton(
-                    text: 'Message',
-                    onPressed: () {
-                      context.navigateTo(
-                        routeName: Routes.chatDetailsRoute,
-                        arguments: user,
-                      );
-                    },
-                    borderRadius: 32,
-                    backgroundColor: Helper.isDark(context)
-                        ? AppColors.darkHeaderClr
-                        : Colors.white,
-                    textStyle: AppTextStyles.textStyle13.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                    boxShadow: <BoxShadow>[
-                      Helper.buttonShadow(
-                        Colors.black.withOpacity(0.25),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            FollowingAndMessageButtons(user: user),
           ],
         ],
       ),

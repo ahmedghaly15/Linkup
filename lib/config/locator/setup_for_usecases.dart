@@ -153,5 +153,17 @@ class SetupLocatorForUseCases {
     getIt.registerLazySingleton<PreviousPageUseCase>(
       () => PreviousPageUseCase(onboardingRepo: getIt.get<OnboardingRepo>()),
     );
+
+    getIt.registerLazySingleton<FollowUseCase>(
+      () => FollowUseCase(userRepo: getIt.get<UserRepo>()),
+    );
+
+    getIt.registerLazySingleton<UnfollowUseCase>(
+      () => UnfollowUseCase(userRepo: getIt.get<UserRepo>()),
+    );
+
+    getIt.registerLazySingleton<UserIsFollowedUseCase>(
+      () => UserIsFollowedUseCase(userRepo: getIt.get<UserRepo>()),
+    );
   }
 }

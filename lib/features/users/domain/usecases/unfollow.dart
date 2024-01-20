@@ -1,19 +1,16 @@
 import 'package:dartz/dartz.dart';
-import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/core/errors/failure.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/usecases/base_usecase.dart';
 import 'package:social_app/features/users/domain/repositories/user_repo.dart';
 
-class GetAllUsersUseCase implements BaseUseCases<List<UserModel>, NoParams> {
+class UnfollowUseCase implements BaseUseCases<void, UserModel> {
   final UserRepo userRepo;
 
-  const GetAllUsersUseCase({required this.userRepo});
+  const UnfollowUseCase({required this.userRepo});
 
   @override
-  Future<Either<Failure, List<UserModel>>> call(
-    NoParams params,
-  ) async {
-    return userRepo.getAllUsers();
+  Future<Either<Failure, void>> call(UserModel params) {
+    return userRepo.unfollow(user: params);
   }
 }

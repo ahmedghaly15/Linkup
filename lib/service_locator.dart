@@ -90,10 +90,13 @@ import 'package:social_app/features/users/data/datasources/user_datasource.dart'
 import 'package:social_app/features/users/data/datasources/user_datasource_impl.dart';
 import 'package:social_app/features/users/data/repositories/user_repo_impl.dart';
 import 'package:social_app/features/users/domain/repositories/user_repo.dart';
+import 'package:social_app/features/users/domain/usecases/follow.dart';
 import 'package:social_app/features/users/domain/usecases/get_all_users.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
+import 'package:social_app/features/users/domain/usecases/unfollow.dart';
+import 'package:social_app/features/users/domain/usecases/user_is_followed.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 part 'config/locator/setup_for_core.dart';
