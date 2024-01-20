@@ -53,7 +53,7 @@ class PersonWhoLiked extends StatelessWidget {
                 imageBuilder: (_, image) {
                   return CircleAvatar(
                     backgroundImage: image,
-                    radius: 35.r,
+                    radius: 25.r,
                     backgroundColor: AppColors.primaryColor,
                   );
                 },
@@ -65,13 +65,13 @@ class PersonWhoLiked extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       like.user!.name!,
-                      style: AppTextStyles.textStyle18Bold,
+                      style: AppTextStyles.textStyle16SemiBold,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       like.user!.email!,
-                      style: AppTextStyles.textStyle15.copyWith(
+                      style: AppTextStyles.textStyle13.copyWith(
                         color: Colors.grey,
                       ),
                     ),
