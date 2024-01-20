@@ -28,13 +28,8 @@ class UserPostItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(40.r)),
         color: Helper.isDark(context)
-            ? AppColors.darkPrimaryColor
+            ? AppColors.darkHeaderClr
             : AppColors.lightWhiteBlue,
-        boxShadow: Helper.isDark(context)
-            ? <BoxShadow>[
-                Helper.postShadow(context),
-              ]
-            : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

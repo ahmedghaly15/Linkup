@@ -11,6 +11,7 @@ class CustomContentContainer extends StatelessWidget {
     this.height,
     this.width = double.infinity,
     this.horizontalPadding = 16,
+    this.bottomPadding = 8,
     this.borderRadius,
   });
 
@@ -19,6 +20,7 @@ class CustomContentContainer extends StatelessWidget {
   final double width;
   final double horizontalPadding;
   final BorderRadiusGeometry? borderRadius;
+  final double bottomPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class CustomContentContainer extends StatelessWidget {
       padding: EdgeInsets.only(
         left: horizontalPadding.w,
         right: horizontalPadding.w,
-        bottom: 8.h,
+        bottom: bottomPadding.h,
         top: 20.h,
       ),
       decoration: BoxDecoration(

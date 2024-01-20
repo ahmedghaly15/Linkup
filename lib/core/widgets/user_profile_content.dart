@@ -24,44 +24,42 @@ class UserProfileContent extends StatelessWidget {
       clipBehavior: Clip.none,
       alignment: Alignment.center,
       children: <Widget>[
-        SingleChildScrollView(
-          child: CustomContentContainer(
-            horizontalPadding: 0,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(
-                AppConstants.contentContainerRadius.r,
-              ),
+        CustomContentContainer(
+          horizontalPadding: 0,
+          bottomPadding: 0,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(
+              AppConstants.contentContainerRadius.r,
             ),
-            child: Column(
-              children: <Widget>[
-                UserInfo(user: user),
-                SizedBox(height: 16.h),
-                Container(
-                  height: MediaQuery.of(context).size.height,
-                  padding: EdgeInsets.symmetric(vertical: 16.h),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Helper.isDark(context)
-                        ? AppColors.darkPrimaryColor
-                        : Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(50.r),
+          ),
+          child: Column(
+            children: <Widget>[
+              UserInfo(user: user),
+              SizedBox(height: 32.h),
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Helper.isDark(context)
+                      ? AppColors.darkPrimaryColor
+                      : Colors.white,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(50.r),
+                  ),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      offset: Offset(0, -5.h),
+                      blurRadius: 20.r,
+                      spreadRadius: 0,
+                      color: Helper.isDark(context)
+                          ? Colors.white24
+                          : const Color(0xffD2DFE2),
                     ),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        offset: Offset(0, -5.h),
-                        blurRadius: 20.r,
-                        spreadRadius: 0,
-                        color: const Color(0xffD2DFE2),
-                      ),
-                    ],
-                  ),
-                  child: UserPosts(
-                    uId: user.uId!,
-                  ),
+                  ],
                 ),
-              ],
-            ),
+                child: UserPosts(uId: user.uId!),
+              ),
+            ],
           ),
         ),
         Positioned(
@@ -80,7 +78,7 @@ class UserProfileContent extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

@@ -30,10 +30,10 @@ class UserPosts extends StatelessWidget {
         } else {
           return cubit.userPosts.isNotEmpty
               ? ListView.separated(
-                  padding: EdgeInsets.zero,
+                  padding: EdgeInsets.only(top: 32.h, bottom: 32.h),
                   itemCount: cubit.userPosts.length,
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
+                  // physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) => UserPostItem(
                     post: cubit.userPosts[index],
                   ),

@@ -96,7 +96,7 @@ class UserInfo extends StatelessWidget {
                   child: MainButton(
                     text: 'Follow',
                     onPressed: () {},
-                    borderRadius: 20,
+                    borderRadius: 32,
                     boxShadow: <BoxShadow>[
                       Helper.buttonShadow(
                         AppColors.primaryColor.withOpacity(0.5),
@@ -118,9 +118,9 @@ class UserInfo extends StatelessWidget {
                         arguments: user,
                       );
                     },
-                    borderRadius: 20,
+                    borderRadius: 32,
                     backgroundColor: Helper.isDark(context)
-                        ? AppColors.darkPrimaryColor
+                        ? AppColors.darkHeaderClr
                         : Colors.white,
                     textStyle: AppTextStyles.textStyle13.copyWith(
                       fontWeight: FontWeight.w500,
