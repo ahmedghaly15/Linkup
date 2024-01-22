@@ -1,18 +1,16 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/features/posts/data/models/like_model.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 import 'package:social_app/features/posts/domain/usecases/create_post.dart';
 import 'package:social_app/features/posts/domain/usecases/delete_post.dart';
 import 'package:social_app/features/posts/domain/usecases/get_post_image.dart';
 import 'package:social_app/features/posts/domain/usecases/like_post.dart';
 import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart';
-import 'package:social_app/features/posts/domain/usecases/people_like_the_post.dart';
+import 'package:social_app/features/people_who_liked/domain/usecases/people_who_liked.dart';
 import 'package:social_app/features/posts/domain/usecases/unlike_post.dart';
 import 'package:social_app/features/posts/domain/usecases/upload_post_image.dart';
 import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
@@ -27,7 +25,7 @@ class PostsCubit extends Cubit<PostsState> {
   final LikePostUseCase likePostUseCase;
   final UnLikePostUseCase unLikePostUseCase;
   final LikedPostsByMeUseCase likedPostsByMeUseCase;
-  final PeopleLikeThePostUseCase peopleLikeThePostUseCase;
+  final PeopleWhoLikedUseCase peopleLikeThePostUseCase;
 
   PostsCubit({
     required this.createPostUseCase,
@@ -161,24 +159,4 @@ class PostsCubit extends Cubit<PostsState> {
 
   Stream<bool> likedPostsByMe({required String postId}) =>
       likedPostsByMeUseCase(postId);
-
-  final List<LikeModel> peopleLikePost = <LikeModel>[];
-
-  void peopleLikeThePost({required String postId}) {
-    streamPeopleLikeThePost(postId).listen((event) {
-      peopleLikePost.clear();
-
-      for (var element in event.docs) {
-        peopleLikePost.add(LikeModel.fromJson(element.data()));
-      }
-
-      emit(GetPeopleLikeThePostSuccess(peopleLikeThePost: peopleLikePost));
-    }).onError((error) {
-      emit(GetPeopleLikeThePostError(error: error.toString()));
-    });
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> streamPeopleLikeThePost(
-          String postId) =>
-      peopleLikeThePostUseCase(postId);
 }

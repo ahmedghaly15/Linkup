@@ -25,8 +25,4 @@ abstract class PostsDataSource {
   Future<void> unLikePost({required String postId});
 
   Stream<bool> likedPostsByMe({required String postId});
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({
-    required String postId,
-  });
 }

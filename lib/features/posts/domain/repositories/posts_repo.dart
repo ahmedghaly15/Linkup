@@ -28,8 +28,4 @@ abstract class PostsRepo {
   Future<Either<Failure, void>> unLikePost({required String postId});
 
   Stream<bool> likedPostsByMe({required String postId});
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({
-    required String postId,
-  });
 }

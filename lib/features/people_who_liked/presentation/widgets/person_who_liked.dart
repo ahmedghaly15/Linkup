@@ -5,19 +5,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
-import 'package:social_app/features/posts/data/models/like_model.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class PersonWhoLiked extends StatelessWidget {
   const PersonWhoLiked({
     super.key,
-    required this.like,
+    required this.user,
   });
 
-  final LikeModel like;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +33,13 @@ class PersonWhoLiked extends StatelessWidget {
       child: MaterialButton(
         padding: EdgeInsets.zero,
         onPressed: () {
-          if (like.user!.uId! != Helper.currentUser!.uId) {
+          if (user.uId! != Helper.currentUser!.uId) {
             BlocProvider.of<UserCubit>(context)
-                .getUserPosts(uId: like.user!.uId!)
+                .getUserPosts(uId: user.uId!)
                 .then((value) {
               context.navigateTo(
                 routeName: Routes.userProfileRoute,
-                arguments: like.user,
+                arguments: user,
               );
             });
           }
@@ -51,7 +51,7 @@ class PersonWhoLiked extends StatelessWidget {
               CachedNetworkImage(
                 errorWidget: (context, error, _) =>
                     const CachedImageErrorIcon(),
-                imageUrl: like.user!.image!,
+                imageUrl: user.image!,
                 imageBuilder: (_, image) {
                   return CircleAvatar(
                     backgroundImage: image,
@@ -66,13 +66,13 @@ class PersonWhoLiked extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      like.user!.name!,
+                      user.name!,
                       style: AppTextStyles.textStyle16SemiBold,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      like.user!.email!,
+                      user.email!,
                       style: AppTextStyles.textStyle13.copyWith(
                         color: Colors.grey,
                       ),

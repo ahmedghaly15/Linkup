@@ -39,7 +39,7 @@ class SetupLocatorForCubits {
         likePostUseCase: getIt.get<LikePostUseCase>(),
         unLikePostUseCase: getIt.get<UnLikePostUseCase>(),
         likedPostsByMeUseCase: getIt.get<LikedPostsByMeUseCase>(),
-        peopleLikeThePostUseCase: getIt.get<PeopleLikeThePostUseCase>(),
+        peopleLikeThePostUseCase: getIt.get<PeopleWhoLikedUseCase>(),
       ),
     );
 
@@ -91,6 +91,12 @@ class SetupLocatorForCubits {
         getOnboardingPagesUseCase: getIt.get<GetOnboardingPagesUseCase>(),
         navigateBetweenPagesUseCase: getIt.get<NavigateBetweenPagesUseCase>(),
         previousPageUseCase: getIt.get<PreviousPageUseCase>(),
+      ),
+    );
+
+    getIt.registerFactory<PeopleWhoLikedCubit>(
+      () => PeopleWhoLikedCubit(
+        peopleWhoLikedUseCase: getIt.get<PeopleWhoLikedUseCase>(),
       ),
     );
   }

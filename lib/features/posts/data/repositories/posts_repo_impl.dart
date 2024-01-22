@@ -125,11 +125,4 @@ class PostsRepoImpl implements PostsRepo {
   Stream<bool> likedPostsByMe({required String postId}) {
     return postsDataSource.likedPostsByMe(postId: postId);
   }
-
-  @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({
-    required String postId,
-  }) {
-    return postsDataSource.peopleLikeThePost(postId: postId);
-  }
 }

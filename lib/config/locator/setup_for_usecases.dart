@@ -68,8 +68,10 @@ class SetupLocatorForUseCases {
       () => LikedPostsByMeUseCase(postsRepo: getIt.get<PostsRepo>()),
     );
 
-    getIt.registerLazySingleton<PeopleLikeThePostUseCase>(
-      () => PeopleLikeThePostUseCase(postsRepo: getIt.get<PostsRepo>()),
+    getIt.registerLazySingleton<PeopleWhoLikedUseCase>(
+      () => PeopleWhoLikedUseCase(
+        peopleWhoLikedRepo: getIt.get<PeopleWhoLikedRepo>(),
+      ),
     );
 
     getIt.registerLazySingleton<TypeNewCommentUseCase>(

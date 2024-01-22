@@ -49,5 +49,11 @@ class SetupLocatorForRepos {
         onboardingDataSource: getIt.get<OnboardingDataSource>(),
       ),
     );
+
+    getIt.registerLazySingleton<PeopleWhoLikedRepo>(
+      () => PeopleWhoLikedRepoImpl(
+        peopleWhoLikedDataSource: getIt.get<PeopleWhoLikedDataSource>(),
+      ),
+    );
   }
 }

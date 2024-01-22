@@ -21,7 +21,9 @@ import 'package:social_app/features/linkup/presentation/views/linkup_view.dart';
 import 'package:social_app/features/new_post/presentation/view/new_post_view.dart';
 import 'package:social_app/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:social_app/features/onboarding/presentation/view/onboarding_view.dart';
-import 'package:social_app/features/posts/presentation/views/post_likes_view.dart';
+import 'package:social_app/features/people_who_liked/presentation/cubit/people_who_liked_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
+import 'package:social_app/features/people_who_liked/presentation/views/people_who_liked_view.dart';
 import 'package:social_app/features/edit_profile/presentation/views/edit_profile_view.dart';
 import 'package:social_app/features/users/presentation/views/user_profile_view.dart';
 import 'package:social_app/service_locator.dart';
@@ -85,7 +87,11 @@ class AppRouter {
       case Routes.postLikesRoute:
         final args = routeSettings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => PostLikesView(postId: args),
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<PeopleWhoLikedCubit>()
+              ..peopleLikeThePost(postId: args),
+            child: PeopleWhoLikedView(postId: args),
+          ),
         );
 
       case Routes.commentsRoute:

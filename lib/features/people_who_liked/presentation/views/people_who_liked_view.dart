@@ -7,11 +7,11 @@ import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
 import 'package:social_app/core/widgets/custom_get_back_button.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
-import 'package:social_app/features/posts/presentation/widgets/person_who_liked.dart';
+import 'package:social_app/features/people_who_liked/presentation/cubit/people_who_liked_cubit.dart';
+import 'package:social_app/features/people_who_liked/presentation/widgets/person_who_liked.dart';
 
-class PostLikesView extends StatelessWidget {
-  const PostLikesView({super.key, required this.postId});
+class PeopleWhoLikedView extends StatelessWidget {
+  const PeopleWhoLikedView({super.key, required this.postId});
 
   final String postId;
 
@@ -36,13 +36,12 @@ class PostLikesView extends StatelessWidget {
                   ],
                 ),
               ),
-              BlocBuilder<PostsCubit, PostsState>(
+              BlocBuilder<PeopleWhoLikedCubit, PeopleWhoLikedState>(
                 builder: (context, state) {
-                  final PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
+                  final PeopleWhoLikedCubit cubit =
+                      BlocProvider.of<PeopleWhoLikedCubit>(context);
 
-                  cubit.peopleLikeThePost(postId: postId);
-
-                  return cubit.peopleLikePost.isNotEmpty
+                  return cubit.peopleWhoLiked.isNotEmpty
                       ? SliverPadding(
                           padding: EdgeInsets.symmetric(vertical: 16.w),
                           sliver: SliverList(
@@ -50,16 +49,16 @@ class PostLikesView extends StatelessWidget {
                               (context, index) {
                                 return AnimationConfiguration.staggeredList(
                                   position: index,
-                                  duration: const Duration(milliseconds: 700),
+                                  duration: const Duration(milliseconds: 650),
                                   child: SlideAnimation(
                                     horizontalOffset: -150.w,
                                     child: PersonWhoLiked(
-                                      like: cubit.peopleLikePost[index],
+                                      user: cubit.peopleWhoLiked[index],
                                     ),
                                   ),
                                 );
                               },
-                              childCount: cubit.peopleLikePost.length,
+                              childCount: cubit.peopleWhoLiked.length,
                             ),
                           ),
                         )
