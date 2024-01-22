@@ -5,7 +5,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/users/domain/usecases/follow.dart';
-import 'package:social_app/features/users/domain/usecases/get_all_users.dart';
+import 'package:social_app/features/users/domain/usecases/get_following_list.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
@@ -16,7 +16,7 @@ part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   final GetUserDataUseCase getUserDataUseCase;
-  final GetAllUsersUseCase getAllUsersUseCase;
+  final GetFollowingListUseCase getAllUsersUseCase;
   final GetUserPostsUseCase getAllUserPostsUseCase;
   final FollowUseCase followUseCase;
   final UnfollowUseCase unfollowUseCase;
@@ -33,7 +33,7 @@ class UserCubit extends Cubit<UserState> {
     required this.signOutUseCase,
   }) : super(const UserInitial());
 
-  List<UserModel> users = <UserModel>[];
+  List<UserModel> followingList = <UserModel>[];
 
   void getAllUsers() {
     emit(const GetAllUsersLoading());
@@ -43,8 +43,8 @@ class UserCubit extends Cubit<UserState> {
         (failure) =>
             emit(GetAllUserError(error: failure.failureMsg.toString())),
         (result) {
-          users = result;
-          emit(GetAllUserSuccess(users: users));
+          followingList = result;
+          emit(GetAllUserSuccess(followingList: followingList));
         },
       );
     });
@@ -71,23 +71,23 @@ class UserCubit extends Cubit<UserState> {
   void invertIsSearching() {
     isSearching = !isSearching;
     emit(InvertIsSearchingSuccess(isSearching: isSearching));
-    emit(GetAllUserSuccess(users: users));
+    emit(GetAllUserSuccess(followingList: followingList));
   }
 
   void search({required String value}) {
     if (value.isEmpty) {
       isSearching = false;
-      emit(GetAllUserSuccess(users: users));
+      emit(GetAllUserSuccess(followingList: followingList));
       // return; => I can use return here, so when isSearching is false, the searching stops
     }
 
     isSearching = true;
 
-    searchList = users
+    searchList = followingList
         .where((user) => user.name!.toLowerCase().contains(value.toLowerCase()))
         .toList();
 
-    emit(GetAllUserSuccess(users: searchList));
+    emit(GetAllUserSuccess(followingList: searchList));
   }
 
   List<PostModel> userPosts = <PostModel>[];

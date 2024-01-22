@@ -38,12 +38,12 @@ class GetAllUsersLoading extends UserState {
 }
 
 class GetAllUserSuccess extends UserState {
-  final List<UserModel> users;
+  final List<UserModel> followingList;
 
-  const GetAllUserSuccess({required this.users});
+  const GetAllUserSuccess({required this.followingList});
 
   @override
-  List<Object> get props => [users];
+  List<Object> get props => [followingList];
 }
 
 class GetAllUserError extends UserState {

@@ -67,7 +67,7 @@ class SetupLocatorForCubits {
 
     getIt.registerFactory<UserCubit>(
       () => UserCubit(
-        getAllUsersUseCase: getIt.get<GetAllUsersUseCase>(),
+        getAllUsersUseCase: getIt.get<GetFollowingListUseCase>(),
         getUserDataUseCase: getIt.get<GetUserDataUseCase>(),
         getAllUserPostsUseCase: getIt.get<GetUserPostsUseCase>(),
         followUseCase: getIt.get<FollowUseCase>(),

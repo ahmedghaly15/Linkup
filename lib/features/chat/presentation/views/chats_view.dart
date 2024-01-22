@@ -42,7 +42,7 @@ class ChatsView extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return cubit.users.isNotEmpty
+                  return cubit.followingList.isNotEmpty
                       ? SliverPadding(
                           padding: EdgeInsets.only(
                             bottom: 35.h,
@@ -55,12 +55,12 @@ class ChatsView extends StatelessWidget {
                                 return ChatItem(
                                   user: cubit.isSearching
                                       ? cubit.searchList[index]
-                                      : cubit.users[index],
+                                      : cubit.followingList[index],
                                 );
                               },
                               childCount: cubit.isSearching
                                   ? cubit.searchList.length
-                                  : cubit.users.length,
+                                  : cubit.followingList.length,
                             ),
                           ),
                         )

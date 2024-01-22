@@ -37,7 +37,7 @@ class UsersView extends StatelessWidget {
                 final UserCubit cubit = BlocProvider.of<UserCubit>(context);
 
                 if (state is GetAllUserSuccess) {
-                  return state.users.isNotEmpty
+                  return state.followingList.isNotEmpty
                       ? SliverGrid(
                           gridDelegate:
                               SliverGridDelegateWithMaxCrossAxisExtent(
@@ -52,15 +52,16 @@ class UsersView extends StatelessWidget {
                               return AnimationConfiguration.staggeredGrid(
                                 position: index,
                                 duration: const Duration(milliseconds: 650),
-                                columnCount: state.users.length,
+                                columnCount: state.followingList.length,
                                 child: ScaleAnimation(
                                   child: FadeInAnimation(
-                                    child: UserItem(user: state.users[index]),
+                                    child: UserItem(
+                                        user: state.followingList[index]),
                                   ),
                                 ),
                               );
                             },
-                            childCount: state.users.length,
+                            childCount: state.followingList.length,
                           ),
                         )
                       : const EmptyUsersView();

@@ -18,7 +18,7 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<QuerySnapshot<Map<String, dynamic>>> getAllUsers() async {
+  Future<QuerySnapshot<Map<String, dynamic>>> getFollowingList() async {
     return await getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.users)

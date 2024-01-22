@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:social_app/core/models/user_model.dart';
 
 abstract class UserDataSource {
-  Future<QuerySnapshot<Map<String, dynamic>>> getAllUsers();
+  Future<QuerySnapshot<Map<String, dynamic>>> getFollowingList();
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserData();
 

@@ -8,6 +8,7 @@ import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
+import 'package:social_app/features/posts/data/models/like_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
 import 'package:social_app/service_locator.dart';

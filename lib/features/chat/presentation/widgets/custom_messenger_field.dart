@@ -15,11 +15,9 @@ import 'package:social_app/features/chat/presentation/cubits/chat_cubit.dart';
 class CustomMessengerField extends StatefulWidget {
   const CustomMessengerField({
     super.key,
-    required this.cubit,
     required this.user,
   });
 
-  final ChatCubit cubit;
   final UserModel user;
 
   @override
@@ -93,7 +91,9 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
                               });
                             },
                           ),
-                          if (widget.cubit.messageImage != null) ...[
+                          if (BlocProvider.of<ChatCubit>(context)
+                                  .messageImage !=
+                              null) ...[
                             SizedBox(height: 4.h),
                             Stack(
                               alignment: AlignmentDirectional.topEnd,
@@ -113,7 +113,8 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
                                     image: DecorationImage(
                                       fit: BoxFit.fill,
                                       image: FileImage(
-                                        widget.cubit.messageImage!,
+                                        BlocProvider.of<ChatCubit>(context)
+                                            .messageImage!,
                                       ),
                                     ),
                                   ),
@@ -127,7 +128,8 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
                                     child: IconButton(
                                       padding: EdgeInsets.zero,
                                       onPressed: () =>
-                                          widget.cubit.removeMessageImage(),
+                                          BlocProvider.of<ChatCubit>(context)
+                                              .removeMessageImage(),
                                       icon: Icon(
                                         Icons.close,
                                         color: AppColors.primaryColor,
@@ -150,12 +152,12 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
         ),
         CustomCircleIconButton(
           onPressed: (_messageController.text.trim().isEmpty &&
-                  widget.cubit.messageImage == null)
+                  BlocProvider.of<ChatCubit>(context).messageImage == null)
               ? null
               : () => _sendMessage(context),
           icon: Image.asset(AppAssets.iconsSend),
           backgroundColor: (_messageController.text.trim().isEmpty &&
-                  widget.cubit.messageImage == null)
+                  BlocProvider.of<ChatCubit>(context).messageImage == null)
               ? Colors.grey
               : AppColors.primaryColor,
         ),
@@ -164,8 +166,8 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
   }
 
   void _sendMessage(BuildContext context) {
-    if (widget.cubit.messageImage == null) {
-      widget.cubit.sendMessage(
+    if (BlocProvider.of<ChatCubit>(context).messageImage == null) {
+      BlocProvider.of<ChatCubit>(context).sendMessage(
         params: SendMessageParams(
           receiverId: widget.user.uId!,
           receiverName: widget.user.name!,
@@ -175,8 +177,8 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
         ),
       );
     }
-    if (widget.cubit.messageImage != null) {
-      widget.cubit.uploadMessageImage(
+    if (BlocProvider.of<ChatCubit>(context).messageImage != null) {
+      BlocProvider.of<ChatCubit>(context).uploadMessageImage(
         params: SendMessageParams(
           receiverId: widget.user.uId!,
           receiverName: widget.user.name!,
@@ -187,6 +189,6 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
       );
     }
     _messageController.clear();
-    widget.cubit.removeMessageImage();
+    BlocProvider.of<ChatCubit>(context).removeMessageImage();
   }
 }
