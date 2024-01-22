@@ -1,12 +1,11 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/features/posts/data/models/like_model.dart';
-import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 import 'package:social_app/features/posts/domain/usecases/create_post.dart';
 import 'package:social_app/features/posts/domain/usecases/delete_post.dart';
@@ -141,30 +140,10 @@ class PostsCubit extends Cubit<PostsState> {
         value.fold(
           (failure) =>
               emit(LikePostError(error: failure.failureMsg.toString())),
-          (success) {
-            emit(const LikePostSuccess());
-            getLikedPostsByMe().then((value) {
-              BlocProvider.of<GetPostsCubit>(context).getPostsWithoutLoading();
-            });
-          },
+          (success) => emit(const LikePostSuccess()),
         );
       },
     );
-  }
-
-  List<PostModel> likedPosts = <PostModel>[];
-
-  Future<void> getLikedPostsByMe() async {
-    likedPostsByMeUseCase(const NoParams()).then((value) {
-      value.fold(
-        (failure) =>
-            emit(GetLikedPostsByMeError(error: failure.failureMsg.toString())),
-        (posts) {
-          likedPosts = posts;
-          emit(GetLikedPostsByMeSuccess(likedPosts: posts));
-        },
-      );
-    });
   }
 
   void unLikePost({
@@ -175,20 +154,18 @@ class PostsCubit extends Cubit<PostsState> {
       value.fold(
         (failure) =>
             emit(UnLikePostError(error: failure.failureMsg.toString())),
-        (success) {
-          emit(const UnLikePostSuccess());
-          getLikedPostsByMe().then((value) {
-            BlocProvider.of<GetPostsCubit>(context).getPostsWithoutLoading();
-          });
-        },
+        (success) => emit(const UnLikePostSuccess()),
       );
     });
   }
 
+  Stream<bool> likedPostsByMe({required String postId}) =>
+      likedPostsByMeUseCase(postId);
+
   final List<LikeModel> peopleLikePost = <LikeModel>[];
 
   void peopleLikeThePost({required String postId}) {
-    peopleLikeThePostUseCase(postId).listen((event) {
+    streamPeopleLikeThePost(postId).listen((event) {
       peopleLikePost.clear();
 
       for (var element in event.docs) {
@@ -200,4 +177,8 @@ class PostsCubit extends Cubit<PostsState> {
       emit(GetPeopleLikeThePostError(error: error.toString()));
     });
   }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamPeopleLikeThePost(
+          String postId) =>
+      peopleLikeThePostUseCase(postId);
 }

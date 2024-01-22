@@ -115,24 +115,6 @@ class UnLikePostError extends PostsState {
   List<Object> get props => [error];
 }
 
-class GetLikedPostsByMeSuccess extends PostsState {
-  final List<PostModel> likedPosts;
-
-  const GetLikedPostsByMeSuccess({required this.likedPosts});
-
-  @override
-  List<Object> get props => [likedPosts];
-}
-
-class GetLikedPostsByMeError extends PostsState {
-  final String error;
-
-  const GetLikedPostsByMeError({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
-
 class GetPeopleLikeThePostSuccess extends PostsState {
   final List<LikeModel> peopleLikeThePost;
 

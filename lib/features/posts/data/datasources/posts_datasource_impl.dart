@@ -97,26 +97,6 @@ class PostsDataSourceImpl implements PostsDataSource {
   }
 
   @override
-  Future<List<PostModel>> likedPostsByMe() async {
-    List<PostModel> likedPosts = <PostModel>[];
-
-    final posts =
-        await getIt.get<FirebaseFirestore>().collection(AppStrings.posts).get();
-
-    for (var post in posts.docs) {
-      var likes = await post.reference.collection(AppStrings.likes).get();
-
-      for (var element in likes.docs) {
-        if (element.id == Helper.currentUser!.uId) {
-          likedPosts.add(PostModel.fromJson(post.data()));
-        }
-      }
-    }
-
-    return likedPosts;
-  }
-
-  @override
   Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({
     required String postId,
   }) {
@@ -126,5 +106,23 @@ class PostsDataSourceImpl implements PostsDataSource {
         .doc(postId)
         .collection(AppStrings.likes)
         .snapshots();
+  }
+
+  @override
+  Stream<bool> likedPostsByMe({required String postId}) {
+    return getIt
+        .get<FirebaseFirestore>()
+        .collection(AppStrings.posts)
+        .doc(postId)
+        .collection(AppStrings.likes)
+        .snapshots()
+        .map((querySnapshot) {
+      for (var item in querySnapshot.docs) {
+        if (item.data()['user']['uId'] == Helper.currentUser!.uId) {
+          return true;
+        }
+      }
+      return false;
+    });
   }
 }

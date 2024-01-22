@@ -30,7 +30,7 @@ class LinkupApp extends StatelessWidget {
             create: (context) => getIt.get<GetPostsCubit>()..getPosts(),
           ),
           BlocProvider(
-            create: (context) => getIt.get<PostsCubit>()..getLikedPostsByMe(),
+            create: (context) => getIt.get<PostsCubit>(),
           ),
         ],
         child: BlocBuilder<ThemesCubit, ThemeData>(

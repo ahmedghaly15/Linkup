@@ -122,10 +122,8 @@ class PostsRepoImpl implements PostsRepo {
   }
 
   @override
-  Future<Either<Failure, List<PostModel>>> likedPostsByMe() {
-    return executeAndHandleErrors<List<PostModel>>(
-      function: () => postsDataSource.likedPostsByMe(),
-    );
+  Stream<bool> likedPostsByMe({required String postId}) {
+    return postsDataSource.likedPostsByMe(postId: postId);
   }
 
   @override

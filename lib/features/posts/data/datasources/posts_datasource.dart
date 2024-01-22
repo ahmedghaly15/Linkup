@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 
 abstract class PostsDataSource {
@@ -25,7 +24,7 @@ abstract class PostsDataSource {
 
   Future<void> unLikePost({required String postId});
 
-  Future<List<PostModel>> likedPostsByMe();
+  Stream<bool> likedPostsByMe({required String postId});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> peopleLikeThePost({
     required String postId,

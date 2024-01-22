@@ -8,7 +8,6 @@ import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/features/comments/domain/entities/comments_view_params.dart';
-import 'package:social_app/features/posts/data/models/like_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
 import 'package:social_app/service_locator.dart';
@@ -37,35 +36,42 @@ class LikesAndComments extends StatelessWidget {
                   arguments: post.postId,
                 );
               },
-              child: TextButton.icon(
-                onPressed: () {
-                  cubit.likedPosts.contains(post)
-                      ? cubit.unLikePost(
-                          postId: post.postId!,
-                          context: context,
-                        )
-                      : cubit.likePost(
-                          postId: post.postId!,
-                          context: context,
-                        );
-                },
-                icon: cubit.likedPosts.contains(post)
-                    ? Image.asset(AppAssets.iconsRedLike)
-                    : Image.asset(AppAssets.iconsLike),
-                label: StreamBuilder(
-                  stream: _likesStream(),
+              child: StreamBuilder<bool>(
+                  stream: BlocProvider.of<PostsCubit>(context)
+                      .likedPostsByMe(postId: post.postId!),
                   builder: (context, snapshot) {
-                    int likesCount = snapshot.data?.docs.length ?? 0;
+                    bool isPostLikedByMe = snapshot.data ?? false;
 
-                    return Text(
-                      "$likesCount Likes",
-                      style: AppTextStyles.textStyle15.copyWith(
-                        color: AppColors.lightGrey,
+                    return TextButton.icon(
+                      onPressed: () {
+                        isPostLikedByMe
+                            ? cubit.unLikePost(
+                                postId: post.postId!,
+                                context: context,
+                              )
+                            : cubit.likePost(
+                                postId: post.postId!,
+                                context: context,
+                              );
+                      },
+                      icon: isPostLikedByMe
+                          ? Image.asset(AppAssets.iconsRedLike)
+                          : Image.asset(AppAssets.iconsLike),
+                      label: StreamBuilder(
+                        stream: _likesStream(),
+                        builder: (context, snapshot) {
+                          int likesCount = snapshot.data?.docs.length ?? 0;
+
+                          return Text(
+                            "$likesCount Likes",
+                            style: AppTextStyles.textStyle15.copyWith(
+                              color: AppColors.lightGrey,
+                            ),
+                          );
+                        },
                       ),
                     );
-                  },
-                ),
-              ),
+                  }),
             ),
             TextButton.icon(
               onPressed: () {

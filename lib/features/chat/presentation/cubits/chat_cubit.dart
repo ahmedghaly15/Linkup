@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,7 +29,7 @@ class ChatCubit extends Cubit<ChatState> {
   List<MessageModel> messages = <MessageModel>[];
 
   void getMessages({required String receiverId}) {
-    getMessagesUseCase(receiverId).listen((event) {
+    getMessagesStream(receiverId).listen((event) {
       messages.clear();
 
       for (var element in event.docs) {
@@ -40,6 +41,10 @@ class ChatCubit extends Cubit<ChatState> {
       emit(GetMessagesError(error: error.toString()));
     });
   }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMessagesStream(
+          String receiverId) =>
+      getMessagesUseCase(receiverId);
 
   void sendMessage({required SendMessageParams params}) {
     sendMessageUseCase(params).then((value) {
