@@ -13,6 +13,7 @@ class CustomContentContainer extends StatelessWidget {
     this.horizontalPadding = 16,
     this.bottomPadding = 8,
     this.borderRadius,
+    this.backgroundColor = AppColors.lightWhiteBlue,
   });
 
   final Widget child;
@@ -21,6 +22,7 @@ class CustomContentContainer extends StatelessWidget {
   final double horizontalPadding;
   final BorderRadiusGeometry? borderRadius;
   final double bottomPadding;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class CustomContentContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Helper.isDark(context)
             ? AppColors.darkPrimaryColor
-            : AppColors.lightWhiteBlue,
+            : backgroundColor,
         borderRadius: borderRadius ??
             BorderRadius.all(
               Radius.circular(AppConstants.contentContainerRadius.r),
