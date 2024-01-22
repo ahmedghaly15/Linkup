@@ -36,7 +36,7 @@ class ChatsSliverAppBar extends StatelessWidget {
               ),
               Expanded(
                 child: cubit.isSearching
-                    ? CustomSearchField(cubit: cubit)
+                    ? const CustomSearchField()
                     : Text(
                         "Chats",
                         style: AppTextStyles.textStyle20Bold,

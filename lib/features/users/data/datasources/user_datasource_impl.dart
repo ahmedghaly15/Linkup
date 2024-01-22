@@ -22,6 +22,8 @@ class UserDataSourceImpl implements UserDataSource {
     return await getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.users)
+        .doc(Helper.uId)
+        .collection(AppStrings.following)
         .get();
   }
 

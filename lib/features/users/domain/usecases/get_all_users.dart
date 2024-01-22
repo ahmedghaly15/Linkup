@@ -14,6 +14,6 @@ class GetAllUsersUseCase implements BaseUseCases<List<UserModel>, NoParams> {
   Future<Either<Failure, List<UserModel>>> call(
     NoParams params,
   ) async {
-    return userRepo.getAllUsers();
+    return await userRepo.getAllUsers();
   }
 }

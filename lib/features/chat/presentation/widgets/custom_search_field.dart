@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class CustomSearchField extends StatelessWidget {
-  const CustomSearchField({
-    super.key,
-    required this.cubit,
-  });
-
-  final UserCubit cubit;
+  const CustomSearchField({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +40,7 @@ class CustomSearchField extends StatelessWidget {
         contentPadding: EdgeInsets.all(8.h),
       ),
       onChanged: (value) {
-        cubit.search(value: value);
+        BlocProvider.of<UserCubit>(context).search(value: value);
       },
     );
   }

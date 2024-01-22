@@ -109,7 +109,9 @@ class UserCubit extends Cubit<UserState> {
     followUseCase(user).then((value) {
       value.fold(
         (failure) => emit(FollowError(error: failure.failureMsg.toString())),
-        (success) => emit(const FollowSuccess()),
+        (success) {
+          emit(const FollowSuccess());
+        },
       );
     });
   }
@@ -118,7 +120,9 @@ class UserCubit extends Cubit<UserState> {
     unfollowUseCase(user).then((value) {
       value.fold(
         (failure) => emit(UnfollowError(error: failure.failureMsg.toString())),
-        (success) => emit(const UnfollowSuccess()),
+        (success) {
+          emit(const UnfollowSuccess());
+        },
       );
     });
   }

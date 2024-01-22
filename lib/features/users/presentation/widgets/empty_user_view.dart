@@ -8,10 +8,12 @@ class EmptyUsersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Image.asset(
-        AppAssets.imagesNoUsers,
-        fit: BoxFit.fill,
+    return SliverFillRemaining(
+      child: Center(
+        child: Image.asset(
+          AppAssets.imagesNoUsers,
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }
