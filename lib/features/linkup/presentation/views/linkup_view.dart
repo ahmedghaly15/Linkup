@@ -11,7 +11,7 @@ class LinkupView extends StatelessWidget {
     return const Scaffold(
       body: LinkupViewBody(),
       bottomNavigationBar: CustomBottomNavigationBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: NewPostFloatingButton(),
     );
   }

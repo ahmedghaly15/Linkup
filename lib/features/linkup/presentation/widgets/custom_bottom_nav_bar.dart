@@ -25,8 +25,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
           color: Helper.isDark(context)
               ? AppColors.darkPrimaryColor
               : AppColors.primaryColor,
-          shape: const CircularNotchedRectangle(),
-          notchMargin: 8.h,
+          // shape: const CircularNotchedRectangle(),
+          // notchMargin: 8.h,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,14 +38,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   IconButton(
                     style: ButtonStyle(
                       padding: MaterialStatePropertyAll(
-                        EdgeInsets.symmetric(horizontal: 16.w),
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                       ),
                     ),
                     onPressed: () => cubit.changeBottomNavIndex(index, context),
                     icon: Image.asset(icons[index]),
                   ),
                   if (cubit.currentIndex == index) ...[
-                    SizedBox(height: 4.h),
+                    // SizedBox(height: 4.h),
                     Container(
                       width: 23.w,
                       height: 3.h,

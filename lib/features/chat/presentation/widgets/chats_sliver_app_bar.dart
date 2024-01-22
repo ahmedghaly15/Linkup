@@ -17,38 +17,44 @@ class ChatsSliverAppBar extends StatelessWidget {
       builder: (context, state) {
         final UserCubit cubit = BlocProvider.of<UserCubit>(context);
 
-        return SliverAppBar(
-          title: cubit.isSearching
-              ? CustomSearchField(cubit: cubit)
-              : Text(
-                  "Chats",
-                  style: AppTextStyles.textStyle20Bold,
+        return SliverToBoxAdapter(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                onPressed: () =>
+                    BlocProvider.of<ThemesCubit>(context).toggleTheme(),
+                icon: Icon(
+                  Helper.isDark(context)
+                      ? Icons.wb_sunny_outlined
+                      : Icons.nightlight_round_outlined,
+                  size: 28.w,
+                  color: Helper.isDark(context)
+                      ? Colors.white
+                      : AppColors.darkPrimaryColor,
                 ),
-          leading: IconButton(
-            onPressed: () =>
-                BlocProvider.of<ThemesCubit>(context).toggleTheme(),
-            icon: Icon(
-              Helper.isDark(context)
-                  ? Icons.wb_sunny_outlined
-                  : Icons.nightlight_round_outlined,
-              size: 28.w,
-              color: Helper.isDark(context)
-                  ? Colors.white
-                  : AppColors.darkPrimaryColor,
-            ),
-          ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () => cubit.invertIsSearching(),
-              icon: Icon(
-                cubit.isSearching ? Icons.cancel : Icons.search_rounded,
-                size: 28.w,
-                color: Helper.isDark(context)
-                    ? Colors.white
-                    : AppColors.darkPrimaryColor,
               ),
-            ),
-          ],
+              Expanded(
+                child: cubit.isSearching
+                    ? CustomSearchField(cubit: cubit)
+                    : Text(
+                        "Chats",
+                        style: AppTextStyles.textStyle20Bold,
+                        textAlign: TextAlign.center,
+                      ),
+              ),
+              IconButton(
+                onPressed: () => cubit.invertIsSearching(),
+                icon: Icon(
+                  cubit.isSearching ? Icons.cancel : Icons.search_rounded,
+                  size: 28.w,
+                  color: Helper.isDark(context)
+                      ? Colors.white
+                      : AppColors.darkPrimaryColor,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
