@@ -38,12 +38,12 @@ class PostsDataSourceImpl implements PostsDataSource {
       dateTime: Timestamp.now(),
     );
 
-    final DocumentReference<Map<String, dynamic>> userPost = await getIt
-        .get<FirebaseFirestore>()
-        .collection(AppStrings.users)
-        .doc(Helper.uId)
-        .collection(AppStrings.posts)
-        .add(post.toJson());
+    // final DocumentReference<Map<String, dynamic>> userPost = await getIt
+    //     .get<FirebaseFirestore>()
+    //     .collection(AppStrings.users)
+    //     .doc(Helper.uId)
+    //     .collection(AppStrings.posts)
+    //     .add(post.toJson());
 
     final DocumentReference<Map<String, dynamic>> documentReference =
         await getIt
@@ -52,11 +52,11 @@ class PostsDataSourceImpl implements PostsDataSource {
             .add(post.toJson());
 
     final String postId = documentReference.id;
-    final String userPostId = userPost.id;
+    // final String userPostId = userPost.id;
 
     await documentReference.update({'postId': postId});
 
-    await userPost.update({'postId': userPostId});
+    // await userPost.update({'postId': userPostId});
 
     return documentReference;
   }

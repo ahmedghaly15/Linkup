@@ -15,7 +15,7 @@ class EditProfileDataSourceImpl implements EditProfileDataSource {
   Future<void> updateUser({required UserModel userModel}) async {
     return await getIt
         .get<FirebaseFirestore>()
-        .collection('users')
+        .collection(AppStrings.users)
         .doc(Helper.currentUser!.uId)
         .update(userModel.toJson());
   }

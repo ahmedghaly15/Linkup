@@ -45,8 +45,9 @@ class CustomMessageBubble extends StatelessWidget {
                 maxLines: null,
               ),
             ],
-            if (message.messageImage!['image'] != null) ...[
+            if (message.messageText != null && message.messageImage != null)
               SizedBox(height: 8.h),
+            if (message.messageImage!['image'] != null)
               Container(
                 width: double.infinity,
                 height: 220.h,
@@ -63,7 +64,6 @@ class CustomMessageBubble extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
             SizedBox(height: 6.h),
             DateAndTime(
               date: message.date!,

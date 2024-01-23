@@ -91,10 +91,14 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
                               });
                             },
                           ),
+                          if (_messageController.text.trim().isNotEmpty &&
+                              BlocProvider.of<ChatCubit>(context)
+                                      .messageImage !=
+                                  null)
+                            SizedBox(height: 4.h),
                           if (BlocProvider.of<ChatCubit>(context)
                                   .messageImage !=
-                              null) ...[
-                            SizedBox(height: 4.h),
+                              null)
                             Stack(
                               alignment: AlignmentDirectional.topEnd,
                               children: <Widget>[
@@ -140,7 +144,6 @@ class _CustomMessengerFieldState extends State<CustomMessengerField> {
                                 ),
                               ],
                             ),
-                          ],
                         ],
                       ),
                     ),

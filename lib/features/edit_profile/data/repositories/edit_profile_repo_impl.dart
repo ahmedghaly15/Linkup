@@ -30,7 +30,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
       bio: updateUserParams.bio,
       image: updateUserParams.image ?? Helper.currentUser!.image,
       cover: updateUserParams.cover ?? Helper.currentUser!.cover,
-      email: Helper.currentUser!.email,
+      email: updateUserParams.email,
       uId: Helper.currentUser!.uId,
       isEmailVerified: false,
     );
@@ -63,8 +63,6 @@ class EditProfileRepoImpl implements EditProfileRepo {
     return executeAndHandleErrors<void>(function: () async {
       final result = await editProfileDataSource.updateUserPosts();
 
-      void method() {}
-
       for (var element in result.docs) {
         final post = PostModel.fromJson(element.data());
 
@@ -86,8 +84,6 @@ class EditProfileRepoImpl implements EditProfileRepo {
           }));
         }
       }
-
-      return method();
     });
   }
 }

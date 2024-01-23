@@ -19,6 +19,10 @@ class UserItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 8.w,
+        vertical: 8.h,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24.r),
         color:
@@ -28,6 +32,7 @@ class UserItem extends StatelessWidget {
         ],
       ),
       child: MaterialButton(
+        padding: EdgeInsets.zero,
         onPressed: () {
           BlocProvider.of<UserCubit>(context)
               .getUserPosts(uId: user.uId!)
@@ -39,7 +44,6 @@ class UserItem extends StatelessWidget {
           });
         },
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CachedNetworkImage(
               imageUrl: user.image!,
@@ -56,11 +60,12 @@ class UserItem extends StatelessWidget {
             Flexible(
               child: Text(
                 user.name!,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                // maxLines: 1,
+                // overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.textStyle20Bold.copyWith(
-                  color: Colors.white,
+                  color: Helper.isDark(context) ? Colors.white : Colors.black,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(height: 16.h),
@@ -69,14 +74,18 @@ class UserItem extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   Icons.touch_app,
-                  color: Colors.white,
+                  color: Helper.isDark(context)
+                      ? Colors.white
+                      : AppColors.primaryColor,
                   size: 22.w,
                 ),
                 SizedBox(width: 5.w),
                 Text(
                   "Visit",
                   style: AppTextStyles.textStyle16.copyWith(
-                    color: Colors.white,
+                    color: Helper.isDark(context)
+                        ? Colors.white
+                        : AppColors.primaryColor,
                   ),
                 ),
               ],

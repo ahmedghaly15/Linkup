@@ -42,7 +42,7 @@ class FollowedUsersView extends StatelessWidget {
                           gridDelegate:
                               SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 300.w,
-                            mainAxisExtent: 220.h,
+                            mainAxisExtent: 240.h,
                             mainAxisSpacing: 10.h,
                             crossAxisSpacing: 10.w,
                             childAspectRatio: 3 / 2,

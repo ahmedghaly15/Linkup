@@ -77,13 +77,15 @@ class _EditProfileFormState extends State<EditProfileForm> {
             autovalidateMode: autoValidateMode,
             child: Column(
               children: <Widget>[
-                ConfirmEditingButtons(
-                  cubit: cubit,
-                  nameController: _nameController,
-                  phoneController: _phoneController,
-                  bioController: _bioController,
-                  state: state,
-                ),
+                if (cubit.profileImage != null)
+                  ConfirmEditingButtons(
+                    cubit: cubit,
+                    name: _nameController.text.trim(),
+                    phone: _phoneController.text,
+                    bio: _bioController.text.trim(),
+                    email: _emailController.text.trim(),
+                    state: state,
+                  ),
                 if (cubit.profileImage != null || cubit.coverImage != null)
                   const TextFormFieldSeparator(),
                 CustomTextFormField(
@@ -166,6 +168,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
           name: _nameController.text.trim(),
           phone: _phoneController.text,
           bio: _bioController.text.trim(),
+          email: _emailController.text.trim(),
         ),
       );
     } else {
@@ -186,20 +189,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
     BuildContext context,
   ) async {
     if (state is UpdateUserSuccess) {
-      BlocProvider.of<UserCubit>(context).getUserData().then((value) {
-        BlocProvider.of<EditProfileCubit>(context)
-            .updateUserPosts()
-            .then((value) {
-          BlocProvider.of<UserCubit>(context)
-              .getUserPosts(uId: Helper.uId!)
-              .then((value) {
-            CustomToast.showToast(
-              text: 'User updated successfully',
-              state: CustomToastState.success,
-            );
-          });
-        });
-      });
+      _handleUpdateUserSuccess(context);
     }
 
     if (state is UploadImageError) {
@@ -208,5 +198,22 @@ class _EditProfileFormState extends State<EditProfileForm> {
         state: CustomToastState.error,
       );
     }
+  }
+
+  void _handleUpdateUserSuccess(BuildContext context) {
+    BlocProvider.of<UserCubit>(context).getUserData().then((value) {
+      BlocProvider.of<EditProfileCubit>(context)
+          .updateUserPosts()
+          .then((value) {
+        BlocProvider.of<UserCubit>(context)
+            .getUserPosts(uId: Helper.uId!)
+            .then((value) {
+          CustomToast.showToast(
+            text: 'User updated successfully',
+            state: CustomToastState.success,
+          );
+        });
+      });
+    });
   }
 }

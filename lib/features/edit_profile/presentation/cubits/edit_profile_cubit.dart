@@ -83,6 +83,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
                 name: params.name,
                 phone: params.phone,
                 bio: params.bio,
+                email: params.email,
                 image: value,
               ),
             );
@@ -130,6 +131,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
                 name: params.name,
                 phone: params.phone,
                 bio: params.bio,
+                email: params.email,
                 cover: value,
               ),
             );
