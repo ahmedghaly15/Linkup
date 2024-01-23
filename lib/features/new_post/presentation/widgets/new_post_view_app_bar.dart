@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
-import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_get_back_button.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
-import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class NewPostViewAppBar extends StatelessWidget {
   const NewPostViewAppBar({
@@ -26,14 +23,7 @@ class NewPostViewAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        CustomGetBackButton(
-          onPressed: () {
-            BlocProvider.of<UserCubit>(context)
-                .getUserPosts(uId: Helper.uId!)
-                .then((value) {
-              context.back();
-            });
-          },
+        const CustomGetBackButton(
           hasShadow: true,
         ),
         SizedBox(width: 24.w),

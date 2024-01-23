@@ -14,11 +14,8 @@ class UserRepoImpl implements UserRepo {
   const UserRepoImpl({required this.userDataSource});
 
   @override
-  Future<Either<Failure, DocumentSnapshot<Map<String, dynamic>>>>
-      getUserData() {
-    return executeAndHandleErrors<DocumentSnapshot<Map<String, dynamic>>>(
-      function: () => userDataSource.getUserData(),
-    );
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getUserData() {
+    return userDataSource.getUserData();
   }
 
   @override

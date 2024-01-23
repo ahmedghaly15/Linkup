@@ -7,7 +7,7 @@ import 'package:social_app/features/posts/data/models/post_model.dart';
 abstract class UserRepo {
   Future<Either<Failure, List<UserModel>>> getFollowingList();
 
-  Future<Either<Failure, DocumentSnapshot<Map<String, dynamic>>>> getUserData();
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getUserData();
 
   Future<Either<Failure, List<PostModel>>> getUserPosts({required String uId});
 

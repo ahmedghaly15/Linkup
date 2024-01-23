@@ -17,12 +17,15 @@ class ChatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Helper.isDark(context) ? AppColors.darkPrimaryColor : Colors.white,
+    return Container(
       margin: EdgeInsets.symmetric(vertical: 4.h),
-      elevation: 1.5.h,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.r),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24.r),
+        color:
+            Helper.isDark(context) ? AppColors.darkPrimaryColor : Colors.white,
+        boxShadow: <BoxShadow>[
+          Helper.postShadow(context),
+        ],
       ),
       child: MaterialButton(
         padding: EdgeInsets.zero,

@@ -4,7 +4,7 @@ import 'package:social_app/core/models/user_model.dart';
 abstract class UserDataSource {
   Future<QuerySnapshot<Map<String, dynamic>>> getFollowingList();
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserData();
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getUserData();
 
   Future<QuerySnapshot<Map<String, dynamic>>> getUserPosts();
 

@@ -22,7 +22,6 @@ import 'package:social_app/features/new_post/presentation/view/new_post_view.dar
 import 'package:social_app/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:social_app/features/onboarding/presentation/view/onboarding_view.dart';
 import 'package:social_app/features/people_who_liked/presentation/cubit/people_who_liked_cubit.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
 import 'package:social_app/features/people_who_liked/presentation/views/people_who_liked_view.dart';
 import 'package:social_app/features/edit_profile/presentation/views/edit_profile_view.dart';
 import 'package:social_app/features/users/presentation/views/user_profile_view.dart';
@@ -35,26 +34,11 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => const EntryView());
 
       case Routes.onboardingRoute:
-        return PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
             create: (context) => getIt.get<OnboardingCubit>(),
             child: const OnboardingView(),
           ),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0.0);
-            const end = Offset.zero;
-            const curve = Curves.easeInOut;
-
-            var tween =
-                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-            var offsetAnimation = animation.drive(tween);
-
-            return SlideTransition(
-              position: offsetAnimation,
-              child: child,
-            );
-          },
         );
 
       case Routes.signInRoute:
@@ -84,7 +68,7 @@ class AppRouter {
       case Routes.newPostRoute:
         return MaterialPageRoute(builder: (context) => const NewPostView());
 
-      case Routes.postLikesRoute:
+      case Routes.peopleWhoLiked:
         final args = routeSettings.arguments as String;
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -113,7 +97,8 @@ class AppRouter {
         final args = routeSettings.arguments as UserModel;
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt.get<ChatCubit>(),
+            create: (context) =>
+                getIt.get<ChatCubit>()..getMessages(receiverId: args.uId!),
             child: ChatDetailsView(user: args),
           ),
         );

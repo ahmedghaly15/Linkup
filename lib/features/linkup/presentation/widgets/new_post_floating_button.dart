@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
+import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 
@@ -13,7 +15,9 @@ class NewPostFloatingButton extends StatelessWidget {
       height: 68.h,
       width: 68.h,
       decoration: BoxDecoration(
-        color: const Color(0xfff3e4e1),
+        color: Helper.isDark(context)
+            ? AppColors.darkPrimaryColor
+            : const Color(0xfff3e4e1),
         shape: BoxShape.circle,
         boxShadow: <BoxShadow>[
           BoxShadow(

@@ -14,15 +14,15 @@ import 'package:social_app/service_locator.dart';
 
 class PostsDataSourceImpl implements PostsDataSource {
   @override
-  Future<QuerySnapshot<Map<String, dynamic>>> getPosts() async {
-    return await getIt
+  Stream<QuerySnapshot<Map<String, dynamic>>> getPosts() {
+    return getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.posts)
         .orderBy(
           'dateTime',
           descending: true,
         )
-        .get();
+        .snapshots();
   }
 
   @override
@@ -35,15 +35,19 @@ class PostsDataSourceImpl implements PostsDataSource {
       time: createPostParams.time,
       text: createPostParams.text,
       postImage: createPostParams.postImage ?? '',
-      likes: 0,
-      comments: 0,
       dateTime: Timestamp.now(),
     );
 
-    return await getIt
-        .get<FirebaseFirestore>()
-        .collection(AppStrings.posts)
-        .add(post.toJson());
+    final DocumentReference<Map<String, dynamic>> documentReference =
+        await getIt
+            .get<FirebaseFirestore>()
+            .collection(AppStrings.posts)
+            .add(post.toJson());
+
+    final String postId = documentReference.id;
+    await documentReference.update({'postId': postId});
+
+    return documentReference;
   }
 
   @override

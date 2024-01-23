@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
@@ -17,13 +18,15 @@ class UserItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0.r),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24.r),
+        color:
+            Helper.isDark(context) ? AppColors.darkPrimaryColor : Colors.white,
+        boxShadow: <BoxShadow>[
+          Helper.postShadow(context),
+        ],
       ),
-      color: AppColors.primaryColor.withOpacity(0.6),
-      elevation: 10.h,
-      shadowColor: Colors.black,
       child: MaterialButton(
         onPressed: () {
           BlocProvider.of<UserCubit>(context)

@@ -53,15 +53,11 @@ class UserCubit extends Cubit<UserState> {
   Future<void> getUserData() async {
     emit(const GetUserDataLoading());
 
-    getUserDataUseCase(const NoParams()).then((value) {
-      value.fold(
-        (failure) =>
-            emit(GetUserDataError(error: failure.failureMsg.toString())),
-        (success) {
-          Helper.currentUser = UserModel.fromJson(success.data()!);
-          emit(GetUserDataSuccess(user: Helper.currentUser!));
-        },
-      );
+    getUserDataUseCase(const NoParams()).listen((event) {
+      Helper.currentUser = UserModel.fromJson(event.data()!);
+      emit(GetUserDataSuccess(user: Helper.currentUser!));
+    }).onError((error) {
+      emit(GetUserDataError(error: error.toString()));
     });
   }
 

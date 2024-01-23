@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 
 abstract class PostsDataSource {
-  Future<QuerySnapshot<Map<String, dynamic>>> getPosts();
+  Stream<QuerySnapshot<Map<String, dynamic>>> getPosts();
 
   Future<DocumentReference<Map<String, dynamic>>> createPost({
     required CreatePostParams createPostParams,

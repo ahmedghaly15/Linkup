@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 
 class Helper {
   static UserModel? currentUser;
 
-// The User's Id
+  // The User's Id
   static String? uId;
 
   static String getDate() {
@@ -42,6 +43,20 @@ class Helper {
         ),
         fit: BoxFit.cover,
       ),
+    );
+  }
+
+  static BoxDecoration postDecoration(BuildContext context) {
+    return BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(40.r)),
+      color: isDark(context)
+          ? AppColors.darkPrimaryColor
+          : AppColors.lightWhiteBlue,
+      boxShadow: isDark(context)
+          ? <BoxShadow>[
+              postShadow(context),
+            ]
+          : null,
     );
   }
 

@@ -7,21 +7,9 @@ import 'package:social_app/core/widgets/custom_get_back_button.dart';
 import 'package:social_app/core/widgets/user_profile_content.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/profile/presentation/widgets/custom_pop_menu_button.dart';
-import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
-class ProfileView extends StatefulWidget {
+class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
-
-  @override
-  State<ProfileView> createState() => _ProfileViewState();
-}
-
-class _ProfileViewState extends State<ProfileView> {
-  @override
-  void initState() {
-    BlocProvider.of<UserCubit>(context).getUserPosts(uId: Helper.uId!);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

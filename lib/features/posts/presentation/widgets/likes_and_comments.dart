@@ -32,13 +32,15 @@ class LikesAndComments extends StatelessWidget {
             InkWell(
               onLongPress: () {
                 context.navigateTo(
-                  routeName: Routes.postLikesRoute,
+                  routeName: Routes.peopleWhoLiked,
                   arguments: post.postId,
                 );
               },
               child: StreamBuilder<bool>(
-                  stream: BlocProvider.of<PostsCubit>(context)
-                      .likedPostsByMe(postId: post.postId!),
+                  stream: post.postId != null
+                      ? BlocProvider.of<PostsCubit>(context)
+                          .likedPostsByMe(postId: post.postId!)
+                      : const Stream<bool>.empty(),
                   builder: (context, snapshot) {
                     bool isPostLikedByMe = snapshot.data ?? false;
 

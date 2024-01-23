@@ -7,7 +7,9 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/post_information.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
+import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class TopPostItemSection extends StatelessWidget {
   const TopPostItemSection({
@@ -24,7 +26,8 @@ class TopPostItemSection extends StatelessWidget {
         Flexible(child: PostInformation(post: post)),
         post.user!.uId == Helper.currentUser!.uId
             ? BlocConsumer<PostsCubit, PostsState>(
-                listener: (context, state) => _controlFeedsState(state),
+                listener: (context, state) =>
+                    _controlFeedsState(state, context),
                 builder: (context, state) {
                   return PopupMenuButton(
                     icon: Icon(
@@ -58,12 +61,22 @@ class TopPostItemSection extends StatelessWidget {
     );
   }
 
-  void _controlFeedsState(PostsState state) {
+  void _controlFeedsState(PostsState state, BuildContext context) {
     if (state is DeletePostSuccess) {
-      CustomToast.showToast(
-        text: 'Post deleted successfully',
-        state: CustomToastState.success,
-      );
+      _handleDeletePostSuccess(context);
     }
+  }
+
+  void _handleDeletePostSuccess(BuildContext context) {
+    BlocProvider.of<GetPostsCubit>(context).getPosts().then((value) {
+      BlocProvider.of<UserCubit>(context)
+          .getUserPosts(uId: Helper.uId!)
+          .then((value) {
+        CustomToast.showToast(
+          text: 'Post deleted successfully',
+          state: CustomToastState.success,
+        );
+      });
+    });
   }
 }

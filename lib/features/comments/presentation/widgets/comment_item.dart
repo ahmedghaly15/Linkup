@@ -39,7 +39,8 @@ class CommentItem extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 5.h),
             backGroundColor: Helper.isDark(context)
                 ? AppColors.darkPrimaryColor.withOpacity(0.9)
-                : const Color(0xffE7E7ED),
+                : Colors.white,
+            elevation: Helper.isDark(context) ? 5.h : 10.h,
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width * 0.65,

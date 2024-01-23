@@ -9,12 +9,12 @@ import 'package:social_app/service_locator.dart';
 
 class UserDataSourceImpl implements UserDataSource {
   @override
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserData() async {
-    return await getIt
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getUserData() {
+    return getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.users)
         .doc(Helper.uId)
-        .get();
+        .snapshots();
   }
 
   @override

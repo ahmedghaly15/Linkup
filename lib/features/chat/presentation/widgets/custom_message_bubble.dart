@@ -3,6 +3,7 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/widgets/date_and_time.dart';
 import 'package:social_app/features/chat/data/models/message_model.dart';
 
@@ -23,13 +24,9 @@ class CustomMessageBubble extends StatelessWidget {
           ? ChatBubbleClipper3(type: BubbleType.sendBubble)
           : ChatBubbleClipper3(type: BubbleType.receiverBubble),
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-      backGroundColor: isMe ? AppColors.primaryColor : Colors.white,
-      // ? (Helper.isDark(context)
-      //     ? const Color(0xffbe29ec)
-      //     : const Color(0xffefbbff))
-      // : (Helper.isDark(context)
-      //     ? AppColors.darkPrimaryColor
-      //     : const Color(0xffE7E7ED)),
+      backGroundColor: isMe
+          ? AppColors.primaryColor
+          : (Helper.isDark(context) ? AppColors.darkHeaderClr : Colors.white),
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.65,
@@ -41,7 +38,9 @@ class CustomMessageBubble extends StatelessWidget {
               Text(
                 message.messageText!,
                 style: AppTextStyles.textStyle16SemiBold.copyWith(
-                  color: isMe ? Colors.white : Colors.black,
+                  color: isMe
+                      ? Colors.white
+                      : (Helper.isDark(context) ? Colors.white : Colors.black),
                 ),
                 maxLines: null,
               ),

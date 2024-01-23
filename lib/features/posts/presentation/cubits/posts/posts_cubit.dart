@@ -13,7 +13,6 @@ import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart
 import 'package:social_app/features/people_who_liked/domain/usecases/people_who_liked.dart';
 import 'package:social_app/features/posts/domain/usecases/unlike_post.dart';
 import 'package:social_app/features/posts/domain/usecases/upload_post_image.dart';
-import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 
 part 'posts_state.dart';
 
@@ -51,7 +50,6 @@ class PostsCubit extends Cubit<PostsState> {
         (success) {
           postImage = null;
           emit(const CreatePostSuccess());
-          BlocProvider.of<GetPostsCubit>(context).getPosts();
         },
       );
     });
@@ -67,10 +65,7 @@ class PostsCubit extends Cubit<PostsState> {
       value.fold(
         (failure) =>
             emit(DeletePostError(error: failure.failureMsg.toString())),
-        (success) {
-          emit(const DeletePostSuccess());
-          BlocProvider.of<GetPostsCubit>(context).getPostsWithoutLoading();
-        },
+        (success) => emit(const DeletePostSuccess()),
       );
     });
   }

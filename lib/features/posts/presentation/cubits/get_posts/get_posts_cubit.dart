@@ -17,22 +17,16 @@ class GetPostsCubit extends Cubit<GetPostsState> {
   Future<void> getPosts() async {
     emit(const GetPostsLoading());
 
-    _executeGetPostsUseCase();
-  }
+    getPostsUseCase(const NoParams()).listen((event) {
+      posts.clear();
 
-  void getPostsWithoutLoading() {
-    _executeGetPostsUseCase();
-  }
+      for (var item in event.docs) {
+        posts.add(PostModel.fromJson(item.data()));
+      }
 
-  void _executeGetPostsUseCase() {
-    getPostsUseCase(const NoParams()).then((value) {
-      value.fold(
-        (failure) => emit(GetPostsError(error: failure.failureMsg.toString())),
-        (result) {
-          posts = result;
-          emit(GetPostsSuccess(posts: posts));
-        },
-      );
+      emit(GetPostsSuccess(posts: posts));
+    }).onError((error) {
+      emit(GetPostsError(error: error.toString()));
     });
   }
 }

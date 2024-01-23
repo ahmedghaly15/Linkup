@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/widgets/likes_and_comments.dart';
@@ -24,17 +23,7 @@ class PostItem extends StatelessWidget {
         top: 10.h,
         bottom: 2.h,
       ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(40.r)),
-        color: Helper.isDark(context)
-            ? AppColors.darkPrimaryColor
-            : AppColors.lightWhiteBlue,
-        boxShadow: Helper.isDark(context)
-            ? <BoxShadow>[
-                Helper.postShadow(context),
-              ]
-            : null,
-      ),
+      decoration: Helper.postDecoration(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

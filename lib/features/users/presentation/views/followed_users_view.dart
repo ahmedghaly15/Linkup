@@ -11,8 +11,8 @@ import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import 'package:social_app/features/users/presentation/widgets/empty_user_view.dart';
 import 'package:social_app/features/users/presentation/widgets/user_item.dart';
 
-class UsersView extends StatelessWidget {
-  const UsersView({super.key});
+class FollowedUsersView extends StatelessWidget {
+  const FollowedUsersView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,8 @@ class UsersView extends StatelessWidget {
                                 child: ScaleAnimation(
                                   child: FadeInAnimation(
                                     child: UserItem(
-                                        user: state.followingList[index]),
+                                      user: state.followingList[index],
+                                    ),
                                   ),
                                 ),
                               );

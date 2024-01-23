@@ -10,8 +10,6 @@ class PostModel extends Equatable {
   final Timestamp? dateTime;
   final String? text;
   final String? postImage;
-  final int? likes;
-  final int? comments;
 
   const PostModel({
     this.user,
@@ -20,8 +18,6 @@ class PostModel extends Equatable {
     this.dateTime,
     this.postImage,
     this.text,
-    this.comments,
-    this.likes,
     this.postId,
   });
 
@@ -33,8 +29,6 @@ class PostModel extends Equatable {
       time: json['time'] as String?,
       dateTime: json['dateTime'] as Timestamp?,
       postImage: json['postImage'] as String?,
-      comments: json['comments'] as int?,
-      likes: json['likes'] as int?,
       postId: json['postId'] as String?,
     );
   }
@@ -47,8 +41,6 @@ class PostModel extends Equatable {
       'time': time,
       'dateTime': dateTime,
       'postImage': postImage,
-      'comments': comments,
-      'likes': likes,
       'postId': postId,
     };
   }
@@ -61,8 +53,6 @@ class PostModel extends Equatable {
         time,
         dateTime,
         postImage,
-        comments,
-        likes,
         postId,
       ];
 }
