@@ -55,6 +55,28 @@ class GetFollowersListError extends UserState {
   List<Object> get props => [error];
 }
 
+class GetFollowingListLoading extends UserState {
+  const GetFollowingListLoading();
+}
+
+class GetFollowingListSuccess extends UserState {
+  final List<UserModel> users;
+
+  const GetFollowingListSuccess({required this.users});
+
+  @override
+  List<Object> get props => [users];
+}
+
+class GetFollowingListError extends UserState {
+  final String error;
+
+  const GetFollowingListError({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}
+
 class InvertIsSearchingSuccess extends UserState {
   final bool isSearching;
 

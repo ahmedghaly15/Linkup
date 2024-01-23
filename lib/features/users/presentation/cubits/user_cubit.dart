@@ -6,6 +6,7 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/users/domain/usecases/follow.dart';
 import 'package:social_app/features/users/domain/usecases/get_followers_list.dart';
+import 'package:social_app/features/users/domain/usecases/get_following_list.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
@@ -16,7 +17,8 @@ part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   final GetUserDataUseCase getUserDataUseCase;
-  final GetFollowersListUseCase getFollowingListUseCase;
+  final GetFollowersListUseCase getFollowersListUseCase;
+  final GetFollowingListUseCase getFollowingListUseCase;
   final GetUserPostsUseCase getAllUserPostsUseCase;
   final FollowUseCase followUseCase;
   final UnfollowUseCase unfollowUseCase;
@@ -25,6 +27,7 @@ class UserCubit extends Cubit<UserState> {
 
   UserCubit({
     required this.getUserDataUseCase,
+    required this.getFollowersListUseCase,
     required this.getFollowingListUseCase,
     required this.getAllUserPostsUseCase,
     required this.followUseCase,
@@ -38,13 +41,30 @@ class UserCubit extends Cubit<UserState> {
   void getFollowersList() {
     emit(const GetFollowersListLoading());
 
-    getFollowingListUseCase(const NoParams()).then((value) {
+    getFollowersListUseCase(const NoParams()).then((value) {
       value.fold(
         (failure) =>
             emit(GetFollowersListError(error: failure.failureMsg.toString())),
         (result) {
           followersList = result;
           emit(GetFollowersListSuccess(users: followersList));
+        },
+      );
+    });
+  }
+
+  List<UserModel> followingList = <UserModel>[];
+
+  void getFollowingList() {
+    emit(const GetFollowingListLoading());
+
+    getFollowingListUseCase(const NoParams()).then((value) {
+      value.fold(
+        (failure) =>
+            emit(GetFollowingListError(error: failure.failureMsg.toString())),
+        (result) {
+          followingList = result;
+          emit(GetFollowingListSuccess(users: followersList));
         },
       );
     });
