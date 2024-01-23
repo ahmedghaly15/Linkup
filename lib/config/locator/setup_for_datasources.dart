@@ -33,5 +33,9 @@ class SetupLocatorForDataSource {
     getIt.registerLazySingleton<PeopleWhoLikedDataSource>(
       () => PeopleWhoLikedDataSourceImpl(),
     );
+
+    getIt.registerLazySingleton<FollowingAndFollowersDataSource>(
+      () => FollowingAndFollowersDataSourceImpl(),
+    );
   }
 }

@@ -8,9 +8,9 @@ import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
-import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 import 'package:social_app/features/posts/presentation/widgets/empty_post_view.dart';
 import 'package:social_app/features/posts/presentation/widgets/posts.dart';
+import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class PostsView extends StatelessWidget {
   const PostsView({super.key});
@@ -40,10 +40,9 @@ class PostsView extends StatelessWidget {
                 ],
               ),
             ),
-            BlocBuilder<GetPostsCubit, GetPostsState>(
+            BlocBuilder<UserCubit, UserState>(
               builder: (context, state) {
-                final GetPostsCubit cubit =
-                    BlocProvider.of<GetPostsCubit>(context);
+                final UserCubit cubit = BlocProvider.of<UserCubit>(context);
 
                 if (state is GetPostsSuccess) {
                   return cubit.posts.isNotEmpty

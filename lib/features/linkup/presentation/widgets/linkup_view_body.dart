@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
-import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class LinkupViewBody extends StatelessWidget {
   const LinkupViewBody({super.key});
@@ -12,13 +12,15 @@ class LinkupViewBody extends StatelessWidget {
       builder: (context, state) {
         final LinkupCubit linkupCubit = BlocProvider.of<LinkupCubit>(context);
 
-        return BlocBuilder<UserCubit, UserState>(builder: (context, state) {
-          final UserCubit userCubit = BlocProvider.of<UserCubit>(context);
+        return BlocBuilder<GetFollowersCubit, GetFollowersState>(
+            builder: (context, state) {
+          final GetFollowersCubit followersCubit =
+              BlocProvider.of<GetFollowersCubit>(context);
 
           return WillPopScope(
             onWillPop: () {
-              if (userCubit.isSearching) {
-                userCubit.invertIsSearching();
+              if (followersCubit.isSearching) {
+                followersCubit.invertIsSearching();
                 return Future.value(false);
               }
 

@@ -15,7 +15,7 @@ class GetFollowersCubit extends Cubit<GetFollowersState> {
 
   List<UserModel> followers = <UserModel>[];
 
-  void getFollowersList() {
+  void getFollowers() {
     emit(const GetFollowersLoading());
 
     getFollowersUseCase(const NoParams()).then((value) {

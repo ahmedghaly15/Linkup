@@ -11,8 +11,7 @@ import 'package:social_app/features/new_post/presentation/widgets/add_photos_and
 import 'package:social_app/features/new_post/presentation/widgets/new_post_view_app_bar.dart';
 import 'package:social_app/features/new_post/presentation/widgets/post_image.dart';
 import 'package:social_app/features/new_post/presentation/widgets/user_name_and_image.dart';
-import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class NewPostViewBody extends StatefulWidget {
@@ -139,7 +138,7 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
   }
 
   void _handleCreatePostSuccess(BuildContext context) {
-    BlocProvider.of<GetPostsCubit>(context).getPosts().then((value) {
+    BlocProvider.of<UserCubit>(context).getPosts().then((value) {
       BlocProvider.of<UserCubit>(context)
           .getUserPosts(uId: Helper.uId!)
           .then((value) {

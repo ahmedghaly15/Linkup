@@ -37,7 +37,7 @@ class SetupLocatorForUseCases {
     );
 
     getIt.registerLazySingleton<GetPostsUseCase>(
-      () => GetPostsUseCase(postsRepo: getIt.get<PostsRepo>()),
+      () => GetPostsUseCase(userRepo: getIt.get<UserRepo>()),
     );
 
     getIt.registerLazySingleton<CreatePostUseCase>(
@@ -110,10 +110,6 @@ class SetupLocatorForUseCases {
       () => GetUserDataUseCase(userRepo: getIt.get<UserRepo>()),
     );
 
-    getIt.registerLazySingleton<GetFollowersListUseCase>(
-      () => GetFollowersListUseCase(userRepo: getIt.get<UserRepo>()),
-    );
-
     getIt.registerLazySingleton<GetUserPostsUseCase>(
       () => GetUserPostsUseCase(userRepo: getIt.get<UserRepo>()),
     );
@@ -157,15 +153,33 @@ class SetupLocatorForUseCases {
     );
 
     getIt.registerLazySingleton<FollowUseCase>(
-      () => FollowUseCase(userRepo: getIt.get<UserRepo>()),
+      () => FollowUseCase(
+        followingAndFollowersRepo: getIt.get<FollowingAndFollowersRepo>(),
+      ),
+    );
+
+    getIt.registerLazySingleton<GetFollowersUseCase>(
+      () => GetFollowersUseCase(
+        followingAndFollowersRepo: getIt.get<FollowingAndFollowersRepo>(),
+      ),
     );
 
     getIt.registerLazySingleton<UnfollowUseCase>(
-      () => UnfollowUseCase(userRepo: getIt.get<UserRepo>()),
+      () => UnfollowUseCase(
+        followingAndFollowersRepo: getIt.get<FollowingAndFollowersRepo>(),
+      ),
     );
 
     getIt.registerLazySingleton<UserIsFollowedUseCase>(
-      () => UserIsFollowedUseCase(userRepo: getIt.get<UserRepo>()),
+      () => UserIsFollowedUseCase(
+        followingAndFollowersRepo: getIt.get<FollowingAndFollowersRepo>(),
+      ),
+    );
+
+    getIt.registerLazySingleton<GetFollowingUseCase>(
+      () => GetFollowingUseCase(
+        followingAndFollowersDataRepo: getIt.get<FollowingAndFollowersRepo>(),
+      ),
     );
   }
 }

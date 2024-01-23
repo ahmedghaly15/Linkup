@@ -44,8 +44,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                     onPressed: () => cubit.changeBottomNavIndex(index, context),
                     icon: Image.asset(icons[index]),
                   ),
-                  if (cubit.currentIndex == index) ...[
-                    // SizedBox(height: 4.h),
+                  if (cubit.currentIndex == index)
                     Container(
                       width: 23.w,
                       height: 3.h,
@@ -54,7 +53,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(5.r)),
                       ),
                     ),
-                  ],
                 ],
               ),
               growable: false,

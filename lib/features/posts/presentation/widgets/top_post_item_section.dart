@@ -7,8 +7,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/post_information.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
-import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class TopPostItemSection extends StatelessWidget {
@@ -68,7 +67,7 @@ class TopPostItemSection extends StatelessWidget {
   }
 
   void _handleDeletePostSuccess(BuildContext context) {
-    BlocProvider.of<GetPostsCubit>(context).getPosts().then((value) {
+    BlocProvider.of<UserCubit>(context).getPosts().then((value) {
       BlocProvider.of<UserCubit>(context)
           .getUserPosts(uId: Helper.uId!)
           .then((value) {

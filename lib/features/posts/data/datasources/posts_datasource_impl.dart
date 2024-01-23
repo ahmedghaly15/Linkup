@@ -14,18 +14,6 @@ import 'package:social_app/service_locator.dart';
 
 class PostsDataSourceImpl implements PostsDataSource {
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> getPosts() {
-    return getIt
-        .get<FirebaseFirestore>()
-        .collection(AppStrings.posts)
-        .orderBy(
-          'dateTime',
-          descending: true,
-        )
-        .snapshots();
-  }
-
-  @override
   Future<DocumentReference<Map<String, dynamic>>> createPost({
     required CreatePostParams createPostParams,
   }) async {

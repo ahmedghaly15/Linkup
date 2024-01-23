@@ -7,7 +7,7 @@ import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/custom_get_back_button.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 
 class NewPostViewAppBar extends StatelessWidget {
   const NewPostViewAppBar({

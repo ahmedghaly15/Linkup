@@ -43,10 +43,6 @@ class SetupLocatorForCubits {
       ),
     );
 
-    getIt.registerFactory<GetPostsCubit>(
-      () => GetPostsCubit(getPostsUseCase: getIt.get<GetPostsUseCase>()),
-    );
-
     getIt.registerFactory<CommentsCubit>(
       () => CommentsCubit(
         typeNewCommentUseCase: getIt.get<TypeNewCommentUseCase>(),
@@ -67,12 +63,9 @@ class SetupLocatorForCubits {
 
     getIt.registerFactory<UserCubit>(
       () => UserCubit(
-        getFollowersListUseCase: getIt.get<GetFollowersListUseCase>(),
         getUserDataUseCase: getIt.get<GetUserDataUseCase>(),
+        getPostsUseCase: getIt.get<GetPostsUseCase>(),
         getAllUserPostsUseCase: getIt.get<GetUserPostsUseCase>(),
-        followUseCase: getIt.get<FollowUseCase>(),
-        unfollowUseCase: getIt.get<UnfollowUseCase>(),
-        userIsFollowedUseCase: getIt.get<UserIsFollowedUseCase>(),
         signOutUseCase: getIt.get<SignOutUseCase>(),
       ),
     );
@@ -97,6 +90,26 @@ class SetupLocatorForCubits {
     getIt.registerFactory<PeopleWhoLikedCubit>(
       () => PeopleWhoLikedCubit(
         peopleWhoLikedUseCase: getIt.get<PeopleWhoLikedUseCase>(),
+      ),
+    );
+
+    getIt.registerFactory<FollowingAndFollowersCubit>(
+      () => FollowingAndFollowersCubit(
+        followUseCase: getIt.get<FollowUseCase>(),
+        unfollowUseCase: getIt.get<UnfollowUseCase>(),
+        userIsFollowedUseCase: getIt.get<UserIsFollowedUseCase>(),
+      ),
+    );
+
+    getIt.registerFactory<GetFollowersCubit>(
+      () => GetFollowersCubit(
+        getFollowersUseCase: getIt.get<GetFollowersUseCase>(),
+      ),
+    );
+
+    getIt.registerFactory<GetFollowingCubit>(
+      () => GetFollowingCubit(
+        getFollowingUseCase: getIt.get<GetFollowingUseCase>(),
       ),
     );
   }

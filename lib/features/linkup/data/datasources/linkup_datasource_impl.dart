@@ -6,7 +6,7 @@ import 'package:social_app/features/linkup/domain/entities/change_index_params.d
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/posts/presentation/views/posts_view.dart';
 import 'package:social_app/features/profile/presentation/views/profile_view.dart';
-import 'package:social_app/features/users/presentation/views/following_and_followers_view.dart';
+import 'package:social_app/features/following_and_followers/presentation/views/following_and_followers_view.dart';
 
 class LinkupDataSourceImpl implements LinkupDataSource {
   @override

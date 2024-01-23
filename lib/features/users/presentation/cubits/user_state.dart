@@ -33,59 +33,6 @@ class GetUserDataError extends UserState {
   List<Object> get props => [error];
 }
 
-class GetFollowersListLoading extends UserState {
-  const GetFollowersListLoading();
-}
-
-class GetFollowersListSuccess extends UserState {
-  final List<UserModel> users;
-
-  const GetFollowersListSuccess({required this.users});
-
-  @override
-  List<Object> get props => [users];
-}
-
-class GetFollowersListError extends UserState {
-  final String error;
-
-  const GetFollowersListError({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
-
-class GetFollowingListLoading extends UserState {
-  const GetFollowingListLoading();
-}
-
-class GetFollowingListSuccess extends UserState {
-  final List<UserModel> users;
-
-  const GetFollowingListSuccess({required this.users});
-
-  @override
-  List<Object> get props => [users];
-}
-
-class GetFollowingListError extends UserState {
-  final String error;
-
-  const GetFollowingListError({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
-
-class InvertIsSearchingSuccess extends UserState {
-  final bool isSearching;
-
-  const InvertIsSearchingSuccess({required this.isSearching});
-
-  @override
-  List<Object> get props => [isSearching];
-}
-
 class GetUserPostsLoading extends UserState {
   const GetUserPostsLoading();
 }
@@ -108,6 +55,28 @@ class GetUserPostsError extends UserState {
   List<Object> get props => [error];
 }
 
+class GetPostsLoading extends UserState {
+  const GetPostsLoading();
+}
+
+class GetPostsSuccess extends UserState {
+  final List<PostModel> posts;
+
+  const GetPostsSuccess({required this.posts});
+
+  @override
+  List<Object> get props => [posts];
+}
+
+class GetPostsError extends UserState {
+  final String error;
+
+  const GetPostsError({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}
+
 class UserSignOutSuccess extends UserState {
   const UserSignOutSuccess();
 }
@@ -116,32 +85,6 @@ class UserSignOutError extends UserState {
   final String error;
 
   const UserSignOutError({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
-
-class FollowSuccess extends UserState {
-  const FollowSuccess();
-}
-
-class FollowError extends UserState {
-  final String error;
-
-  const FollowError({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
-
-class UnfollowSuccess extends UserState {
-  const UnfollowSuccess();
-}
-
-class UnfollowError extends UserState {
-  final String error;
-
-  const UnfollowError({required this.error});
 
   @override
   List<Object> get props => [error];

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:social_app/core/errors/failure.dart';
-import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/functions/execute_and_handle_errors.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/users/data/datasources/user_datasource.dart';
@@ -18,39 +17,8 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<Either<Failure, List<UserModel>>> getFollowersList() {
-    return executeAndHandleErrors<List<UserModel>>(
-      function: () async {
-        final List<UserModel> users = <UserModel>[];
-        final result = await userDataSource.getFollowersList();
-
-        users.clear();
-
-        for (var element in result.docs) {
-          users.add(UserModel.fromJson(element.data()));
-        }
-
-        return users;
-      },
-    );
-  }
-
-  @override
-  Future<Either<Failure, List<UserModel>>> getFollowingList() {
-    return executeAndHandleErrors<List<UserModel>>(
-      function: () async {
-        final List<UserModel> users = <UserModel>[];
-        final result = await userDataSource.getFollowingList();
-
-        users.clear();
-
-        for (var element in result.docs) {
-          users.add(UserModel.fromJson(element.data()));
-        }
-
-        return users;
-      },
-    );
+  Stream<QuerySnapshot<Map<String, dynamic>>> getPosts() {
+    return userDataSource.getPosts();
   }
 
   @override
@@ -80,24 +48,5 @@ class UserRepoImpl implements UserRepo {
     return executeAndHandleErrors<void>(
       function: () => userDataSource.signOut(),
     );
-  }
-
-  @override
-  Future<Either<Failure, void>> follow({required UserModel user}) {
-    return executeAndHandleErrors<void>(
-      function: () => userDataSource.follow(user: user),
-    );
-  }
-
-  @override
-  Future<Either<Failure, void>> unfollow({required UserModel user}) {
-    return executeAndHandleErrors<void>(
-      function: () => userDataSource.unfollow(user: user),
-    );
-  }
-
-  @override
-  Stream<bool> userIsFollowed({required UserModel user}) {
-    return userDataSource.userIsFollowed(user: user);
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/widgets/custom_image_bottom_sheet.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 
 class AddPhotosAndTagsButtons extends StatelessWidget {
   const AddPhotosAndTagsButtons({

@@ -15,7 +15,9 @@ import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
-import 'package:social_app/features/people_who_liked/presentation/cubit/people_who_liked_cubit.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/following_and_followers_cubit.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/get_following/get_following_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import 'package:social_app/features/users/presentation/widgets/empty_user_view.dart';
 import 'package:social_app/features/users/presentation/widgets/user_item.dart';
@@ -60,6 +62,15 @@ class _FollowingAndFollowersViewState extends State<FollowingAndFollowersView>
                 : AppColors.lightWhiteBlue,
             elevation: 0,
             bottom: TabBar(
+              onTap: (int index) {
+                if (index == 0) {
+                  BlocProvider.of<GetFollowersCubit>(context).getFollowers();
+                }
+
+                if (index == 1) {
+                  BlocProvider.of<GetFollowingCubit>(context).getFollowing();
+                }
+              },
               padding: EdgeInsets.zero,
               controller: _tabController,
               indicatorColor: AppColors.primaryColor,
@@ -78,16 +89,16 @@ class _FollowingAndFollowersViewState extends State<FollowingAndFollowersView>
               ),
               tabAlignment: TabAlignment.center,
               tabs: const [
-                Tab(text: 'Following'),
                 Tab(text: 'Followers'),
+                Tab(text: 'Following'),
               ],
             ),
           ),
           body: TabBarView(
             controller: _tabController,
             children: const [
-              FollowingTab(),
               FollowersTab(),
+              FollowingTab(),
             ],
           ),
         ),
@@ -108,12 +119,13 @@ class FollowersTab extends StatelessWidget {
       child: CustomScrollView(
         physics: AppConstants.physics,
         slivers: [
-          BlocBuilder<UserCubit, UserState>(
+          BlocBuilder<GetFollowersCubit, GetFollowersState>(
             builder: (context, state) {
-              final UserCubit cubit = BlocProvider.of<UserCubit>(context);
+              final GetFollowersCubit cubit =
+                  BlocProvider.of<GetFollowersCubit>(context);
 
-              if (state is GetFollowersListSuccess) {
-                return state.users.isNotEmpty
+              if (state is GetFollowersSuccess) {
+                return state.followers.isNotEmpty
                     ? SliverPadding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
                         sliver: SliverGrid(
@@ -130,25 +142,25 @@ class FollowersTab extends StatelessWidget {
                               return AnimationConfiguration.staggeredGrid(
                                 position: index,
                                 duration: const Duration(milliseconds: 650),
-                                columnCount: state.users.length,
+                                columnCount: state.followers.length,
                                 child: ScaleAnimation(
                                   child: FadeInAnimation(
                                     child: FollowerUserItem(
-                                      user: state.users[index],
+                                      user: state.followers[index],
                                     ),
                                   ),
                                 ),
                               );
                             },
-                            childCount: state.users.length,
+                            childCount: state.followers.length,
                           ),
                         ),
                       )
                     : const EmptyUsersView();
-              } else if (state is GetFollowersListError) {
+              } else if (state is GetFollowersError) {
                 return SliverFillRemaining(
                   child: CustomErrorWidget(
-                    onPressed: () => cubit.getFollowersList(),
+                    onPressed: () => cubit.getFollowers(),
                     error: state.error,
                   ),
                 );
@@ -170,25 +182,26 @@ class FollowingTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserCubit, UserState>(
+    return BlocBuilder<GetFollowingCubit, GetFollowingState>(
       builder: (context, state) {
-        final UserCubit cubit = BlocProvider.of<UserCubit>(context);
+        final GetFollowingCubit cubit =
+            BlocProvider.of<GetFollowingCubit>(context);
 
-        if (state is GetFollowersListSuccess) {
-          return state.users.isNotEmpty
+        if (state is GetFollowingSuccess) {
+          return state.following.isNotEmpty
               ? Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.h),
                   child: ListView.builder(
-                    itemCount: state.users.length,
+                    itemCount: state.following.length,
                     physics: AppConstants.physics,
                     itemBuilder: (context, index) {
                       return AnimationConfiguration.staggeredList(
                         position: index,
                         duration: const Duration(milliseconds: 650),
                         child: SlideAnimation(
-                          horizontalOffset: -150,
+                          horizontalOffset: 150,
                           child: FollowingUserItem(
-                            user: state.users[index],
+                            user: state.following[index],
                           ),
                         ),
                       );
@@ -196,17 +209,16 @@ class FollowingTab extends StatelessWidget {
                   ),
                 )
               : const SizedBox();
-          // : const EmptyUsersView();
-        } else if (state is GetFollowersListError) {
+        } else if (state is GetFollowingError) {
           return CustomErrorWidget(
-            onPressed: () => cubit.getFollowersList(),
+            onPressed: () => cubit.getFollowing(),
             error: state.error,
           );
         } else {
           return const Center(
             child: BodyLoadingIndicator(),
           );
-        } // Replace with your desired empty state widget
+        }
       },
     );
   }
@@ -283,14 +295,18 @@ class FollowingUserItem extends StatelessWidget {
                 ),
               ),
               StreamBuilder<bool>(
-                  stream: BlocProvider.of<UserCubit>(context)
+                  stream: BlocProvider.of<FollowingAndFollowersCubit>(context)
                       .userIsFollowed(user: user),
                   builder: (context, snapshot) {
                     bool isFollowed = snapshot.data ?? false;
                     String buttonText = isFollowed ? 'Unfollow' : 'Follow';
 
                     return OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () => isFollowed
+                          ? BlocProvider.of<FollowingAndFollowersCubit>(context)
+                              .unfollow(user: user)
+                          : BlocProvider.of<FollowingAndFollowersCubit>(context)
+                              .follow(user: user),
                       style: ButtonStyle(
                         side: MaterialStatePropertyAll(
                           BorderSide(

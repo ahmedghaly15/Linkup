@@ -6,16 +6,17 @@ import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/features/chat/presentation/widgets/custom_search_field.dart';
-import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
 
 class ChatsSliverAppBar extends StatelessWidget {
   const ChatsSliverAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserCubit, UserState>(
+    return BlocBuilder<GetFollowersCubit, GetFollowersState>(
       builder: (context, state) {
-        final UserCubit cubit = BlocProvider.of<UserCubit>(context);
+        final GetFollowersCubit cubit =
+            BlocProvider.of<GetFollowersCubit>(context);
 
         return SliverToBoxAdapter(
           child: Row(

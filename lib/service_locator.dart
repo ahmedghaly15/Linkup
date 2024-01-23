@@ -46,6 +46,13 @@ import 'package:social_app/features/comments/domain/usecases/type_new_comment.da
 import 'package:social_app/features/comments/domain/usecases/upload_comment_image.dart';
 import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social_app/features/edit_profile/presentation/cubits/edit_profile_cubit.dart';
+import 'package:social_app/features/following_and_followers/data/datasources/following_and_followers_datasource.dart';
+import 'package:social_app/features/following_and_followers/data/datasources/following_and_followers_datasource_impl.dart';
+import 'package:social_app/features/following_and_followers/data/repositories/following_and_followers_repo_impl.dart';
+import 'package:social_app/features/following_and_followers/domain/repositories/following_and_followers_repo.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/following_and_followers_cubit.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/get_following/get_following_cubit.dart';
 import 'package:social_app/features/linkup/data/datasources/linkup_datasource.dart';
 import 'package:social_app/features/linkup/data/datasources/linkup_datasource_impl.dart';
 import 'package:social_app/features/linkup/data/repositories/linkup_repo_impl.dart';
@@ -81,8 +88,7 @@ import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart
 import 'package:social_app/features/people_who_liked/domain/usecases/people_who_liked.dart';
 import 'package:social_app/features/posts/domain/usecases/unlike_post.dart';
 import 'package:social_app/features/posts/domain/usecases/upload_post_image.dart';
-import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
-import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
+import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 import 'package:social_app/features/edit_profile/data/datasources/edit_profile_datasource.dart';
 import 'package:social_app/features/edit_profile/data/datasources/edit_profile_datasource_impl.dart';
 import 'package:social_app/features/edit_profile/data/repositories/edit_profile_repo_impl.dart';
@@ -95,13 +101,14 @@ import 'package:social_app/features/users/data/datasources/user_datasource.dart'
 import 'package:social_app/features/users/data/datasources/user_datasource_impl.dart';
 import 'package:social_app/features/users/data/repositories/user_repo_impl.dart';
 import 'package:social_app/features/users/domain/repositories/user_repo.dart';
-import 'package:social_app/features/users/domain/usecases/follow.dart';
-import 'package:social_app/features/users/domain/usecases/get_followers_list.dart';
+import 'package:social_app/features/following_and_followers/domain/usecases/follow.dart';
+import 'package:social_app/features/following_and_followers/domain/usecases/get_followers.dart';
+import 'package:social_app/features/following_and_followers/domain/usecases/get_following.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
-import 'package:social_app/features/users/domain/usecases/unfollow.dart';
-import 'package:social_app/features/users/domain/usecases/user_is_followed.dart';
+import 'package:social_app/features/following_and_followers/domain/usecases/unfollow.dart';
+import 'package:social_app/features/following_and_followers/domain/usecases/user_is_followed.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 part 'config/locator/setup_for_core.dart';

@@ -8,7 +8,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/main_button.dart';
-import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/following_and_followers_cubit.dart';
 
 class FollowingAndMessageButtons extends StatelessWidget {
   const FollowingAndMessageButtons({
@@ -24,8 +24,8 @@ class FollowingAndMessageButtons extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: StreamBuilder(
-            stream:
-                BlocProvider.of<UserCubit>(context).userIsFollowed(user: user),
+            stream: BlocProvider.of<FollowingAndFollowersCubit>(context)
+                .userIsFollowed(user: user),
             builder: (context, snapshot) {
               bool isFollowed = snapshot.data ?? false;
               String buttonText = isFollowed ? 'Unfollow' : 'Follow';
@@ -33,8 +33,10 @@ class FollowingAndMessageButtons extends StatelessWidget {
               return MainButton(
                 text: buttonText,
                 onPressed: () => isFollowed
-                    ? BlocProvider.of<UserCubit>(context).unfollow(user: user)
-                    : BlocProvider.of<UserCubit>(context).follow(user: user),
+                    ? BlocProvider.of<FollowingAndFollowersCubit>(context)
+                        .unfollow(user: user)
+                    : BlocProvider.of<FollowingAndFollowersCubit>(context)
+                        .follow(user: user),
                 borderRadius: 32,
                 boxShadow: <BoxShadow>[
                   Helper.buttonShadow(

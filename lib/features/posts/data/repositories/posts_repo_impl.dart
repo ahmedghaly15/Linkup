@@ -16,11 +16,6 @@ class PostsRepoImpl implements PostsRepo {
   const PostsRepoImpl({required this.postsDataSource});
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> getPosts() {
-    return postsDataSource.getPosts();
-  }
-
-  @override
   Future<Either<Failure, DocumentReference<Map<String, dynamic>>>> createPost({
     required CreatePostParams createPostParams,
   }) {

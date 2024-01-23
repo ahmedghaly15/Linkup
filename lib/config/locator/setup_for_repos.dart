@@ -55,5 +55,12 @@ class SetupLocatorForRepos {
         peopleWhoLikedDataSource: getIt.get<PeopleWhoLikedDataSource>(),
       ),
     );
+
+    getIt.registerLazySingleton<FollowingAndFollowersRepo>(
+      () => FollowingAndFollowersRepoImpl(
+        followingAndFollowersDataSource:
+            getIt.get<FollowingAndFollowersDataSource>(),
+      ),
+    );
   }
 }

@@ -8,8 +8,6 @@ import 'package:social_app/core/errors/failure.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
 
 abstract class PostsRepo {
-  Stream<QuerySnapshot<Map<String, dynamic>>> getPosts();
-
   Future<Either<Failure, DocumentReference<Map<String, dynamic>>>> createPost({
     required CreatePostParams createPostParams,
   });
