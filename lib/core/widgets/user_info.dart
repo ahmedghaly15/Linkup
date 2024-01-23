@@ -30,13 +30,19 @@ class UserInfo extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset(AppAssets.iconsProfileEmail),
+              Image.asset(
+                Helper.isDark(context)
+                    ? AppAssets.iconsGreyProfileEmail
+                    : AppAssets.iconsProfileEmail,
+              ),
               SizedBox(width: 8.w),
               Flexible(
                 child: Text(
                   user.email!,
                   style: AppTextStyles.textStyle13.copyWith(
-                    color: AppColors.lightGrey,
+                    color: Helper.isDark(context)
+                        ? Colors.white54
+                        : AppColors.lightGrey,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -49,7 +55,8 @@ class UserInfo extends StatelessWidget {
           Text(
             user.bio!,
             style: AppTextStyles.textStyle13.copyWith(
-              color: AppColors.lightGrey,
+              color:
+                  Helper.isDark(context) ? Colors.white54 : AppColors.lightGrey,
             ),
             maxLines: null,
             textAlign: TextAlign.center,

@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
+import 'package:social_app/config/themes/cubit/themes_cubit.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
@@ -30,6 +32,13 @@ class CustomPopMenuButton extends StatelessWidget {
             ),
             itemBuilder: (context) => [
               PopupMenuItem(
+                value: 'theme',
+                child: Text(
+                  Helper.isDark(context) ? 'Light mode' : 'Dark mode',
+                  style: AppTextStyles.textStyle16SemiBold,
+                ),
+              ),
+              PopupMenuItem(
                 value: 'editProfile',
                 child: Text(
                   'Edit Profile',
@@ -51,6 +60,10 @@ class CustomPopMenuButton extends StatelessWidget {
 
               if (value == 'signOut') {
                 BlocProvider.of<UserCubit>(context).signOut();
+              }
+
+              if (value == 'theme') {
+                BlocProvider.of<ThemesCubit>(context).toggleTheme();
               }
             },
           );

@@ -58,6 +58,11 @@ class AppAssets {
   /// assets/icons/email.png
   static const String iconsEmail = "assets/icons/email.png";
 
+  /// Assets for iconsGreyProfileEmail
+  /// assets/icons/grey_profile_email.png
+  static const String iconsGreyProfileEmail =
+      "assets/icons/grey_profile_email.png";
+
   /// Assets for iconsHome
   /// assets/icons/home.png
   static const String iconsHome = "assets/icons/home.png";
