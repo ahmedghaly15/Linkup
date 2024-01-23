@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/core/entities/no_params.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/features/linkup/domain/entities/change_index_params.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_bottom_nav_index.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_nav_to_home.dart';
@@ -43,6 +44,10 @@ class LinkupCubit extends Cubit<LinkupState> {
 
     if (currentIndex == 1 || currentIndex == 2) {
       BlocProvider.of<UserCubit>(context).getAllUsers();
+    }
+
+    if (currentIndex == 3) {
+      BlocProvider.of<UserCubit>(context).getUserPosts(uId: Helper.uId!);
     }
 
     emit(ChangeBottomNavIndex(index: currentIndex));

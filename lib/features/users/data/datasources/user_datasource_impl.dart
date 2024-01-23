@@ -29,13 +29,7 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<QuerySnapshot<Map<String, dynamic>>> getUserPosts() {
-    return FirebaseFirestore.instance
-        .collection(AppStrings.posts)
-        .orderBy(
-          'dateTime',
-          descending: true,
-        )
-        .get();
+    return FirebaseFirestore.instance.collection(AppStrings.posts).get();
   }
 
   @override

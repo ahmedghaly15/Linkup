@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/app_router.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
-import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/posts/presentation/cubits/get_posts/get_posts_cubit.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts/posts_cubit.dart';
@@ -25,9 +24,7 @@ class LinkupApp extends StatelessWidget {
             create: (context) => getIt.get<ThemesCubit>(),
           ),
           BlocProvider(
-            create: (context) => getIt.get<UserCubit>()
-              ..getUserData()
-              ..getUserPosts(uId: Helper.uId!),
+            create: (context) => getIt.get<UserCubit>()..getUserData(),
           ),
           BlocProvider(
             create: (context) => getIt.get<PostsCubit>(),

@@ -43,20 +43,14 @@ class UserRepoImpl implements UserRepo {
   }) {
     return executeAndHandleErrors<List<PostModel>>(
       function: () async {
-        final List<PostModel> allPosts = <PostModel>[];
         final List<PostModel> userPosts = <PostModel>[];
         final result = await userDataSource.getUserPosts();
 
-        allPosts.clear();
         userPosts.clear();
 
         for (var item in result.docs) {
-          allPosts.add(PostModel.fromJson(item.data()));
-        }
-
-        for (var post in allPosts) {
-          if (post.user!.uId == uId) {
-            userPosts.add(post);
+          if (item.data()['user']['uId'] == uId) {
+            userPosts.add(PostModel.fromJson(item.data()));
           }
         }
 
