@@ -33,23 +33,23 @@ class GetUserDataError extends UserState {
   List<Object> get props => [error];
 }
 
-class GetAllUsersLoading extends UserState {
-  const GetAllUsersLoading();
+class GetFollowersListLoading extends UserState {
+  const GetFollowersListLoading();
 }
 
-class GetAllUserSuccess extends UserState {
-  final List<UserModel> followingList;
+class GetFollowersListSuccess extends UserState {
+  final List<UserModel> users;
 
-  const GetAllUserSuccess({required this.followingList});
+  const GetFollowersListSuccess({required this.users});
 
   @override
-  List<Object> get props => [followingList];
+  List<Object> get props => [users];
 }
 
-class GetAllUserError extends UserState {
+class GetFollowersListError extends UserState {
   final String error;
 
-  const GetAllUserError({required this.error});
+  const GetFollowersListError({required this.error});
 
   @override
   List<Object> get props => [error];

@@ -96,7 +96,7 @@ import 'package:social_app/features/users/data/datasources/user_datasource_impl.
 import 'package:social_app/features/users/data/repositories/user_repo_impl.dart';
 import 'package:social_app/features/users/domain/repositories/user_repo.dart';
 import 'package:social_app/features/users/domain/usecases/follow.dart';
-import 'package:social_app/features/users/domain/usecases/get_following_list.dart';
+import 'package:social_app/features/users/domain/usecases/get_followers_list.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';

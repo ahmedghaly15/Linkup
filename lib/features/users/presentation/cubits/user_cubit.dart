@@ -5,7 +5,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/users/domain/usecases/follow.dart';
-import 'package:social_app/features/users/domain/usecases/get_following_list.dart';
+import 'package:social_app/features/users/domain/usecases/get_followers_list.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
@@ -16,7 +16,7 @@ part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   final GetUserDataUseCase getUserDataUseCase;
-  final GetFollowingListUseCase getAllUsersUseCase;
+  final GetFollowersListUseCase getFollowingListUseCase;
   final GetUserPostsUseCase getAllUserPostsUseCase;
   final FollowUseCase followUseCase;
   final UnfollowUseCase unfollowUseCase;
@@ -25,7 +25,7 @@ class UserCubit extends Cubit<UserState> {
 
   UserCubit({
     required this.getUserDataUseCase,
-    required this.getAllUsersUseCase,
+    required this.getFollowingListUseCase,
     required this.getAllUserPostsUseCase,
     required this.followUseCase,
     required this.unfollowUseCase,
@@ -33,18 +33,18 @@ class UserCubit extends Cubit<UserState> {
     required this.signOutUseCase,
   }) : super(const UserInitial());
 
-  List<UserModel> followingList = <UserModel>[];
+  List<UserModel> followersList = <UserModel>[];
 
-  void getAllUsers() {
-    emit(const GetAllUsersLoading());
+  void getFollowersList() {
+    emit(const GetFollowersListLoading());
 
-    getAllUsersUseCase(const NoParams()).then((value) {
+    getFollowingListUseCase(const NoParams()).then((value) {
       value.fold(
         (failure) =>
-            emit(GetAllUserError(error: failure.failureMsg.toString())),
+            emit(GetFollowersListError(error: failure.failureMsg.toString())),
         (result) {
-          followingList = result;
-          emit(GetAllUserSuccess(followingList: followingList));
+          followersList = result;
+          emit(GetFollowersListSuccess(users: followersList));
         },
       );
     });
@@ -67,23 +67,23 @@ class UserCubit extends Cubit<UserState> {
   void invertIsSearching() {
     isSearching = !isSearching;
     emit(InvertIsSearchingSuccess(isSearching: isSearching));
-    emit(GetAllUserSuccess(followingList: followingList));
+    emit(GetFollowersListSuccess(users: followersList));
   }
 
   void search({required String value}) {
     if (value.isEmpty) {
       isSearching = false;
-      emit(GetAllUserSuccess(followingList: followingList));
+      emit(GetFollowersListSuccess(users: followersList));
       // return; => I can use return here, so when isSearching is false, the searching stops
     }
 
     isSearching = true;
 
-    searchList = followingList
+    searchList = followersList
         .where((user) => user.name!.toLowerCase().contains(value.toLowerCase()))
         .toList();
 
-    emit(GetAllUserSuccess(followingList: searchList));
+    emit(GetFollowersListSuccess(users: searchList));
   }
 
   List<PostModel> userPosts = <PostModel>[];
@@ -106,7 +106,7 @@ class UserCubit extends Cubit<UserState> {
       value.fold(
         (failure) => emit(FollowError(error: failure.failureMsg.toString())),
         (success) {
-          getAllUsers();
+          getFollowersList();
           emit(const FollowSuccess());
         },
       );
@@ -118,7 +118,7 @@ class UserCubit extends Cubit<UserState> {
       value.fold(
         (failure) => emit(UnfollowError(error: failure.failureMsg.toString())),
         (success) {
-          getAllUsers();
+          getFollowersList();
           emit(const UnfollowSuccess());
         },
       );

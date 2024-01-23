@@ -19,11 +19,11 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<Either<Failure, List<UserModel>>> getFollowingList() {
+  Future<Either<Failure, List<UserModel>>> getFollowersList() {
     return executeAndHandleErrors<List<UserModel>>(
       function: () async {
         final List<UserModel> users = <UserModel>[];
-        final result = await userDataSource.getFollowingList();
+        final result = await userDataSource.getFollowersList();
 
         users.clear();
 

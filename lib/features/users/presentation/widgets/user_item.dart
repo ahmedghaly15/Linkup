@@ -11,8 +11,8 @@ import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
-class UserItem extends StatelessWidget {
-  const UserItem({super.key, required this.user});
+class FollowerUserItem extends StatelessWidget {
+  const FollowerUserItem({super.key, required this.user});
 
   final UserModel user;
 
@@ -60,8 +60,8 @@ class UserItem extends StatelessWidget {
             Flexible(
               child: Text(
                 user.name!,
-                // maxLines: 1,
-                // overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.textStyle20Bold.copyWith(
                   color: Helper.isDark(context) ? Colors.white : Colors.black,
                 ),

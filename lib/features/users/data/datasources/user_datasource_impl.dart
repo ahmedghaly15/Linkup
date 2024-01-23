@@ -18,12 +18,12 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<QuerySnapshot<Map<String, dynamic>>> getFollowingList() async {
+  Future<QuerySnapshot<Map<String, dynamic>>> getFollowersList() async {
     return await getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.users)
         .doc(Helper.uId)
-        .collection(AppStrings.following)
+        .collection(AppStrings.followers)
         .get();
   }
 

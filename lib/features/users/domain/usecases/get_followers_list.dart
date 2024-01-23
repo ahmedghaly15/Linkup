@@ -5,16 +5,16 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/usecases/base_usecase.dart';
 import 'package:social_app/features/users/domain/repositories/user_repo.dart';
 
-class GetFollowingListUseCase
+class GetFollowersListUseCase
     implements BaseUseCases<List<UserModel>, NoParams> {
   final UserRepo userRepo;
 
-  const GetFollowingListUseCase({required this.userRepo});
+  const GetFollowersListUseCase({required this.userRepo});
 
   @override
   Future<Either<Failure, List<UserModel>>> call(
     NoParams params,
   ) async {
-    return await userRepo.getFollowingList();
+    return await userRepo.getFollowersList();
   }
 }

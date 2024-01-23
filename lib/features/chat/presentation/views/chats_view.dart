@@ -27,22 +27,22 @@ class ChatsView extends StatelessWidget {
               builder: (context, state) {
                 final UserCubit cubit = BlocProvider.of<UserCubit>(context);
 
-                if (state is GetAllUsersLoading) {
+                if (state is GetFollowersListLoading) {
                   return const SliverFillRemaining(
                     hasScrollBody: false,
                     child: Center(
                       child: BodyLoadingIndicator(),
                     ),
                   );
-                } else if (state is GetAllUserError) {
+                } else if (state is GetFollowersListError) {
                   return SliverFillRemaining(
                     child: CustomErrorWidget(
-                      onPressed: () => cubit.getAllUsers(),
+                      onPressed: () => cubit.getFollowersList(),
                       error: state.error,
                     ),
                   );
                 } else {
-                  return cubit.followingList.isNotEmpty
+                  return cubit.followersList.isNotEmpty
                       ? SliverPadding(
                           padding: EdgeInsets.only(
                             bottom: 35.h,
@@ -55,12 +55,12 @@ class ChatsView extends StatelessWidget {
                                 return ChatItem(
                                   user: cubit.isSearching
                                       ? cubit.searchList[index]
-                                      : cubit.followingList[index],
+                                      : cubit.followersList[index],
                                 );
                               },
                               childCount: cubit.isSearching
                                   ? cubit.searchList.length
-                                  : cubit.followingList.length,
+                                  : cubit.followersList.length,
                             ),
                           ),
                         )

@@ -110,8 +110,8 @@ class SetupLocatorForUseCases {
       () => GetUserDataUseCase(userRepo: getIt.get<UserRepo>()),
     );
 
-    getIt.registerLazySingleton<GetFollowingListUseCase>(
-      () => GetFollowingListUseCase(userRepo: getIt.get<UserRepo>()),
+    getIt.registerLazySingleton<GetFollowersListUseCase>(
+      () => GetFollowersListUseCase(userRepo: getIt.get<UserRepo>()),
     );
 
     getIt.registerLazySingleton<GetUserPostsUseCase>(
