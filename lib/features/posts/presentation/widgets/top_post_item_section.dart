@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/widgets/custom_toast.dart';
 import 'package:social_app/core/widgets/post_information.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
@@ -49,7 +48,6 @@ class TopPostItemSection extends StatelessWidget {
                       if (value == 'deletePost') {
                         BlocProvider.of<PostsCubit>(context).deletePost(
                           postId: post.postId!,
-                          context: context,
                         );
                       }
                     },
@@ -67,15 +65,6 @@ class TopPostItemSection extends StatelessWidget {
   }
 
   void _handleDeletePostSuccess(BuildContext context) {
-    BlocProvider.of<UserCubit>(context).getPosts().then((value) {
-      BlocProvider.of<UserCubit>(context)
-          .getUserPosts(uId: Helper.uId!)
-          .then((value) {
-        CustomToast.showToast(
-          text: 'Post deleted successfully',
-          state: CustomToastState.success,
-        );
-      });
-    });
+    BlocProvider.of<UserCubit>(context).getUserPosts(uId: Helper.uId!);
   }
 }

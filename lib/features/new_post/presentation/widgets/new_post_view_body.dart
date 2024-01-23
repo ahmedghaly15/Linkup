@@ -138,14 +138,12 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
   }
 
   void _handleCreatePostSuccess(BuildContext context) {
-    BlocProvider.of<UserCubit>(context).getPosts().then((value) {
-      BlocProvider.of<UserCubit>(context)
-          .getUserPosts(uId: Helper.uId!)
-          .then((value) {
-        _textController.clear();
-        setState(() {
-          postText = '';
-        });
+    BlocProvider.of<UserCubit>(context)
+        .getUserPosts(uId: Helper.uId!)
+        .then((value) {
+      _textController.clear();
+      setState(() {
+        postText = '';
       });
     });
   }

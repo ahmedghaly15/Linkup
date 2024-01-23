@@ -82,7 +82,7 @@ import 'package:social_app/features/posts/domain/repositories/posts_repo.dart';
 import 'package:social_app/features/posts/domain/usecases/create_post.dart';
 import 'package:social_app/features/posts/domain/usecases/delete_post.dart';
 import 'package:social_app/features/posts/domain/usecases/get_post_image.dart';
-import 'package:social_app/features/posts/domain/usecases/get_posts.dart';
+import 'package:social_app/features/users/domain/usecases/get_posts.dart';
 import 'package:social_app/features/posts/domain/usecases/like_post.dart';
 import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart';
 import 'package:social_app/features/people_who_liked/domain/usecases/people_who_liked.dart';

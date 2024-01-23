@@ -48,14 +48,8 @@ class LikesAndComments extends StatelessWidget {
                     return TextButton.icon(
                       onPressed: () {
                         isPostLikedByMe
-                            ? cubit.unLikePost(
-                                postId: post.postId!,
-                                context: context,
-                              )
-                            : cubit.likePost(
-                                postId: post.postId!,
-                                context: context,
-                              );
+                            ? cubit.unLikePost(postId: post.postId!)
+                            : cubit.likePost(postId: post.postId!);
                       },
                       icon: isPostLikedByMe
                           ? Image.asset(AppAssets.iconsRedLike)

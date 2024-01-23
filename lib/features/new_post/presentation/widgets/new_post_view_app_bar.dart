@@ -68,7 +68,6 @@ class NewPostViewAppBar extends StatelessWidget {
           time: DateFormat.jm().format(DateTime.now()),
           text: postText,
         ),
-        context: context,
       );
     } else if (cubit.postImage != null) {
       AuthHelper.keyboardUnfocus(context);
@@ -78,7 +77,6 @@ class NewPostViewAppBar extends StatelessWidget {
           time: DateFormat.jm().format(DateTime.now()),
           text: postText,
         ),
-        context: context,
       );
     }
   }

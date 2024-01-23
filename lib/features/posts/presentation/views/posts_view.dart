@@ -44,10 +44,10 @@ class PostsView extends StatelessWidget {
               builder: (context, state) {
                 final UserCubit cubit = BlocProvider.of<UserCubit>(context);
 
-                if (state is GetPostsSuccess) {
-                  return cubit.posts.isNotEmpty
-                      ? Posts(posts: cubit.posts)
-                      : const SliverToBoxAdapter(child: EmptyPostView());
+                if (state is GetPostsLoading) {
+                  return const SliverToBoxAdapter(
+                    child: BodyLoadingIndicator(),
+                  );
                 } else if (state is GetPostsError) {
                   return SliverToBoxAdapter(
                     child: CustomErrorWidget(
@@ -56,9 +56,9 @@ class PostsView extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return const SliverToBoxAdapter(
-                    child: BodyLoadingIndicator(),
-                  );
+                  return cubit.posts.isNotEmpty
+                      ? Posts(posts: cubit.posts)
+                      : const SliverToBoxAdapter(child: EmptyPostView());
                 }
               },
             )

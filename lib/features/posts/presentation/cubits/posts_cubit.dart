@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/features/posts/domain/entities/create_post_params.dart';
@@ -37,10 +36,7 @@ class PostsCubit extends Cubit<PostsState> {
     required this.peopleLikeThePostUseCase,
   }) : super(const PostsInitial());
 
-  void createPost({
-    required CreatePostParams createPostParams,
-    required BuildContext context,
-  }) {
+  void createPost({required CreatePostParams createPostParams}) {
     emit(const CreatePostLoading());
 
     createPostUseCase(createPostParams).then((value) {
@@ -55,10 +51,7 @@ class PostsCubit extends Cubit<PostsState> {
     });
   }
 
-  void deletePost({
-    required String postId,
-    required BuildContext context,
-  }) {
+  void deletePost({required String postId}) {
     emit(const DeletePostLoading());
 
     deletePostUseCase(postId).then((value) {
@@ -90,7 +83,6 @@ class PostsCubit extends Cubit<PostsState> {
 
   void uploadPostImage({
     required CreatePostParams createPostParams,
-    required BuildContext context,
   }) {
     emit(const UploadPostImageLoading());
 
@@ -107,7 +99,6 @@ class PostsCubit extends Cubit<PostsState> {
                 text: createPostParams.text,
                 postImage: value,
               ),
-              context: context,
             );
             postImage = null;
             emit(UploadPostImageSuccess(imageUrl: value));
@@ -124,10 +115,7 @@ class PostsCubit extends Cubit<PostsState> {
     emit(const PostImageRemoved());
   }
 
-  void likePost({
-    required String postId,
-    required BuildContext context,
-  }) {
+  void likePost({required String postId}) {
     likePostUseCase(postId).then(
       (value) {
         value.fold(
@@ -139,10 +127,7 @@ class PostsCubit extends Cubit<PostsState> {
     );
   }
 
-  void unLikePost({
-    required String postId,
-    required BuildContext context,
-  }) {
+  void unLikePost({required String postId}) {
     unLikePostUseCase(postId).then((value) {
       value.fold(
         (failure) =>
