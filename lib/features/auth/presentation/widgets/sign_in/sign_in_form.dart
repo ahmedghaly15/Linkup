@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/router/routes.dart';
+import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/cache_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
@@ -111,7 +113,12 @@ class _SignInFormState extends State<SignInForm> {
                 child: TextButton(
                   onPressed: () =>
                       context.navigateTo(routeName: Routes.forgotPasswordRoute),
-                  child: const Text('Forgot Password?'),
+                  child: Text(
+                    'Forgot Password?',
+                    style: AppTextStyles.textStyle16SemiBold.copyWith(
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 10.h),

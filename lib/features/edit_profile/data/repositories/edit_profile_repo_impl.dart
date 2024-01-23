@@ -5,9 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/core/errors/failure.dart';
-import 'package:social_app/core/errors/firebase_failure.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/internet/internet_checker.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/utils/functions/execute_and_handle_errors.dart';
@@ -61,35 +59,35 @@ class EditProfileRepoImpl implements EditProfileRepo {
   }
 
   @override
-  Future<Either<Failure, void>> updateUserPosts() async {
-    if (await getIt.get<InternetChecker>().isConnected) {
-      try {
-        void method() {}
-        final result = await editProfileDataSource.getPosts();
+  Future<Either<Failure, void>> updateUserPosts() {
+    return executeAndHandleErrors<void>(function: () async {
+      final result = await editProfileDataSource.updateUserPosts();
 
-        for (var element in result.docs) {
-          final post = PostModel.fromJson(element.data());
+      void method() {}
 
-          if (post.user!.uId == Helper.currentUser!.uId) {
-            return Right(await getIt
-                .get<FirebaseFirestore>()
-                .collection(AppStrings.posts)
-                .doc(element.id)
-                .update({
+      for (var element in result.docs) {
+        final post = PostModel.fromJson(element.data());
+
+        if (post.user!.uId == Helper.currentUser!.uId) {
+          return (await getIt
+              .get<FirebaseFirestore>()
+              .collection(AppStrings.posts)
+              .doc(post.postId)
+              .update({
+            'user': {
               'name': Helper.currentUser!.name,
               'image': Helper.currentUser!.image,
-            }));
-          }
+              'uId': Helper.uId,
+              'isEmailVerified': false,
+              'email': Helper.currentUser!.email,
+              'phone': Helper.currentUser!.phone,
+              'bio': Helper.currentUser!.bio,
+            }
+          }));
         }
-        return Right(method());
-      } catch (failure) {
-        if (failure is FirebaseException) {
-          return Left(FirebaseFailure.fromFirebaseException(failure.code));
-        }
-        return Left(FirebaseFailure(failureMsg: failure.toString()));
       }
-    } else {
-      return const Left(FirebaseFailure(failureMsg: AppStrings.noInternet));
-    }
+
+      return method();
+    });
   }
 }

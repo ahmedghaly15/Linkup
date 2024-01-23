@@ -24,6 +24,7 @@ class EditProfileForm extends StatefulWidget {
 class _EditProfileFormState extends State<EditProfileForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
 
   late final GlobalKey<FormState> _formKey;
@@ -40,6 +41,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
     _nameController.text = Helper.currentUser!.name!;
     _bioController.text = Helper.currentUser!.bio!;
     _phoneController.text = Helper.currentUser!.phone!;
+    _emailController.text = Helper.currentUser!.email!;
   }
 
   void _initFormAttributes() {
@@ -57,6 +59,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
     _nameController.dispose();
     _bioController.dispose();
     _phoneController.dispose();
+    _emailController.dispose();
   }
 
   @override
@@ -93,6 +96,15 @@ class _EditProfileFormState extends State<EditProfileForm> {
                     fieldName: 'Username',
                     value: val,
                   ),
+                ),
+                const TextFormFieldSeparator(),
+                CustomTextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _emailController,
+                  hintText: 'Email',
+                  prefixIcon: Image.asset(AppAssets.iconsEmail),
+                  validating: (String? val) =>
+                      AuthHelper.validatingEmailField(value: val),
                 ),
                 const TextFormFieldSeparator(),
                 CustomTextFormField(
@@ -175,10 +187,18 @@ class _EditProfileFormState extends State<EditProfileForm> {
   ) async {
     if (state is UpdateUserSuccess) {
       BlocProvider.of<UserCubit>(context).getUserData().then((value) {
-        CustomToast.showToast(
-          text: 'User updated successfully',
-          state: CustomToastState.success,
-        );
+        BlocProvider.of<EditProfileCubit>(context)
+            .updateUserPosts()
+            .then((value) {
+          BlocProvider.of<UserCubit>(context)
+              .getUserPosts(uId: Helper.uId!)
+              .then((value) {
+            CustomToast.showToast(
+              text: 'User updated successfully',
+              state: CustomToastState.success,
+            );
+          });
+        });
       });
     }
 

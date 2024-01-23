@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
+import 'package:social_app/core/helpers/helper.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -103,9 +104,13 @@ class CustomTextFormField extends StatelessWidget {
           onChanged: onChanged,
           style: _customTextFieldTextStyle(),
           maxLines: maxLines,
-          cursorColor: AppColors.primaryColor,
+          cursorColor:
+              Helper.isDark(context) ? Colors.white : AppColors.primaryColor,
           decoration: InputDecoration(
-            fillColor: fillColor ?? AppColors.lightWhiteBlue,
+            fillColor: fillColor ??
+                (Helper.isDark(context)
+                    ? AppColors.darkPrimaryColor
+                    : AppColors.lightWhiteBlue),
             filled: filled,
             errorStyle: TextStyle(fontSize: 13.sp, color: Colors.red),
             hintText: hintText,

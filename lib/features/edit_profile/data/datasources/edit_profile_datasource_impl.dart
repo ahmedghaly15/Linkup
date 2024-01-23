@@ -36,14 +36,10 @@ class EditProfileDataSourceImpl implements EditProfileDataSource {
   }
 
   @override
-  Future<QuerySnapshot<Map<String, dynamic>>> getPosts() async {
+  Future<QuerySnapshot<Map<String, dynamic>>> updateUserPosts() async {
     return await getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.posts)
-        .orderBy(
-          'dateTime',
-          descending: true,
-        )
         .get();
   }
 }

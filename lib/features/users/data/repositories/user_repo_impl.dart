@@ -48,6 +48,7 @@ class UserRepoImpl implements UserRepo {
         final result = await userDataSource.getUserPosts();
 
         allPosts.clear();
+        userPosts.clear();
 
         for (var item in result.docs) {
           allPosts.add(PostModel.fromJson(item.data()));

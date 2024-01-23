@@ -33,15 +33,12 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         (failure) => emit(
           UpdateUserError(error: failure.failureMsg.toString()),
         ),
-        (success) {
-          updateUserPosts();
-          emit(const UpdateUserSuccess());
-        },
+        (success) => emit(const UpdateUserSuccess()),
       );
     });
   }
 
-  void updateUserPosts() {
+  Future<void> updateUserPosts() async {
     updateUserPostsUseCase(const NoParams()).then((value) {
       value.fold(
         (failure) => emit(
