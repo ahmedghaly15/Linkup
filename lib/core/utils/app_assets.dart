@@ -58,6 +58,14 @@ class AppAssets {
   /// assets/icons/email.png
   static const String iconsEmail = "assets/icons/email.png";
 
+  /// Assets for iconsGreyComment
+  /// assets/icons/grey_comment.png
+  static const String iconsGreyComment = "assets/icons/grey_comment.png";
+
+  /// Assets for iconsGreyLike
+  /// assets/icons/grey_like.png
+  static const String iconsGreyLike = "assets/icons/grey_like.png";
+
   /// Assets for iconsGreyProfileEmail
   /// assets/icons/grey_profile_email.png
   static const String iconsGreyProfileEmail =

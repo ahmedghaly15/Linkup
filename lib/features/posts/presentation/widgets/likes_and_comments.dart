@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/app_colors.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
@@ -58,7 +59,11 @@ class LikesAndComments extends StatelessWidget {
                       },
                       icon: isPostLikedByMe
                           ? Image.asset(AppAssets.iconsRedLike)
-                          : Image.asset(AppAssets.iconsLike),
+                          : Image.asset(
+                              Helper.isDark(context)
+                                  ? AppAssets.iconsGreyLike
+                                  : AppAssets.iconsLike,
+                            ),
                       label: StreamBuilder(
                         stream: _likesStream(),
                         builder: (context, snapshot) {
@@ -67,7 +72,9 @@ class LikesAndComments extends StatelessWidget {
                           return Text(
                             "$likesCount Likes",
                             style: AppTextStyles.textStyle15.copyWith(
-                              color: AppColors.lightGrey,
+                              color: Helper.isDark(context)
+                                  ? Colors.white54
+                                  : AppColors.lightGrey,
                             ),
                           );
                         },
@@ -85,7 +92,11 @@ class LikesAndComments extends StatelessWidget {
                   ),
                 );
               },
-              icon: Image.asset(AppAssets.iconsComment),
+              icon: Image.asset(
+                Helper.isDark(context)
+                    ? AppAssets.iconsGreyComment
+                    : AppAssets.iconsComment,
+              ),
               label: StreamBuilder(
                   stream: _commentsStream(),
                   builder: (context, snapshot) {
@@ -94,7 +105,9 @@ class LikesAndComments extends StatelessWidget {
                     return Text(
                       "$commentsCount comments",
                       style: AppTextStyles.textStyle13.copyWith(
-                        color: AppColors.lightGrey,
+                        color: Helper.isDark(context)
+                            ? Colors.white54
+                            : AppColors.lightGrey,
                       ),
                     );
                   }),
