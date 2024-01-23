@@ -61,6 +61,19 @@ class AppThemes {
             minimumSize: const MaterialStatePropertyAll(Size.zero),
           ),
         ),
+        tabBarTheme: TabBarTheme(
+          indicatorColor: AppColors.primaryColor,
+          indicatorSize: TabBarIndicatorSize.label,
+          dividerHeight: 0,
+          labelStyle: AppTextStyles.textStyle16SemiBold.copyWith(
+            color: Colors.black,
+          ),
+          unselectedLabelColor: Colors.black,
+          labelPadding: EdgeInsets.symmetric(
+            horizontal: 48.0.w,
+          ),
+          tabAlignment: TabAlignment.center,
+        ),
       );
 
   static ThemeData get darkTheme => ThemeData(
@@ -99,6 +112,19 @@ class AppThemes {
           color: AppColors.darkPrimaryColor,
           iconColor: Colors.white,
           position: PopupMenuPosition.under,
+        ),
+        tabBarTheme: TabBarTheme(
+          indicatorColor: AppColors.primaryColor,
+          indicatorSize: TabBarIndicatorSize.label,
+          dividerHeight: 0,
+          labelStyle: AppTextStyles.textStyle16SemiBold.copyWith(
+            color: Colors.white,
+          ),
+          unselectedLabelColor: Colors.white,
+          labelPadding: EdgeInsets.symmetric(
+            horizontal: 48.0.w,
+          ),
+          tabAlignment: TabAlignment.center,
         ),
       );
 }
