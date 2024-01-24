@@ -29,29 +29,32 @@ class ChatsView extends StatelessWidget {
                     BlocProvider.of<GetFollowersCubit>(context);
 
                 if (state is GetFollowersSuccess) {
-                  return state.followers.isNotEmpty
-                      ? SliverPadding(
-                          padding: EdgeInsets.only(
-                            bottom: 35.h,
-                            left: 10.w,
-                            right: 10.w,
-                          ),
-                          sliver: SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) {
-                                return ChatItem(
-                                  user: cubit.isSearching
-                                      ? cubit.searchList[index]
-                                      : state.followers[index],
-                                );
-                              },
-                              childCount: cubit.isSearching
-                                  ? cubit.searchList.length
-                                  : state.followers.length,
-                            ),
-                          ),
-                        )
-                      : const EmptyChatsView();
+                  return SliverFillRemaining(
+                      child: CustomErrorWidget(onPressed: () {}, error: 'dfd'));
+
+                  // return state.followers.isNotEmpty
+                  //     ? SliverPadding(
+                  //         padding: EdgeInsets.only(
+                  //           bottom: 35.h,
+                  //           left: 10.w,
+                  //           right: 10.w,
+                  //         ),
+                  //         sliver: SliverList(
+                  //           delegate: SliverChildBuilderDelegate(
+                  //             (context, index) {
+                  //               return ChatItem(
+                  //                 user: cubit.isSearching
+                  //                     ? cubit.searchList[index]
+                  //                     : state.followers[index],
+                  //               );
+                  //             },
+                  //             childCount: cubit.isSearching
+                  //                 ? cubit.searchList.length
+                  //                 : state.followers.length,
+                  //           ),
+                  //         ),
+                  //       )
+                  //     : const EmptyChatsView();
                 } else if (state is GetFollowersError) {
                   return SliverFillRemaining(
                     child: CustomErrorWidget(

@@ -157,20 +157,10 @@ class AppAssets {
   static const String imagesContentBackgroundImage =
       "assets/images/content_background_image.png";
 
-  /// Assets for imagesDarkBackgroundImage
-  /// assets/images/dark_background_image.jpg
-  static const String imagesDarkBackgroundImage =
-      "assets/images/dark_background_image.jpg";
-
   /// Assets for imagesDarkContentBackground
   /// assets/images/dark_content_background.png
   static const String imagesDarkContentBackground =
       "assets/images/dark_content_background.png";
-
-  /// Assets for imagesDarkProfileBackground
-  /// assets/images/dark_profile_background.jpg
-  static const String imagesDarkProfileBackground =
-      "assets/images/dark_profile_background.jpg";
 
   /// Assets for imagesDarkSplash
   /// assets/images/dark_splash.png
@@ -180,6 +170,10 @@ class AppAssets {
   /// assets/images/dark_splash_android_12.png
   static const String imagesDarkSplashAndroid12 =
       "assets/images/dark_splash_android_12.png";
+
+  /// Assets for imagesNoInternet
+  /// assets/images/no_internet.png
+  static const String imagesNoInternet = "assets/images/no_internet.png";
 
   /// Assets for imagesNoPosts
   /// assets/images/no_posts.png

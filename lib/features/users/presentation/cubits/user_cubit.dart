@@ -13,14 +13,14 @@ part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   final GetUserDataUseCase getUserDataUseCase;
-  final GetUserPostsUseCase getAllUserPostsUseCase;
+  final GetUserPostsUseCase getUserPostsUseCase;
   final GetPostsUseCase getPostsUseCase;
   final SignOutUseCase signOutUseCase;
 
   UserCubit({
     required this.getUserDataUseCase,
     required this.getPostsUseCase,
-    required this.getAllUserPostsUseCase,
+    required this.getUserPostsUseCase,
     required this.signOutUseCase,
   }) : super(const UserInitial());
 
@@ -56,7 +56,9 @@ class UserCubit extends Cubit<UserState> {
   List<PostModel> userPosts = <PostModel>[];
 
   Future<void> getUserPosts({required String uId}) async {
-    getAllUserPostsUseCase(uId).then((value) {
+    emit(const GetUserPostsLoading());
+
+    getUserPostsUseCase(uId).then((value) {
       value.fold(
         (failure) =>
             emit(GetUserPostsError(error: failure.failureMsg.toString())),
