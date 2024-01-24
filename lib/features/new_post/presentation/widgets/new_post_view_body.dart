@@ -6,7 +6,7 @@ import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
-import 'package:social_app/core/widgets/custom_toast.dart';
+import 'package:social_app/core/widgets/custom_snack_bar.dart';
 import 'package:social_app/features/new_post/presentation/widgets/add_photos_and_tags_buttons.dart';
 import 'package:social_app/features/new_post/presentation/widgets/new_post_view_app_bar.dart';
 import 'package:social_app/features/new_post/presentation/widgets/post_image.dart';
@@ -116,23 +116,26 @@ class _NewPostViewBodyState extends State<NewPostViewBody> {
     }
 
     if (state is CreatePostError) {
-      CustomToast.showToast(
-        text: state.error,
-        state: CustomToastState.error,
+      CustomSnackBar.show(
+        context: context,
+        message: state.error,
+        state: CustomSnackBarState.error,
       );
     }
 
     if (state is PostImagePickedError) {
-      CustomToast.showToast(
-        text: state.error,
-        state: CustomToastState.error,
+      CustomSnackBar.show(
+        context: context,
+        message: state.error,
+        state: CustomSnackBarState.error,
       );
     }
 
     if (state is UploadPostImageError) {
-      CustomToast.showToast(
-        text: state.error,
-        state: CustomToastState.error,
+      CustomSnackBar.show(
+        context: context,
+        message: state.error,
+        state: CustomSnackBarState.error,
       );
     }
   }

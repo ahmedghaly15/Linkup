@@ -4,7 +4,7 @@ import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
-import 'package:social_app/core/widgets/custom_toast.dart';
+import 'package:social_app/core/widgets/custom_snack_bar.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 import 'package:social_app/features/auth/presentation/cubits/forgot_password/forgot_password_cubit.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
@@ -101,16 +101,18 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
 
   void _controlForgotPasswordState(ForgotPasswordState state) {
     if (state is ForgotPasswordSuccess) {
-      CustomToast.showToast(
-        text: 'Reset password mail is sent',
-        state: CustomToastState.success,
+      CustomSnackBar.show(
+        context: context,
+        message: 'Reset password mail is sent',
+        state: CustomSnackBarState.success,
       );
     }
 
     if (state is ForgotPasswordError) {
-      CustomToast.showToast(
-        text: state.error,
-        state: CustomToastState.error,
+      CustomSnackBar.show(
+        context: context,
+        message: state.error,
+        state: CustomSnackBarState.error,
       );
     }
   }

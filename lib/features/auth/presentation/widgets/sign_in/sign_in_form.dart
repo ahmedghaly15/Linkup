@@ -11,7 +11,7 @@ import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
-import 'package:social_app/core/widgets/custom_toast.dart';
+import 'package:social_app/core/widgets/custom_snack_bar.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 import 'package:social_app/features/auth/domain/entities/sign_in_params.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
@@ -165,9 +165,10 @@ class _SignInFormState extends State<SignInForm> {
 
   void _handleSignInError(BuildContext context, SignInError state) {
     context.back();
-    CustomToast.showToast(
-      text: state.error,
-      state: CustomToastState.error,
+    CustomSnackBar.show(
+      context: context,
+      message: state.error,
+      state: CustomSnackBarState.error,
     );
   }
 

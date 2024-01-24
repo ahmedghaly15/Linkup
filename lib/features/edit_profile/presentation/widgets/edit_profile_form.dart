@@ -6,7 +6,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
-import 'package:social_app/core/widgets/custom_toast.dart';
+import 'package:social_app/core/widgets/custom_snack_bar.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
 import 'package:social_app/features/edit_profile/presentation/cubits/edit_profile_cubit.dart';
@@ -155,9 +155,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
 
   void _update(BuildContext context) {
     if (_checkInfoChanged()) {
-      CustomToast.showToast(
-        text: 'Nothing changed to update',
-        state: CustomToastState.warning,
+      CustomSnackBar.show(
+        context: context,
+        message: 'Nothing changed to update',
+        state: CustomSnackBarState.warning,
       );
     }
 
@@ -193,9 +194,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
     }
 
     if (state is UploadImageError) {
-      CustomToast.showToast(
-        text: state.error,
-        state: CustomToastState.error,
+      CustomSnackBar.show(
+        context: context,
+        message: state.error,
+        state: CustomSnackBarState.error,
       );
     }
   }
@@ -208,9 +210,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
         BlocProvider.of<UserCubit>(context)
             .getUserPosts(uId: Helper.uId!)
             .then((value) {
-          CustomToast.showToast(
-            text: 'User updated successfully',
-            state: CustomToastState.success,
+          CustomSnackBar.show(
+            context: context,
+            message: 'User updated successfully',
+            state: CustomSnackBarState.success,
           );
         });
       });

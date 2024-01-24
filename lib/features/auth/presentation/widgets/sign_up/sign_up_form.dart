@@ -9,7 +9,7 @@ import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
-import 'package:social_app/core/widgets/custom_toast.dart';
+import 'package:social_app/core/widgets/custom_snack_bar.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 import 'package:social_app/features/auth/domain/entities/sign_up_params.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
@@ -225,9 +225,10 @@ class _SignUpFormState extends State<SignUpForm> {
 
   void _handleSignUpError(BuildContext context, SignUpError state) {
     context.back();
-    CustomToast.showToast(
-      text: state.error,
-      state: CustomToastState.error,
+    CustomSnackBar.show(
+      context: context,
+      message: state.error,
+      state: CustomSnackBarState.error,
     );
   }
 
@@ -241,9 +242,10 @@ class _SignUpFormState extends State<SignUpForm> {
       if (value) {
         Helper.uId = state.uId;
         BlocProvider.of<UserCubit>(context).getUserData().then((value) {
-          CustomToast.showToast(
-            text: 'Account created successfully',
-            state: CustomToastState.success,
+          CustomSnackBar.show(
+            context: context,
+            message: 'Account created successfully',
+            state: CustomSnackBarState.success,
           );
           context.navigateAndReplace(newRoute: Routes.linkupRoute);
         });
