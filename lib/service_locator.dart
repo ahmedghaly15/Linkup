@@ -50,6 +50,7 @@ import 'package:social_app/features/following_and_followers/data/datasources/fol
 import 'package:social_app/features/following_and_followers/data/datasources/following_and_followers_datasource_impl.dart';
 import 'package:social_app/features/following_and_followers/data/repositories/following_and_followers_repo_impl.dart';
 import 'package:social_app/features/following_and_followers/domain/repositories/following_and_followers_repo.dart';
+import 'package:social_app/features/following_and_followers/domain/usecases/user_is_in_followers.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/following_and_followers_cubit.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/get_following/get_following_cubit.dart';
@@ -108,7 +109,7 @@ import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
 import 'package:social_app/features/following_and_followers/domain/usecases/unfollow.dart';
-import 'package:social_app/features/following_and_followers/domain/usecases/user_is_followed.dart';
+import 'package:social_app/features/following_and_followers/domain/usecases/user_is_in_following.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 part 'config/locator/setup_for_core.dart';

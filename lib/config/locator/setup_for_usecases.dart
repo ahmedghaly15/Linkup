@@ -170,8 +170,14 @@ class SetupLocatorForUseCases {
       ),
     );
 
-    getIt.registerLazySingleton<UserIsFollowedUseCase>(
-      () => UserIsFollowedUseCase(
+    getIt.registerLazySingleton<UserIsInFollowingUseCase>(
+      () => UserIsInFollowingUseCase(
+        followingAndFollowersRepo: getIt.get<FollowingAndFollowersRepo>(),
+      ),
+    );
+
+    getIt.registerLazySingleton<UserIsInFollowersUseCase>(
+      () => UserIsInFollowersUseCase(
         followingAndFollowersRepo: getIt.get<FollowingAndFollowersRepo>(),
       ),
     );

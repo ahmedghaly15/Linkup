@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_assets.dart';
+import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/widgets/custom_snack_bar.dart';
 
 class Helper {
   static UserModel? currentUser;
@@ -69,6 +72,23 @@ class Helper {
       crossAxisSpacing: 16.w,
       childAspectRatio: 3 / 2,
     );
+  }
+
+  static void message({
+    required bool isInFollowers,
+    required BuildContext context,
+    required UserModel user,
+  }) {
+    return isInFollowers
+        ? context.navigateTo(
+            routeName: Routes.chatDetailsRoute,
+            arguments: user,
+          )
+        : CustomSnackBar.show(
+            context: context,
+            message: "Can't message a person who's not following you",
+            state: CustomSnackBarState.warning,
+          );
   }
 
 /*

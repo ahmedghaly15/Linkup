@@ -3,29 +3,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/following_and_followers/domain/usecases/follow.dart';
 import 'package:social_app/features/following_and_followers/domain/usecases/unfollow.dart';
-import 'package:social_app/features/following_and_followers/domain/usecases/user_is_followed.dart';
+import 'package:social_app/features/following_and_followers/domain/usecases/user_is_in_followers.dart';
+import 'package:social_app/features/following_and_followers/domain/usecases/user_is_in_following.dart';
 
 part 'following_and_followers_state.dart';
 
 class FollowingAndFollowersCubit extends Cubit<FollowingAndFollowersState> {
   final FollowUseCase followUseCase;
   final UnfollowUseCase unfollowUseCase;
-  final UserIsFollowedUseCase userIsFollowedUseCase;
+  final UserIsInFollowingUseCase userIsInFollowingUseCase;
+  final UserIsInFollowersUseCase userIsInFollowersUseCase;
 
   FollowingAndFollowersCubit({
     required this.followUseCase,
     required this.unfollowUseCase,
-    required this.userIsFollowedUseCase,
+    required this.userIsInFollowingUseCase,
+    required this.userIsInFollowersUseCase,
   }) : super(const FollowingAndFollowersInitial());
 
   void follow({required UserModel user}) {
     followUseCase(user).then((value) {
       value.fold(
         (failure) => emit(FollowError(error: failure.failureMsg.toString())),
-        (success) {
-          // getFollowersList();
-          emit(const FollowSuccess());
-        },
+        (success) => emit(const FollowSuccess()),
       );
     });
   }
@@ -34,15 +34,16 @@ class FollowingAndFollowersCubit extends Cubit<FollowingAndFollowersState> {
     unfollowUseCase(user).then((value) {
       value.fold(
         (failure) => emit(UnfollowError(error: failure.failureMsg.toString())),
-        (success) {
-          // getFollowersList();
-          emit(const UnfollowSuccess());
-        },
+        (success) => emit(const UnfollowSuccess()),
       );
     });
   }
 
-  Stream<bool> userIsFollowed({required UserModel user}) {
-    return userIsFollowedUseCase(user);
+  Stream<bool> userIsInFollowing({required String uId}) {
+    return userIsInFollowingUseCase(uId);
+  }
+
+  Stream<bool> userIsInFollowers({required String uId}) {
+    return userIsInFollowersUseCase(uId);
   }
 }

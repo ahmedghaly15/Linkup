@@ -8,7 +8,7 @@ import 'package:social_app/service_locator.dart';
 class FollowingAndFollowersDataSourceImpl
     implements FollowingAndFollowersDataSource {
   @override
-  Future<QuerySnapshot<Map<String, dynamic>>> getFollowersList() async {
+  Future<QuerySnapshot<Map<String, dynamic>>> getFollowers() async {
     return await getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.users)
@@ -18,7 +18,7 @@ class FollowingAndFollowersDataSourceImpl
   }
 
   @override
-  Future<QuerySnapshot<Map<String, dynamic>>> getFollowingList() async {
+  Future<QuerySnapshot<Map<String, dynamic>>> getFollowing() async {
     return await getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.users)
@@ -42,16 +42,34 @@ class FollowingAndFollowersDataSourceImpl
   }
 
   @override
-  Stream<bool> userIsFollowed({required UserModel user}) {
+  Stream<bool> userIsInFollowing({required String uId}) {
     return getIt
         .get<FirebaseFirestore>()
         .collection(AppStrings.users)
-        .doc(user.uId)
+        .doc(Helper.uId!)
+        .collection(AppStrings.following)
+        .snapshots()
+        .map((querySnapshot) {
+      for (var item in querySnapshot.docs) {
+        if (item.data()['uId'] == uId) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+
+  @override
+  Stream<bool> userIsInFollowers({required String uId}) {
+    return getIt
+        .get<FirebaseFirestore>()
+        .collection(AppStrings.users)
+        .doc(Helper.uId!)
         .collection(AppStrings.followers)
         .snapshots()
         .map((querySnapshot) {
       for (var item in querySnapshot.docs) {
-        if (item.data()['uId'] == Helper.currentUser!.uId) {
+        if (item.data()['uId'] == uId) {
           return true;
         }
       }

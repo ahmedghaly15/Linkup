@@ -13,11 +13,11 @@ class FollowingAndFollowersRepoImpl implements FollowingAndFollowersRepo {
   });
 
   @override
-  Future<Either<Failure, List<UserModel>>> getFollowersList() {
+  Future<Either<Failure, List<UserModel>>> getFollowers() {
     return executeAndHandleErrors<List<UserModel>>(
       function: () async {
         final List<UserModel> users = <UserModel>[];
-        final result = await followingAndFollowersDataSource.getFollowersList();
+        final result = await followingAndFollowersDataSource.getFollowers();
 
         users.clear();
 
@@ -31,11 +31,11 @@ class FollowingAndFollowersRepoImpl implements FollowingAndFollowersRepo {
   }
 
   @override
-  Future<Either<Failure, List<UserModel>>> getFollowingList() {
+  Future<Either<Failure, List<UserModel>>> getFollowing() {
     return executeAndHandleErrors<List<UserModel>>(
       function: () async {
         final List<UserModel> users = <UserModel>[];
-        final result = await followingAndFollowersDataSource.getFollowingList();
+        final result = await followingAndFollowersDataSource.getFollowing();
 
         users.clear();
 
@@ -63,7 +63,12 @@ class FollowingAndFollowersRepoImpl implements FollowingAndFollowersRepo {
   }
 
   @override
-  Stream<bool> userIsFollowed({required UserModel user}) {
-    return followingAndFollowersDataSource.userIsFollowed(user: user);
+  Stream<bool> userIsInFollowing({required String uId}) {
+    return followingAndFollowersDataSource.userIsInFollowing(uId: uId);
+  }
+
+  @override
+  Stream<bool> userIsInFollowers({required String uId}) {
+    return followingAndFollowersDataSource.userIsInFollowers(uId: uId);
   }
 }

@@ -74,7 +74,7 @@ class FollowingUserItem extends StatelessWidget {
             ),
             StreamBuilder<bool>(
                 stream: BlocProvider.of<FollowingAndFollowersCubit>(context)
-                    .userIsFollowed(user: user),
+                    .userIsInFollowing(uId: user.uId!),
                 builder: (context, snapshot) {
                   bool isFollowed = snapshot.data ?? false;
                   String buttonText = isFollowed ? 'Unfollow' : 'Follow';

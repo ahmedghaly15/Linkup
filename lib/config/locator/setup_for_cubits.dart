@@ -97,7 +97,8 @@ class SetupLocatorForCubits {
       () => FollowingAndFollowersCubit(
         followUseCase: getIt.get<FollowUseCase>(),
         unfollowUseCase: getIt.get<UnfollowUseCase>(),
-        userIsFollowedUseCase: getIt.get<UserIsFollowedUseCase>(),
+        userIsInFollowingUseCase: getIt.get<UserIsInFollowingUseCase>(),
+        userIsInFollowersUseCase: getIt.get<UserIsInFollowersUseCase>(),
       ),
     );
 

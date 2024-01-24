@@ -14,6 +14,6 @@ class GetFollowersUseCase implements BaseUseCases<List<UserModel>, NoParams> {
   Future<Either<Failure, List<UserModel>>> call(
     NoParams params,
   ) async {
-    return await followingAndFollowersRepo.getFollowersList();
+    return await followingAndFollowersRepo.getFollowers();
   }
 }

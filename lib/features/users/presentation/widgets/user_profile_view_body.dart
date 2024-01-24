@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_assets.dart';
-import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/custom_circle_icon_button.dart';
 import 'package:social_app/core/widgets/custom_get_back_button.dart';
 import 'package:social_app/core/widgets/user_profile_content.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/following_and_followers_cubit.dart';
 
 class UserProfileViewBody extends StatelessWidget {
   const UserProfileViewBody({
@@ -42,15 +42,23 @@ class UserProfileViewBody extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             const CustomGetBackButton(),
-                            CustomCircleIconButton(
-                              onPressed: () {
-                                context.navigateTo(
-                                  routeName: Routes.chatDetailsRoute,
-                                  arguments: user,
-                                );
-                              },
-                              icon: Image.asset(AppAssets.iconsMessage),
-                            ),
+                            StreamBuilder<bool>(
+                                stream:
+                                    BlocProvider.of<FollowingAndFollowersCubit>(
+                                            context)
+                                        .userIsInFollowers(uId: user.uId!),
+                                builder: (context, snapshot) {
+                                  bool isInFollowers = snapshot.data ?? false;
+
+                                  return CustomCircleIconButton(
+                                    onPressed: () => Helper.message(
+                                      isInFollowers: isInFollowers,
+                                      context: context,
+                                      user: user,
+                                    ),
+                                    icon: Image.asset(AppAssets.iconsMessage),
+                                  );
+                                }),
                           ],
                         ),
                       ),
