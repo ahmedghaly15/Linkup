@@ -7,7 +7,7 @@ import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
 import 'package:social_app/features/following_and_followers/presentation/widgets/shimmer_followers_tab.dart';
-import 'package:social_app/features/users/presentation/widgets/empty_user_view.dart';
+import 'package:social_app/features/following_and_followers/presentation/widgets/empty_followers.dart';
 import 'package:social_app/features/following_and_followers/presentation/widgets/follower_user_item.dart';
 
 class FollowersTab extends StatelessWidget {
@@ -44,7 +44,7 @@ class FollowersTab extends StatelessWidget {
                     },
                     itemCount: state.followers.length,
                   )
-                : const EmptyUsersView();
+                : const EmptyFollowers();
           } else if (state is GetFollowersError) {
             return CustomErrorWidget(
               onPressed: () => cubit.getFollowers(),
