@@ -152,20 +152,25 @@ class AppAssets {
   /// assets/images/chat.png
   static const String imagesChat = "assets/images/chat.png";
 
-  /// Assets for imagesChatDarkBackground
-  /// assets/images/chat_dark_background.jpg
-  static const String imagesChatDarkBackground =
-      "assets/images/chat_dark_background.jpg";
-
-  /// Assets for imagesChatLightBackground
-  /// assets/images/chat_light_background.jpg
-  static const String imagesChatLightBackground =
-      "assets/images/chat_light_background.jpg";
-
   /// Assets for imagesContentBackgroundImage
   /// assets/images/content_background_image.png
   static const String imagesContentBackgroundImage =
       "assets/images/content_background_image.png";
+
+  /// Assets for imagesDarkBackgroundImage
+  /// assets/images/dark_background_image.jpg
+  static const String imagesDarkBackgroundImage =
+      "assets/images/dark_background_image.jpg";
+
+  /// Assets for imagesDarkContentBackground
+  /// assets/images/dark_content_background.png
+  static const String imagesDarkContentBackground =
+      "assets/images/dark_content_background.png";
+
+  /// Assets for imagesDarkProfileBackground
+  /// assets/images/dark_profile_background.jpg
+  static const String imagesDarkProfileBackground =
+      "assets/images/dark_profile_background.jpg";
 
   /// Assets for imagesDarkSplash
   /// assets/images/dark_splash.png

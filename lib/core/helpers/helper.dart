@@ -28,14 +28,7 @@ class Helper {
     );
   }
 
-  static BoxShadow buttonShadow(Color color) => BoxShadow(
-        offset: Offset(0, 10.h),
-        blurRadius: 20.h,
-        spreadRadius: 0,
-        color: color,
-      );
-
-  static BoxDecoration backgroundImageDecoration() {
+  static BoxDecoration backgroundImageDecoration(BuildContext context) {
     return const BoxDecoration(
       image: DecorationImage(
         image: AssetImage(
@@ -45,6 +38,13 @@ class Helper {
       ),
     );
   }
+
+  static BoxShadow buttonShadow(Color color) => BoxShadow(
+        offset: Offset(0, 10.h),
+        blurRadius: 20.h,
+        spreadRadius: 0,
+        color: color,
+      );
 
   static BoxDecoration postDecoration(BuildContext context) {
     return BoxDecoration(

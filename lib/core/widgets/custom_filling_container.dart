@@ -20,7 +20,7 @@ class CustomFillingContainer extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      decoration: Helper.backgroundImageDecoration(),
+      decoration: Helper.backgroundImageDecoration(context),
       child: Container(
         margin: EdgeInsets.only(top: 50.h),
         padding: EdgeInsets.only(
@@ -34,9 +34,11 @@ class CustomFillingContainer extends StatelessWidget {
             topLeft: Radius.circular(50.0.r),
             topRight: Radius.circular(50.0.r),
           ),
-          image: const DecorationImage(
+          image: DecorationImage(
             image: AssetImage(
-              AppAssets.imagesContentBackgroundImage,
+              Helper.isDark(context)
+                  ? AppAssets.imagesDarkContentBackground
+                  : AppAssets.imagesContentBackgroundImage,
             ),
             fit: BoxFit.cover,
           ),

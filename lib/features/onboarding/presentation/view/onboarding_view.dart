@@ -9,7 +9,7 @@ class OnboardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: Helper.backgroundImageDecoration(),
+        decoration: Helper.backgroundImageDecoration(context),
         child: const OnboardingViewBody(),
       ),
     );

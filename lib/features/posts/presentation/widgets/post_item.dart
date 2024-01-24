@@ -17,6 +17,7 @@ class PostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 12.h),
       padding: EdgeInsets.only(
         left: 10.w,
         right: 10.w,

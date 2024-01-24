@@ -15,4 +15,11 @@ class AppColors {
     Color(0xff6C79DF),
     Color(0xff3C567F),
   ];
+
+  static const Color shimmerContainerColor = Colors.grey;
+  static Color shimmerBaseColor = Colors.grey.shade300;
+  static Color darkShimmerBaseColor = Colors.grey.shade700.withOpacity(0.6);
+  static Color shimmerHighlightColor = Colors.grey.shade100;
+  static Color darkShimmerHighlightColor =
+      Colors.grey.shade800.withOpacity(0.3);
 }

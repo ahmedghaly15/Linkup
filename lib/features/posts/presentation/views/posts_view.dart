@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_constants.dart';
-import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
 import 'package:social_app/features/posts/presentation/widgets/empty_post_view.dart';
 import 'package:social_app/features/posts/presentation/widgets/posts.dart';
+import 'package:social_app/features/posts/presentation/widgets/shimmer_posts.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class PostsView extends StatelessWidget {
@@ -45,9 +45,7 @@ class PostsView extends StatelessWidget {
                 final UserCubit cubit = BlocProvider.of<UserCubit>(context);
 
                 if (state is GetPostsLoading) {
-                  return const SliverToBoxAdapter(
-                    child: BodyLoadingIndicator(),
-                  );
+                  return const ShimmerPosts();
                 } else if (state is GetPostsError) {
                   return SliverToBoxAdapter(
                     child: CustomErrorWidget(
