@@ -22,106 +22,95 @@ class FollowingUserItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(minHeight: 0),
-      width: double.infinity,
-      margin: EdgeInsets.only(bottom: 10.h),
-      decoration: BoxDecoration(
-        color: Helper.isDark(context)
-            ? AppColors.darkPrimaryColor
-            : AppColors.lightWhiteBlue,
-      ),
-      child: MaterialButton(
-        padding: EdgeInsets.zero,
-        onPressed: () {
-          if (user.uId! != Helper.currentUser!.uId) {
-            BlocProvider.of<UserCubit>(context)
-                .getUserPosts(uId: user.uId!)
-                .then((value) {
-              context.navigateTo(
-                routeName: Routes.userProfileRoute,
-                arguments: user,
-              );
-            });
-          }
-        },
-        child: Padding(
-          padding: EdgeInsets.all(10.h),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CachedNetworkImage(
-                errorWidget: (context, error, _) =>
-                    const CachedImageErrorIcon(),
-                imageUrl: user.image!,
-                imageBuilder: (_, image) {
-                  return CircleAvatar(
-                    backgroundImage: image,
-                    radius: 25.r,
-                    backgroundColor: AppColors.primaryColor,
-                  );
-                },
-              ),
-              SizedBox(width: 10.w),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      user.name!,
-                      style: AppTextStyles.textStyle16SemiBold,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+    return MaterialButton(
+      padding: EdgeInsets.zero,
+      onPressed: () {
+        if (user.uId! != Helper.currentUser!.uId) {
+          BlocProvider.of<UserCubit>(context)
+              .getUserPosts(uId: user.uId!)
+              .then((value) {
+            context.navigateTo(
+              routeName: Routes.userProfileRoute,
+              arguments: user,
+            );
+          });
+        }
+      },
+      child: Padding(
+        padding: EdgeInsets.all(10.h),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            CachedNetworkImage(
+              errorWidget: (context, error, _) => const CachedImageErrorIcon(),
+              imageUrl: user.image!,
+              imageBuilder: (_, image) {
+                return CircleAvatar(
+                  backgroundImage: image,
+                  radius: 25.r,
+                  backgroundColor: AppColors.primaryColor,
+                );
+              },
+            ),
+            SizedBox(width: 10.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    user.name!,
+                    style: AppTextStyles.textStyle16SemiBold,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    user.bio!,
+                    style: AppTextStyles.textStyle13.copyWith(
+                      color: Colors.grey,
                     ),
-                    Text(
-                      user.bio!,
-                      style: AppTextStyles.textStyle13.copyWith(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              StreamBuilder<bool>(
-                  stream: BlocProvider.of<FollowingAndFollowersCubit>(context)
-                      .userIsFollowed(user: user),
-                  builder: (context, snapshot) {
-                    bool isFollowed = snapshot.data ?? false;
-                    String buttonText = isFollowed ? 'Unfollow' : 'Follow';
+            ),
+            StreamBuilder<bool>(
+                stream: BlocProvider.of<FollowingAndFollowersCubit>(context)
+                    .userIsFollowed(user: user),
+                builder: (context, snapshot) {
+                  bool isFollowed = snapshot.data ?? false;
+                  String buttonText = isFollowed ? 'Unfollow' : 'Follow';
 
-                    return OutlinedButton(
-                      onPressed: () => isFollowed
-                          ? BlocProvider.of<FollowingAndFollowersCubit>(context)
-                              .unfollow(user: user)
-                          : BlocProvider.of<FollowingAndFollowersCubit>(context)
-                              .follow(user: user),
-                      style: ButtonStyle(
-                        side: MaterialStatePropertyAll(
-                          BorderSide(
-                            color: AppColors.primaryColor,
-                            width: 1.w,
-                          ),
-                        ),
-                        backgroundColor: MaterialStatePropertyAll(
-                          isFollowed
-                              ? (Helper.isDark(context)
-                                  ? AppColors.darkPrimaryColor
-                                  : AppColors.lightWhiteBlue)
-                              : AppColors.primaryColor,
-                        ),
-                        textStyle: MaterialStatePropertyAll(
-                          AppTextStyles.textStyle13
-                              .copyWith(fontWeight: FontWeight.w600),
-                        ),
-                        foregroundColor: MaterialStatePropertyAll(
-                          isFollowed ? AppColors.primaryColor : Colors.white,
+                  return OutlinedButton(
+                    onPressed: () => isFollowed
+                        ? BlocProvider.of<FollowingAndFollowersCubit>(context)
+                            .unfollow(user: user)
+                        : BlocProvider.of<FollowingAndFollowersCubit>(context)
+                            .follow(user: user),
+                    style: ButtonStyle(
+                      side: MaterialStatePropertyAll(
+                        BorderSide(
+                          color: AppColors.primaryColor,
+                          width: 1.w,
                         ),
                       ),
-                      child: Text(buttonText),
-                    );
-                  }),
-            ],
-          ),
+                      backgroundColor: MaterialStatePropertyAll(
+                        isFollowed
+                            ? (Helper.isDark(context)
+                                ? AppColors.darkPrimaryColor
+                                : AppColors.lightWhiteBlue)
+                            : AppColors.primaryColor,
+                      ),
+                      textStyle: MaterialStatePropertyAll(
+                        AppTextStyles.textStyle13
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      foregroundColor: MaterialStatePropertyAll(
+                        isFollowed ? AppColors.primaryColor : Colors.white,
+                      ),
+                    ),
+                    child: Text(buttonText),
+                  );
+                }),
+          ],
         ),
       ),
     );

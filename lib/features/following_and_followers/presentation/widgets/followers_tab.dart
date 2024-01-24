@@ -11,9 +11,7 @@ import 'package:social_app/features/users/presentation/widgets/empty_user_view.d
 import 'package:social_app/features/following_and_followers/presentation/widgets/follower_user_item.dart';
 
 class FollowersTab extends StatelessWidget {
-  const FollowersTab({
-    super.key,
-  });
+  const FollowersTab({super.key});
 
   @override
   Widget build(BuildContext context) {
