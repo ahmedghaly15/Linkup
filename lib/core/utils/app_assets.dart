@@ -171,6 +171,11 @@ class AppAssets {
   static const String imagesDarkSplashAndroid12 =
       "assets/images/dark_splash_android_12.png";
 
+  /// Assets for imagesEmptyFollowing
+  /// assets/images/empty_following.png
+  static const String imagesEmptyFollowing =
+      "assets/images/empty_following.png";
+
   /// Assets for imagesNoInternet
   /// assets/images/no_internet.png
   static const String imagesNoInternet = "assets/images/no_internet.png";
