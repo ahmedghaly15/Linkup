@@ -30,14 +30,14 @@ class CustomSnackBar {
                 children: <Widget>[
                   Text(
                     _chooseSnackBarTitle(state),
-                    style: AppTextStyles.textStyle16Medium.copyWith(
+                    style: AppTextStyles.textStyle18Bold.copyWith(
                       color: Colors.white,
                     ),
                   ),
                   Text(
                     message,
                     style: AppTextStyles.textStyle13.copyWith(
-                      color: Colors.white,
+                      color: Colors.white70,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
