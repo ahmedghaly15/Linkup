@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/core/widgets/body_loading_indicator.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
 import 'package:social_app/features/chat/presentation/widgets/chats_sliver_app_bar.dart';
 import 'package:social_app/features/chat/presentation/widgets/empty_chats_view.dart';
+import 'package:social_app/features/chat/presentation/widgets/shimmer_chats.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
 import '/features/chat/presentation/widgets/chat_item.dart';
 
@@ -60,12 +60,7 @@ class ChatsView extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return const SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Center(
-                      child: BodyLoadingIndicator(),
-                    ),
-                  );
+                  return const ShimmerChats();
                 }
               },
             )

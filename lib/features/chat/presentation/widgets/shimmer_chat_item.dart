@@ -4,8 +4,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/helpers/shimmer_helper.dart';
 
-class ShimmerPostItem extends StatelessWidget {
-  const ShimmerPostItem({super.key});
+class ShimmerChatItem extends StatelessWidget {
+  const ShimmerChatItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +14,11 @@ class ShimmerPostItem extends StatelessWidget {
       highlightColor: ShimmerHelper.highlightColor(context),
       enabled: true,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 12.h),
-        height: 150.h,
+        height: 85.h,
         width: double.infinity,
+        margin: EdgeInsets.symmetric(vertical: 4.h),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(40.r)),
+          borderRadius: BorderRadius.circular(24.r),
           color: AppColors.shimmerContainerColor,
         ),
       ),
