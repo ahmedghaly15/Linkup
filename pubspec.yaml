@@ -37,8 +37,6 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   # A collection of loading indicators animated with flutter
   loading_indicator: ^3.1.1
-  # Updating app's launcher icon
-  flutter_launcher_icons: ^0.13.1
   # A flutter plugin for adapting screen and font size.Guaranteed to look good on different models
   flutter_screenutil: ^5.9.0
   # To load and cache network images
@@ -78,14 +76,3 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
-
-flutter_assets:
-  assets_path: assets/
-  output_path: lib/core/utils/
-  filename: app_assets.dart
-  field_prefix: null
-
-flutter_icons:
-  android: true
-  ios: true
-  image_path: "assets/app_logo.jpg"

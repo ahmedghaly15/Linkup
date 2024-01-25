@@ -3,40 +3,15 @@ class AppAssets {
 
   /// Assets for AppIcon
   /// assets/app_icon.png
-  static const String AppIcon = "assets/app_icon.png";
+  static const String appIcon = "assets/app_icon.png";
 
   /// Assets for AppLogo
   /// assets/app_logo.jpg
-  static const String AppLogo = "assets/app_logo.jpg";
+  static const String appLogo = "assets/app_logo.jpg";
 
   /// Assets for fontsPoppinsOFL
   /// assets/fonts/Poppins/OFL.txt
   static const String fontsPoppinsOFL = "assets/fonts/Poppins/OFL.txt";
-
-  /// Assets for fontsPoppinsPoppinsBold
-  /// assets/fonts/Poppins/Poppins-Bold.ttf
-  static const String fontsPoppinsPoppinsBold =
-      "assets/fonts/Poppins/Poppins-Bold.ttf";
-
-  /// Assets for fontsPoppinsPoppinsExtraBold
-  /// assets/fonts/Poppins/Poppins-ExtraBold.ttf
-  static const String fontsPoppinsPoppinsExtraBold =
-      "assets/fonts/Poppins/Poppins-ExtraBold.ttf";
-
-  /// Assets for fontsPoppinsPoppinsMedium
-  /// assets/fonts/Poppins/Poppins-Medium.ttf
-  static const String fontsPoppinsPoppinsMedium =
-      "assets/fonts/Poppins/Poppins-Medium.ttf";
-
-  /// Assets for fontsPoppinsPoppinsRegular
-  /// assets/fonts/Poppins/Poppins-Regular.ttf
-  static const String fontsPoppinsPoppinsRegular =
-      "assets/fonts/Poppins/Poppins-Regular.ttf";
-
-  /// Assets for fontsPoppinsPoppinsSemiBold
-  /// assets/fonts/Poppins/Poppins-SemiBold.ttf
-  static const String fontsPoppinsPoppinsSemiBold =
-      "assets/fonts/Poppins/Poppins-SemiBold.ttf";
 
   /// Assets for iconsArrowLeft
   /// assets/icons/arrow_left.png
@@ -188,10 +163,6 @@ class AppAssets {
   /// Assets for imagesNoPosts
   /// assets/images/no_posts.png
   static const String imagesNoPosts = "assets/images/no_posts.png";
-
-  /// Assets for imagesNoUsers
-  /// assets/images/no_users.png
-  static const String imagesNoUsers = "assets/images/no_users.png";
 
   /// Assets for imagesOnboarding1
   /// assets/images/onboarding1.png

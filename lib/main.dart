@@ -7,8 +7,6 @@ import 'package:social_app/firebase_options.dart';
 import 'package:social_app/service_locator.dart';
 import 'package:social_app/linkup_app.dart';
 
-// TODO: seems that peopleLikeThePost method need Future instead of Stream
-// TODO: user image doesn't update in posts when i change it
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

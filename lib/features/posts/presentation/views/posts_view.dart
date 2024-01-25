@@ -27,7 +27,7 @@ class PostsView extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Image.asset(
-                    AppAssets.AppIcon,
+                    AppAssets.appIcon,
                     height: 48.h,
                     width: 48.h,
                   ),
