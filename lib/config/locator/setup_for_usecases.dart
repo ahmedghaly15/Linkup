@@ -183,5 +183,11 @@ class SetupLocatorForUseCases {
         followingAndFollowersDataRepo: getIt.get<FollowingAndFollowersRepo>(),
       ),
     );
+
+    getIt.registerLazySingleton<UpdateUserLikesUseCase>(
+      () => UpdateUserLikesUseCase(
+        editProfileRepo: getIt.get<EditProfileRepo>(),
+      ),
+    );
   }
 }

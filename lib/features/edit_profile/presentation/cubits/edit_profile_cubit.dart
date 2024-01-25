@@ -7,6 +7,7 @@ import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/features/edit_profile/domain/entities/update_user_params.dart';
 import 'package:social_app/features/edit_profile/domain/usecases/get_image.dart';
 import 'package:social_app/features/edit_profile/domain/usecases/update_user.dart';
+import 'package:social_app/features/edit_profile/domain/usecases/update_user_likes.dart';
 import 'package:social_app/features/edit_profile/domain/usecases/update_user_posts.dart';
 import 'package:social_app/features/edit_profile/domain/usecases/upload_image.dart';
 
@@ -17,12 +18,14 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   final GetImageUseCase getImageUseCase;
   final UploadImageUseCase uploadImageUseCase;
   final UpdateUserPostsUseCase updateUserPostsUseCase;
+  final UpdateUserLikesUseCase updateUserLikesUseCase;
 
   EditProfileCubit({
     required this.updateUserUseCase,
     required this.getImageUseCase,
     required this.uploadImageUseCase,
     required this.updateUserPostsUseCase,
+    required this.updateUserLikesUseCase,
   }) : super(const EditProfileInitial());
 
   void updateUser({required UpdateUserParams params}) {
@@ -45,6 +48,16 @@ class EditProfileCubit extends Cubit<EditProfileState> {
           UpdateUserPostsError(error: failure.failureMsg.toString()),
         ),
         (success) => emit(const UpdateUserPostsSuccess()),
+      );
+    });
+  }
+
+  Future<void> updateUserLikes() async {
+    updateUserLikesUseCase(const NoParams()).then((value) {
+      value.fold(
+        (failure) =>
+            emit(UpdateUserLikesError(error: failure.failureMsg.toString())),
+        (success) => emit(const UpdateUserLikesSuccess()),
       );
     });
   }

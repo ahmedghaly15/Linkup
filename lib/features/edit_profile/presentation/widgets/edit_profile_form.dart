@@ -207,20 +207,15 @@ class _EditProfileFormState extends State<EditProfileForm> {
       BlocProvider.of<EditProfileCubit>(context)
           .updateUserPosts()
           .then((value) {
-        CustomSnackBar.show(
-          context: context,
-          message: 'User updated successfully',
-          state: CustomSnackBarState.success,
+        BlocProvider.of<EditProfileCubit>(context).updateUserLikes().then(
+          (value) {
+            CustomSnackBar.show(
+              context: context,
+              message: 'User updated successfully',
+              state: CustomSnackBarState.success,
+            );
+          },
         );
-        // BlocProvider.of<UserCubit>(context)
-        //     .getUserPosts(uId: Helper.uId!)
-        //     .then((value) {
-        //   CustomSnackBar.show(
-        //     context: context,
-        //     message: 'User updated successfully',
-        //     state: CustomSnackBarState.success,
-        //   );
-        // });
       });
     });
   }

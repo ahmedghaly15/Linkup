@@ -45,6 +45,7 @@ import 'package:social_app/features/comments/domain/usecases/get_comments.dart';
 import 'package:social_app/features/comments/domain/usecases/type_new_comment.dart';
 import 'package:social_app/features/comments/domain/usecases/upload_comment_image.dart';
 import 'package:social_app/features/comments/presentation/cubit/comments_cubit.dart';
+import 'package:social_app/features/edit_profile/domain/usecases/update_user_likes.dart';
 import 'package:social_app/features/edit_profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:social_app/features/following_and_followers/data/datasources/following_and_followers_datasource.dart';
 import 'package:social_app/features/following_and_followers/data/datasources/following_and_followers_datasource_impl.dart';

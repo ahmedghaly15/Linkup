@@ -16,4 +16,6 @@ abstract class EditProfileRepo {
   Future<Either<Failure, TaskSnapshot>> uploadImage({File? image});
 
   Future<Either<Failure, void>> updateUserPosts();
+
+  Future<Either<Failure, void>> updateUserLikes();
 }
