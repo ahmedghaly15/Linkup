@@ -1,5 +1,5 @@
 class AppStrings {
-  static const String appTitle = "Social-App";
+  static const String appTitle = "Linkup";
 
   static const String cachedUserId = 'uId';
   static const String cachedOnboarding = 'onboarding';
