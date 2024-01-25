@@ -13,13 +13,11 @@ import 'package:social_app/service_locator.dart';
 
 class CommentsDataSourceImpl implements CommentsDataSource {
   @override
-  Future<DocumentReference<Map<String, dynamic>>> typeNewComment({
+  Future<void> typeNewComment({
     required TypeNewCommentParams typeCommentParams,
   }) async {
     CommentModel commentModel = CommentModel(
-      name: Helper.currentUser!.name,
-      image: Helper.currentUser!.image,
-      uId: Helper.currentUser!.uId,
+      user: Helper.currentUser,
       commentImage: typeCommentParams.commentImage ?? {},
       commentText: typeCommentParams.commentText ?? '',
       time: typeCommentParams.time,
@@ -32,7 +30,8 @@ class CommentsDataSourceImpl implements CommentsDataSource {
         .collection(AppStrings.posts)
         .doc(typeCommentParams.postId)
         .collection(AppStrings.comments)
-        .add(commentModel.toJson());
+        .doc(Helper.uId)
+        .set(commentModel.toJson());
   }
 
   @override

@@ -18,7 +18,7 @@ class CommentItemContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          comment.name!,
+          comment.user!.name!,
           style: AppTextStyles.textStyle17Bold,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:social_app/features/comments/domain/entities/type_new_comment_params.dart';
 
 abstract class CommentsDataSource {
-  Future<DocumentReference<Map<String, dynamic>>> typeNewComment({
+  Future<void> typeNewComment({
     required TypeNewCommentParams typeCommentParams,
   });
 

@@ -24,7 +24,7 @@ class CommentItem extends StatelessWidget {
       children: <Widget>[
         CachedNetworkImage(
           errorWidget: (context, error, _) => const CachedImageErrorIcon(),
-          imageUrl: comment.image!,
+          imageUrl: comment.user!.image!,
           imageBuilder: (_, image) {
             return CircleAvatar(
               backgroundImage: image,
