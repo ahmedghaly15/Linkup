@@ -10,7 +10,7 @@ import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/core/widgets/custom_circle_icon_button.dart';
-import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 class CustomChatDetailsViewAppBar extends StatelessWidget {
   const CustomChatDetailsViewAppBar({
@@ -26,7 +26,7 @@ class CustomChatDetailsViewAppBar extends StatelessWidget {
       children: <Widget>[
         InkWell(
           onTap: () {
-            BlocProvider.of<UserCubit>(context)
+            BlocProvider.of<UserProfileCubit>(context)
                 .getUserPosts(uId: user.uId!)
                 .then((value) {
               context.navigateTo(

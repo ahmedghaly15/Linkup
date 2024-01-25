@@ -7,7 +7,7 @@ import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
-import 'package:social_app/features/posts/presentation/widgets/empty_post_view.dart';
+import 'package:social_app/features/posts/presentation/widgets/empty_posts.dart';
 import 'package:social_app/features/posts/presentation/widgets/posts.dart';
 import 'package:social_app/features/posts/presentation/widgets/shimmer_posts.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
@@ -56,7 +56,7 @@ class PostsView extends StatelessWidget {
                 } else {
                   return cubit.posts.isNotEmpty
                       ? Posts(posts: cubit.posts)
-                      : const SliverToBoxAdapter(child: EmptyPostView());
+                      : const SliverToBoxAdapter(child: EmptyPosts());
                 }
               },
             )

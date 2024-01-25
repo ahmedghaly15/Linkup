@@ -29,11 +29,6 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<QuerySnapshot<Map<String, dynamic>>> getUserPosts() {
-    return FirebaseFirestore.instance.collection(AppStrings.posts).get();
-  }
-
-  @override
   Future<void> signOut() async {
     await getIt
         .get<CacheHelper>()

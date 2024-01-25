@@ -110,10 +110,6 @@ class SetupLocatorForUseCases {
       () => GetUserDataUseCase(userRepo: getIt.get<UserRepo>()),
     );
 
-    getIt.registerLazySingleton<GetUserPostsUseCase>(
-      () => GetUserPostsUseCase(userRepo: getIt.get<UserRepo>()),
-    );
-
     getIt.registerLazySingleton<SignOutUseCase>(
       () => SignOutUseCase(userRepo: getIt.get<UserRepo>()),
     );

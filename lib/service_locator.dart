@@ -106,11 +106,11 @@ import 'package:social_app/features/following_and_followers/domain/usecases/foll
 import 'package:social_app/features/following_and_followers/domain/usecases/get_followers.dart';
 import 'package:social_app/features/following_and_followers/domain/usecases/get_following.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
-import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
 import 'package:social_app/features/following_and_followers/domain/usecases/unfollow.dart';
 import 'package:social_app/features/following_and_followers/domain/usecases/user_is_in_following.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 part 'config/locator/setup_for_core.dart';
 part 'config/locator/setup_for_cubits.dart';

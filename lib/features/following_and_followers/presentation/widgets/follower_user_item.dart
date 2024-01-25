@@ -9,7 +9,7 @@ import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
-import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 class FollowerUserItem extends StatelessWidget {
   const FollowerUserItem({super.key, required this.user});
@@ -34,7 +34,7 @@ class FollowerUserItem extends StatelessWidget {
       child: MaterialButton(
         padding: EdgeInsets.zero,
         onPressed: () {
-          BlocProvider.of<UserCubit>(context)
+          BlocProvider.of<UserProfileCubit>(context)
               .getUserPosts(uId: user.uId!)
               .then((value) {
             context.navigateTo(

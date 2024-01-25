@@ -33,28 +33,6 @@ class GetUserDataError extends UserState {
   List<Object> get props => [error];
 }
 
-class GetUserPostsLoading extends UserState {
-  const GetUserPostsLoading();
-}
-
-class GetUserPostsSuccess extends UserState {
-  final List<PostModel> userPosts;
-
-  const GetUserPostsSuccess({required this.userPosts});
-
-  @override
-  List<Object> get props => [userPosts];
-}
-
-class GetUserPostsError extends UserState {
-  final String error;
-
-  const GetUserPostsError({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
-
 class GetPostsLoading extends UserState {
   const GetPostsLoading();
 }

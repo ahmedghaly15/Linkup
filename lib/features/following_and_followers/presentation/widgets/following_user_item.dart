@@ -10,7 +10,7 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/following_and_followers_cubit.dart';
-import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 class FollowingUserItem extends StatelessWidget {
   const FollowingUserItem({
@@ -26,7 +26,7 @@ class FollowingUserItem extends StatelessWidget {
       padding: EdgeInsets.zero,
       onPressed: () {
         if (user.uId! != Helper.currentUser!.uId) {
-          BlocProvider.of<UserCubit>(context)
+          BlocProvider.of<UserProfileCubit>(context)
               .getUserPosts(uId: user.uId!)
               .then((value) {
             context.navigateTo(

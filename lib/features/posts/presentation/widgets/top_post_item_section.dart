@@ -60,11 +60,7 @@ class TopPostItemSection extends StatelessWidget {
 
   void _controlFeedsState(PostsState state, BuildContext context) {
     if (state is DeletePostSuccess) {
-      _handleDeletePostSuccess(context);
+      BlocProvider.of<UserCubit>(context).getPosts();
     }
-  }
-
-  void _handleDeletePostSuccess(BuildContext context) {
-    BlocProvider.of<UserCubit>(context).getUserPosts(uId: Helper.uId!);
   }
 }

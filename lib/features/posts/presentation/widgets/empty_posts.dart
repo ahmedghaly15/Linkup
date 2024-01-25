@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 
-class EmptyPostView extends StatelessWidget {
-  const EmptyPostView({super.key});
+class EmptyPosts extends StatelessWidget {
+  const EmptyPosts({super.key});
 
   @override
   Widget build(BuildContext context) {

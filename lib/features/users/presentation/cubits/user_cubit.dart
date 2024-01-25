@@ -6,21 +6,18 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/users/domain/usecases/get_posts.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
-import 'package:social_app/features/users/domain/usecases/get_user_posts.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
 
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   final GetUserDataUseCase getUserDataUseCase;
-  final GetUserPostsUseCase getUserPostsUseCase;
   final GetPostsUseCase getPostsUseCase;
   final SignOutUseCase signOutUseCase;
 
   UserCubit({
     required this.getUserDataUseCase,
     required this.getPostsUseCase,
-    required this.getUserPostsUseCase,
     required this.signOutUseCase,
   }) : super(const UserInitial());
 
@@ -50,23 +47,6 @@ class UserCubit extends Cubit<UserState> {
       emit(GetPostsSuccess(posts: posts));
     }).onError((error) {
       emit(GetPostsError(error: error.toString()));
-    });
-  }
-
-  List<PostModel> userPosts = <PostModel>[];
-
-  Future<void> getUserPosts({required String uId}) async {
-    emit(const GetUserPostsLoading());
-
-    getUserPostsUseCase(uId).then((value) {
-      value.fold(
-        (failure) =>
-            emit(GetUserPostsError(error: failure.failureMsg.toString())),
-        (posts) {
-          userPosts = posts;
-          emit(GetUserPostsSuccess(userPosts: userPosts));
-        },
-      );
     });
   }
 
