@@ -5,6 +5,8 @@ import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_assets.dart';
+import 'package:social_app/core/utils/app_strings.dart';
+import 'package:social_app/core/widgets/social_icons.dart';
 import 'package:social_app/features/users/presentation/widgets/followers_and_following.dart';
 import 'package:social_app/features/users/presentation/widgets/following_and_message_buttons.dart';
 
@@ -61,6 +63,13 @@ class UserInfo extends StatelessWidget {
             maxLines: null,
             textAlign: TextAlign.center,
           ),
+          if (user.xUrl != AppStrings.xUrl ||
+              user.facebookUrl != AppStrings.facebookUrl ||
+              user.instagramUrl != AppStrings.instagramUrl ||
+              user.githubUrl != AppStrings.githubUrl) ...[
+            SizedBox(height: 8.h),
+            SocialIcons(user: user),
+          ],
           if (user.uId! != Helper.currentUser!.uId) ...[
             SizedBox(height: 10.h),
             FollowingAndMessageButtons(user: user),

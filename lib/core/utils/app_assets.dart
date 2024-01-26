@@ -25,6 +25,23 @@ class AppAssets {
   /// assets/icons/comment.png
   static const String iconsComment = "assets/icons/comment.png";
 
+  /// Assets for iconsDarkFacebook
+  /// assets/icons/dark_facebook.png
+  static const String iconsDarkFacebook = "assets/icons/dark_facebook.png";
+
+  /// Assets for iconsDarkGithub
+  /// assets/icons/dark_github.png
+  static const String iconsDarkGithub = "assets/icons/dark_github.png";
+
+  /// Assets for iconsDarkInstagramAlt
+  /// assets/icons/dark_instagram-alt.png
+  static const String iconsDarkInstagramAlt =
+      "assets/icons/dark_instagram-alt.png";
+
+  /// Assets for iconsDarkX
+  /// assets/icons/dark_x.png
+  static const String iconsDarkX = "assets/icons/dark_x.png";
+
   /// Assets for iconsEmail
   /// assets/icons/email.png
   static const String iconsEmail = "assets/icons/email.png";
