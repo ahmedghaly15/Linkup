@@ -1,0 +1,1 @@
+class SearchDataSourceImpl implements SearchDataSource{}
