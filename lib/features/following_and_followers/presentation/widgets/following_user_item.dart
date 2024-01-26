@@ -68,6 +68,8 @@ class FollowingUserItem extends StatelessWidget {
                     style: AppTextStyles.textStyle13.copyWith(
                       color: Colors.grey,
                     ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
