@@ -37,5 +37,7 @@ class SetupLocatorForDataSource {
     getIt.registerLazySingleton<FollowingAndFollowersDataSource>(
       () => FollowingAndFollowersDataSourceImpl(),
     );
+
+    getIt.registerLazySingleton<SearchDataSource>(() => SearchDataSourceImpl());
   }
 }

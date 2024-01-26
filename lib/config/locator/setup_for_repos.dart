@@ -62,5 +62,9 @@ class SetupLocatorForRepos {
             getIt.get<FollowingAndFollowersDataSource>(),
       ),
     );
+
+    getIt.registerLazySingleton<SearchRepo>(
+      () => SearchRepoImpl(searchDataSource: getIt.get<SearchDataSource>()),
+    );
   }
 }

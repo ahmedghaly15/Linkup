@@ -191,5 +191,9 @@ class SetupLocatorForUseCases {
         editProfileRepo: getIt.get<EditProfileRepo>(),
       ),
     );
+
+    getIt.registerLazySingleton<SearchUseCase>(
+      () => SearchUseCase(searchRepo: getIt.get<SearchRepo>()),
+    );
   }
 }

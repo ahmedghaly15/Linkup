@@ -117,5 +117,9 @@ class SetupLocatorForCubits {
         getFollowingUseCase: getIt.get<GetFollowingUseCase>(),
       ),
     );
+
+    getIt.registerFactory<SearchCubit>(
+      () => SearchCubit(searchUseCase: getIt.get<SearchUseCase>()),
+    );
   }
 }
