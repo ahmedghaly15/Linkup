@@ -7,6 +7,4 @@ abstract class LinkupRepo {
   void changeBottomNavToHome({required BuildContext context});
 
   List<Widget> getBody();
-
-  List<BottomNavigationBarItem> getBottomNavItems();
 }

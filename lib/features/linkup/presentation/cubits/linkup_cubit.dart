@@ -7,20 +7,17 @@ import 'package:social_app/features/linkup/domain/entities/change_index_params.d
 import 'package:social_app/features/linkup/domain/usecases/change_bottom_nav_index.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_nav_to_home.dart';
 import 'package:social_app/features/linkup/domain/usecases/get_body.dart';
-import 'package:social_app/features/linkup/domain/usecases/get_bottom_nav_items.dart';
 import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 part 'linkup_state.dart';
 
 class LinkupCubit extends Cubit<LinkupState> {
   final GetBodyUseCse getBodyUseCse;
-  final GetBottomNavItemsUseCase getBottomNavItemsUseCase;
   final ChangeBottomNavIndexUseCase changeBottomNavIndexUseCase;
   final ChangeNavToHomeUseCase changeNavToHomeUseCase;
 
   LinkupCubit({
     required this.getBodyUseCse,
-    required this.getBottomNavItemsUseCase,
     required this.changeBottomNavIndexUseCase,
     required this.changeNavToHomeUseCase,
   }) : super(const LinkupInitial());
@@ -28,9 +25,6 @@ class LinkupCubit extends Cubit<LinkupState> {
   int currentIndex = 0;
 
   List<Widget> getBody() => getBodyUseCse(const NoParams());
-
-  List<BottomNavigationBarItem> getBottomNavItems() =>
-      getBottomNavItemsUseCase(const NoParams());
 
   void changeBottomNavIndex(int index, BuildContext context) {
     currentIndex = index;

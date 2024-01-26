@@ -32,10 +32,6 @@ class SetupLocatorForUseCases {
       () => GetBodyUseCse(linkupRepo: getIt.get<LinkupRepo>()),
     );
 
-    getIt.registerLazySingleton<GetBottomNavItemsUseCase>(
-      () => GetBottomNavItemsUseCase(linkupRepo: getIt.get<LinkupRepo>()),
-    );
-
     getIt.registerLazySingleton<GetPostsUseCase>(
       () => GetPostsUseCase(userRepo: getIt.get<UserRepo>()),
     );

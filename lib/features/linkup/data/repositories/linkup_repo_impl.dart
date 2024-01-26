@@ -22,9 +22,4 @@ class LinkupRepoImpl implements LinkupRepo {
   List<Widget> getBody() {
     return linkupDataSource.getBody();
   }
-
-  @override
-  List<BottomNavigationBarItem> getBottomNavItems() {
-    return linkupDataSource.getBottomNavItems();
-  }
 }

@@ -9,6 +9,4 @@ abstract class LinkupDataSource {
   void changeBottomNavToHome({required BuildContext context});
 
   List<Widget> getBody();
-
-  List<BottomNavigationBarItem> getBottomNavItems();
 }

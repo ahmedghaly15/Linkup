@@ -24,7 +24,6 @@ class SetupLocatorForCubits {
     getIt.registerFactory<LinkupCubit>(
       () => LinkupCubit(
         getBodyUseCse: getIt.get<GetBodyUseCse>(),
-        getBottomNavItemsUseCase: getIt.get<GetBottomNavItemsUseCase>(),
         changeBottomNavIndexUseCase: getIt.get<ChangeBottomNavIndexUseCase>(),
         changeNavToHomeUseCase: getIt.get<ChangeNavToHomeUseCase>(),
       ),

@@ -5,13 +5,9 @@ class AppAssets {
   /// assets/app_icon.png
   static const String appIcon = "assets/app_icon.png";
 
-  /// Assets for AppLogo
-  /// assets/app_logo.jpg
-  static const String appLogo = "assets/app_logo.jpg";
-
-  /// Assets for fontsPoppinsOFL
-  /// assets/fonts/Poppins/OFL.txt
-  static const String fontsPoppinsOFL = "assets/fonts/Poppins/OFL.txt";
+  /// Assets for LinkupLogo
+  /// assets/linkup_logo.png
+  static const String linkupLogo = "assets/linkup_logo.png";
 
   /// Assets for iconsArrowLeft
   /// assets/icons/arrow_left.png
@@ -93,6 +89,10 @@ class AppAssets {
   /// Assets for iconsRedLike
   /// assets/icons/red_like.png
   static const String iconsRedLike = "assets/icons/red_like.png";
+
+  /// Assets for iconsSearch
+  /// assets/icons/search.png
+  static const String iconsSearch = "assets/icons/search.png";
 
   /// Assets for iconsSend
   /// assets/icons/Send.png

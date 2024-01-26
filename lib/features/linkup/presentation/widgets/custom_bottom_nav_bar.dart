@@ -17,6 +17,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         List<String> icons = const <String>[
           AppAssets.iconsHome,
           AppAssets.iconsChat,
+          AppAssets.iconsSearch,
           AppAssets.iconsUsers,
           AppAssets.iconsUser,
         ];
@@ -46,7 +47,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   ),
                   if (cubit.currentIndex == index)
                     Container(
-                      width: 23.w,
+                      width: 24.w,
                       height: 3.h,
                       decoration: BoxDecoration(
                         color: Colors.white,

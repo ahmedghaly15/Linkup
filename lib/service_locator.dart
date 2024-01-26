@@ -63,7 +63,6 @@ import 'package:social_app/features/linkup/domain/repositories/linkup_repo.dart'
 import 'package:social_app/features/linkup/domain/usecases/change_bottom_nav_index.dart';
 import 'package:social_app/features/linkup/domain/usecases/change_nav_to_home.dart';
 import 'package:social_app/features/linkup/domain/usecases/get_body.dart';
-import 'package:social_app/features/linkup/domain/usecases/get_bottom_nav_items.dart';
 import 'package:social_app/features/linkup/presentation/cubits/linkup_cubit.dart';
 import 'package:social_app/features/onboarding/data/datasources/onboarding_datasource.dart';
 import 'package:social_app/features/onboarding/data/datasources/onboarding_datasource_impl.dart';
