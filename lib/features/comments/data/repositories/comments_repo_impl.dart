@@ -16,10 +16,11 @@ class CommentsRepoImpl implements CommentsRepo {
   const CommentsRepoImpl({required this.commentsDataSource});
 
   @override
-  Future<Either<Failure, void>> typeNewComment({
+  Future<Either<Failure, DocumentReference<Map<String, dynamic>>>>
+      typeNewComment({
     required TypeNewCommentParams typeCommentParams,
   }) {
-    return executeAndHandleErrors<void>(
+    return executeAndHandleErrors<DocumentReference<Map<String, dynamic>>>(
       function: () => commentsDataSource.typeNewComment(
         typeCommentParams: typeCommentParams,
       ),

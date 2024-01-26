@@ -11,7 +11,7 @@ class CommentModel extends Equatable {
   final Timestamp? dateTime;
 
   const CommentModel({
-    this.user,
+    required this.user,
     this.commentImage,
     this.commentText,
     this.time,
