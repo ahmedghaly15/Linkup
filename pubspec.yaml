@@ -80,9 +80,3 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
-
-flutter_assets:
-  assets_path: assets/
-  output_path: lib/core/utils/
-  filename: app_assets.dart
-  field_prefix: null
