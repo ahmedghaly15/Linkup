@@ -5,17 +5,19 @@ import 'package:social_app/config/themes/app_colors.dart';
 class CustomSearchField extends StatelessWidget {
   const CustomSearchField({
     super.key,
-    this.hintText = 'Name...',
     required this.onChanged,
+    this.hintText = 'Name...',
+    this.autofocus = true,
   });
 
   final String hintText;
   final void Function(String)? onChanged;
+  final bool autofocus;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autofocus: true,
+      autofocus: autofocus,
       enableSuggestions: true,
       keyboardType: TextInputType.name,
       cursorColor: Colors.grey,

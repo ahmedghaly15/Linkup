@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
-import 'package:social_app/features/chat/presentation/widgets/custom_search_field.dart';
+import 'package:social_app/core/widgets/custom_search_field.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
@@ -14,6 +14,7 @@ class SearchView extends StatelessWidget {
           slivers: [
             SliverToBoxAdapter(
               child: CustomSearchField(
+                autofocus: false,
                 hintText: 'Name or Email',
                 onChanged: (String value) {},
               ),

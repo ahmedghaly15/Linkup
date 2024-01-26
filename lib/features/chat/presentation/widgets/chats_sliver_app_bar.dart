@@ -5,7 +5,7 @@ import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_colors.dart';
-import 'package:social_app/features/chat/presentation/widgets/custom_search_field.dart';
+import 'package:social_app/core/widgets/custom_search_field.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
 
 class ChatsSliverAppBar extends StatelessWidget {
