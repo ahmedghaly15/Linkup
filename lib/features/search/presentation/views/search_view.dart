@@ -8,12 +8,15 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomFillingContainer(
+    return CustomFillingContainer(
       child: CustomContentContainer(
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: CustomSearchField(hintText: 'Name or Email'),
+              child: CustomSearchField(
+                hintText: 'Name or Email',
+                onChanged: (String value) {},
+              ),
             ),
           ],
         ),

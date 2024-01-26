@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
-import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
 
 class CustomSearchField extends StatelessWidget {
-  const CustomSearchField({super.key, this.hintText = 'Name...'});
+  const CustomSearchField({
+    super.key,
+    this.hintText = 'Name...',
+    required this.onChanged,
+  });
 
   final String hintText;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +44,7 @@ class CustomSearchField extends StatelessWidget {
         ),
         contentPadding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
       ),
-      onChanged: (value) {
-        BlocProvider.of<GetFollowersCubit>(context).search(value: value);
-      },
+      onChanged: onChanged,
     );
   }
 }
