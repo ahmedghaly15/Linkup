@@ -1,0 +1,1 @@
+class SearchRepoImpl implements SearchRepo{}
