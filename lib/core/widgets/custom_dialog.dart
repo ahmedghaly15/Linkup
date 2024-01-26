@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/helpers/helper.dart';
-import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/widgets/positioned_app_icon.dart';
 
 enum CustomDialogStates { warning, success, error }
 
@@ -76,16 +76,7 @@ class CustomDialog {
                         ],
                       ),
                     ),
-                    Positioned(
-                      top: -30.h,
-                      child: CircleAvatar(
-                        backgroundColor: const Color(0xff032a49),
-                        radius: 24.r,
-                        child: Image.asset(
-                          AppAssets.appIcon,
-                        ),
-                      ),
-                    ),
+                    const PositionedAppIcon(),
                   ],
                 ),
               ),
