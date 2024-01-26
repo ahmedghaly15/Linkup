@@ -37,7 +37,7 @@ class CustomErrorWidget extends StatelessWidget {
           Container(
             margin: EdgeInsets.symmetric(vertical: 12.h),
             child: Text(
-              error == AppStrings.noInternet ? '$error. Tap to try' : error,
+              error,
               style: AppTextStyles.textStyle18Bold,
               textAlign: TextAlign.center,
             ),
