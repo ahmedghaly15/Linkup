@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
@@ -18,9 +20,19 @@ class PostTextAndImage extends StatelessWidget {
       children: <Widget>[
         if (post.text != null) ...[
           SizedBox(height: 10.h),
-          Text(
-            post.text!,
+          Linkify(
+            text: post.text!,
             style: AppTextStyles.textStyle16,
+            onOpen: (link) async {
+              if (_isEmail(link.text)) {
+                await launchUrl(Uri.parse(link.url));
+              } else {
+                await launchUrl(
+                  Uri.parse(link.url),
+                  mode: LaunchMode.inAppBrowserView,
+                );
+              }
+            },
           ),
         ],
         if (post.postImage != '' && post.text != '') SizedBox(height: 15.h),
@@ -38,5 +50,11 @@ class PostTextAndImage extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  bool _isEmail(String input) {
+    final emailRegex =
+        RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    return emailRegex.hasMatch(input);
   }
 }
