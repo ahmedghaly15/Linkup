@@ -16,6 +16,7 @@ import 'package:social_app/features/auth/presentation/cubits/sign_up/sign_up_cub
 import 'package:social_app/features/auth/presentation/widgets/custom_auth_loading.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 import 'package:social_app/service_locator.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -176,7 +177,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 keyboardType: TextInputType.phone,
                 autofillHints: const <String>[AutofillHints.telephoneNumber],
                 validating: (String? val) =>
-                    AuthHelper.validatePhoneField(value: val),
+                    AuthHelper.validatePhoneNumber(val),
               ),
               SizedBox(height: 40.h),
               MainButton(
@@ -242,12 +243,16 @@ class _SignUpFormState extends State<SignUpForm> {
       if (value) {
         Helper.uId = state.uId;
         BlocProvider.of<UserCubit>(context).getUserData().then((value) {
-          CustomDialog.show(
-            context: context,
-            message: 'Account created successfully',
-            state: CustomDialogStates.success,
-          );
-          context.navigateAndReplace(newRoute: Routes.linkupRoute);
+          BlocProvider.of<UserProfileCubit>(context)
+              .getUserPosts(uId: Helper.uId!)
+              .then((value) {
+            CustomDialog.show(
+              context: context,
+              message: 'Account created successfully',
+              state: CustomDialogStates.success,
+            );
+            context.navigateAndReplace(newRoute: Routes.linkupRoute);
+          });
         });
       }
     });

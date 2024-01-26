@@ -5,6 +5,10 @@ class UpdateUserParams extends Equatable {
   final String phone;
   final String email;
   final String bio;
+  final String? xUrl;
+  final String? facebookUrl;
+  final String? instagramUrl;
+  final String? githubUrl;
   final String? cover;
   final String? image;
 
@@ -13,10 +17,25 @@ class UpdateUserParams extends Equatable {
     required this.phone,
     required this.bio,
     required this.email,
+    this.xUrl,
+    this.facebookUrl,
+    this.instagramUrl,
+    this.githubUrl,
     this.cover,
     this.image,
   });
 
   @override
-  List<Object?> get props => [name, phone, bio, cover, image, email];
+  List<Object?> get props => [
+        name,
+        phone,
+        bio,
+        cover,
+        image,
+        email,
+        xUrl,
+        facebookUrl,
+        instagramUrl,
+        githubUrl,
+      ];
 }

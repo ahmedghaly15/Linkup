@@ -29,7 +29,10 @@ class SignUpDataSourceImpl implements SignUpDataSource {
       image:
           'https://img.freepik.com/free-icon/user_318-159711.jpg?size=626&ext=jpg&ga=GA1.2.825316313.1674289475&semt=ais',
       bio: 'Write your bio...',
-      cover: 'https://notepd.s3.amazonaws.com/default-cover.png',
+      xUrl: AppStrings.xUrl,
+      instagramUrl: AppStrings.instagramUrl,
+      facebookUrl: AppStrings.facebookUrl,
+      githubUrl: AppStrings.githubUrl,
     );
     await getIt
         .get<FirebaseFirestore>()

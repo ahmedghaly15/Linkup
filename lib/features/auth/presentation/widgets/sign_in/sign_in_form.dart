@@ -18,6 +18,7 @@ import 'package:social_app/features/auth/presentation/cubits/sign_in/sign_in_cub
 import 'package:social_app/features/auth/presentation/widgets/custom_auth_loading.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
+import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 import 'package:social_app/service_locator.dart';
 
 class SignInForm extends StatefulWidget {
@@ -184,7 +185,11 @@ class _SignInFormState extends State<SignInForm> {
       if (value) {
         Helper.uId = state.uId;
         BlocProvider.of<UserCubit>(context).getUserData().then((value) {
-          context.navigateAndReplace(newRoute: Routes.linkupRoute);
+          BlocProvider.of<UserProfileCubit>(context)
+              .getUserPosts(uId: Helper.uId!)
+              .then((value) {
+            context.navigateAndReplace(newRoute: Routes.linkupRoute);
+          });
         });
       }
     });

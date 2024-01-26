@@ -41,10 +41,40 @@ class AuthHelper {
     return null;
   }
 
-  static String? validatePhoneField({String? value}) {
-    if (value!.isEmpty) {
-      return "Phone number can't be blank";
+  static String? validatePhoneNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a phone number.';
     }
+
+    final RegExp phoneRegex = RegExp(
+      r'^\d{11}$',
+      caseSensitive: false,
+      multiLine: false,
+    );
+
+    if (!phoneRegex.hasMatch(value)) {
+      return 'Please enter a valid phone number.';
+    }
+
+    return null;
+  }
+
+  static String? validateLink(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a link.';
+    }
+
+    // Use a regular expression to check if the link is valid
+    final RegExp urlRegex = RegExp(
+      r'^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$',
+      caseSensitive: false,
+      multiLine: false,
+    );
+
+    if (!urlRegex.hasMatch(value)) {
+      return 'Please enter a valid link.';
+    }
+
     return null;
   }
 

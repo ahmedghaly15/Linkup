@@ -5,6 +5,7 @@ import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/utils/app_assets.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/widgets/custom_dialog.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/main_button.dart';
@@ -26,6 +27,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _xUrlController = TextEditingController();
+  final TextEditingController _facebookUrlController = TextEditingController();
+  final TextEditingController _instagramUrlController = TextEditingController();
+  final TextEditingController _githubUrlController = TextEditingController();
 
   late final GlobalKey<FormState> _formKey;
   late AutovalidateMode autoValidateMode;
@@ -42,6 +47,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
     _bioController.text = Helper.currentUser!.bio!;
     _phoneController.text = Helper.currentUser!.phone!;
     _emailController.text = Helper.currentUser!.email!;
+    _xUrlController.text = Helper.currentUser!.xUrl!;
+    _facebookUrlController.text = Helper.currentUser!.facebookUrl!;
+    _instagramUrlController.text = Helper.currentUser!.instagramUrl!;
+    _githubUrlController.text = Helper.currentUser!.githubUrl!;
   }
 
   void _initFormAttributes() {
@@ -60,6 +69,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
     _bioController.dispose();
     _phoneController.dispose();
     _emailController.dispose();
+    _xUrlController.dispose();
+    _facebookUrlController.dispose();
+    _instagramUrlController.dispose();
+    _githubUrlController.dispose();
   }
 
   @override
@@ -80,11 +93,19 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 if (cubit.profileImage != null)
                   ConfirmEditingButtons(
                     cubit: cubit,
-                    name: _nameController.text.trim(),
-                    phone: _phoneController.text,
-                    bio: _bioController.text.trim(),
-                    email: _emailController.text.trim(),
                     state: state,
+                    updateUserParams: UpdateUserParams(
+                      name: _nameController.text.trim(),
+                      phone: _phoneController.text,
+                      bio: _bioController.text.trim(),
+                      email: _emailController.text.trim(),
+                      xUrl: '${AppStrings.xUrl}${_xUrlController.text.trim()}',
+                      instagramUrl:
+                          '${AppStrings.instagramUrl}${_instagramUrlController.text.trim()}',
+                      facebookUrl: _facebookUrlController.text.trim(),
+                      githubUrl:
+                          '${AppStrings.githubUrl}${_githubUrlController.text.trim()}',
+                    ),
                   ),
                 if (cubit.profileImage != null || cubit.coverImage != null)
                   const TextFormFieldSeparator(),
@@ -132,6 +153,38 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   ),
                 ),
                 const TextFormFieldSeparator(),
+                CustomTextFormField(
+                  controller: _xUrlController,
+                  hintText: 'Username',
+                  prefixIcon: Image.asset(AppAssets.iconsGreyX),
+                  keyboardType: TextInputType.url,
+                  validating: (String? val) => AuthHelper.validateLink(val),
+                ),
+                const TextFormFieldSeparator(),
+                CustomTextFormField(
+                  controller: _instagramUrlController,
+                  hintText: 'Username',
+                  prefixIcon: Image.asset(AppAssets.iconsGreyInstagram),
+                  keyboardType: TextInputType.url,
+                  validating: (String? val) => AuthHelper.validateLink(val),
+                ),
+                const TextFormFieldSeparator(),
+                CustomTextFormField(
+                  controller: _facebookUrlController,
+                  hintText: 'Facebook Link',
+                  prefixIcon: Image.asset(AppAssets.iconsGreyFacebook),
+                  keyboardType: TextInputType.url,
+                  validating: (String? val) => AuthHelper.validateLink(val),
+                ),
+                const TextFormFieldSeparator(),
+                CustomTextFormField(
+                  controller: _githubUrlController,
+                  hintText: 'Username',
+                  prefixIcon: Image.asset(AppAssets.iconsGreyGithub),
+                  keyboardType: TextInputType.url,
+                  validating: (String? val) => AuthHelper.validateLink(val),
+                ),
+                const TextFormFieldSeparator(),
                 MainButton(
                   child: state is UpdateUserLoading
                       ? const CircularProgressIndicator(
@@ -154,7 +207,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
   }
 
   void _update(BuildContext context) {
-    if (_checkInfoChanged()) {
+    if (_checkInfoChanged() && _formKey.currentState!.validate()) {
       CustomDialog.show(
         context: context,
         state: CustomDialogStates.warning,
@@ -170,6 +223,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
           phone: _phoneController.text,
           bio: _bioController.text.trim(),
           email: _emailController.text.trim(),
+          xUrl: _xUrlController.text.trim(),
+          instagramUrl: _instagramUrlController.text.trim(),
+          facebookUrl: _facebookUrlController.text.trim(),
+          githubUrl: _githubUrlController.text.trim(),
         ),
       );
     } else {
@@ -182,7 +239,12 @@ class _EditProfileFormState extends State<EditProfileForm> {
   bool _checkInfoChanged() {
     return Helper.currentUser!.name == _nameController.text.trim() &&
         Helper.currentUser!.phone == _phoneController.text &&
-        Helper.currentUser!.bio == _bioController.text.trim();
+        Helper.currentUser!.bio == _bioController.text.trim() &&
+        Helper.currentUser!.xUrl == _xUrlController.text.trim() &&
+        Helper.currentUser!.instagramUrl ==
+            _instagramUrlController.text.trim() &&
+        Helper.currentUser!.facebookUrl == _facebookUrlController.text.trim() &&
+        Helper.currentUser!.githubUrl == _githubUrlController.text.trim();
   }
 
   void _controlEditProfileState(

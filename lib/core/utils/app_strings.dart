@@ -17,4 +17,8 @@ class AppStrings {
   static const String comments = 'comments';
   static const String chats = 'chats';
   static const String messages = 'messages';
+  static const String xUrl = 'https://x.com/';
+  static const String facebookUrl = 'https://www.facebook.com/';
+  static const String instagramUrl = 'https://www.instagram.com/';
+  static const String githubUrl = 'https://github.com/';
 }

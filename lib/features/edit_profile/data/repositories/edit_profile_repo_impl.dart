@@ -32,6 +32,10 @@ class EditProfileRepoImpl implements EditProfileRepo {
       email: updateUserParams.email,
       uId: Helper.currentUser!.uId,
       isEmailVerified: false,
+      xUrl: updateUserParams.xUrl,
+      facebookUrl: updateUserParams.facebookUrl,
+      instagramUrl: updateUserParams.instagramUrl,
+      githubUrl: updateUserParams.githubUrl,
     );
 
     Helper.currentUser = userModel;

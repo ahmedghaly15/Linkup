@@ -9,19 +9,13 @@ class ConfirmEditingButtons extends StatelessWidget {
   const ConfirmEditingButtons({
     super.key,
     required this.cubit,
-    required this.name,
-    required this.phone,
-    required this.bio,
     required this.state,
-    required this.email,
+    required this.updateUserParams,
   });
 
   final EditProfileCubit cubit;
   final EditProfileState state;
-  final String email;
-  final String name;
-  final String phone;
-  final String bio;
+  final UpdateUserParams updateUserParams;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +27,7 @@ class ConfirmEditingButtons extends StatelessWidget {
         ConfirmEditingButton(
           buttonText: "Update Profile Image",
           onPressed: () => cubit.uploadProfileImage(
-            params: UpdateUserParams(
-              name: name,
-              phone: phone,
-              bio: bio,
-              email: email,
-            ),
+            params: updateUserParams,
           ),
         ),
         if (state is UploadProfileImageLoading) ...[
