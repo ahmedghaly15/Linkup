@@ -29,9 +29,29 @@ class AppAssets {
   /// assets/icons/email.png
   static const String iconsEmail = "assets/icons/email.png";
 
+  /// Assets for iconsFacebook
+  /// assets/icons/facebook.png
+  static const String iconsFacebook = "assets/icons/facebook.png";
+
+  /// Assets for iconsGithub
+  /// assets/icons/github.png
+  static const String iconsGithub = "assets/icons/github.png";
+
   /// Assets for iconsGreyComment
   /// assets/icons/grey_comment.png
   static const String iconsGreyComment = "assets/icons/grey_comment.png";
+
+  /// Assets for iconsGreyFacebook
+  /// assets/icons/grey_facebook.png
+  static const String iconsGreyFacebook = "assets/icons/grey_facebook.png";
+
+  /// Assets for iconsGreyGithub
+  /// assets/icons/grey_github.png
+  static const String iconsGreyGithub = "assets/icons/grey_github.png";
+
+  /// Assets for iconsGreyInstagram
+  /// assets/icons/grey_instagram.png
+  static const String iconsGreyInstagram = "assets/icons/grey_instagram.png";
 
   /// Assets for iconsGreyLike
   /// assets/icons/grey_like.png
@@ -42,6 +62,10 @@ class AppAssets {
   static const String iconsGreyProfileEmail =
       "assets/icons/grey_profile_email.png";
 
+  /// Assets for iconsGreyX
+  /// assets/icons/grey_x.png
+  static const String iconsGreyX = "assets/icons/grey_x.png";
+
   /// Assets for iconsHome
   /// assets/icons/home.png
   static const String iconsHome = "assets/icons/home.png";
@@ -49,6 +73,10 @@ class AppAssets {
   /// Assets for iconsInfo
   /// assets/icons/info.png
   static const String iconsInfo = "assets/icons/info.png";
+
+  /// Assets for iconsInstagram
+  /// assets/icons/instagram.png
+  static const String iconsInstagram = "assets/icons/instagram.png";
 
   /// Assets for iconsInvisible
   /// assets/icons/invisible.png
@@ -109,6 +137,10 @@ class AppAssets {
   /// Assets for iconsVisible
   /// assets/icons/visible.png
   static const String iconsVisible = "assets/icons/visible.png";
+
+  /// Assets for iconsX
+  /// assets/icons/x.png
+  static const String iconsX = "assets/icons/x.png";
 
   /// Assets for imagesAddImage
   /// assets/images/add_image.png

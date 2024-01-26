@@ -9,6 +9,10 @@ class UserModel extends Equatable {
   final String? cover;
   final String? bio;
   final bool? isEmailVerified;
+  final String? xUrl;
+  final String? facebookUrl;
+  final String? instagramUrl;
+  final String? githubUrl;
 
   const UserModel({
     this.name,
@@ -19,6 +23,10 @@ class UserModel extends Equatable {
     this.cover,
     this.bio,
     this.isEmailVerified,
+    this.xUrl,
+    this.facebookUrl,
+    this.instagramUrl,
+    this.githubUrl,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +39,10 @@ class UserModel extends Equatable {
       cover: json['cover'] as String?,
       bio: json['bio'] as String?,
       isEmailVerified: json['isEmailVerified'] as bool?,
+      xUrl: json['xUrl'] as String?,
+      instagramUrl: json['instagramUrl'] as String?,
+      facebookUrl: json['facebookUrl'] as String?,
+      githubUrl: json['githubUrl'] as String?,
     );
   }
 
@@ -44,6 +56,10 @@ class UserModel extends Equatable {
       'image': image,
       'cover': cover,
       'bio': bio,
+      'githubUrl': githubUrl,
+      'facebookUrl': facebookUrl,
+      'instagramUrl': instagramUrl,
+      'xUrl': xUrl,
     };
   }
 
@@ -57,5 +73,9 @@ class UserModel extends Equatable {
         image,
         cover,
         bio,
+        xUrl,
+        facebookUrl,
+        instagramUrl,
+        githubUrl,
       ];
 }
