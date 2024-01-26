@@ -89,12 +89,3 @@ class GetCommentsError extends CommentsState {
 class CommentImageRemovedSuccess extends CommentsState {
   const CommentImageRemovedSuccess();
 }
-
-class ClearCommentsList extends CommentsState {
-  final List<CommentModel> comments;
-
-  const ClearCommentsList({required this.comments});
-
-  @override
-  List<Object> get props => [comments];
-}

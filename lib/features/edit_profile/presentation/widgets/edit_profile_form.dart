@@ -5,8 +5,8 @@ import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/utils/app_assets.dart';
+import 'package:social_app/core/widgets/custom_dialog.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
-import 'package:social_app/core/widgets/custom_snack_bar.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
 import 'package:social_app/features/edit_profile/presentation/cubits/edit_profile_cubit.dart';
@@ -155,10 +155,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
 
   void _update(BuildContext context) {
     if (_checkInfoChanged()) {
-      CustomSnackBar.show(
+      CustomDialog.show(
         context: context,
+        state: CustomDialogStates.warning,
         message: 'Nothing changed to update',
-        state: CustomSnackBarState.warning,
       );
     }
 
@@ -194,10 +194,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
     }
 
     if (state is UploadImageError) {
-      CustomSnackBar.show(
+      CustomDialog.show(
         context: context,
+        state: CustomDialogStates.error,
         message: state.error,
-        state: CustomSnackBarState.error,
       );
     }
   }
@@ -209,11 +209,15 @@ class _EditProfileFormState extends State<EditProfileForm> {
           .then((value) {
         BlocProvider.of<EditProfileCubit>(context).updateUserLikes().then(
           (value) {
-            CustomSnackBar.show(
-              context: context,
-              message: 'User updated successfully',
-              state: CustomSnackBarState.success,
-            );
+            BlocProvider.of<EditProfileCubit>(context)
+                .updateUserComments()
+                .then((value) {
+              CustomDialog.show(
+                context: context,
+                state: CustomDialogStates.success,
+                message: 'User updated successfully',
+              );
+            });
           },
         );
       });

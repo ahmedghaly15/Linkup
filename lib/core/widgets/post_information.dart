@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,9 +8,11 @@ import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
 import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
+import 'package:social_app/service_locator.dart';
 
 class PostInformation extends StatelessWidget {
   const PostInformation({
@@ -54,11 +57,50 @@ class PostInformation extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                post.user!.name!,
-                style: AppTextStyles.textStyle17Bold,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              InkWell(
+                onTap: () async {
+                  final posts = await getIt
+                      .get<FirebaseFirestore>()
+                      .collection(AppStrings.posts)
+                      .get();
+
+                  for (var post in posts.docs) {
+                    final comments = await getIt
+                        .get<FirebaseFirestore>()
+                        .collection(AppStrings.posts)
+                        .doc(post.id)
+                        .collection(AppStrings.comments)
+                        .get();
+
+                    for (var commecnt in comments.docs) {
+                      await getIt
+                          .get<FirebaseFirestore>()
+                          .collection(AppStrings.posts)
+                          .doc(post.id)
+                          .collection(AppStrings.comments)
+                          .doc(commecnt.id)
+                          .update(
+                        {
+                          'user': {
+                            'name': Helper.currentUser!.name,
+                            'image': Helper.currentUser!.image,
+                            'uId': Helper.uId,
+                            'isEmailVerified': false,
+                            'email': Helper.currentUser!.email,
+                            'phone': Helper.currentUser!.phone,
+                            'bio': Helper.currentUser!.bio,
+                          }
+                        },
+                      );
+                    }
+                  }
+                },
+                child: Text(
+                  post.user!.name!,
+                  style: AppTextStyles.textStyle17Bold,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               Text(
                 "${post.date} at ${post.time}",

@@ -103,15 +103,9 @@ class CommentsCubit extends Cubit<CommentsState> {
 
   List<CommentModel> comments = <CommentModel>[];
 
-  void clearComments() {
-    comments.clear();
-
-    emit(ClearCommentsList(comments: comments));
-  }
-
   void getComments({required String postId}) {
     getCommentsUseCase(postId).listen((event) {
-      clearComments();
+      comments.clear();
 
       for (var element in event.docs) {
         comments.add(CommentModel.fromJson(element.data()));

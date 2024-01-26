@@ -55,9 +55,11 @@ class CustomDialog {
                             style: AppTextStyles.textStyle18Bold,
                           ),
                           SizedBox(height: 8.h),
-                          Text(
-                            message,
-                            style: AppTextStyles.textStyle15,
+                          Flexible(
+                            child: Text(
+                              message,
+                              style: AppTextStyles.textStyle15,
+                            ),
                           ),
                           SizedBox(height: 16.h),
                           Align(

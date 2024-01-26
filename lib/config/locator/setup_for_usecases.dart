@@ -189,5 +189,11 @@ class SetupLocatorForUseCases {
         editProfileRepo: getIt.get<EditProfileRepo>(),
       ),
     );
+
+    getIt.registerLazySingleton<UpdateUserCommentsUseCase>(
+      () => UpdateUserCommentsUseCase(
+        editProfileRepo: getIt.get<EditProfileRepo>(),
+      ),
+    );
   }
 }

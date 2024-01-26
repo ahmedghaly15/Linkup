@@ -62,9 +62,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
 
       for (var element in result.docs) {
         if (element.data()['user']['uId'] == Helper.uId) {
-          return await getIt
-              .get<FirebaseFirestore>()
-              .collection(AppStrings.posts)
+          return await _accessPostsCollection()
               .doc(element.data()['postId'])
               .update(
             {
@@ -91,12 +89,12 @@ class EditProfileRepoImpl implements EditProfileRepo {
         final result = await editProfileDataSource.updateUserPosts();
 
         for (var post in result.docs) {
-          final postLikes = await _getPostLikesCollection(post).get();
+          final postLikes = await _accessPostLikesCollection(post).get();
 
           for (var like in postLikes.docs) {
             if (like.data()['user']['uId'] == Helper.uId) {
-              return await _getPostLikesCollection(post)
-                  .doc(like.data()['user']['uId'])
+              return await _accessPostLikesCollection(post)
+                  .doc(Helper.uId)
                   .update(
                 {
                   'user': {
@@ -117,13 +115,54 @@ class EditProfileRepoImpl implements EditProfileRepo {
     );
   }
 
-  CollectionReference<Map<String, dynamic>> _getPostLikesCollection(
+  @override
+  Future<Either<Failure, void>> updateUserComments() {
+    return executeAndHandleErrors<void>(
+      function: () async {
+        final posts = await editProfileDataSource.updateUserPosts();
+
+        for (var post in posts.docs) {
+          final comments = await _accessPostCommentsCollection(post).get();
+
+          for (var comment in comments.docs) {
+            if (comment.data()['user']['uId'] == Helper.uId) {
+              await _accessPostCommentsCollection(post).doc(comment.id).update(
+                {
+                  'user': {
+                    'name': Helper.currentUser!.name,
+                    'image': Helper.currentUser!.image,
+                    'uId': Helper.uId,
+                    'isEmailVerified': false,
+                    'email': Helper.currentUser!.email,
+                    'phone': Helper.currentUser!.phone,
+                    'bio': Helper.currentUser!.bio,
+                  }
+                },
+              );
+            }
+          }
+        }
+      },
+    );
+  }
+
+  CollectionReference<Map<String, dynamic>> _accessPostsCollection() {
+    return getIt.get<FirebaseFirestore>().collection(AppStrings.posts);
+  }
+
+  CollectionReference<Map<String, dynamic>> _accessPostLikesCollection(
     QueryDocumentSnapshot<Map<String, dynamic>> post,
   ) {
-    return getIt
-        .get<FirebaseFirestore>()
-        .collection(AppStrings.posts)
+    return _accessPostsCollection()
         .doc(post.data()['postId'])
         .collection(AppStrings.likes);
+  }
+
+  CollectionReference<Map<String, dynamic>> _accessPostCommentsCollection(
+    QueryDocumentSnapshot<Map<String, dynamic>> post,
+  ) {
+    return _accessPostsCollection()
+        .doc(post.data()['postId'])
+        .collection(AppStrings.comments);
   }
 }
