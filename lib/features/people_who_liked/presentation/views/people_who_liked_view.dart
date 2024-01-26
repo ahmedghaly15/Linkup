@@ -8,7 +8,7 @@ import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
 import 'package:social_app/core/widgets/custom_get_back_button.dart';
 import 'package:social_app/features/people_who_liked/presentation/cubit/people_who_liked_cubit.dart';
-import 'package:social_app/features/people_who_liked/presentation/widgets/person_who_liked.dart';
+import 'package:social_app/core/widgets/person.dart';
 
 class PeopleWhoLikedView extends StatelessWidget {
   const PeopleWhoLikedView({super.key, required this.postId});
@@ -52,7 +52,7 @@ class PeopleWhoLikedView extends StatelessWidget {
                                   duration: const Duration(milliseconds: 650),
                                   child: SlideAnimation(
                                     horizontalOffset: -150.w,
-                                    child: PersonWhoLiked(
+                                    child: Person(
                                       user: cubit.peopleWhoLiked[index],
                                     ),
                                   ),
