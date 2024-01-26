@@ -62,9 +62,7 @@ class FollowerUserItem extends StatelessWidget {
                 user.name!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.textStyle18Bold.copyWith(
-                  color: Helper.isDark(context) ? Colors.white : Colors.black,
-                ),
+                style: AppTextStyles.textStyle16SemiBold,
                 textAlign: TextAlign.center,
               ),
             ),

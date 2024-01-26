@@ -66,8 +66,8 @@ class Helper {
   static SliverGridDelegateWithMaxCrossAxisExtent
       followersGridViewGridDelegate() {
     return SliverGridDelegateWithMaxCrossAxisExtent(
-      maxCrossAxisExtent: 210.w,
-      mainAxisExtent: 210.h,
+      maxCrossAxisExtent: 200.h,
+      mainAxisExtent: 200.h,
       mainAxisSpacing: 10.h,
       crossAxisSpacing: 16.w,
       childAspectRatio: 3 / 2,
