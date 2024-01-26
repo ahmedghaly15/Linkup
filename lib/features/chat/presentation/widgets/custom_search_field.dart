@@ -5,7 +5,9 @@ import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
 
 class CustomSearchField extends StatelessWidget {
-  const CustomSearchField({super.key});
+  const CustomSearchField({super.key, this.hintText = 'Name...'});
+
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class CustomSearchField extends StatelessWidget {
       cursorColor: Colors.grey,
       maxLines: 1,
       decoration: InputDecoration(
-        hintText: "Name...",
+        hintText: hintText,
         hintStyle: TextStyle(
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
@@ -37,7 +39,7 @@ class CustomSearchField extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(20.r),
         ),
-        contentPadding: EdgeInsets.all(8.h),
+        contentPadding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
       ),
       onChanged: (value) {
         BlocProvider.of<GetFollowersCubit>(context).search(value: value);
