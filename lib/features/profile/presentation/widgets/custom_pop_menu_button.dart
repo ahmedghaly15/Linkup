@@ -7,6 +7,7 @@ import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/config/themes/cubit/themes_cubit.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
+import 'package:social_app/features/profile/presentation/widgets/custom_sign_out_dialog.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 
 class CustomPopMenuButton extends StatelessWidget {
@@ -59,7 +60,7 @@ class CustomPopMenuButton extends StatelessWidget {
               }
 
               if (value == 'signOut') {
-                BlocProvider.of<UserCubit>(context).signOut();
+                CustomSignOutDialog.show(context: context);
               }
 
               if (value == 'theme') {
