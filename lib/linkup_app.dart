@@ -8,7 +8,6 @@ import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/following_and_followers_cubit.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/get_following/get_following_cubit.dart';
-import 'package:social_app/features/people_who_liked/presentation/cubit/people_who_liked_cubit.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
@@ -48,9 +47,6 @@ class LinkupApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getIt.get<GetFollowingCubit>()..getFollowing(),
-          ),
-          BlocProvider(
-            create: (context) => getIt.get<PeopleWhoLikedCubit>(),
           ),
         ],
         child: BlocBuilder<ThemesCubit, ThemeData>(

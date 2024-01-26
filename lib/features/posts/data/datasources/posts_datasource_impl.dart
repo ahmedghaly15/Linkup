@@ -84,7 +84,7 @@ class PostsDataSourceImpl implements PostsDataSource {
         .collection(AppStrings.posts)
         .doc(postId)
         .collection(AppStrings.likes)
-        .doc(Helper.currentUser!.uId)
+        .doc(Helper.uId)
         .set(likeModel.toJson());
   }
 

@@ -6,7 +6,7 @@ import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
-import 'package:social_app/core/widgets/custom_snack_bar.dart';
+import 'package:social_app/core/widgets/custom_dialog.dart';
 
 class Helper {
   static UserModel? currentUser;
@@ -84,10 +84,10 @@ class Helper {
             routeName: Routes.chatDetailsRoute,
             arguments: user,
           )
-        : CustomSnackBar.show(
+        : CustomDialog.show(
             context: context,
             message: "Can't message a person who's not following you",
-            state: CustomSnackBarState.warning,
+            state: CustomDialogStates.warning,
           );
   }
 
