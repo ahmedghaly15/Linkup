@@ -48,7 +48,6 @@ class CustomDialog {
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
                             _chooseSnackBarTitle(state),
@@ -59,6 +58,7 @@ class CustomDialog {
                             child: Text(
                               message,
                               style: AppTextStyles.textStyle15,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                           SizedBox(height: 16.h),

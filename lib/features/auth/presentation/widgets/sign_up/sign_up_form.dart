@@ -246,12 +246,13 @@ class _SignUpFormState extends State<SignUpForm> {
           BlocProvider.of<UserProfileCubit>(context)
               .getUserPosts(uId: Helper.uId!)
               .then((value) {
+            context.navigateAndReplace(newRoute: Routes.linkupRoute);
             CustomDialog.show(
               context: context,
-              message: 'Account created successfully',
+              message:
+                  "Welcome to Linkup!\nYour account created successfully. Let's link up and connect",
               state: CustomDialogStates.success,
             );
-            context.navigateAndReplace(newRoute: Routes.linkupRoute);
           });
         });
       }
