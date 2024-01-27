@@ -17,6 +17,8 @@ import 'package:social_app/features/auth/domain/entities/sign_in_params.dart';
 import 'package:social_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
 import 'package:social_app/features/auth/presentation/widgets/custom_auth_loading.dart';
 import 'package:social_app/features/auth/presentation/widgets/text_form_field_separator.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/get_followers/get_followers_cubit.dart';
+import 'package:social_app/features/following_and_followers/presentation/cubit/get_following/get_following_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_cubit.dart';
 import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 import 'package:social_app/service_locator.dart';
@@ -188,7 +190,15 @@ class _SignInFormState extends State<SignInForm> {
           BlocProvider.of<UserProfileCubit>(context)
               .getUserPosts(uId: Helper.uId!)
               .then((value) {
-            context.navigateAndReplace(newRoute: Routes.linkupRoute);
+            BlocProvider.of<GetFollowingCubit>(context)
+                .getFollowing()
+                .then((value) {
+              BlocProvider.of<GetFollowersCubit>(context)
+                  .getFollowers()
+                  .then((value) {
+                context.navigateAndReplace(newRoute: Routes.linkupRoute);
+              });
+            });
           });
         });
       }

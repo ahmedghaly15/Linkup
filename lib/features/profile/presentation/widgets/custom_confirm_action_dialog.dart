@@ -6,7 +6,7 @@ import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/main_button.dart';
 import 'package:social_app/core/widgets/positioned_app_icon.dart';
-import 'package:social_app/features/profile/presentation/widgets/custom_outline_sign_out_button.dart';
+import 'package:social_app/features/profile/presentation/widgets/custom_outline_button.dart';
 
 class CustomConfirmActionDialog {
   static void show({

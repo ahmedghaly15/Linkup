@@ -33,15 +33,19 @@ class UserRepoImpl implements UserRepo {
   @override
   Future<Either<Failure, void>> deleteAccount() {
     return executeAndHandleErrors<void>(function: () {
-      return userDataSource.deleteAccount().then((value) async {
-        _deleteAccountFromOtherUsersFollowers().then((value) {
-          _deleteAccountFromOtherUsersFollowing().then((value) {
-            _deleteAccountComments().then((value) {
-              _deleteAccountLikes().then((value) {
-                _deleteAccountPosts().then((value) {
-                  _deleteAccountFollowers().then((value) {
-                    _deleteAccountFollowing().then((value) {
-                      _deleteFirestoreUser();
+      return userDataSource.deleteAccount().then((value) {
+        _deleteAccountChats().then((value) {
+          _deleteAccountChatsFromOtherUsers().then((value) {
+            _deleteAccountFollowers().then((value) {
+              _deleteAccountFollowing().then((value) {
+                _deleteAccountFromOtherUsersFollowers().then((value) {
+                  _deleteAccountFromOtherUsersFollowing().then((value) {
+                    _deleteAccountComments().then((value) {
+                      _deleteAccountLikes().then((value) {
+                        _deleteAccountPosts().then((value) {
+                          _deleteFirestoreUser();
+                        });
+                      });
                     });
                   });
                 });
@@ -155,6 +159,39 @@ class UserRepoImpl implements UserRepo {
         }
       }
     }
+  }
+
+  Future<void> _deleteAccountChats() async {
+    final users = await _accessUsersCollection().get();
+
+    for (var user in users.docs) {
+      if (user.data()['uId'] == Helper.uId) {
+        final userChats = await _accessChatsCollection(user).get();
+
+        for (var chat in userChats.docs) {
+          await _accessChatsCollection(user).doc(chat.id).delete();
+        }
+      }
+    }
+  }
+
+  Future<void> _deleteAccountChatsFromOtherUsers() async {
+    final users = await _accessUsersCollection().get();
+
+    for (var user in users.docs) {
+      final chats = await _accessChatsCollection(user).get();
+
+      for (var chat in chats.docs) {
+        if (chat.id == Helper.uId) {
+          await _accessChatsCollection(user).doc(Helper.uId).delete();
+        }
+      }
+    }
+  }
+
+  CollectionReference<Map<String, dynamic>> _accessChatsCollection(
+      QueryDocumentSnapshot<Map<String, dynamic>> user) {
+    return _accessUsersCollection().doc(user.id).collection(AppStrings.chats);
   }
 
   CollectionReference<Map<String, dynamic>> _accessCommentsCollection(
