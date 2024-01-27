@@ -8,9 +8,14 @@ import 'package:social_app/core/widgets/main_button.dart';
 import 'package:social_app/core/widgets/positioned_app_icon.dart';
 import 'package:social_app/features/profile/presentation/widgets/custom_outline_sign_out_button.dart';
 
-class CustomSignOutDialog {
+class CustomConfirmActionDialog {
   static void show({
     required BuildContext context,
+    required VoidCallback outlineButtonOnPressed,
+    required String outlineButtonText,
+    required String message,
+    Color cancelButtonBackgroundColor = AppColors.primaryColor,
+    Color outlineButtonBorderColor = AppColors.primaryColor,
   }) {
     showGeneralDialog(
       context: context,
@@ -47,7 +52,7 @@ class CustomSignOutDialog {
                         children: <Widget>[
                           SizedBox(height: 8.h),
                           Text(
-                            'Are you sure that you would like to sign out?',
+                            message,
                             style: AppTextStyles.textStyle20Bold,
                             textAlign: TextAlign.center,
                           ),
@@ -58,6 +63,7 @@ class CustomSignOutDialog {
                                 child: MainButton(
                                   onPressed: () => context.back(),
                                   text: 'Cancel',
+                                  backgroundColor: cancelButtonBackgroundColor,
                                   textStyle:
                                       AppTextStyles.textStyle18Bold.copyWith(
                                     color: Colors.white,
@@ -65,7 +71,11 @@ class CustomSignOutDialog {
                                 ),
                               ),
                               SizedBox(width: 16.w),
-                              const CustomOutlineSignOutButton(),
+                              CustomOutlineButton(
+                                onPressed: outlineButtonOnPressed,
+                                text: outlineButtonText,
+                                borderColor: outlineButtonBorderColor,
+                              ),
                             ],
                           ),
                         ],
