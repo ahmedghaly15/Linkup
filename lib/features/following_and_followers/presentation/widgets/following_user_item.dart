@@ -74,6 +74,7 @@ class FollowingUserItem extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(width: 4.w),
             StreamBuilder<bool>(
                 stream: BlocProvider.of<FollowingAndFollowersCubit>(context)
                     .userIsInFollowing(uId: user.uId!),
