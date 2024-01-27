@@ -5,5 +5,7 @@ abstract class UserDataSource {
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUserData();
 
+  Future<void> deleteAccount();
+
   Future<void> signOut();
 }

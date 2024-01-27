@@ -64,6 +64,7 @@ class SetupLocatorForCubits {
       () => UserCubit(
         getUserDataUseCase: getIt.get<GetUserDataUseCase>(),
         getPostsUseCase: getIt.get<GetPostsUseCase>(),
+        deleteAccountUseCase: getIt.get<DeleteAccountUseCase>(),
         signOutUseCase: getIt.get<SignOutUseCase>(),
       ),
     );

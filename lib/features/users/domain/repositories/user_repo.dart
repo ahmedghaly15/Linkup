@@ -7,5 +7,7 @@ abstract class UserRepo {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getPosts();
 
+  Future<Either<Failure, void>> deleteAccount();
+
   Future<Either<Failure, void>> signOut();
 }

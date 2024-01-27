@@ -39,4 +39,14 @@ class UserDataSourceImpl implements UserDataSource {
       }
     });
   }
+
+  @override
+  Future<void> deleteAccount() async {
+    getIt
+        .get<CacheHelper>()
+        .removeData(key: AppStrings.cachedUserId)
+        .then((value) async {
+      await getIt.get<FirebaseAuth>().currentUser!.delete();
+    });
+  }
 }

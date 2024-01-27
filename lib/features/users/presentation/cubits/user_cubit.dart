@@ -4,6 +4,7 @@ import 'package:social_app/core/entities/no_params.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/features/posts/data/models/post_model.dart';
+import 'package:social_app/features/users/domain/usecases/delete_account.dart';
 import 'package:social_app/features/users/domain/usecases/get_posts.dart';
 import 'package:social_app/features/users/domain/usecases/get_user_data.dart';
 import 'package:social_app/features/users/domain/usecases/sign_out.dart';
@@ -13,11 +14,13 @@ part 'user_state.dart';
 class UserCubit extends Cubit<UserState> {
   final GetUserDataUseCase getUserDataUseCase;
   final GetPostsUseCase getPostsUseCase;
+  final DeleteAccountUseCase deleteAccountUseCase;
   final SignOutUseCase signOutUseCase;
 
   UserCubit({
     required this.getUserDataUseCase,
     required this.getPostsUseCase,
+    required this.deleteAccountUseCase,
     required this.signOutUseCase,
   }) : super(const UserInitial());
 
@@ -47,6 +50,16 @@ class UserCubit extends Cubit<UserState> {
       emit(GetPostsSuccess(posts: posts));
     }).onError((error) {
       emit(GetPostsError(error: error.toString()));
+    });
+  }
+
+  void deleteAccount() {
+    deleteAccountUseCase(const NoParams()).then((value) {
+      value.fold(
+        (failure) =>
+            emit(DeleteUserError(error: failure.failureMsg.toString())),
+        (success) => emit(const DeleteUserSuccess()),
+      );
     });
   }
 

@@ -90,6 +90,7 @@ import 'package:social_app/features/search/data/repositories/search_repo_impl.da
 import 'package:social_app/features/search/domain/repositories/search_repo.dart';
 import 'package:social_app/features/search/domain/usecases/search.dart';
 import 'package:social_app/features/search/presentation/cubit/search_cubit.dart';
+import 'package:social_app/features/users/domain/usecases/delete_account.dart';
 import 'package:social_app/features/users/domain/usecases/get_posts.dart';
 import 'package:social_app/features/posts/domain/usecases/like_post.dart';
 import 'package:social_app/features/posts/domain/usecases/liked_posts_by_me.dart';

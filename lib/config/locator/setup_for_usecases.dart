@@ -195,5 +195,9 @@ class SetupLocatorForUseCases {
     getIt.registerLazySingleton<SearchUseCase>(
       () => SearchUseCase(searchRepo: getIt.get<SearchRepo>()),
     );
+
+    getIt.registerLazySingleton<DeleteAccountUseCase>(
+      () => DeleteAccountUseCase(userRepo: getIt.get<UserRepo>()),
+    );
   }
 }
