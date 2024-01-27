@@ -5,7 +5,6 @@ import 'package:social_app/core/helpers/auth_helper.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/utils/app_assets.dart';
-import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/widgets/custom_dialog.dart';
 import 'package:social_app/core/widgets/custom_text_form_field.dart';
 import 'package:social_app/core/widgets/main_button.dart';
@@ -99,12 +98,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
                       phone: _phoneController.text,
                       bio: _bioController.text.trim(),
                       email: _emailController.text.trim(),
-                      xUrl: '${AppStrings.xUrl}${_xUrlController.text.trim()}',
-                      instagramUrl:
-                          '${AppStrings.instagramUrl}${_instagramUrlController.text.trim()}',
+                      xUrl: _xUrlController.text.trim(),
+                      instagramUrl: _instagramUrlController.text.trim(),
                       facebookUrl: _facebookUrlController.text.trim(),
-                      githubUrl:
-                          '${AppStrings.githubUrl}${_githubUrlController.text.trim()}',
+                      githubUrl: _githubUrlController.text.trim(),
                     ),
                   ),
                 if (cubit.profileImage != null || cubit.coverImage != null)
@@ -267,21 +264,29 @@ class _EditProfileFormState extends State<EditProfileForm> {
   void _handleUpdateUserSuccess(BuildContext context) {
     BlocProvider.of<UserCubit>(context).getUserData().then((value) {
       BlocProvider.of<EditProfileCubit>(context)
-          .updateUserPosts()
+          .updateUserInOtherUsersFollowing()
           .then((value) {
-        BlocProvider.of<EditProfileCubit>(context).updateUserLikes().then(
-          (value) {
-            BlocProvider.of<EditProfileCubit>(context)
-                .updateUserComments()
-                .then((value) {
-              CustomDialog.show(
-                context: context,
-                state: CustomDialogStates.success,
-                message: 'User updated successfully',
-              );
-            });
-          },
-        );
+        BlocProvider.of<EditProfileCubit>(context)
+            .updateUserInOtherUsersFollowers()
+            .then((value) {
+          BlocProvider.of<EditProfileCubit>(context)
+              .updateUserPosts()
+              .then((value) {
+            BlocProvider.of<EditProfileCubit>(context).updateUserLikes().then(
+              (value) {
+                BlocProvider.of<EditProfileCubit>(context)
+                    .updateUserComments()
+                    .then((value) {
+                  CustomDialog.show(
+                    context: context,
+                    state: CustomDialogStates.success,
+                    message: 'User updated successfully',
+                  );
+                });
+              },
+            );
+          });
+        });
       });
     });
   }

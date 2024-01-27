@@ -81,6 +81,10 @@ class SetupLocatorForCubits {
         updateUserPostsUseCase: getIt.get<UpdateUserPostsUseCase>(),
         updateUserLikesUseCase: getIt.get<UpdateUserLikesUseCase>(),
         updateUserCommentsUseCase: getIt.get<UpdateUserCommentsUseCase>(),
+        updateUserInOtherUsersFollowersUseCase:
+            getIt.get<UpdateUserInOtherUsersFollowersUseCase>(),
+        updateUserInOtherUsersFollowingUseCase:
+            getIt.get<UpdateUserInOtherUsersFollowingUseCase>(),
       ),
     );
 

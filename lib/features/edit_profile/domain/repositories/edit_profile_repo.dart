@@ -20,4 +20,8 @@ abstract class EditProfileRepo {
   Future<Either<Failure, void>> updateUserLikes();
 
   Future<Either<Failure, void>> updateUserComments();
+
+  Future<Either<Failure, void>> updateUserInOtherUsersFollowers();
+
+  Future<Either<Failure, void>> updateUserInOtherUsersFollowing();
 }

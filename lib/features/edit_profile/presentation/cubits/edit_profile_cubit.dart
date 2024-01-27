@@ -8,6 +8,8 @@ import 'package:social_app/features/edit_profile/domain/entities/update_user_par
 import 'package:social_app/features/edit_profile/domain/usecases/get_image.dart';
 import 'package:social_app/features/edit_profile/domain/usecases/update_user.dart';
 import 'package:social_app/features/edit_profile/domain/usecases/update_user_comments.dart';
+import 'package:social_app/features/edit_profile/domain/usecases/update_user_in_other_users_followers.dart';
+import 'package:social_app/features/edit_profile/domain/usecases/update_user_in_other_users_following.dart';
 import 'package:social_app/features/edit_profile/domain/usecases/update_user_likes.dart';
 import 'package:social_app/features/edit_profile/domain/usecases/update_user_posts.dart';
 import 'package:social_app/features/edit_profile/domain/usecases/upload_image.dart';
@@ -21,6 +23,11 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   final UpdateUserPostsUseCase updateUserPostsUseCase;
   final UpdateUserLikesUseCase updateUserLikesUseCase;
   final UpdateUserCommentsUseCase updateUserCommentsUseCase;
+  final UpdateUserInOtherUsersFollowersUseCase
+      updateUserInOtherUsersFollowersUseCase;
+
+  final UpdateUserInOtherUsersFollowingUseCase
+      updateUserInOtherUsersFollowingUseCase;
 
   EditProfileCubit({
     required this.updateUserUseCase,
@@ -29,6 +36,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     required this.updateUserPostsUseCase,
     required this.updateUserLikesUseCase,
     required this.updateUserCommentsUseCase,
+    required this.updateUserInOtherUsersFollowersUseCase,
+    required this.updateUserInOtherUsersFollowingUseCase,
   }) : super(const EditProfileInitial());
 
   void updateUser({required UpdateUserParams params}) {
@@ -75,6 +84,31 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     });
   }
 
+  Future<void> updateUserInOtherUsersFollowers() async {
+    updateUserInOtherUsersFollowersUseCase(const NoParams()).then((value) {
+      value.fold(
+        (failure) => emit(
+          UpdateUserInOtherUsersFollowersError(
+              error: failure.failureMsg.toString()),
+        ),
+        (success) => emit(const UpdateUserInOtherUsersFollowersSuccess()),
+      );
+    });
+  }
+
+  Future<void> updateUserInOtherUsersFollowing() async {
+    updateUserInOtherUsersFollowingUseCase(const NoParams()).then((value) {
+      value.fold(
+        (failure) => emit(
+          UpdateUserInOtherUsersFollowingError(
+            error: failure.failureMsg.toString(),
+          ),
+        ),
+        (success) => emit(const UpdateUserInOtherUsersFollowingSuccess()),
+      );
+    });
+  }
+
   File? profileImage;
 
   void getProfileImage({required ImageSource source}) {
@@ -111,6 +145,10 @@ class EditProfileCubit extends Cubit<EditProfileState> {
                 bio: params.bio,
                 email: params.email,
                 image: value,
+                xUrl: params.xUrl,
+                instagramUrl: params.instagramUrl,
+                facebookUrl: params.facebookUrl,
+                githubUrl: params.githubUrl,
               ),
             );
 

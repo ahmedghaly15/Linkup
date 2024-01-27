@@ -42,4 +42,13 @@ class EditProfileDataSourceImpl implements EditProfileDataSource {
         .collection(AppStrings.posts)
         .get();
   }
+
+  @override
+  Future<QuerySnapshot<Map<String, dynamic>>>
+      updateUserInOtherFollowingAndFollowers() async {
+    return await getIt
+        .get<FirebaseFirestore>()
+        .collection(AppStrings.users)
+        .get();
+  }
 }

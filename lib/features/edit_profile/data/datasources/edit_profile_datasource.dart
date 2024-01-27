@@ -13,4 +13,7 @@ abstract class EditProfileDataSource {
   Future<TaskSnapshot> uploadImage({File? image});
 
   Future<QuerySnapshot<Map<String, dynamic>>> updateUserPosts();
+
+  Future<QuerySnapshot<Map<String, dynamic>>>
+      updateUserInOtherFollowingAndFollowers();
 }

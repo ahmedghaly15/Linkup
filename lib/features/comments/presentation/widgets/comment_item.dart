@@ -32,14 +32,16 @@ class CommentItem extends StatelessWidget {
           imageBuilder: (_, image) {
             return InkWell(
               onTap: () {
-                BlocProvider.of<UserProfileCubit>(context)
-                    .getUserPosts(uId: comment.user!.uId!)
-                    .then((value) {
-                  context.navigateTo(
-                    routeName: Routes.userProfileRoute,
-                    arguments: comment.user,
-                  );
-                });
+                if (comment.user!.uId! != Helper.currentUser!.uId) {
+                  BlocProvider.of<UserProfileCubit>(context)
+                      .getUserPosts(uId: comment.user!.uId!)
+                      .then((value) {
+                    context.navigateTo(
+                      routeName: Routes.userProfileRoute,
+                      arguments: comment.user,
+                    );
+                  });
+                }
               },
               child: CircleAvatar(
                 backgroundImage: image,

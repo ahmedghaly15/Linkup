@@ -67,6 +67,32 @@ class UpdateUserCommentsError extends EditProfileState {
   List<Object?> get props => [error];
 }
 
+class UpdateUserInOtherUsersFollowersSuccess extends EditProfileState {
+  const UpdateUserInOtherUsersFollowersSuccess();
+}
+
+class UpdateUserInOtherUsersFollowersError extends EditProfileState {
+  final String error;
+
+  const UpdateUserInOtherUsersFollowersError({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}
+
+class UpdateUserInOtherUsersFollowingSuccess extends EditProfileState {
+  const UpdateUserInOtherUsersFollowingSuccess();
+}
+
+class UpdateUserInOtherUsersFollowingError extends EditProfileState {
+  final String error;
+
+  const UpdateUserInOtherUsersFollowingError({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}
+
 class ImagePickedSuccess extends EditProfileState {
   final File image;
 
