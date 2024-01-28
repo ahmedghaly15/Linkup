@@ -17,26 +17,26 @@ class Posts extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return BlocBuilder<PostsCubit, PostsState>(builder: (context, state) {
-            final PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
+          return StreamBuilder<bool>(
+            stream: posts[index].postId != null
+                ? BlocProvider.of<PostsCubit>(context)
+                    .likedPostsByMe(postId: posts[index].postId!)
+                : const Stream<bool>.empty(),
+            builder: (context, snapshot) {
+              bool isPostLikedByMe = snapshot.data ?? false;
 
-            return StreamBuilder<bool>(
-                stream: posts[index].postId != null
-                    ? cubit.likedPostsByMe(postId: posts[index].postId!)
-                    : const Stream<bool>.empty(),
-                builder: (context, snapshot) {
-                  bool isPostLikedByMe = snapshot.data ?? false;
-
-                  return InkWell(
-                    onDoubleTap: () {
-                      isPostLikedByMe
-                          ? cubit.unLikePost(postId: posts[index].postId!)
-                          : cubit.likePost(postId: posts[index].postId!);
-                    },
-                    child: PostItem(post: posts[index]),
-                  );
-                });
-          });
+              return InkWell(
+                onDoubleTap: () {
+                  isPostLikedByMe
+                      ? BlocProvider.of<PostsCubit>(context)
+                          .unLikePost(postId: posts[index].postId!)
+                      : BlocProvider.of<PostsCubit>(context)
+                          .likePost(postId: posts[index].postId!);
+                },
+                child: PostItem(post: posts[index]),
+              );
+            },
+          );
         },
         childCount: posts.length,
       ),
