@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:social_app/core/errors/failure.dart';
+import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/functions/execute_and_handle_errors.dart';
 import 'package:social_app/features/search/data/datasources/search_datasource.dart';
@@ -22,21 +23,21 @@ class SearchRepoImpl implements SearchRepo {
       searchResult.clear();
 
       for (var user in users.docs) {
-        // Modify the condition for a case-insensitive partial match
-        if (user
-                .data()['name']
-                .toString()
-                .toLowerCase()
-                .contains(nameOrEmail.toLowerCase()) ||
-            user
-                .data()['email']
-                .toString()
-                .toLowerCase()
-                .contains(nameOrEmail.toLowerCase())) {
-          searchResult.add(UserModel.fromJson(user.data()));
+        if (user['uId'] != Helper.uId) {
+          if (user
+                  .data()['name']
+                  .toString()
+                  .toLowerCase()
+                  .contains(nameOrEmail.toLowerCase()) ||
+              user
+                  .data()['email']
+                  .toString()
+                  .toLowerCase()
+                  .contains(nameOrEmail.toLowerCase())) {
+            searchResult.add(UserModel.fromJson(user.data()));
+          }
         }
       }
-      print('SEARCH RESULT: ${searchResult.toString()}');
 
       return searchResult;
     });

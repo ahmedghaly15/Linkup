@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:social_app/core/utils/app_constants.dart';
 import 'package:social_app/core/widgets/custom_content_container.dart';
 import 'package:social_app/core/widgets/custom_error_widget.dart';
 import 'package:social_app/core/widgets/custom_filling_container.dart';
@@ -22,6 +23,7 @@ class SearchView extends StatelessWidget {
           child: BlocBuilder<SearchCubit, SearchState>(
             builder: (context, state) {
               return CustomScrollView(
+                physics: AppConstants.physics,
                 slivers: [
                   SliverToBoxAdapter(
                     child: CustomSearchField(
