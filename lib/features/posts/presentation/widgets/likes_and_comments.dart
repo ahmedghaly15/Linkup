@@ -25,7 +25,7 @@ class LikesAndComments extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PostsCubit, PostsState>(
       builder: (context, state) {
-        PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
+        final PostsCubit cubit = BlocProvider.of<PostsCubit>(context);
 
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,8 +39,7 @@ class LikesAndComments extends StatelessWidget {
               },
               child: StreamBuilder<bool>(
                   stream: post.postId != null
-                      ? BlocProvider.of<PostsCubit>(context)
-                          .likedPostsByMe(postId: post.postId!)
+                      ? cubit.likedPostsByMe(postId: post.postId!)
                       : const Stream<bool>.empty(),
                   builder: (context, snapshot) {
                     bool isPostLikedByMe = snapshot.data ?? false;

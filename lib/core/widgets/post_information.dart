@@ -29,18 +29,7 @@ class PostInformation extends StatelessWidget {
           imageUrl: post.user!.image!,
           imageBuilder: (_, image) {
             return InkWell(
-              onTap: () {
-                if (post.user!.uId != Helper.uId) {
-                  BlocProvider.of<UserProfileCubit>(context)
-                      .getUserPosts(uId: post.user!.uId!)
-                      .then((value) {
-                    context.navigateTo(
-                      routeName: Routes.userProfileRoute,
-                      arguments: post.user,
-                    );
-                  });
-                }
-              },
+              onTap: () => _navigateToUserProfile(context),
               child: CircleAvatar(
                 backgroundImage: image,
                 radius: 20.r,
@@ -54,11 +43,14 @@ class PostInformation extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                post.user!.name!,
-                style: AppTextStyles.textStyle17Bold,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              InkWell(
+                onTap: () => _navigateToUserProfile(context),
+                child: Text(
+                  post.user!.name!,
+                  style: AppTextStyles.textStyle17Bold,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               Text(
                 "${post.date} at ${post.time}",
@@ -71,5 +63,18 @@ class PostInformation extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _navigateToUserProfile(BuildContext context) {
+    if (post.user!.uId != Helper.uId) {
+      BlocProvider.of<UserProfileCubit>(context)
+          .getUserPosts(uId: post.user!.uId!)
+          .then((value) {
+        context.navigateTo(
+          routeName: Routes.userProfileRoute,
+          arguments: post.user,
+        );
+      });
+    }
   }
 }
