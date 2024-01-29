@@ -30,21 +30,16 @@ class LikesAndComments extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            InkWell(
-              onLongPress: () {
-                context.navigateTo(
-                  routeName: Routes.peopleWhoLiked,
-                  arguments: post.postId,
-                );
-              },
-              child: StreamBuilder<bool>(
+            Row(
+              children: <Widget>[
+                StreamBuilder<bool>(
                   stream: post.postId != null
                       ? cubit.likedPostsByMe(postId: post.postId!)
                       : const Stream<bool>.empty(),
                   builder: (context, snapshot) {
                     bool isPostLikedByMe = snapshot.data ?? false;
 
-                    return TextButton.icon(
+                    return IconButton(
                       onPressed: () {
                         isPostLikedByMe
                             ? cubit.unLikePost(postId: post.postId!)
@@ -57,23 +52,33 @@ class LikesAndComments extends StatelessWidget {
                                   ? AppAssets.iconsGreyLike
                                   : AppAssets.iconsLike,
                             ),
-                      label: StreamBuilder(
-                        stream: _likesStream(),
-                        builder: (context, snapshot) {
-                          int likesCount = snapshot.data?.docs.length ?? 0;
-
-                          return Text(
-                            "$likesCount Likes",
-                            style: AppTextStyles.textStyle15.copyWith(
-                              color: Helper.isDark(context)
-                                  ? Colors.white54
-                                  : AppColors.lightGrey,
-                            ),
-                          );
-                        },
-                      ),
                     );
-                  }),
+                  },
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.navigateTo(
+                      routeName: Routes.peopleWhoLiked,
+                      arguments: post.postId,
+                    );
+                  },
+                  child: StreamBuilder(
+                    stream: _likesStream(),
+                    builder: (context, snapshot) {
+                      int likesCount = snapshot.data?.docs.length ?? 0;
+
+                      return Text(
+                        "$likesCount Likes",
+                        style: AppTextStyles.textStyle15.copyWith(
+                          color: Helper.isDark(context)
+                              ? Colors.white54
+                              : AppColors.lightGrey,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
             TextButton.icon(
               onPressed: () {
