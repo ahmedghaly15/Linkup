@@ -36,16 +36,11 @@ class _EntryViewState extends State<EntryView> {
   }
 
   void _setSystemUIOverlayStyle() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    final double bottomPadding = View.of(context).viewPadding.bottom;
-
-    // Set the color based on the presence of the system navigation bar
-    final Color? systemNavigationBarColor =
-        bottomPadding > 0 ? null : Colors.transparent;
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
 
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        systemNavigationBarColor: systemNavigationBarColor,
+      const SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.transparent,
         statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
