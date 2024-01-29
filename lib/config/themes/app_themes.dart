@@ -56,8 +56,13 @@ class AppThemes {
         ),
         iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.symmetric(
+                horizontal: 4.w,
+                vertical: 4.h,
+              ),
+            ),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            padding: MaterialStateProperty.all(EdgeInsets.zero),
             minimumSize: const MaterialStatePropertyAll(Size.zero),
           ),
         ),
@@ -106,6 +111,24 @@ class AppThemes {
                 color: AppColors.primaryColor,
               ),
             ),
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.symmetric(
+                horizontal: 8.w,
+                vertical: 8.h,
+              ),
+            ),
+          ),
+        ),
+        iconButtonTheme: IconButtonThemeData(
+          style: ButtonStyle(
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.symmetric(
+                horizontal: 4.w,
+                vertical: 4.h,
+              ),
+            ),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            minimumSize: const MaterialStatePropertyAll(Size.zero),
           ),
         ),
         popupMenuTheme: const PopupMenuThemeData(

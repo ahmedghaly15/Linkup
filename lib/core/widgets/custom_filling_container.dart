@@ -26,7 +26,7 @@ class CustomFillingContainer extends StatelessWidget {
         padding: EdgeInsets.only(
           left: 10.w,
           right: 10.w,
-          bottom: 25.h,
+          bottom: 35.h,
           top: 10.h,
         ),
         decoration: BoxDecoration(
