@@ -23,6 +23,7 @@ class PageViewItem extends StatelessWidget {
     var size = MediaQuery.of(context).size;
 
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(40.r),
@@ -32,7 +33,11 @@ class PageViewItem extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.only(
+        left: 16.w,
+        right: 16.w,
+        bottom: 16.h,
+      ),
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

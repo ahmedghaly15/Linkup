@@ -59,39 +59,36 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
               child: Column(
                 children: <Widget>[
                   const Spacer(),
-                  SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 16.w,
-                        right: 16.w,
-                        top: 16.h,
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 16.h,
+                    ),
+                    child: MainButton(
+                      onPressed: () => cubit.navigateBetweenPages(
+                        context: context,
+                        pageController: pageController,
                       ),
-                      child: MainButton(
-                        onPressed: () => cubit.navigateBetweenPages(
-                          context: context,
-                          pageController: pageController,
+                      boxShadow: <BoxShadow>[
+                        Helper.buttonShadow(
+                          AppColors.primaryColor.withOpacity(0.5),
                         ),
-                        boxShadow: <BoxShadow>[
-                          Helper.buttonShadow(
-                            AppColors.primaryColor.withOpacity(0.5),
+                      ],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            cubit.isLastBoarding ? 'Get Started' : 'Next',
+                            style: AppTextStyles.textStyle20Bold.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_right_alt_outlined,
+                            color: Colors.white,
+                            size: 32.w,
                           ),
                         ],
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              cubit.isLastBoarding ? 'Get Started' : 'Next',
-                              style: AppTextStyles.textStyle20Bold.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                            Icon(
-                              Icons.arrow_right_alt_outlined,
-                              color: Colors.white,
-                              size: 32.w,
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                   ),
