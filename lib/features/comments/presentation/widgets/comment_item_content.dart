@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/date_and_time.dart';
+import 'package:social_app/core/widgets/username.dart';
+import 'package:social_app/core/widgets/username_and_verification_icon.dart';
 import 'package:social_app/features/comments/data/models/comment_model.dart';
 
 class CommentItemContent extends StatelessWidget {
@@ -17,12 +19,9 @@ class CommentItemContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          comment.user!.name!,
-          style: AppTextStyles.textStyle17Bold,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
+        comment.user!.isEmailVerified!
+            ? UsernameAndVerificationIcon(user: comment.user!)
+            : Username(user: comment.user!),
         if (comment.commentText != null) ...[
           SizedBox(height: 8.h),
           Text(

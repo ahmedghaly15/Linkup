@@ -6,6 +6,8 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
+import 'package:social_app/core/widgets/username.dart';
+import 'package:social_app/core/widgets/username_and_verification_icon.dart';
 
 class ChatItem extends StatelessWidget {
   const ChatItem({
@@ -46,10 +48,15 @@ class ChatItem extends StatelessWidget {
                 backgroundColor: AppColors.primaryColor,
               ),
             ),
-            title: Text(
-              user.name!,
-              style: AppTextStyles.textStyle18Bold,
-            ),
+            title: user.isEmailVerified!
+                ? UsernameAndVerificationIcon(
+                    user: user,
+                    canNavigateToProfile: false,
+                  )
+                : Username(
+                    user: user,
+                    canNavigateToProfile: false,
+                  ),
             subtitle: Text(
               user.bio!,
               style: AppTextStyles.textStyle13,

@@ -9,6 +9,8 @@ import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
+import 'package:social_app/core/widgets/username.dart';
+import 'package:social_app/core/widgets/username_and_verification_icon.dart';
 import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 class FollowerUserItem extends StatelessWidget {
@@ -57,15 +59,15 @@ class FollowerUserItem extends StatelessWidget {
               errorWidget: (context, error, _) => const CachedImageErrorIcon(),
             ),
             SizedBox(height: 8.h),
-            Flexible(
-              child: Text(
-                user.name!,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.textStyle16SemiBold,
-                textAlign: TextAlign.center,
-              ),
-            ),
+            user.isEmailVerified!
+                ? UsernameAndVerificationIcon(
+                    user: user,
+                    canNavigateToProfile: false,
+                  )
+                : Username(
+                    user: user,
+                    canNavigateToProfile: false,
+                  ),
             SizedBox(height: 16.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

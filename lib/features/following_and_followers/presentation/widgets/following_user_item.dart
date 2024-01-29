@@ -2,15 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:social_app/config/router/routes.dart';
 import 'package:social_app/config/themes/app_colors.dart';
 import 'package:social_app/config/themes/app_text_styles.dart';
 import 'package:social_app/core/helpers/helper.dart';
 import 'package:social_app/core/models/user_model.dart';
-import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/cached_image_error_icon.dart';
+import 'package:social_app/core/widgets/username.dart';
+import 'package:social_app/core/widgets/username_and_verification_icon.dart';
 import 'package:social_app/features/following_and_followers/presentation/cubit/following_and_followers_cubit.dart';
-import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 class FollowingUserItem extends StatelessWidget {
   const FollowingUserItem({
@@ -26,14 +25,7 @@ class FollowingUserItem extends StatelessWidget {
       padding: EdgeInsets.zero,
       onPressed: () {
         if (user.uId! != Helper.currentUser!.uId) {
-          BlocProvider.of<UserProfileCubit>(context)
-              .getUserPosts(uId: user.uId!)
-              .then((value) {
-            context.navigateTo(
-              routeName: Routes.userProfileRoute,
-              arguments: user,
-            );
-          });
+          Helper.navigateToUserProfile(user, context);
         }
       },
       child: Padding(
@@ -57,12 +49,15 @@ class FollowingUserItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    user.name!,
-                    style: AppTextStyles.textStyle16SemiBold,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  user.isEmailVerified!
+                      ? UsernameAndVerificationIcon(
+                          user: user,
+                          canNavigateToProfile: false,
+                        )
+                      : Username(
+                          user: user,
+                          canNavigateToProfile: false,
+                        ),
                   Text(
                     user.bio!,
                     style: AppTextStyles.textStyle13.copyWith(
@@ -76,43 +71,44 @@ class FollowingUserItem extends StatelessWidget {
             ),
             SizedBox(width: 4.w),
             StreamBuilder<bool>(
-                stream: BlocProvider.of<FollowingAndFollowersCubit>(context)
-                    .userIsInFollowing(uId: user.uId!),
-                builder: (context, snapshot) {
-                  bool isFollowed = snapshot.data ?? false;
-                  String buttonText = isFollowed ? 'Unfollow' : 'Follow';
+              stream: BlocProvider.of<FollowingAndFollowersCubit>(context)
+                  .userIsInFollowing(uId: user.uId!),
+              builder: (context, snapshot) {
+                bool isFollowed = snapshot.data ?? false;
+                String buttonText = isFollowed ? 'Unfollow' : 'Follow';
 
-                  return OutlinedButton(
-                    onPressed: () => isFollowed
-                        ? BlocProvider.of<FollowingAndFollowersCubit>(context)
-                            .unfollow(user: user)
-                        : BlocProvider.of<FollowingAndFollowersCubit>(context)
-                            .follow(user: user),
-                    style: ButtonStyle(
-                      side: MaterialStatePropertyAll(
-                        BorderSide(
-                          color: AppColors.primaryColor,
-                          width: 1.w,
-                        ),
-                      ),
-                      backgroundColor: MaterialStatePropertyAll(
-                        isFollowed
-                            ? (Helper.isDark(context)
-                                ? AppColors.darkPrimaryColor
-                                : AppColors.lightWhiteBlue)
-                            : AppColors.primaryColor,
-                      ),
-                      textStyle: MaterialStatePropertyAll(
-                        AppTextStyles.textStyle13
-                            .copyWith(fontWeight: FontWeight.w600),
-                      ),
-                      foregroundColor: MaterialStatePropertyAll(
-                        isFollowed ? AppColors.primaryColor : Colors.white,
+                return OutlinedButton(
+                  onPressed: () => isFollowed
+                      ? BlocProvider.of<FollowingAndFollowersCubit>(context)
+                          .unfollow(user: user)
+                      : BlocProvider.of<FollowingAndFollowersCubit>(context)
+                          .follow(user: user),
+                  style: ButtonStyle(
+                    side: MaterialStatePropertyAll(
+                      BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 1.w,
                       ),
                     ),
-                    child: Text(buttonText),
-                  );
-                }),
+                    backgroundColor: MaterialStatePropertyAll(
+                      isFollowed
+                          ? (Helper.isDark(context)
+                              ? AppColors.darkPrimaryColor
+                              : AppColors.lightWhiteBlue)
+                          : AppColors.primaryColor,
+                    ),
+                    textStyle: MaterialStatePropertyAll(
+                      AppTextStyles.textStyle13
+                          .copyWith(fontWeight: FontWeight.w600),
+                    ),
+                    foregroundColor: MaterialStatePropertyAll(
+                      isFollowed ? AppColors.primaryColor : Colors.white,
+                    ),
+                  ),
+                  child: Text(buttonText),
+                );
+              },
+            ),
           ],
         ),
       ),

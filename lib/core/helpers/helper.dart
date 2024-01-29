@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/config/router/routes.dart';
@@ -7,6 +8,7 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_navigator.dart';
 import 'package:social_app/core/widgets/custom_dialog.dart';
+import 'package:social_app/features/users/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 class Helper {
   static UserModel? currentUser;
@@ -89,6 +91,19 @@ class Helper {
             message: "Can't message a person who's not following you",
             state: CustomDialogStates.warning,
           );
+  }
+
+  static void navigateToUserProfile(UserModel postUser, BuildContext context) {
+    if (postUser.uId != uId) {
+      BlocProvider.of<UserProfileCubit>(context)
+          .getUserPosts(uId: postUser.uId!)
+          .then((value) {
+        context.navigateTo(
+          routeName: Routes.userProfileRoute,
+          arguments: postUser,
+        );
+      });
+    }
   }
 
 /*

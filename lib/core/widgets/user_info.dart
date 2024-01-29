@@ -7,6 +7,8 @@ import 'package:social_app/core/models/user_model.dart';
 import 'package:social_app/core/utils/app_assets.dart';
 import 'package:social_app/core/utils/app_strings.dart';
 import 'package:social_app/core/widgets/social_icons.dart';
+import 'package:social_app/core/widgets/username.dart';
+import 'package:social_app/core/widgets/username_and_verification_icon.dart';
 import 'package:social_app/features/users/presentation/widgets/followers_and_following.dart';
 import 'package:social_app/features/users/presentation/widgets/following_and_message_buttons.dart';
 
@@ -23,11 +25,16 @@ class UserInfo extends StatelessWidget {
         children: <Widget>[
           FollowersAndFollowing(user: user),
           SizedBox(height: 10.h),
-          Text(
-            user.name!,
-            style: AppTextStyles.textStyle17Bold,
-            textAlign: TextAlign.center,
-          ),
+          user.isEmailVerified!
+              ? UsernameAndVerificationIcon(
+                  user: user,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  canNavigateToProfile: false,
+                )
+              : Username(
+                  user: user,
+                  canNavigateToProfile: false,
+                ),
           SizedBox(height: 4.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
