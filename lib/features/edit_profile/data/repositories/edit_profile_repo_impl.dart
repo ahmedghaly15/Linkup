@@ -31,7 +31,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
       cover: updateUserParams.cover ?? Helper.currentUser!.cover,
       email: updateUserParams.email,
       uId: Helper.currentUser!.uId,
-      isEmailVerified: false,
+      isEmailVerified: Helper.currentUser!.isEmailVerified,
       xUrl: updateUserParams.xUrl,
       facebookUrl: updateUserParams.facebookUrl,
       instagramUrl: updateUserParams.instagramUrl,
@@ -70,19 +70,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
               .doc(element.data()['postId'])
               .update(
             {
-              'user': {
-                'name': Helper.currentUser!.name,
-                'image': Helper.currentUser!.image,
-                'uId': Helper.uId,
-                'isEmailVerified': false,
-                'email': Helper.currentUser!.email,
-                'phone': Helper.currentUser!.phone,
-                'bio': Helper.currentUser!.bio,
-                'githubUrl': Helper.currentUser!.githubUrl,
-                'facebookUrl': Helper.currentUser!.facebookUrl,
-                'instagramUrl': Helper.currentUser!.instagramUrl,
-                'xUrl': Helper.currentUser!.xUrl,
-              }
+              'user': _currentUserToJson,
             },
           );
         }
@@ -105,19 +93,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
                   .doc(Helper.uId)
                   .update(
                 {
-                  'user': {
-                    'name': Helper.currentUser!.name,
-                    'image': Helper.currentUser!.image,
-                    'uId': Helper.uId,
-                    'isEmailVerified': false,
-                    'email': Helper.currentUser!.email,
-                    'phone': Helper.currentUser!.phone,
-                    'bio': Helper.currentUser!.bio,
-                    'githubUrl': Helper.currentUser!.githubUrl,
-                    'facebookUrl': Helper.currentUser!.facebookUrl,
-                    'instagramUrl': Helper.currentUser!.instagramUrl,
-                    'xUrl': Helper.currentUser!.xUrl,
-                  }
+                  'user': _currentUserToJson,
                 },
               );
             }
@@ -140,19 +116,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
             if (comment.data()['user']['uId'] == Helper.uId) {
               await _accessPostCommentsCollection(post).doc(comment.id).update(
                 {
-                  'user': {
-                    'name': Helper.currentUser!.name,
-                    'image': Helper.currentUser!.image,
-                    'uId': Helper.uId,
-                    'isEmailVerified': false,
-                    'email': Helper.currentUser!.email,
-                    'phone': Helper.currentUser!.phone,
-                    'bio': Helper.currentUser!.bio,
-                    'githubUrl': Helper.currentUser!.githubUrl,
-                    'facebookUrl': Helper.currentUser!.facebookUrl,
-                    'instagramUrl': Helper.currentUser!.instagramUrl,
-                    'xUrl': Helper.currentUser!.xUrl,
-                  }
+                  'user': _currentUserToJson,
                 },
               );
             }
@@ -173,19 +137,9 @@ class EditProfileRepoImpl implements EditProfileRepo {
 
         for (var follower in followers.docs) {
           if (follower.data()['uId'] == Helper.uId) {
-            await _accessUserFollowersCollection(user).doc(Helper.uId).update({
-              'name': Helper.currentUser!.name,
-              'image': Helper.currentUser!.image,
-              'uId': Helper.uId,
-              'isEmailVerified': false,
-              'email': Helper.currentUser!.email,
-              'phone': Helper.currentUser!.phone,
-              'bio': Helper.currentUser!.bio,
-              'githubUrl': Helper.currentUser!.githubUrl,
-              'facebookUrl': Helper.currentUser!.facebookUrl,
-              'instagramUrl': Helper.currentUser!.instagramUrl,
-              'xUrl': Helper.currentUser!.xUrl,
-            });
+            await _accessUserFollowersCollection(user)
+                .doc(Helper.uId)
+                .update(_currentUserToJson);
           }
         }
       }
@@ -203,23 +157,29 @@ class EditProfileRepoImpl implements EditProfileRepo {
 
         for (var followed in following.docs) {
           if (followed.data()['uId'] == Helper.uId) {
-            await _accessUserFollowingCollection(user).doc(Helper.uId).update({
-              'name': Helper.currentUser!.name,
-              'image': Helper.currentUser!.image,
-              'uId': Helper.uId,
-              'isEmailVerified': false,
-              'email': Helper.currentUser!.email,
-              'phone': Helper.currentUser!.phone,
-              'bio': Helper.currentUser!.bio,
-              'githubUrl': Helper.currentUser!.githubUrl,
-              'facebookUrl': Helper.currentUser!.facebookUrl,
-              'instagramUrl': Helper.currentUser!.instagramUrl,
-              'xUrl': Helper.currentUser!.xUrl,
-            });
+            await _accessUserFollowingCollection(user)
+                .doc(Helper.uId)
+                .update(_currentUserToJson);
           }
         }
       }
     });
+  }
+
+  Map<Object, Object?> get _currentUserToJson {
+    return {
+      'name': Helper.currentUser!.name,
+      'image': Helper.currentUser!.image,
+      'uId': Helper.uId,
+      'isEmailVerified': Helper.currentUser!.isEmailVerified,
+      'email': Helper.currentUser!.email,
+      'phone': Helper.currentUser!.phone,
+      'bio': Helper.currentUser!.bio,
+      'githubUrl': Helper.currentUser!.githubUrl,
+      'facebookUrl': Helper.currentUser!.facebookUrl,
+      'instagramUrl': Helper.currentUser!.instagramUrl,
+      'xUrl': Helper.currentUser!.xUrl,
+    };
   }
 
   CollectionReference<Map<String, dynamic>> _accessUserFollowingCollection(
