@@ -70,7 +70,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
               .doc(element.data()['postId'])
               .update(
             {
-              'user': _currentUserToJson,
+              'user': _currentUserToJson(),
             },
           );
         }
@@ -93,7 +93,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
                   .doc(Helper.uId)
                   .update(
                 {
-                  'user': _currentUserToJson,
+                  'user': _currentUserToJson(),
                 },
               );
             }
@@ -116,7 +116,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
             if (comment.data()['user']['uId'] == Helper.uId) {
               await _accessPostCommentsCollection(post).doc(comment.id).update(
                 {
-                  'user': _currentUserToJson,
+                  'user': _currentUserToJson(),
                 },
               );
             }
@@ -128,45 +128,49 @@ class EditProfileRepoImpl implements EditProfileRepo {
 
   @override
   Future<Either<Failure, void>> updateUserInOtherUsersFollowers() {
-    return executeAndHandleErrors<void>(function: () async {
-      final users =
-          await editProfileDataSource.updateUserInOtherFollowingAndFollowers();
+    return executeAndHandleErrors<void>(
+      function: () async {
+        final users = await editProfileDataSource
+            .updateUserInOtherFollowingAndFollowers();
 
-      for (var user in users.docs) {
-        final followers = await _accessUserFollowersCollection(user).get();
+        for (var user in users.docs) {
+          final followers = await _accessUserFollowersCollection(user).get();
 
-        for (var follower in followers.docs) {
-          if (follower.data()['uId'] == Helper.uId) {
-            await _accessUserFollowersCollection(user)
-                .doc(Helper.uId)
-                .update(_currentUserToJson);
+          for (var follower in followers.docs) {
+            if (follower.data()['uId'] == Helper.uId) {
+              await _accessUserFollowersCollection(user)
+                  .doc(Helper.uId)
+                  .update(_currentUserToJson());
+            }
           }
         }
-      }
-    });
+      },
+    );
   }
 
   @override
   Future<Either<Failure, void>> updateUserInOtherUsersFollowing() {
-    return executeAndHandleErrors<void>(function: () async {
-      final users =
-          await editProfileDataSource.updateUserInOtherFollowingAndFollowers();
+    return executeAndHandleErrors<void>(
+      function: () async {
+        final users = await editProfileDataSource
+            .updateUserInOtherFollowingAndFollowers();
 
-      for (var user in users.docs) {
-        final following = await _accessUserFollowingCollection(user).get();
+        for (var user in users.docs) {
+          final following = await _accessUserFollowingCollection(user).get();
 
-        for (var followed in following.docs) {
-          if (followed.data()['uId'] == Helper.uId) {
-            await _accessUserFollowingCollection(user)
-                .doc(Helper.uId)
-                .update(_currentUserToJson);
+          for (var followed in following.docs) {
+            if (followed.data()['uId'] == Helper.uId) {
+              await _accessUserFollowingCollection(user)
+                  .doc(Helper.uId)
+                  .update(_currentUserToJson());
+            }
           }
         }
-      }
-    });
+      },
+    );
   }
 
-  Map<Object, Object?> get _currentUserToJson {
+  Map<Object, Object?> _currentUserToJson() {
     return {
       'name': Helper.currentUser!.name,
       'image': Helper.currentUser!.image,

@@ -262,32 +262,44 @@ class _EditProfileFormState extends State<EditProfileForm> {
   }
 
   void _handleUpdateUserSuccess(BuildContext context) {
-    BlocProvider.of<UserCubit>(context).getUserData().then((value) {
-      BlocProvider.of<EditProfileCubit>(context)
-          .updateUserInOtherUsersFollowing()
-          .then((value) {
+    BlocProvider.of<UserCubit>(context).getUserData().then(
+      (value) {
         BlocProvider.of<EditProfileCubit>(context)
-            .updateUserInOtherUsersFollowers()
-            .then((value) {
-          BlocProvider.of<EditProfileCubit>(context)
-              .updateUserPosts()
-              .then((value) {
-            BlocProvider.of<EditProfileCubit>(context).updateUserLikes().then(
+            .updateUserInOtherUsersFollowing()
+            .then(
+          (value) {
+            BlocProvider.of<EditProfileCubit>(context)
+                .updateUserInOtherUsersFollowers()
+                .then(
               (value) {
                 BlocProvider.of<EditProfileCubit>(context)
-                    .updateUserComments()
-                    .then((value) {
-                  CustomDialog.show(
-                    context: context,
-                    state: CustomDialogStates.success,
-                    message: 'User updated successfully',
-                  );
-                });
+                    .updateUserPosts()
+                    .then(
+                  (value) {
+                    BlocProvider.of<EditProfileCubit>(context)
+                        .updateUserLikes()
+                        .then(
+                      (value) {
+                        BlocProvider.of<EditProfileCubit>(context)
+                            .updateUserComments()
+                            .then(
+                          (value) {
+                            CustomDialog.show(
+                              context: context,
+                              state: CustomDialogStates.success,
+                              message: 'User updated successfully',
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                );
               },
             );
-          });
-        });
-      });
-    });
+          },
+        );
+      },
+    );
   }
 }
