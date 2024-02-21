@@ -17,7 +17,7 @@ class PostImage extends StatelessWidget {
       alignment: AlignmentDirectional.topEnd,
       children: <Widget>[
         Container(
-          height: 180.h,
+          height: MediaQuery.sizeOf(context).height * 0.35,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),

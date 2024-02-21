@@ -38,7 +38,7 @@ class PostTextAndImage extends StatelessWidget {
         if (post.postImage != '' && post.text != '') SizedBox(height: 15.h),
         if (post.postImage != '')
           Container(
-            height: 268.h,
+            height: MediaQuery.sizeOf(context).height * 0.3,
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30.r),
